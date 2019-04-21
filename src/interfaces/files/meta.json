@@ -69,6 +69,20 @@
       "accept": "Accept File Types",
       "accept_comment": "Set a list of MIME types that can be picked",
       "edit_item": "Edit"
+    },
+	"fr-FR": {
+      "files": "Fichiers",
+      "view_type": "Mode d'affichage",
+      "view_type_comment": "Sélection du mode d'affichage des fichiers",
+      "view_options": "Options d'affichage",
+      "view_options_comment": "Sélection des options d'affichage des fichiers",
+      "view_query": "Requête d'affichage",
+      "view_query_comment": "Sélection de la requête d'affichage des fichierss",
+      "filters": "Filtres",
+      "filters_comment": "Filtres à utiliser",
+      "accept": "Type des fichiers acceptés",
+      "accept_comment": "Sélection des types MIME autorisés",
+      "edit_item": "Mettre à jour"
     }
   }
 }

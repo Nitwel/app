@@ -52,6 +52,20 @@
       "icon": "Icon",
       "icon_comment": "Choose an optional icon to display on the left of the input",
       "options_invalid": "The JSON options provided for the dropdown are invalid:"
+    },
+	"fr-FR": {
+      "dropdown": "Menu déroulant",
+      "choices": "Choix",
+      "choices_comment": "Saisir des pairs de clefs et valeurs en JSON avec la valeur enregistrée et le texte affiché",
+      "placeholder": "Paramètre fictif",
+      "placeholder_comment": "Texte statique qui est affiché avant la sélection d'une valeur",
+      "placeholder_default": "Choisir une option",
+      "option": "Option",
+      "formatting": "Affchage du texte",
+      "formatting_comment": "Affiche les valeurs selon un format donné",
+      "icon": "Icone",
+      "icon_comment": "Choisir l'icone optionnelle à afficher à gauche de l'entrée",
+      "options_invalid": "Les options fournies au format JSON pour alimenter le menu déroulant sont invalides:"
     }
   }
 }

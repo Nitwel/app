@@ -8,9 +8,9 @@
       @input="setOption('title', $event === '__none__' ? null : $event)"
     ></v-select>
 
-    <label for="subtitle" class="style-3">{{
-      $t("layouts-cards-subtitle")
-    }}</label>
+    <label for="subtitle" class="style-3">
+      {{ $t("layouts-cards-subtitle") }}
+    </label>
     <v-select
       id="subtitle"
       :value="viewOptions.subtitle || '__none__'"
@@ -26,9 +26,9 @@
       @input="setOption('src', $event === '__none__' ? null : $event)"
     ></v-select>
 
-    <label for="content" class="style-3">{{
-      $t("layouts-cards-content")
-    }}</label>
+    <label for="content" class="style-3">
+      {{ $t("layouts-cards-content") }}
+    </label>
     <v-select
       id="content"
       :value="viewOptions.content || '__none__'"
@@ -37,10 +37,7 @@
     ></v-select>
 
     <label for="icon" class="style-3">Fallback Icon</label>
-    <v-input
-      :value="viewOptions.icon || 'photo'"
-      @input="setOption('icon', $event)"
-    ></v-input>
+    <v-input :value="viewOptions.icon || 'photo'" @input="setOption('icon', $event)"></v-input>
   </form>
 </template>
 
@@ -79,10 +76,7 @@ export default {
       if ("data" in this.fields) {
         const field = this.fields.data;
 
-        if (
-          field.type.toLowerCase() === "alias" &&
-          field.collection === "directus_files"
-        ) {
+        if (field.type.toLowerCase() === "alias" && field.collection === "directus_files") {
           options.data = this.$t("file");
         }
       }

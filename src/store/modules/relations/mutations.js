@@ -1,10 +1,6 @@
 import Vue from "vue";
 import { forEach } from "lodash";
-import {
-  SET_RELATIONS,
-  ADD_RELATION,
-  UPDATE_RELATION
-} from "../../mutation-types";
+import { SET_RELATIONS, ADD_RELATION, UPDATE_RELATION } from "../../mutation-types";
 
 export default {
   [SET_RELATIONS](state, relations) {

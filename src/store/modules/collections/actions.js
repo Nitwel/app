@@ -47,9 +47,7 @@ export async function getCollections({ commit }) {
       // If translations haven't been setup, we're using the title formatter
       Object.keys(availableLanguages).forEach(locale => {
         i18n.mergeLocaleMessage(locale, {
-          [`collections-${collection.collection}`]: formatTitle(
-            collection.collection
-          )
+          [`collections-${collection.collection}`]: formatTitle(collection.collection)
         });
       });
     } else {
@@ -91,9 +89,7 @@ export function addCollection({ commit }, collection) {
   } else {
     Object.keys(availableLanguages).forEach(locale => {
       i18n.mergeLocaleMessage(locale, {
-        [`collections-${collection.collection}`]: formatTitle(
-          collection.collection
-        )
+        [`collections-${collection.collection}`]: formatTitle(collection.collection)
       });
     });
   }

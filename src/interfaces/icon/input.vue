@@ -9,7 +9,7 @@
     ></v-input>
     <div class="icons-view" v-show="searchText.length === 0">
       <details v-for="(icongroup, groupname) in icons" :key="groupname" open>
-        <summary> {{ $helpers.formatTitle(groupname) }} </summary>
+        <summary>{{ $helpers.formatTitle(groupname) }}</summary>
         <div>
           <button
             v-for="icon in icongroup"
@@ -19,7 +19,7 @@
             :disabled="readonly"
             @click="$emit('input', value === icon ? null : icon)"
           >
-            <i class="material-icons">{{ icon }}</i>
+            <v-icon :name="icon" />
           </button>
         </div>
       </details>
@@ -34,7 +34,7 @@
         :disabled="readonly"
         @click="$emit('input', value === icon ? null : icon)"
       >
-        <i class="material-icons">{{ icon }}</i>
+        <v-icon :name="icon" />
       </button>
     </div>
   </div>
@@ -59,9 +59,7 @@ export default {
       return this.$lodash.flatten(Object.values(this.icons));
     },
     filteredArray() {
-      return this.iconsArray.filter(icon =>
-        icon.includes(this.searchText.toLowerCase())
-      );
+      return this.iconsArray.filter(icon => icon.includes(this.searchText.toLowerCase()));
     }
   }
 };

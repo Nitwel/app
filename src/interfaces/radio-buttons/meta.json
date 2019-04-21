@@ -40,6 +40,14 @@
       "option": "Option",
       "format": "Browse Format",
       "format_comment": "The output format on the Browse Items page"
+    },
+	"fr-FR": {
+      "radio": "Bouton radio",
+      "choices": "choix",
+      "choices_comment": "Saisir des pairs de clefs et valeurs en JSON avec la valeur enregistrée et le texte affiché",
+      "option": "Option",
+      "format": "Format du parcours",
+      "format_comment": "Le format de sortie sur la page de recherche des éléments"
     }
   }
 }

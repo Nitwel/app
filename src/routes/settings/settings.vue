@@ -15,14 +15,11 @@
 
           <v-card
             :title="$t('settings_collections_fields')"
-            :subtitle="
-              $tc('collection_count', collectionsNum, { count: collectionsNum })
-            "
+            :subtitle="$tc('collection_count', collectionsNum, { count: collectionsNum })"
             element="li"
             to="/settings/collections"
-          >
-            <img slot="icon" src="../../assets/icons/box.svg" alt="" />
-          </v-card>
+            icon="box"
+          />
 
           <v-card
             :title="$t('settings_permissions')"
@@ -48,20 +45,10 @@
         <ul>
           <v-card
             :title="$t('interfaces')"
-            :subtitle="
-              $tc('interface_count', interfaceCount, { count: interfaceCount })
-            "
+            :subtitle="$tc('interface_count', interfaceCount, { count: interfaceCount })"
             element="li"
             to="/settings/interfaces"
             icon="extension"
-          />
-
-          <v-card
-            :title="$t('about_directus')"
-            :subtitle="$t('learn_more')"
-            element="li"
-            href="https://directus.io"
-            icon="info_outline"
           />
 
           <v-card
@@ -70,6 +57,14 @@
             element="li"
             to="/activity"
             icon="warning"
+          />
+
+          <v-card
+            :title="$t('about_directus')"
+            :subtitle="$t('learn_more')"
+            element="li"
+            href="https://directus.io"
+            icon="info_outline"
           />
 
           <v-card
@@ -97,9 +92,7 @@
             :title="$t('connection')"
             :subtitle="
               `${$t('latency')}: ${$n(
-                Math.round(
-                  $store.state.latency[$store.state.latency.length - 1].latency
-                )
+                Math.round($store.state.latency[$store.state.latency.length - 1].latency)
               )}ms`
             "
             disabled
@@ -163,8 +156,7 @@ export default {
   },
   computed: {
     globalNum() {
-      return Object.keys(this.$store.state.collections.directus_settings.fields)
-        .length;
+      return Object.keys(this.$store.state.collections.directus_settings.fields).length;
     },
     collectionsNum() {
       return Object.keys(this.$store.state.collections).filter(

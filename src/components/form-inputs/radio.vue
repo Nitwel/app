@@ -93,7 +93,7 @@ label::before {
 }
 
 input:hover + label {
-  color: var(--accent);
+  color: var(--darker-gray);
 }
 
 input:disabled + label {
@@ -103,10 +103,10 @@ input:disabled + label {
 
 input:checked + label::before {
   content: "radio_button_checked";
-  color: var(--accent);
+  color: var(--darkest-gray);
 }
 
 input:checked + label {
-  color: var(--accent);
+  color: var(--darkest-gray);
 }
 </style>

@@ -1,21 +1,9 @@
 <template>
-  <div
-    ref="container"
-    :style="{ minWidth: totalWidth + 'px' }"
-    class="v-table"
-    @scroll="onScroll"
-  >
+  <div ref="container" :style="{ minWidth: totalWidth + 'px' }" class="v-table" @scroll="onScroll">
     <div class="toolbar" :class="{ shadow: scrolled }">
-      <div
-        v-if="manualSortField"
-        class="manual-sort cell"
-        :class="{ active: manualSorting }"
-      >
-        <button
-          v-tooltip="$t('enable_manual_sorting')"
-          @click="startManualSorting"
-        >
-          <i class="material-icons">sort</i>
+      <div v-if="manualSortField" class="manual-sort cell" :class="{ active: manualSorting }">
+        <button v-tooltip="$t('enable_manual_sorting')" @click="startManualSorting">
+          <v-icon name="sort" />
         </button>
       </div>
       <div v-if="selectable" class="select cell">
@@ -48,15 +36,24 @@
           class="sort style-4 no-wrap"
           @click="updateSort(field)"
         >
-          {{ widths[field] > 40 ? name : null
-          }}<i v-if="sortVal.field === field" class="material-icons">{{
-            sortVal.asc ? "arrow_upward" : "arrow_downward"
-          }}</i>
+          {{ widths[field] > 40 ? name : null }}
+          <v-icon class="sort-arrow" :name="sortVal.asc ? 'arrow_upward' : 'arrow_downward'" />
         </button>
 
-        <span v-else class="style-4">{{
-          widths[field] > 40 ? name : null
-        }}</span>
+        <span
+          v-else
+          class="style-4"
+          v-tooltip="
+            (columns[index].fieldInfo && columns[index].fieldInfo.type.toLowerCase() === 'o2m') ||
+            (columns[index].fieldInfo && columns[index].fieldInfo.type.toLowerCase() === 'm2o') ||
+            (columns[index].fieldInfo &&
+              columns[index].fieldInfo.type.toLowerCase() === 'translation')
+              ? $t('cant_sort_by_this_field')
+              : undefined
+          "
+        >
+          {{ widths[field] > 40 ? name : null }}
+        </span>
 
         <div
           v-if="resizeable && index !== columns.length - 1"
@@ -72,12 +69,7 @@
     </div>
     <div class="body" :class="{ loading, dragging }">
       <div v-if="loading && items.length === 0" class="loader">
-        <div
-          v-for="n in 50"
-          :key="n"
-          class="row"
-          :style="{ height: rowHeight + 'px' }"
-        />
+        <div v-for="n in 50" :key="n" class="row" :style="{ height: rowHeight + 'px' }" />
       </div>
       <component
         :is="manualSorting ? 'draggable' : 'div'"
@@ -106,7 +98,7 @@
               class="manual-sort cell"
               :class="{ active: manualSorting }"
             >
-              <i class="material-icons">drag_handle</i>
+              <v-icon name="drag_handle" />
             </div>
             <div v-if="selectable" class="cell select" @click.stop>
               <v-checkbox
@@ -124,10 +116,7 @@
               }"
               class="cell"
             >
-              <div
-                v-if="row[field] === '' || $lodash.isNil(row[field])"
-                class="empty"
-              >
+              <div v-if="row[field] === '' || $lodash.isNil(row[field])" class="empty">
                 --
               </div>
               <v-ext-display
@@ -141,7 +130,9 @@
                 :value="row[field]"
                 :relation="fieldInfo.relation"
               />
-              <template v-else>{{ row[field] }}</template>
+              <template v-else>
+                {{ row[field] }}
+              </template>
             </div>
           </div>
         </template>
@@ -169,10 +160,7 @@
               }"
               class="cell"
             >
-              <div
-                v-if="row[field] === '' || $lodash.isNil(row[field])"
-                class="empty"
-              >
+              <div v-if="row[field] === '' || $lodash.isNil(row[field])" class="empty">
                 --
               </div>
               <v-ext-display
@@ -184,7 +172,9 @@
                 :options="fieldInfo.options"
                 :value="row[field]"
               />
-              <template v-else>{{ row[field] }}</template>
+              <template v-else>
+                {{ row[field] }}
+              </template>
             </div>
           </div>
         </template>
@@ -192,10 +182,7 @@
     </div>
     <transition name="fade">
       <div v-if="lazyLoading" class="lazy-loader">
-        <v-spinner
-          line-fg-color="var(--light-gray)"
-          line-bg-color="var(--lighter-gray)"
-        />
+        <v-spinner line-fg-color="var(--light-gray)" line-bg-color="var(--lighter-gray)" />
       </div>
     </transition>
   </div>
@@ -272,15 +259,10 @@ export default {
   },
   computed: {
     allSelected() {
-      const primaryKeyFields = this.items
-        .map(item => item[this.primaryKeyField])
-        .sort();
+      const primaryKeyFields = this.items.map(item => item[this.primaryKeyField]).sort();
       const selection = [...this.selection];
       selection.sort();
-      return (
-        this.selection.length > 0 &&
-        this.$lodash.isEqual(primaryKeyFields, selection)
-      );
+      return this.selection.length > 0 && this.$lodash.isEqual(primaryKeyFields, selection);
     },
     selectable() {
       return Array.isArray(this.selection);
@@ -310,11 +292,7 @@ export default {
 
     if (!this.manualSortField) return;
 
-    if (
-      this.sortVal &&
-      this.sortVal.field === this.manualSortField &&
-      this.sortVal.asc === true
-    ) {
+    if (this.sortVal && this.sortVal.field === this.manualSortField && this.sortVal.asc === true) {
       this.manualSorting = true;
       this.itemsManuallySorted = this.items;
     }
@@ -336,9 +314,7 @@ export default {
         return this.$emit("select", []);
       }
 
-      const primaryKeyFields = this.items.map(
-        item => item[this.primaryKeyField]
-      );
+      const primaryKeyFields = this.items.map(item => item[this.primaryKeyField]);
       return this.$emit("select", primaryKeyFields);
     },
     updateSort(field, direction) {
@@ -388,8 +364,7 @@ export default {
     },
     hideDragImage(event) {
       const img = document.createElement("img");
-      img.src =
-        "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+      img.src = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
       event.dataTransfer.setDragImage(img, 0, 0);
       event.dataTransfer.effectAllowed = "move";
     },
@@ -424,9 +399,7 @@ export default {
     },
     saveSort() {
       this.dragging = false;
-      if (
-        this.itemsManuallySorted.some(row => row[this.manualSortField] == null)
-      ) {
+      if (this.itemsManuallySorted.some(row => row[this.manualSortField] == null)) {
         return this.$emit(
           "input",
           this.itemsManuallySorted.map((row, i) => ({
@@ -585,12 +558,17 @@ export default {
   color: var(--darker-gray);
 }
 
-.sort > i {
-  font-size: 12px;
+.sort-arrow {
+  opacity: 0;
+  font-size: 12px !important;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
   margin-left: 5px;
+}
+
+.active .sort-arrow {
+  opacity: 1;
 }
 
 .select,
@@ -613,7 +591,7 @@ export default {
   }
 
   &.active button {
-    color: var(--accent);
+    color: var(--darkest-gray);
   }
 }
 
@@ -635,10 +613,10 @@ export default {
 .dragging .sortable-chosen,
 .sortable-chosen:active {
   background-color: var(--highlight) !important;
-  color: var(--accent);
+  color: var(--darkest-gray);
 
   .manual-sort {
-    color: var(--accent);
+    color: var(--darkest-gray);
   }
 }
 

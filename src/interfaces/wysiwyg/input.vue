@@ -1,19 +1,13 @@
 <template>
-  <div
-    ref="input"
-    :class="[{ fullscreen: distractionFree }, 'interface-wysiwyg-container']"
-  >
-    <div
-      ref="editor"
-      :class="['interface-wysiwyg', readonly ? 'readonly' : '']"
-    ></div>
+  <div ref="input" :class="[{ fullscreen: distractionFree }, 'interface-wysiwyg-container']">
+    <div ref="editor" :class="['interface-wysiwyg', readonly ? 'readonly' : '']"></div>
     <button
       v-on:click="distractionFree = !distractionFree"
       type="button"
       class="fullscreen-toggle"
       v-tooltip="$t('interfaces-wysiwyg-distraction_free_mode')"
     >
-      <i class="material-icons">{{ fullscreenIcon }}</i>
+      <v-icon :name="fullscreenIcon" />
     </button>
   </div>
 </template>
@@ -228,12 +222,12 @@ button.fullscreen-toggle {
 
     &:focus {
       color: var(--darker-gray);
-      border-color: var(--accent);
+      border-color: var(--darker-gray);
       outline: 0;
     }
 
     &:focus + i {
-      color: var(--accent);
+      color: var(--darkest-gray);
     }
   }
 
@@ -265,7 +259,7 @@ button.fullscreen-toggle {
   }
 
   a {
-    color: var(--accent);
+    color: var(--darkest-gray);
   }
 
   p {
@@ -353,8 +347,7 @@ button.fullscreen-toggle {
   border-right: 1px solid var(--dark-gray);
   background-color: transparent;
   color: var(--white);
-  transition: background-color var(--fast) var(--transition),
-    color var(--fast) var(--transition);
+  transition: background-color var(--fast) var(--transition), color var(--fast) var(--transition);
 }
 
 .medium-editor-toolbar li button:hover {
@@ -384,8 +377,7 @@ button.fullscreen-toggle {
   padding-left: 20px;
 }
 
-.medium-editor-toolbar-form
-  .medium-editor-toolbar-input::-webkit-input-placeholder {
+.medium-editor-toolbar-form .medium-editor-toolbar-input::-webkit-input-placeholder {
   color: var(--white);
   color: rgba(255, 255, 255, 0.8);
 }

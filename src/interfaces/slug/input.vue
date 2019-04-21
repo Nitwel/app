@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import slug from "slugify";
+import slug from "slug";
 
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
@@ -35,8 +35,7 @@ export default {
       this.$emit(
         "input",
         slug(value, {
-          lower: this.options.forceLowercase,
-          remove: /[*+~%<>/;.(){}?,'"!:@#^|]/g
+          lower: this.options.forceLowercase
         })
       );
     }

@@ -69,6 +69,24 @@
       "icon_left_comment": "Choose an optional icon to display on the left of the input",
       "icon_right": "Icon Right",
       "icon_right_comment": "Choose an optional icon to display on the right of the input"
+    },
+	"fr-FR": {
+      "tags": "Etiquettes",
+      "alphabetize": "Rangement alphabétique des étiquettes",
+      "alphabetize_comment": "Réarrange les étiquettes dans l'ordre alphabétique",
+      "lowercase": "Tout transformer en minuscules",
+      "lowercase_comment": "S'assurer que les étiquettes sont écrites en minuscules",
+      "wrap": "Encapsuler avec un délimiteur",
+      "wrap_comment": "Encapsuler la valeur enregistrée avec une paire de délimiteurs afin de permettre une recherche stricte sur une valeur unitaire",
+      "format": "Formatter en majuscules",
+      "format_comment": "Converti les étiquettes en majuscules pour l'affichage uniquement",
+      "sanitize": "Nettoyage",
+      "sanitize_comment": "Supprime tous les caractère non-alphanumériques et converti les espaces en traits d'union",
+      "placeholder_text": "Saisir l'étiquette et presser la touche entrée ou virgule",
+      "icon_left": "Icon Left",
+      "icon_left_comment": "Choose an optional icon to display on the left of the input",
+      "icon_right": "Icon Right",
+      "icon_right_comment": "Choose an optional icon to display on the right of the input"
     }
   }
 }

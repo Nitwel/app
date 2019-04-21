@@ -1,10 +1,6 @@
 <template>
   <div class="interface-debugger">
-    <v-header
-      :breadcrumb="links"
-      :icon-link="`/settings/interfaces`"
-      icon-color="warning"
-    />
+    <v-header :breadcrumb="links" :icon-link="`/settings/interfaces`" icon-color="warning" />
 
     <label>Dummy Label</label>
 
@@ -54,16 +50,9 @@
       </fieldset>
       <fieldset>
         <legend>Options</legend>
-        <div
-          v-for="(option, optionID) in extension.options"
-          class="options"
-          :key="optionID"
-        >
+        <div v-for="(option, optionID) in extension.options" class="options" :key="optionID">
           <label :for="optionID">{{ option.name }}</label>
-          <p
-            v-if="options.comment"
-            v-html="$helpers.snarkdown(option.comment)"
-          />
+          <p v-if="options.comment" v-html="$helpers.snarkdown(option.comment)" />
           <v-ext-input
             v-model="options[optionID]"
             :id="option.interface"
@@ -84,22 +73,16 @@
           <label for="type">Type</label>
           <p>Allowed datatypes this interface supports</p>
           <v-simple-select id="type" class="small" v-model="type">
-            <option v-for="type in extension.types" :key="type" :value="type">{{
-              type
-            }}</option>
+            <option v-for="type in extension.types" :key="type" :value="type">
+              {{ type }}
+            </option>
           </v-simple-select>
         </div>
 
         <div class="settings">
           <label for="length">Length</label>
           <p>Database length for the column</p>
-          <v-input
-            id="length"
-            v-model="length"
-            type="number"
-            class="length"
-            :min="0"
-          />
+          <v-input id="length" v-model="length" type="number" class="length" :min="0" />
         </div>
 
         <div class="settings">
@@ -160,12 +143,7 @@
 
           <div class="settings">
             <label for="field_many">Field Many</label>
-            <v-input
-              id="field_many"
-              v-model="relation.field_many"
-              type="text"
-              class="value"
-            />
+            <v-input id="field_many" v-model="relation.field_many" type="text" class="value" />
           </div>
 
           <div class="settings">
@@ -180,12 +158,7 @@
 
           <div class="settings">
             <label for="field_one">Field One</label>
-            <v-input
-              id="field_one"
-              v-model="relation.field_one"
-              type="text"
-              class="value"
-            />
+            <v-input id="field_one" v-model="relation.field_one" type="text" class="value" />
           </div>
 
           <div class="settings">
@@ -204,13 +177,7 @@
 
         <div class="misc">
           <p>Toggle viewing between New and Edit</p>
-          <v-checkbox
-            id="new"
-            v-model="newItem"
-            value="newItem"
-            class="checkbox"
-            type="checkbox"
-          />
+          <v-checkbox id="new" v-model="newItem" value="newItem" class="checkbox" type="checkbox" />
           <label for="new" class="inline">New item</label>
         </div>
       </fieldset>
@@ -386,9 +353,8 @@ export default {
       this.type = this.extension.types[0];
 
       // Populate the options with the default values
-      const defaults = this.$lodash.mapValues(
-        this.extension.options,
-        settings => (settings.default === undefined ? null : settings.default)
+      const defaults = this.$lodash.mapValues(this.extension.options, settings =>
+        settings.default === undefined ? null : settings.default
       );
 
       this.options = defaults;

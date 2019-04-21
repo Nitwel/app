@@ -30,6 +30,15 @@
       "label_off_comment": "Label to show next to the toggle when the toggle is off",
       "checkbox": "Show as Checkbox",
       "checkbox_comment": "Display a checkbox instead of the default switch"
+    },
+	"fr-FR": {
+      "toggle": "Interrupteur",
+      "label_on": "Libellé de l'état actif",
+      "label_on_comment": "Le libellé à afficher à côté de la bascule lorsque ce dernier est dans l'état actif",
+      "label_off": "Libellé de l'état inactif",
+      "label_off_comment": "Le libellé à afficher à côté de la bascule lorsque ce dernier est dans l'état inactif",
+      "checkbox": "Afficher en tant que case à cocher",
+      "checkbox_comment": "Afficher une case à cocher à la place de l'interrupteur par défaut"
     }
   }
 }

@@ -2,13 +2,9 @@
   <div class="v-permissions-row" :class="{ 'system-row': system }">
     <div v-if="!statuses" class="row">
       <div class="cell">
-        <span :class="{ system }" v-tooltip="permissionName"
-          >{{
-            $helpers.formatTitle(
-              system ? permissionName.substring(9) : permissionName
-            )
-          }}<i v-if="system" class="material-icons">star</i></span
-        >
+        <span :class="{ system }" v-tooltip="permissionName">
+          {{ $helpers.formatTitle(system ? permissionName.substring(9) : permissionName) }}
+        </span>
         <span class="set-all">
           <button @click.prevent="setAll(true)" type="button">
             {{ $t("all") }}
@@ -71,13 +67,13 @@
           {{ fieldState ? $t("limited") : $t("all") }}
         </button>
       </div>
-      <div class="cell"><span class="mixed">n/a</span></div>
+      <div class="cell"><span class="mixed">--</span></div>
     </div>
     <div v-else class="row">
       <div class="cell">
-        <span v-tooltip="permissionName">{{
-          $helpers.formatTitle(permissionName)
-        }}</span>
+        <span :class="{ system }" v-tooltip="permissionName">
+          {{ $helpers.formatTitle(system ? permissionName.substring(9) : permissionName) }}
+        </span>
         <span class="set-all">
           <button @click.prevent="setAll(true)" type="button">
             {{ $t("all") }}
@@ -133,37 +129,30 @@
         </div>
       -->
       <div class="cell">
-        <button :class="{ mixed: fieldState }" @click="active = !active">
+        <button :class="{ limited: fieldState }" @click="active = !active">
           {{ fieldState ? $t("mixed") : $t("all") }}
         </button>
       </div>
       <div class="cell">
-        <button class="mixed" @click="active = !active">--</button>
+        <button class="mixed" @click="active = !active">Expand</button>
       </div>
     </div>
     <template v-if="active">
       <div class="sub row">
-        <div class="cell">
-          <span class="system"
-            >{{ $t("permission_states.create")
-            }}<i class="material-icons">star</i></span
-          >
+        <div class="cell" v-tooltip="'System Option'">
+          {{ $t("permission_states.on_create") }}
         </div>
-        <div class="cell block"><i class="material-icons">block</i></div>
-        <div class="cell block"><i class="material-icons">block</i></div>
-        <div class="cell block"><i class="material-icons">block</i></div>
-        <div class="cell block"><i class="material-icons">block</i></div>
-        <div class="cell block"><i class="material-icons">block</i></div>
+        <div class="cell block"><v-icon name="block" /></div>
+        <div class="cell block"><v-icon name="block" /></div>
+        <div class="cell block"><v-icon name="block" /></div>
+        <div class="cell block"><v-icon name="block" /></div>
+        <div class="cell block"><v-icon name="block" /></div>
         <div class="cell">
           <button
             :class="{ limited: getFieldSettingsPerStatus('$create') }"
-            @click="
-              fieldsSelect = { collection: permissionName, status: '$create' }
-            "
+            @click="fieldsSelect = { collection: permissionName, status: '$create' }"
           >
-            {{
-              getFieldSettingsPerStatus("$create") ? $t("limited") : $t("all")
-            }}
+            {{ getFieldSettingsPerStatus("$create") ? $t("limited") : $t("all") }}
           </button>
         </div>
         <div class="cell" v-if="statuses">
@@ -171,18 +160,14 @@
             :class="{
               limited: (permission.$create.status_blacklist || []).length !== 0
             }"
-            @click="
-              statusSelect = { collection: permissionName, status: '$create' }
-            "
+            @click="statusSelect = { collection: permissionName, status: '$create' }"
           >
             {{
-              (permission.$create.status_blacklist || []).length === 0
-                ? $t("all")
-                : $t("limited")
+              (permission.$create.status_blacklist || []).length === 0 ? $t("all") : $t("limited")
             }}
           </button>
         </div>
-        <div class="cell" v-else><span class="mixed">n/a</span></div>
+        <div class="cell" v-else><span class="mixed">--</span></div>
       </div>
     </template>
     <template v-if="statuses && active">
@@ -254,16 +239,14 @@
             @click="statusSelect = { collection: permissionName, status }"
           >
             {{
-              (permission[status].status_blacklist || []).length === 0
-                ? $t("all")
-                : $t("limited")
+              (permission[status].status_blacklist || []).length === 0 ? $t("all") : $t("limited")
             }}
           </button>
         </div>
       </div>
     </template>
     <button class="collapse" @click="active = !active">
-      <i class="material-icons">{{ active ? "unfold_less" : "unfold_more" }}</i>
+      <v-icon :name="active ? 'unfold_less' : 'unfold_more'" />
     </button>
     <portal v-if="fieldsSelect" to="modal">
       <v-modal
@@ -317,11 +300,7 @@
               v-for="(status, name) in statuses"
               :key="`status-${name}`"
               :id="`status-${name}`"
-              :checked="
-                !(
-                  permission[statusSelect.status].status_blacklist || []
-                ).includes(name)
-              "
+              :checked="!(permission[statusSelect.status].status_blacklist || []).includes(name)"
               :label="status.name"
               :value="name"
               @change="toggleStatus(name)"
@@ -434,9 +413,7 @@ export default {
       );
     },
     permissionOptions() {
-      return this.userCreatedField
-        ? ["none", "mine", "role", "full"]
-        : ["none", "full"];
+      return this.userCreatedField ? ["none", "mine", "role", "full"] : ["none", "full"];
     }
   },
   methods: {
@@ -505,8 +482,7 @@ export default {
       let value = this.permission[Object.keys(this.statuses)[0]][field];
 
       this.$lodash.forEach(this.permission, (status, name) => {
-        if (name !== "$create" && status[field] !== value)
-          value = "indeterminate";
+        if (name !== "$create" && status[field] !== value) value = "indeterminate";
       });
 
       return value;
@@ -536,23 +512,13 @@ export default {
 
       const selectedFields = write ? this.blacklist.write : this.blacklist.read;
 
-      const permissionField = write
-        ? "write_field_blacklist"
-        : "read_field_blacklist";
+      const permissionField = write ? "write_field_blacklist" : "read_field_blacklist";
 
       if (selectedFields.includes(field)) {
-        return this.emitValue(
-          permissionField,
-          selectedFields.filter(f => f !== field),
-          status
-        );
+        return this.emitValue(permissionField, selectedFields.filter(f => f !== field), status);
       }
 
-      return this.emitValue(
-        permissionField,
-        [...selectedFields, field],
-        status
-      );
+      return this.emitValue(permissionField, [...selectedFields, field], status);
     },
     toggleStatus(status) {
       if (!this.statuses) return;
@@ -568,11 +534,7 @@ export default {
         );
       }
 
-      return this.emitValue(
-        "status_blacklist",
-        [...selectedStatuses, status],
-        parentStatus
-      );
+      return this.emitValue("status_blacklist", [...selectedStatuses, status], parentStatus);
     }
   }
 };
@@ -594,7 +556,7 @@ export default {
   }
 
   &:hover i {
-    color: var(--accent);
+    color: var(--darkest-gray);
   }
 }
 
@@ -626,22 +588,12 @@ export default {
 
 .block {
   color: var(--lightest-gray);
-
-  i {
-    position: relative;
-    left: -3px;
-  }
-}
-
-.system i {
-  color: var(--accent);
-  vertical-align: super;
-  font-size: 7px;
 }
 
 .set-all {
   opacity: 0;
-  font-size: 10px;
+  font-size: 12px;
+  font-weight: 600;
   margin-left: 5px;
   color: var(--light-gray);
   transition: opacity var(--fast) var(--transition);
@@ -660,7 +612,7 @@ export default {
   }
 
   button:first-of-type:hover {
-    color: var(--action);
+    color: var(--success);
   }
 
   button:last-of-type:hover {
@@ -669,6 +621,7 @@ export default {
 }
 
 .system-row {
-  color: var(--gray);
+  color: var(--light-gray);
+  background-color: var(--off-white);
 }
 </style>

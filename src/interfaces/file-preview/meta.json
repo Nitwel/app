@@ -20,6 +20,10 @@
     "en-US": {
       "file_preview": "File Preview",
       "edit": "Editing Options"
+    },
+	"fr-FR": {
+      "file_preview": "Prévisualisation d'un fichier",
+      "edit": "Options d'édition"
     }
   }
 }

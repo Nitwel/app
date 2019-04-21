@@ -1,6 +1,6 @@
 {
   "name": "$t:tabular",
-  "version": "1.0.0",
+  "icon": "view_headline",
   "translation": {
     "en-US": {
       "tabular": "Table",
@@ -9,6 +9,10 @@
     "nl-NL": {
       "tabular": "Tabel",
       "fields": "Kolommen"
+    },
+	"fr-FR": {
+      "tabular": "Table",
+      "fields": "Champs"
     }
   }
 }

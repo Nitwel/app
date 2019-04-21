@@ -84,6 +84,29 @@
       "address_to_code": "Address Input",
       "address_to_code_comment": "Add an input field to automatically get the geocodes from an address. Uses <a href=\"https://wiki.openstreetmap.org/wiki/Nominatim\">Nominatim</a>. Please check their usage policy.",
       "address_to_code_error": "No geocode found for this address"
+    },
+	"fr-FR": {
+      "map": "Carte",
+      "choices": "choix",
+      "choices_comment": "Saisir des pairs de clefs et valeurs en JSON avec la valeur enregistrée et le texte affiché",
+      "theme": "Thème de l'interface",
+      "theme_comment": "Sélectionne l'interface utilisateur si supporté",
+      "value": "Valeur",
+      "map_lat": "Latitude par défaut",
+      "map_lat_comment": "La carte sera centrée sur cette latitude",
+      "map_lng": "Longitude par défaut",
+      "map_lng_comment": "La carte sera centrée sur cette longitude",
+      "height": "Hauteur",
+      "default_zoom": "Zoom par défaut",
+      "default_zoom_comment": "Le niveau de zoom par défaut sur la carte",
+      "max_zoom": "Zoom maximum",
+      "max_zoom_comment": "Le zoom maximal autorisé sur la carte",
+      "no_location": "Aucun emplacement trouvé",
+      "user_location_error_blocked": "Vous avez désactivé l'accès à votre position. S'il vous plait, réactivez cette option à partir de la barre d'adresse de votre navigateur afin que votre emplacement soit détécté automatiquement",
+      "user_location_error": "Une erreur est survenue lors de l'écquisition de votre emplacement. Réessayez s'il vous plait",
+      "address_to_code": "Entrée de l'adresse",
+      "address_to_code_comment": "Ajout d'un champ pour récupérer automatiquement les géocodes d'une adresse. Utilisez <a href=\"https://wiki.openstreetmap.org/wiki/Nominatim\">Nominatim</a>. Vérifiez leurs conditions d'utilisation s'il vous plait",
+      "address_to_code_error": "Aucun géocode trouvé pour cette adresse"
     }
   }
 }

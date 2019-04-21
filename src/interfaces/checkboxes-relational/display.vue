@@ -1,8 +1,5 @@
 <template>
-  <v-popover
-    trigger="hover"
-    v-if="options.listing_template && this.value && this.value.length > 0"
-  >
+  <v-popover trigger="hover" v-if="options.listing_template && this.value && this.value.length > 0">
     <div class="display-checkbox-relational">{{ itemCount }}</div>
     <template slot="popover">
       <ul class="list">
@@ -29,10 +26,7 @@ export default {
   },
   methods: {
     render(val) {
-      return this.$helpers.micromustache.render(
-        this.options.listing_template,
-        val
-      );
+      return this.$helpers.micromustache.render(this.options.listing_template, val);
     }
   }
 };

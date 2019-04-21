@@ -1,11 +1,6 @@
 <template>
   <div>
-    <v-blocker
-      :z-index="9"
-      v-show="active"
-      @click="disableSidebar"
-      class="blocker-info"
-    />
+    <v-blocker :z-index="9" v-show="active" @click="disableSidebar" class="blocker-info" />
     <aside class="info-sidebar" v-if="active" :class="{ wide }">
       <div class="system"><slot name="system" /></div>
       <slot />

@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="v-upload"
-    :class="{ uploading: Object.keys(files).length > 0, disabled }"
-  >
+  <div class="v-upload" :class="{ uploading: Object.keys(files).length > 0, disabled }">
     <input
       :disabled="disabled"
       class="select"
@@ -14,7 +11,9 @@
     />
 
     <div class="dropzone" :class="{ smaller: small }">
-      <div class="icon"><i class="material-icons">cloud_upload</i></div>
+      <div class="icon">
+        <v-icon name="cloud_upload" size="48" />
+      </div>
       <div class="info">
         <p class="name">{{ $tc("drop_files", multiple ? 2 : 1) }}</p>
         <p class="file-info no-wrap">
@@ -27,25 +26,16 @@
       </div>
       <div class="buttons">
         <form class="embed-input" @submit.prevent="saveEmbed" v-if="embed">
-          <input
-            type="url"
-            :placeholder="$t('embed_placeholder')"
-            v-model="embedLink"
-          />
+          <input type="url" :placeholder="$t('embed_placeholder')" v-model="embedLink" />
           <button type="submit">Save</button>
         </form>
-        <i
-          v-tooltip="$t('embed')"
-          @click="embed = !embed"
-          class="material-icons select"
-          >link</i
-        >
-        <i
+        <v-icon name="link" v-tooltip="$t('embed')" @click="embed = !embed" class="select" />
+        <v-icon
           v-tooltip="$t('select_from_device')"
           @click="$refs.select.click()"
           class="material-icons select"
-          >devices</i
-        >
+          name="devices"
+        />
       </div>
     </div>
     <transition-group tag="ol" name="list">
@@ -60,22 +50,16 @@
               ? 'cloud_done'
               : 'cloud_upload'
           "
-          :color="
-            file.error !== null
-              ? 'danger'
-              : file.progress === 100
-              ? 'success'
-              : 'accent'
-          "
+          :color="file.error !== null ? 'danger' : file.progress === 100 ? 'success' : 'accent'"
           :stroke="file.progress === 100 ? 0 : 2"
         />
         <div class="info">
           <p class="name no-wrap">{{ file.name }}</p>
           <p class="file-info no-wrap">
             {{ file.size }}
-            <span v-if="file.progress && file.progress !== 100" class="progress"
-              >{{ file.progress }}%</span
-            >
+            <span v-if="file.progress && file.progress !== 100" class="progress">
+              {{ file.progress }}%
+            </span>
           </p>
         </div>
       </li>
@@ -135,9 +119,7 @@ export default {
   methods: {
     saveEmbed() {
       const id = this.$helpers.shortid.generate();
-      const name = this.embedLink.substring(
-        this.embedLink.lastIndexOf("/") + 1
-      );
+      const name = this.embedLink.substring(this.embedLink.lastIndexOf("/") + 1);
       this.files = {
         [id]: {
           name,
@@ -201,10 +183,7 @@ export default {
         return;
       }
 
-      if (
-        this.acceptTypesList.length > 0 &&
-        !this.acceptTypesList.includes(type)
-      ) {
+      if (this.acceptTypesList.length > 0 && !this.acceptTypesList.includes(type)) {
         this.$events.emit("warning", {
           notify: this.$t("file_type_not_accepted", { filename: name })
         });
@@ -324,7 +303,7 @@ export default {
         color: var(--white);
 
         &:hover {
-          background-color: var(--accent);
+          background-color: var(--darkest-gray);
           color: var(--white);
         }
       }
@@ -362,7 +341,6 @@ input.select {
   .icon i {
     font-size: 100px;
     color: var(--lighter-gray);
-    margin-bottom: -6px;
   }
 
   p {

@@ -24,7 +24,7 @@
             <header v-if="title">
               <h1 id="modal-title" class="style-1">{{ title }}</h1>
               <button v-if="!actionRequired" @click="$emit('close')">
-                <i class="material-icons">close</i>
+                <v-icon name="close" />
               </button>
             </header>
 
@@ -65,8 +65,9 @@
                 :loading="button.loading || false"
                 :disabled="button.disabled || false"
                 @click="$emit(id)"
-                >{{ button.text }}</v-button
               >
+                {{ button.text }}
+              </v-button>
             </div>
           </div>
         </aside>
@@ -294,16 +295,16 @@ export default {
       position: absolute;
       height: 2px;
       bottom: -2px;
-      background-color: var(--accent);
+      background-color: var(--darkest-gray);
       transform: scaleY(0);
       transition: transform var(--fast) var(--transition-out);
     }
 
     &.active {
-      color: var(--accent);
+      color: var(--darker-gray);
 
       &:hover {
-        color: var(--accent);
+        color: var(--darkest-gray);
       }
 
       &::after {

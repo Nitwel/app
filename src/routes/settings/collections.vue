@@ -1,10 +1,6 @@
 <template>
   <div class="collections">
-    <v-header
-      :breadcrumb="breadcrumb"
-      icon-color="warning"
-      icon-link="/settings"
-    >
+    <v-header :breadcrumb="breadcrumb" icon-color="warning" icon-link="/settings">
       <template slot="buttons">
         <v-header-button
           icon="add"
@@ -45,11 +41,7 @@
           >
             {{ $t("dont_manage") }}
           </button>
-          <button
-            v-else
-            class="not-managed"
-            @click.prevent.stop="toggleManage(collection)"
-          >
+          <button v-else class="not-managed" @click.prevent.stop="toggleManage(collection)">
             {{ $t("manage") }}
           </button>
         </router-link>
@@ -69,26 +61,30 @@
       >
         <v-details title="Default fields" :open="true">
           <div class="advanced-form">
-            <label class="toggle"
-              ><v-toggle v-model="status" /> {{ $t("Status") }}</label
-            >
-            <label class="toggle"
-              ><v-toggle v-model="sort" /> {{ $t("Sort") }}</label
-            >
-            <label class="toggle"
-              ><v-toggle v-model="createdBy" :value="true" />
-              {{ $t("Created by") }}</label
-            >
-            <label class="toggle"
-              ><v-toggle v-model="createdOn" :value="true" />
-              {{ $t("Created on") }}</label
-            >
-            <label class="toggle"
-              ><v-toggle v-model="modifiedBy" /> {{ $t("Modified by") }}</label
-            >
-            <label class="toggle"
-              ><v-toggle v-model="modifiedOn" /> {{ $t("Modified on") }}</label
-            >
+            <label class="toggle">
+              <v-toggle v-model="status" />
+              {{ $t("status") }}
+            </label>
+            <label class="toggle">
+              <v-toggle v-model="sort" />
+              {{ $t("sort") }}
+            </label>
+            <label class="toggle">
+              <v-toggle v-model="createdBy" :value="true" />
+              {{ $t("created_by") }}
+            </label>
+            <label class="toggle">
+              <v-toggle v-model="createdOn" :value="true" />
+              {{ $t("created_on") }}
+            </label>
+            <label class="toggle">
+              <v-toggle v-model="modifiedBy" />
+              {{ $t("modified_by") }}
+            </label>
+            <label class="toggle">
+              <v-toggle v-model="modifiedOn" />
+              {{ $t("modified_on") }}
+            </label>
           </div>
         </v-details>
       </v-prompt>
@@ -111,9 +107,7 @@ export default {
   name: "settings-collections",
   metaInfo() {
     return {
-      title: `${this.$t("settings")} | ${this.$t(
-        "settings_collections_fields"
-      )}`
+      title: `${this.$t("settings")} | ${this.$t("settings_collections_fields")}`
     };
   },
   data() {
@@ -136,9 +130,7 @@ export default {
       const collections = this.$store.state.collections || {};
 
       return Object.values(collections)
-        .filter(
-          collection => collection.collection.startsWith("directus_") === false
-        )
+        .filter(collection => collection.collection.startsWith("directus_") === false)
         .map(collection => ({
           ...collection,
           name: this.$t(`collections-${collection.collection}`),
@@ -527,9 +519,7 @@ export default {
             };
             this.$events.emit("error", {
               notify:
-                error.code in errors
-                  ? errors[error.code]
-                  : this.$t("something_went_wrong_body"),
+                error.code in errors ? errors[error.code] : this.$t("something_went_wrong_body"),
               error
             });
           }
@@ -662,11 +652,11 @@ export default {
     }
 
     &.not-managed {
-      background-color: var(--accent);
+      background-color: var(--darker-gray);
       color: var(--white);
 
       &:hover {
-        background-color: var(--accent-dark);
+        background-color: var(--darkest-gray);
         color: var(--white);
       }
     }
@@ -691,7 +681,7 @@ export default {
       width: max-content;
 
       &:not(.disabled):hover {
-        color: var(--accent);
+        color: var(--darkest-gray);
       }
 
       > *:first-child {

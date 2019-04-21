@@ -48,6 +48,18 @@
       "display_text": "Display Text",
       "value": "Value",
       "option": "Option"
+    },
+	"fr-FR": {
+      "checkboxes": "Cases à cocher",
+      "choices": "choix",
+      "choices_comment": "Saisir des pairs de clefs et valeurs en JSON avec la valeur enregistrée et le texte affiché",
+      "wrap": "Encapsuler avec un délimiteur",	  
+      "wrap_comment": "Encapsuler la valeur enregistrée avec une paire de délimiteurs afin de permettre une recherche stricte sur une valeur unitaire",
+      "formatting": "Affchage du texte",
+      "formatting_comment": "Affiche les valeurs selon un format donné",
+      "display_text": "Texte affiché",
+      "value": "Valeur",
+      "option": "Option"
     }
   }
 }

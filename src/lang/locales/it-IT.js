@@ -20,8 +20,7 @@ export default {
   activity: "Attività",
   my_activity: "Le mie attività",
   activity_log: "Log delle attività",
-  activity_outside_directus:
-    "Questo elemento è stato creato al di fuori di Directus.",
+  activity_outside_directus: "Questo elemento è stato creato al di fuori di Directus.",
   admin_email: "Email dell'amministratore",
   admin_password: "Password dell'amministratore",
   additional_info: "Informazioni aggiuntive",
@@ -29,8 +28,7 @@ export default {
   add_field_filter: "Aggiungi un filtro",
   add_note: "Aggiungi una nota utile per gli utenti ...",
   admin_settings: "Impostazioni amministratore",
-  almost_done_options:
-    "Quasi fatto! Ora rivedi le opzioni dell'interfaccia qui sotto.",
+  almost_done_options: "Quasi fatto! Ora rivedi le opzioni dell'interfaccia qui sotto.",
   almost_done_copy:
     "Ogni interfaccia può essere perfettamente adattata alle tue esigenze. Di seguito sono elencate le opzioni disponibili per questo campo, ma solo alcune sono obbligatorie.",
   all: "Tutti",
@@ -50,11 +48,9 @@ export default {
   change_project: "Cambia progetto",
   choose_one: "Scegline uno",
   choose_project: "Scegli Progetto",
-  choose_interface:
-    "Scegli un'interfaccia per come devono essere gestiti questi dati.",
+  choose_interface: "Scegli un'interfaccia per come devono essere gestiti questi dati.",
   clear: "Chiaro",
-  click_to_toggle_all_none:
-    "Fai clic per attivare / disattivare l'intera colonna",
+  click_to_toggle_all_none: "Fai clic per attivare / disattivare l'intera colonna",
   connection: "Connessione",
   collection: "Collezione",
   collections_and_fields: "Collezione e campi",
@@ -72,8 +68,7 @@ export default {
   coming_soon: "Prossimamente",
   contains: "contiene",
   config_error: "Configurazione mancante",
-  config_error_copy:
-    "Assicurati di aver creato il file di configurazione dell'applicazione",
+  config_error_copy: "Assicurati di aver creato il file di configurazione dell'applicazione",
   collection_contains_items: "{collection} contiene {count} elementi",
   currently_selected: "Attualmente selezionato: {thing}",
   create: "Creare",
@@ -91,11 +86,9 @@ export default {
   db_datatype: "{db} Tipo di dati",
   editing_my_profile: "Modifica il mio profilo",
   fieldtypes: {
-    alias:
-      "Campi che non salvano dati o non hanno colonne di database corrispondenti",
+    alias: "Campi che non salvano dati o non hanno colonne di database corrispondenti",
     array: "Formato array standard nella risposta API",
-    datetime:
-      "Una data e ora in formato ISO, ad esempio: 2018-09-19T14: 00: 43,381Z",
+    datetime: "Una data e ora in formato ISO, ad esempio: 2018-09-19T14: 00: 43,381Z",
     date: "Data, ad es .: 2018-09-19",
     time: "Tempo, es: 14:09:22",
     file: "Chiave esterna per directus_files.id",
@@ -104,14 +97,12 @@ export default {
     integer: "Numero intero",
     decimal: "Numero che include un decimale",
     json: "Formato JSON standard nella risposta API",
-    lang:
-      "Specifico per le interfacce di traduzione, questo memorizza la chiave della lingua",
+    lang: "Specifico per le interfacce di traduzione, questo memorizza la chiave della lingua",
     m2o: "Relazione molti-a-uno",
     o2m: "Relazione uno-a-molti",
     sort:
       "Campo di sistema utilizzato nel riordino degli oggetti con trascinamento della selezione",
-    status:
-      "Campo di sistema utilizzato per la pubblicazione dei flussi di lavoro",
+    status: "Campo di sistema utilizzato per la pubblicazione dei flussi di lavoro",
     string:
       "Qualsiasi testo, numeri, spazi o simboli; definito e limitato dalla sua lunghezza (numero di caratteri)",
     translation:
@@ -134,10 +125,8 @@ export default {
         "Una stringa non binaria di lunghezza variabile. La lunghezza può essere compresa tra 0 e 65.535 caratteri (MySQL 5.0.3+).",
       TINYTEXT: "Una stringa con una lunghezza massima di 255 caratteri.",
       TEXT: "Una stringa con una lunghezza massima di 65.535 caratteri.",
-      MEDIUMTEXT:
-        "Una stringa con una lunghezza massima di 16.777.215 caratteri.",
-      LONGTEXT:
-        "Una stringa con una lunghezza massima di 4.294.967.295 caratteri.",
+      MEDIUMTEXT: "Una stringa con una lunghezza massima di 16.777.215 caratteri.",
+      LONGTEXT: "Una stringa con una lunghezza massima di 4.294.967.295 caratteri.",
       BOOLEAN: "Vero o falso. Viene salvato come 1 o 0 rispettivamente.",
       TINYINT:
         "Un numero intero Quando è firmata (consente negativo) la lunghezza è compresa tra -128 e 127, altrimenti il ​​massimo è 255.",
@@ -151,13 +140,10 @@ export default {
         "Un numero intero Quando è firmata (consentita negativa) la lunghezza è di -9,223,372,036,854,775,808 a 9,223,372,036,854,775,807, altrimenti il ​​massimo è 18,446,744,073,709,551,615.",
       DECIMAL:
         "Un numero preciso (es: per valuta), con lunghezza da 1 a 65 cifre (L) e da 0 a 30 cifre decimali (D). Formato di lunghezza: `L, D`",
-      FLOAT:
-        "Un numero binario approssimativo, 4 byte con un punto decimale mobile.",
-      DOUBLE:
-        "Un numero binario approssimativo, 8 byte con un punto decimale mobile.",
+      FLOAT: "Un numero binario approssimativo, 4 byte con un punto decimale mobile.",
+      DOUBLE: "Un numero binario approssimativo, 8 byte con un punto decimale mobile.",
       DATE: "Una data. Consente `1000-01-01` a` 9999-12-31`.",
-      DATETIME:
-        "Una data e ora. Consente `1000-01-01 00: 00: 00` a` 9999-12-31 23: 59: 59`.",
+      DATETIME: "Una data e ora. Consente `1000-01-01 00: 00: 00` a` 9999-12-31 23: 59: 59`.",
       TIMESTAMP:
         "Una data e ora. Permette `1970-01-01 00: 00: 01` UTC a` 2038-01-19 03: 14: 07` UTC.",
       TIME: "Un tempo. Permette `-838: 59: 59` a` 838: 59: 59`.",
@@ -178,8 +164,7 @@ export default {
     "Sei sicuro di voler eliminare questa raccolta? Questa azione non può essere annullata.",
   delete_field_are_you_sure:
     'Sei sicuro di voler cancellare il campo "{field}"? Questa azione non può essere annullata.',
-  delete_role_are_you_sure:
-    'Eliminare il ruolo "{name}"? Questa azione non può essere annullata.',
+  delete_role_are_you_sure: 'Eliminare il ruolo "{name}"? Questa azione non può essere annullata.',
   delete_bookmark: "Elimina segnalibro",
   delete_bookmark_body:
     "Sei sicuro di voler eliminare questo segnalibro? Questa azione non può essere annullata.",
@@ -188,8 +173,7 @@ export default {
   dialog_beginning: "Inizio della finestra di dialogo.",
   discard_changes: "Non salvare le modifiche",
   display_name: "Nome da visualizzare",
-  drop_files:
-    "Impossibile rilasciare i file | Trascina il file qui ... | Trascina i file qui ...",
+  drop_files: "Impossibile rilasciare i file | Trascina il file qui ... | Trascina i file qui ...",
   dont_show: "Non mostrare",
   editing: "Modifica dell'articolo: {collection}",
   editing_item: "Modifica dell'articolo",
@@ -225,6 +209,7 @@ export default {
   field_created: "{field} Campo creato",
   field_updated: "{field} Field Updated",
   field_removed: "{field} Field Removed",
+  field_already_exists: "{field} Existe déjà",
   fields: "campi",
   fields_are_saved_instantly: "Modifiche salvate all'istante",
   file: "File",
@@ -259,18 +244,15 @@ export default {
   item_count: "Nessun elemento | Un articolo | {count} Articoli",
   event_count: "Nessun evento | Un evento | {count} Eventi",
   role_count: "Nessun ruolo | Un ruolo | {count} Ruoli",
-  item_count_filter:
-    "Nessun elemento filtrato | Un articolo filtrato | {count} Articoli filtrati",
+  item_count_filter: "Nessun elemento filtrato | Un articolo filtrato | {count} Articoli filtrati",
   item_deleted: "Elemento eliminato",
   item_saved: "Elemento salvato | {count} Articoli salvati",
   junction_collection: "Collezione Junction",
   cant_disable_primary:
     "Non è possibile disabilitare la chiave primaria su un campo esistente. Rimuovi invece questo campo.",
-  extension_error:
-    "Si è verificato un problema durante il caricamento dell'estensione {ext}.",
+  extension_error: "Si è verificato un problema durante il caricamento dell'estensione {ext}.",
   extensions_missing: "Nessuna estensione trovata",
-  extensions_missing_copy:
-    "Assicurati di avere le estensioni di sistema installate.",
+  extensions_missing_copy: "Assicurati di avere le estensioni di sistema installate.",
   latency: "Latenza",
   learn_more: "Per saperne di più",
   leave_comment: "Lascia un commento...",
@@ -285,8 +267,7 @@ export default {
   m2o: "Molti a uno (M2O)",
   o2m: "Uno a molti (O2M)",
   name: "Nome",
-  name_field:
-    "Diamo un nome al campo {field} e aggiungiamo una nota utile per gli utenti.",
+  name_field: "Diamo un nome al campo {field} e aggiungiamo una nota utile per gli utenti.",
   navigate_changes:
     "Sei sicuro di voler lasciare questa pagina? Le modifiche apportate andranno perse se ti allontani da questa pagina.",
   new: "Nuovo",
@@ -296,22 +277,17 @@ export default {
   not_contains: "Non contiene",
   note: "Nota",
   note_note: "Una descrizione interna ...",
-  note_hidden:
-    "[Ulteriori informazioni] (https://docs.directus.io/guides/collections.html#hidden)",
+  note_hidden: "[Ulteriori informazioni] (https://docs.directus.io/guides/collections.html#hidden)",
   note_icon: "L'icona mostrata nella barra laterale di navigazione dell'app",
   note_managed:
     "[Ulteriori informazioni] (https://docs.directus.io/guides/collections.html#managing-collections)",
-  note_single:
-    "[Ulteriori informazioni] (https://docs.directus.io/guides/collections.html#single)",
+  note_single: "[Ulteriori informazioni] (https://docs.directus.io/guides/collections.html#single)",
   no_results: "Nessun risultato",
-  no_results_body:
-    "I filtri attuali non corrispondono ad alcun elemento della collezione",
+  no_results_body: "I filtri attuali non corrispondono ad alcun elemento della collezione",
   no_collections: "Nessuna raccolta di collezioni",
-  no_collections_body:
-    "Sembra che non ci siano ancora impostazioni per le raccolte",
+  no_collections_body: "Sembra che non ci siano ancora impostazioni per le raccolte",
   no_fields: "Nessuna installazione di campi",
-  no_fields_body:
-    "Sembra che questa raccolta non abbia ancora nessuna configurazione dei campi",
+  no_fields_body: "Sembra che questa raccolta non abbia ancora nessuna configurazione dei campi",
   no_files: "Nessun documento",
   no_files_body: "Sembra che non siano stati ancora caricati file",
   numeric: "Numerico",
@@ -324,12 +300,10 @@ export default {
   not_empty: "Non è vuoto",
   not_equal_to: "Non uguale a",
   not_in_list: "Non uno di questi",
-  no_interface_error:
-    "Field {field} non ha una configurazione dell'interfaccia",
+  no_interface_error: "Field {field} non ha una configurazione dell'interfaccia",
   manage: "Gestire",
   max_size: "Max. Dimensioni: {size}",
-  max_one_primary_key:
-    "È possibile avere solo 1 campo chiave primaria per collezione",
+  max_one_primary_key: "È possibile avere solo 1 campo chiave primaria per collezione",
   dont_manage: "Non gestire",
   dont_manage_copy:
     "Privilegi, preferenze e impostazioni per la raccolta {collection} verranno rimossi permanentemente dal sistema! Sei sicuro?",
@@ -342,8 +316,7 @@ export default {
   open_on_gh: "Apri su GitHub",
   options: "Opzioni",
   password: "Parola d'ordine",
-  password_reset_sent:
-    "Email di reimpostazione della password inviata a {email}",
+  password_reset_sent: "Email di reimpostazione della password inviata a {email}",
   permissions_no_collections: "Questo progetto non ha ancora raccolte.",
   permissions_admin:
     "Gli amministratori hanno accesso a tutti i dati gestiti all'interno del sistema per impostazione predefinita.",
@@ -416,11 +389,9 @@ export default {
   settings_extensions: "estensioni",
   server_details: "Dettagli del server",
   server_error: "Errore del server",
-  server_error_copy:
-    "C'è qualcosa di sbagliato nel server o nel database di questa istanza.",
+  server_error_copy: "C'è qualcosa di sbagliato nel server o nel database di questa istanza.",
   server_trouble: "Problemi del server",
-  server_trouble_copy:
-    "Riprovare più tardi o contattare l'aiuto dell'amministratore di sistema.",
+  server_trouble_copy: "Riprovare più tardi o contattare l'aiuto dell'amministratore di sistema.",
   advanced_options: "Opzioni avanzate",
   show_directus_collections: "Mostra le collezioni del sistema di Directus",
   something_went_wrong: "Qualcosa è andato storto.",
@@ -435,8 +406,7 @@ export default {
   text: "Testo",
   this_collection: "Questa collezione",
   to: "A",
-  unsaved_changes_copy:
-    "Hai modifiche non salvate! Sei sicuro di voler lasciare questa pagina?",
+  unsaved_changes_copy: "Hai modifiche non salvate! Sei sicuro di voler lasciare questa pagina?",
   user_directory: "Elenco utenti",
   update: "Aggiornare",
   update_confirm: "Sei sicuro di voler aggiornare {count} elementi?",

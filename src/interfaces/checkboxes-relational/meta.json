@@ -41,6 +41,17 @@
       "listing_template": "Listing Template",
       "listing_template_comment": "How to display values on the listing layouts.<br>You'll need to prepend the collection name",
       "listing_template_placeholder": "{{movie.name}} — {{member.first_name}}"
+    },
+	"fr-FR": {
+      "checkboxes_relational": "Case à cocher relationnelle",
+      "grid": "Grille",
+      "grid_comment": "Nombre d'éléments à afficher dans une ligne",
+      "item_template": "Modèle d'élément",
+      "item_template_comment": "Comment afficher les éléments sur la mise en page à un seul élément",
+      "item_template_placeholder": "{{name}} — {{first_name}}",
+      "listing_template": "Liste des modèles",
+      "listing_template_comment": "Comment afficher les valeurs sur la mise en page des listes.<br>Vous devrez mettre devant le nom de la collection",
+      "listing_template_placeholder": "{{movie.name}} — {{member.first_name}}"
     }
   }
 }

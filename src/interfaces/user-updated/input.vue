@@ -9,9 +9,9 @@
       v-tooltip="options.display === 'avatar' ? displayValue : null"
       color="light-gray"
     ></v-avatar>
-    <span v-if="options.display !== 'avatar'" class="label gray style-3"
-      ><div>{{ displayValue }}</div></span
-    >
+    <span v-if="options.display !== 'avatar'" class="label gray style-3">
+      <div>{{ displayValue }}</div>
+    </span>
   </div>
   <div v-else-if="newItem" class="gray style-3">
     {{ $t("interfaces-user-updated-you") }}
@@ -39,10 +39,7 @@ export default {
       return this.$store.state.users[this.value];
     },
     displayValue() {
-      return this.$helpers.micromustache.render(
-        this.options.template,
-        this.userInfo
-      );
+      return this.$helpers.micromustache.render(this.options.template, this.userInfo);
     },
     src() {
       if (!this.userInfo.avatar) return null;

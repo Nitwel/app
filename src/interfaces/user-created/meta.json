@@ -38,6 +38,17 @@
       "display_comment": "How to display the user on the item browse page",
       "you": "You will be the creator",
       "unknown": "Unknown"
+    },
+	"fr-FR": {
+      "user_created": "Utilisateur qui a créé l'élément",
+      "avatar": "Avatar",
+      "name": "Nom",
+      "template": "Modèle",
+      "template_comment": "Mode d'affichage de l'utilisateur dans la page des détails d'un élément",
+      "display": "Affichage",
+      "display_comment": "Mode d'affichage de l'utilisateur sur la page d'énumération des éléments",
+      "you": "Vous en serez le créateur",
+      "unknown": "Inconnu"
     }
   }
 }

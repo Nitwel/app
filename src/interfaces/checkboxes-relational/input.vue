@@ -56,9 +56,7 @@ export default {
 
     //Select the items
     if (!this.newItem) {
-      this.selection = this.value.map(
-        item => item[this.junctionFieldOfRelated][this.relatedPk]
-      );
+      this.selection = this.value.map(item => item[this.junctionFieldOfRelated][this.relatedPk]);
     }
   },
 
@@ -116,8 +114,7 @@ export default {
           //Restore the value from unchecked array
           if (item.$delete) {
             let uncheckedItem = this.unchecked[item[this.junctionPk]];
-            let itemId =
-              uncheckedItem[this.junctionFieldOfRelated][this.relatedPk];
+            let itemId = uncheckedItem[this.junctionFieldOfRelated][this.relatedPk];
             if (itemId == val) {
               isSet = true;
               newValue.push(uncheckedItem);
@@ -142,10 +139,7 @@ export default {
       //Loop through existing value to find an item
       //Set $delete key to true
       this.value.forEach(item => {
-        if (
-          !item.$delete &&
-          item[this.junctionFieldOfRelated][this.relatedPk] == val
-        ) {
+        if (!item.$delete && item[this.junctionFieldOfRelated][this.relatedPk] == val) {
           //Keep the item in seperate array
           // to restore the value when checked again
           if (item[this.junctionPk]) {

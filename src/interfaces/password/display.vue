@@ -1,9 +1,9 @@
 <template>
-  <i
+  <v-icon
     class="material-icons readonly-password"
     :style="{ color: `var(--${colorChange})` }"
-    >{{ icon }}</i
-  >
+    :name="icon"
+  />
 </template>
 
 <script>

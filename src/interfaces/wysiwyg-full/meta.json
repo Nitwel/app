@@ -76,6 +76,17 @@
       "upload_files_comment": "Upload files to directus instead of using Base64 encoded images. Needs 'image' in toolbar.",
       "custom_url": "URL base for images",
       "custom_url_comment": "Optional custom URL base for images including last '/'"
+    },
+	"fr-FR": {
+      "wysiwyg_full": "Editeur avancé de contenu avec présentation « tel écran, tel écrit »",
+      "placeholder": "Paramètre fictif",
+      "placeholder_comment": "Texte statique qui est affiché avant la sélection d'une valeur",
+      "toolbar_options": "Options de la barre d'outils",
+      "toolbar_options_comment": "Options de la barre d'outils [QuillJS](https://quilljs.com/docs/modules/toolbar/)",
+      "upload_files": "Téléverser des fichiers",
+      "upload_files_comment": "Télécharger vers Directus des fichiers plutôt que d'utiliser des images encodées en Base64. Nécessite l'option « image » dans la barre d'outils",
+      "custom_url": "Adresse Web (URL) des images",
+      "custom_url_comment": "URL personnalisée optionnelle des images, incluant la barre verticale oblique (/) finale"
     }
   }
 }

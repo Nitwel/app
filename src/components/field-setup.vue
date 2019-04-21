@@ -1,8 +1,6 @@
 <template>
   <v-modal
-    :title="
-      existing ? $t('update_field') + ': ' + displayName : $t('create_field')
-    "
+    :title="existing ? $t('update_field') + ': ' + displayName : $t('create_field')"
     :tabs="tabs"
     :active-tab="activeTab"
     :buttons="buttons"
@@ -14,18 +12,16 @@
       <template v-if="!existing">
         <h1 class="style-0">{{ $t("choose_interface") }}</h1>
       </template>
-      <p v-if="interfaceName" class="currently-selected subtext">
-        {{
-          $t("currently_selected", { thing: interfaces[interfaceName].name })
-        }}
-      </p>
+      <v-notice v-if="interfaceName" color="gray" class="currently-selected">
+        {{ $t("currently_selected", { thing: interfaces[interfaceName].name }) }}
+      </v-notice>
       <p v-else class="subtext">{{ $t("select_interface_below") }}</p>
       <div>
         <v-details
-          v-for="(group, index) in interfacesGrouped"
+          v-for="group in interfacesGrouped"
           :title="group.title"
           :key="group.title"
-          :open="index === 0"
+          :open="true"
         >
           <div class="interfaces">
             <article
@@ -36,9 +32,7 @@
               @click="setInterface(ext.id)"
             >
               <div class="header">
-                <i class="material-icons">{{
-                  ext.icon ? ext.icon : "category"
-                }}</i>
+                <v-icon :name="ext.icon || 'category'" size="48" color="white" />
               </div>
               <div class="body">
                 <h2>{{ ext.name }}</h2>
@@ -53,44 +47,52 @@
     <template slot="schema" v-if="interfaceName">
       <template v-if="!existing">
         <h1 class="style-0">
-          {{ $t("name_field", { field: $helpers.formatTitle(interfaceName) }) }}
+          {{ $t("name_field", { field: $helpers.formatTitle(interfaces[interfaceName].name) }) }}
         </h1>
         <p class="subtext">{{ $t("intelligent_defaults") }}</p>
       </template>
       <form @submit.prevent class="schema">
         <div class="name">
-          <label
-            >{{ $t("name")
-            }}<i v-tooltip="$t('required')" class="material-icons required"
-              >star</i
-            >
+          <label>
+            {{ $t("name") }}*
             <v-input
               type="text"
               v-model="field"
               :placeholder="$t('db_column_name')"
               class="name-input"
               :disabled="existing"
-          /></label>
-          <label
-            >{{ $t("default_value") }}
+              :icon-right="iconToShow.icon"
+              :icon-right-color="iconToShow.color"
+              :icon-right-tooltip="iconToShow.tooltip"
+            />
+            <p class="small-text">
+              {{ $t("display_name") }}:
+              <b>{{ $helpers.formatTitle(field || "...") }}</b>
+            </p>
+          </label>
+          <label>
+            {{ $t("default_value") }}
             <v-input
               type="text"
               v-model="default_value"
               placeholder="NULL"
               :disabled="type === 'o2m' || type === 'translation'"
-          /></label>
+            />
+          </label>
         </div>
-        <label
-          >{{ $t("note") }}
-          <v-input type="text" v-model="note" :placeholder="$t('add_note')"
-        /></label>
+        <label>
+          {{ $t("note") }}
+          <v-input type="text" v-model="note" :placeholder="$t('add_note')" />
+        </label>
 
         <div class="toggles">
-          <label class="toggle" v-if="type !== 'alias'"
-            ><v-toggle v-model="required" /> {{ $t("required") }}
+          <label class="toggle" v-if="type !== 'alias'">
+            <v-toggle v-model="required" :disabled="fieldInfo.primary_key" />
+            {{ $t("required") }}
           </label>
-          <label class="toggle"
-            ><v-toggle v-model="readonly" /> {{ $t("readonly") }}
+          <label class="toggle">
+            <v-toggle v-model="readonly" />
+            {{ $t("readonly") }}
           </label>
         </div>
 
@@ -113,7 +115,9 @@
             </label>
             <label>
               {{
-                $t("db_datatype", { db: $helpers.formatTitle(databaseVendor) })
+                $t("db_datatype", {
+                  db: $helpers.formatTitle(databaseVendor)
+                })
               }}
               <v-simple-select v-model="datatype">
                 <option
@@ -125,32 +129,24 @@
                   {{ typeOption }}
                 </option>
               </v-simple-select>
-              <small class="description">{{
-                selectedDatatypeInfo && selectedDatatypeInfo.description
-              }}</small>
+              <small class="description">
+                {{ selectedDatatypeInfo && $t(selectedDatatypeInfo.description) }}
+              </small>
             </label>
-            <label
-              >{{ $t("length") }}
+            <label>
+              {{ $t("length") }}
               <v-input
-                :type="
-                  selectedDatatypeInfo && selectedDatatypeInfo.decimal
-                    ? 'string'
-                    : 'number'
-                "
+                :type="selectedDatatypeInfo && selectedDatatypeInfo.decimal ? 'string' : 'number'"
                 @input="length = $event"
                 :value="lengthDisabled ? null : length"
                 :disabled="lengthDisabled"
-                :placeholder="
-                  lengthDisabled ? $t('length_disabled_placeholder') : ''
-                "
-            /></label>
-            <label
-              >{{ $t("validation") }}
-              <v-input
-                type="text"
-                v-model="validation"
-                :placeholder="$t('regex')"
-            /></label>
+                :placeholder="lengthDisabled ? $t('length_disabled_placeholder') : ''"
+              />
+            </label>
+            <label>
+              {{ $t("validation") }}
+              <v-input type="text" v-model="validation" :placeholder="$t('regex')" />
+            </label>
             <label
               class="toggle"
               :class="{ disabled: primaryKeyDisabled }"
@@ -159,18 +155,18 @@
               <v-toggle v-model="primary_key" :disabled="primaryKeyDisabled" />
               {{ $t("primary_key") }}
             </label>
-            <label class="toggle"
-              ><v-toggle v-model="unique" /> {{ $t("unique") }}</label
-            >
-            <label class="toggle"
-              ><v-toggle v-model="hidden_detail" />
-              {{ $t("hidden_detail") }}</label
-            >
-            <label class="toggle"
-              ><v-toggle v-model="hidden_browse" />{{
-                $t("hidden_browse")
-              }}</label
-            >
+            <label class="toggle">
+              <v-toggle v-model="unique" />
+              {{ $t("unique") }}
+            </label>
+            <label class="toggle">
+              <v-toggle v-model="hidden_detail" />
+              {{ $t("hidden_detail") }}
+            </label>
+            <label class="toggle">
+              <v-toggle v-model="hidden_browse" />
+              {{ $t("hidden_browse") }}
+            </label>
             <label class="toggle" v-if="isNumeric">
               <v-toggle v-model="signed" />
               {{ $t("signed") }}
@@ -191,25 +187,17 @@
       <form v-if="relation === 'm2o'" class="single">
         <p>{{ $t("this_collection") }}</p>
 
-        <v-simple-select
-          class="select"
-          :value="relationInfo.collection_many"
-          disabled
-        >
-          <option selected :value="collectionInfo.collection">{{
-            collectionInfo.collection
-          }}</option>
+        <v-simple-select class="select" :value="relationInfo.collection_many" disabled>
+          <option selected :value="collectionInfo.collection">
+            {{ collectionInfo.collection }}
+          </option>
         </v-simple-select>
 
-        <v-simple-select
-          class="select"
-          :value="relationInfo.field_many"
-          disabled
-        >
+        <v-simple-select class="select" :value="relationInfo.field_many" disabled>
           <option selected :value="field">{{ field }}</option>
         </v-simple-select>
 
-        <i class="material-icons">arrow_backward</i>
+        <v-icon name="arrow_backward" />
 
         <p>{{ $t("related_collection") }}</p>
 
@@ -219,32 +207,27 @@
               v-for="collection in collectionsGrouped.user"
               :key="collection"
               :value="collection"
-              >{{ collection }}</option
             >
+              {{ collection }}
+            </option>
           </optgroup>
           <optgroup label="Directus">
             <option
               v-for="collection in collectionsGrouped.system"
               :key="collection"
               :value="collection"
-              >{{ collection }}</option
             >
+              {{ collection }}
+            </option>
           </optgroup>
         </v-simple-select>
 
         <v-simple-select
           class="select"
-          :value="
-            primaryKeyFieldByCollection(relationInfo.collection_one).field
-          "
+          :value="primaryKeyFieldByCollection(relationInfo.collection_one).field"
           disabled
         >
-          <option
-            selected
-            :value="
-              primaryKeyFieldByCollection(relationInfo.collection_one).field
-            "
-          >
+          <option selected :value="primaryKeyFieldByCollection(relationInfo.collection_one).field">
             {{ primaryKeyFieldByCollection(relationInfo.collection_one).field }}
           </option>
         </v-simple-select>
@@ -253,23 +236,19 @@
       <form v-if="relation === 'o2m'" class="single">
         <p>{{ $t("this_collection") }}</p>
 
-        <v-simple-select
-          class="select"
-          :value="collectionInfo.collection"
-          disabled
-        >
-          <option selected :value="collectionInfo.collection">{{
-            collectionInfo.collection
-          }}</option>
+        <v-simple-select class="select" :value="collectionInfo.collection" disabled>
+          <option selected :value="collectionInfo.collection">
+            {{ collectionInfo.collection }}
+          </option>
         </v-simple-select>
 
         <v-simple-select class="select" :value="primaryKeyField.field" disabled>
-          <option selected :value="primaryKeyField.field">{{
-            primaryKeyField.field
-          }}</option>
+          <option selected :value="primaryKeyField.field">
+            {{ primaryKeyField.field }}
+          </option>
         </v-simple-select>
 
-        <i class="material-icons">arrow_forward</i>
+        <v-icon name="arrow_forward" />
 
         <p>{{ $t("related_collection") }}</p>
 
@@ -279,16 +258,18 @@
               v-for="collection in collectionsGrouped.user"
               :key="collection"
               :value="collection"
-              >{{ collection }}</option
             >
+              {{ collection }}
+            </option>
           </optgroup>
           <optgroup label="Directus">
             <option
               v-for="collection in collectionsGrouped.system"
               :key="collection"
               :value="collection"
-              >{{ collection }}</option
             >
+              {{ collection }}
+            </option>
           </optgroup>
         </v-simple-select>
 
@@ -297,31 +278,28 @@
             v-for="{ field } in fields(relationInfo.collection_many)"
             :key="field"
             :value="field"
-            >{{ field }}</option
           >
+            {{ field }}
+          </option>
         </v-simple-select>
       </form>
 
       <form v-if="relation === 'm2m'" class="full">
         <p>{{ $t("this_collection") }}</p>
 
-        <v-simple-select
-          class="select"
-          :value="collectionInfo.collection"
-          disabled
-        >
-          <option selected :value="collectionInfo.collection">{{
-            collectionInfo.collection
-          }}</option>
+        <v-simple-select class="select" :value="collectionInfo.collection" disabled>
+          <option selected :value="collectionInfo.collection">
+            {{ collectionInfo.collection }}
+          </option>
         </v-simple-select>
 
         <v-simple-select class="select" :value="primaryKeyField.field" disabled>
-          <option selected :value="primaryKeyField.field">{{
-            primaryKeyField.field
-          }}</option>
+          <option selected :value="primaryKeyField.field">
+            {{ primaryKeyField.field }}
+          </option>
         </v-simple-select>
 
-        <i class="material-icons">arrow_forward</i>
+        <v-icon name="arrow_forward" />
 
         <p>{{ $t("junction_collection") }}</p>
 
@@ -341,16 +319,18 @@
               v-for="collection in collectionsGrouped.user"
               :key="collection"
               :value="collection"
-              >{{ collection }}</option
             >
+              {{ collection }}
+            </option>
           </optgroup>
           <optgroup label="Directus">
             <option
               v-for="collection in collectionsGrouped.system"
               :key="collection"
               :value="collection"
-              >{{ collection }}</option
             >
+              {{ collection }}
+            </option>
           </optgroup>
         </v-simple-select>
 
@@ -376,8 +356,9 @@
             v-for="{ field } in fields(relationInfoM2M[0].collection_many)"
             :key="field"
             :value="field"
-            >{{ field }}</option
           >
+            {{ field }}
+          </option>
         </v-simple-select>
 
         <v-input
@@ -397,8 +378,9 @@
             v-for="{ field } in fields(relationInfoM2M[0].collection_many)"
             :key="field"
             :value="field"
-            >{{ field }}</option
           >
+            {{ field }}
+          </option>
         </v-simple-select>
 
         <v-input
@@ -407,10 +389,7 @@
           type="text"
           v-model="relationInfoM2M[currentM2MIndex === 0 ? 1 : 0].field_many"
           :placeholder="
-            autoM2Msuggestion(
-              relationInfoM2M[currentM2MIndex == 0 ? 1 : 0].collection_one,
-              'id'
-            )
+            autoM2Msuggestion(relationInfoM2M[currentM2MIndex == 0 ? 1 : 0].collection_one, 'id')
           "
         />
 
@@ -422,7 +401,7 @@
           @change="createM2Mjunction = !createM2Mjunction"
         />
 
-        <i class="material-icons">arrow_backward</i>
+        <v-icon name="arrow_backward" />
 
         <p>{{ $t("related_collection") }}</p>
 
@@ -435,16 +414,18 @@
               v-for="collection in collectionsGrouped.user"
               :key="collection"
               :value="collection"
-              >{{ collection }}</option
             >
+              {{ collection }}
+            </option>
           </optgroup>
           <optgroup label="Directus">
             <option
               v-for="collection in collectionsGrouped.system"
               :key="collection"
               :value="collection"
-              >{{ collection }}</option
             >
+              {{ collection }}
+            </option>
           </optgroup>
         </v-simple-select>
 
@@ -464,12 +445,13 @@
                 relationInfoM2M[currentM2MIndex === 0 ? 1 : 0].collection_one
               ).field
             "
-            >{{
+          >
+            {{
               primaryKeyFieldByCollection(
                 relationInfoM2M[currentM2MIndex === 0 ? 1 : 0].collection_one
               ).field
-            }}</option
-          >
+            }}
+          </option>
         </v-simple-select>
       </form>
     </template>
@@ -479,12 +461,18 @@
         <h1 class="style-0">{{ $t("almost_done_options") }}</h1>
         <p class="subtext">{{ $t("almost_done_copy") }}</p>
       </template>
+
+      <label for="__width">{{ $t("field_width") }}</label>
+      <v-simple-select v-model="width" name="__width">
+        <option value="half">Half</option>
+        <option value="full">Full</option>
+        <option value="fill">Fill the page</option>
+      </v-simple-select>
+
+      <hr />
+
       <form @submit.prevent v-if="selectedInterfaceInfo" class="options">
-        <div
-          v-for="(option, optionID) in interfaceOptions.regular"
-          class="options"
-          :key="optionID"
-        >
+        <div v-for="(option, optionID) in interfaceOptions.regular" class="options" :key="optionID">
           <label :for="optionID">{{ option.name }}</label>
           <v-ext-input
             :id="option.interface"
@@ -564,6 +552,7 @@ export default {
       sort: null,
 
       field: null,
+      isFieldValid: null,
       datatype: null,
       type: null,
       interfaceName: null,
@@ -577,6 +566,7 @@ export default {
       hidden_browse: false,
       primary_key: false,
       signed: true,
+      width: "full",
 
       length: null,
       default_value: null,
@@ -619,17 +609,26 @@ export default {
     };
   },
   computed: {
+    iconToShow() {
+      if (!this.field || this.existing) {
+        return { icon: null, color: null };
+      }
+      if (this.isFieldValid) {
+        return { icon: "done", color: "success" };
+      }
+      return {
+        icon: "error",
+        color: "danger",
+        tooltip: this.$t("field_already_exists", { field: "'" + this.field + "'" })
+      };
+    },
     collections() {
       return Object.assign({}, this.$store.state.collections);
     },
     collectionsGrouped() {
       const collectionNames = Object.keys(this.collections);
-      const system = collectionNames.filter(name =>
-        name.startsWith("directus_")
-      );
-      const user = collectionNames.filter(
-        name => !name.startsWith("directus_")
-      );
+      const system = collectionNames.filter(name => name.startsWith("directus_"));
+      const user = collectionNames.filter(name => !name.startsWith("directus_"));
       return { system, user };
     },
     interfaces() {
@@ -742,10 +741,7 @@ export default {
       if (!this.selectedInterfaceInfo) return null;
       const options = Object.assign({}, this.selectedInterfaceInfo.options);
       const regular = this.$lodash.pickBy(options, opt => !opt.advanced);
-      const advanced = this.$lodash.pickBy(
-        options,
-        opt => opt.advanced === true
-      );
+      const advanced = this.$lodash.pickBy(options, opt => opt.advanced === true);
 
       return { regular, advanced };
     },
@@ -765,9 +761,7 @@ export default {
     availableFieldTypes() {
       if (!this.interfaceName) return [];
       return (
-        (this.interfaces[this.interfaceName] &&
-          this.interfaces[this.interfaceName].types) ||
-        []
+        (this.interfaces[this.interfaceName] && this.interfaces[this.interfaceName].types) || []
       );
     },
     availableDatatypes() {
@@ -781,20 +775,14 @@ export default {
     fieldTypeDescription() {
       if (!this.type) return null;
 
-      return mapping[this.type] && mapping[this.type].description;
+      return mapping[this.type] && this.$t(mapping[this.type].description);
     },
     lengthDisabled() {
-      if (
-        this.selectedDatatypeInfo &&
-        this.selectedDatatypeInfo.length === true
-      ) {
+      if (this.selectedDatatypeInfo && this.selectedDatatypeInfo.length === true) {
         return false;
       }
 
-      if (
-        this.selectedDatatypeInfo &&
-        this.selectedDatatypeInfo.decimal === true
-      ) {
+      if (this.selectedDatatypeInfo && this.selectedDatatypeInfo.decimal === true) {
         return false;
       }
 
@@ -816,6 +804,9 @@ export default {
         disabled = true;
       }
       if (this.activeTab === "schema" && !this.field) {
+        disabled = true;
+      }
+      if (!this.isFieldValid && !this.existing) {
         disabled = true;
       }
 
@@ -855,10 +846,10 @@ export default {
         };
       }
 
-      if (
-        this.interfaceName &&
-        Object.keys(this.selectedInterfaceInfo.options).length > 0
-      ) {
+      const interfaceOptions =
+        (this.selectedInterfaceInfo && this.selectedInterfaceInfo.options) || {};
+
+      if (this.interfaceName && Object.keys(interfaceOptions).length > 0) {
         let disabled = this.schemaDisabled === true || !this.field;
         tabs.options = {
           text: this.$t("options"),
@@ -869,11 +860,10 @@ export default {
       return tabs;
     },
     hasOptions() {
-      if (
-        this.interfaceName &&
-        Object.keys(this.interfaces[this.interfaceName].options).length > 0
-      )
-        return true;
+      const interfaceOptions =
+        (this.selectedInterfaceInfo && this.selectedInterfaceInfo.options) || {};
+
+      if (this.interfaceName && Object.keys(interfaceOptions).length > 0) return true;
 
       return false;
     },
@@ -922,21 +912,12 @@ export default {
 
       this.type = this.availableFieldTypes[0];
 
-      this.datatype = this.type
-        ? mapping[this.type][this.databaseVendor].default
-        : null;
+      this.datatype = this.type ? mapping[this.type][this.databaseVendor].default : null;
 
       if (this.existing) return;
 
-      if (
-        this.selectedInterfaceInfo &&
-        this.selectedInterfaceInfo.recommended
-      ) {
-        const {
-          defaultValue,
-          length,
-          validation
-        } = this.selectedInterfaceInfo.recommended;
+      if (this.selectedInterfaceInfo && this.selectedInterfaceInfo.recommended) {
+        const { defaultValue, length, validation } = this.selectedInterfaceInfo.recommended;
 
         if (defaultValue) {
           this.default_value = defaultValue;
@@ -980,7 +961,7 @@ export default {
         return;
       }
 
-      if (this.selectedDatatypeInfo.length) {
+      if (this.selectedDatatypeInfo && this.selectedDatatypeInfo.length) {
         this.length = this.selectedDatatypeInfo.defaultLength;
 
         if (mapping[this.type][this.databaseVendor].length) {
@@ -990,9 +971,7 @@ export default {
 
       if (this.selectedDatatypeInfo && this.selectedDatatypeInfo.decimal) {
         this.length =
-          this.selectedDatatypeInfo.defaultDigits +
-          "," +
-          this.selectedDatatypeInfo.defaultDecimals;
+          this.selectedDatatypeInfo.defaultDigits + "," + this.selectedDatatypeInfo.defaultDecimals;
       }
     },
     lengthDisabled(disabled) {
@@ -1002,6 +981,8 @@ export default {
     },
     field(val) {
       this.field = this.validateFieldName(val);
+
+      this.isFieldValid = !Object.keys(this.collectionInfo.fields).includes(val);
 
       if (this.relation) {
         if (this.relation === "m2o") {
@@ -1051,13 +1032,8 @@ export default {
           currentCollection,
           this.relationInfoM2M[ix == 0 ? 1 : 0].collection_one
         );
-        this.relationInfoM2M[ix].field_many = this.autoM2Msuggestion(
-          currentCollection,
-          "id"
-        );
-        this.relationInfoM2M[
-          ix === 0 ? 1 : 0
-        ].field_many = this.autoM2Msuggestion(
+        this.relationInfoM2M[ix].field_many = this.autoM2Msuggestion(currentCollection, "id");
+        this.relationInfoM2M[ix === 0 ? 1 : 0].field_many = this.autoM2Msuggestion(
           this.relationInfoM2M[ix == 0 ? 1 : 0].collection_one,
           "id"
         );
@@ -1128,7 +1104,8 @@ export default {
         hidden_detail: this.hidden_detail,
         hidden_browse: this.hidden_browse,
         primary_key: this.primary_key,
-        validation: this.validation
+        validation: this.validation,
+        width: this.width
         // translation: this.translation, < Haven't implemented that yet
       };
 
@@ -1264,40 +1241,30 @@ export default {
         if (field && existingRelation) {
           this.relationInfoM2M[0].id = existingRelation.id;
 
-          this.relationInfoM2M[0].collection_many =
-            existingRelation.collection_many.collection;
+          this.relationInfoM2M[0].collection_many = existingRelation.collection_many.collection;
 
-          this.relationInfoM2M[0].field_many =
-            existingRelation.field_many.field;
+          this.relationInfoM2M[0].field_many = existingRelation.field_many.field;
 
-          this.relationInfoM2M[0].collection_one =
-            existingRelation.collection_one.collection;
+          this.relationInfoM2M[0].collection_one = existingRelation.collection_one.collection;
 
           this.relationInfoM2M[0].field_one = existingRelation.field_one.field;
-          this.relationInfoM2M[0].junction_field =
-            existingRelation.junction.field_many.field;
+          this.relationInfoM2M[0].junction_field = existingRelation.junction.field_many.field;
 
           this.relationInfoM2M[1].id = existingRelation.junction.id;
 
-          this.relationInfoM2M[1].collection_many =
-            existingRelation.collection_many.collection;
+          this.relationInfoM2M[1].collection_many = existingRelation.collection_many.collection;
 
-          this.relationInfoM2M[1].field_many =
-            existingRelation.junction.field_many.field;
+          this.relationInfoM2M[1].field_many = existingRelation.junction.field_many.field;
 
           this.relationInfoM2M[1].collection_one =
             existingRelation.junction.collection_one.collection;
 
           this.relationInfoM2M[1].field_one =
-            existingRelation.junction.field_one &&
-            existingRelation.junction.field_one.field;
+            existingRelation.junction.field_one && existingRelation.junction.field_one.field;
 
-          this.relationInfoM2M[1].junction_field =
-            existingRelation.field_many.field;
+          this.relationInfoM2M[1].junction_field = existingRelation.field_many.field;
         } else {
-          this.relationInfoM2M[0].collection_many = Object.keys(
-            this.collections
-          )[0];
+          this.relationInfoM2M[0].collection_many = Object.keys(this.collections)[0];
 
           this.relationInfoM2M[0].field_many = Object.values(
             Object.values(this.collections)[0].fields
@@ -1309,17 +1276,13 @@ export default {
             Object.values(this.collections)[0].fields
           )[0].field;
 
-          this.relationInfoM2M[1].collection_many = Object.keys(
-            this.collections
-          )[0];
+          this.relationInfoM2M[1].collection_many = Object.keys(this.collections)[0];
 
           this.relationInfoM2M[1].field_many = Object.values(
             Object.values(this.collections)[0].fields
           )[0].field;
 
-          this.relationInfoM2M[1].collection_one = Object.keys(
-            this.collections
-          )[1];
+          this.relationInfoM2M[1].collection_one = Object.keys(this.collections)[1];
 
           this.relationInfoM2M[1].junction_field = Object.values(
             Object.values(this.collections)[0].fields
@@ -1532,9 +1495,21 @@ p {
     line-height: 26px;
     font-weight: 400;
     margin-bottom: 40px;
-    &.currently-selected {
-      color: var(--accent);
-    }
+  }
+}
+
+.currently-selected {
+  margin-bottom: 40px;
+}
+
+.small-text {
+  margin-top: 4px;
+  font-style: italic;
+  font-size: 12px;
+  line-height: 1.5em;
+  color: var(--light-gray);
+  & b {
+    font-weight: 600;
   }
 }
 
@@ -1543,9 +1518,10 @@ p {
   margin-top: 4px;
   margin-bottom: 10px;
   font-style: italic;
-  font-size: 12px;
+  font-size: var(--size-3);
   line-height: 1.5em;
   color: var(--light-gray);
+  font-weight: var(--weight-bold);
 }
 
 .interfaces {
@@ -1571,11 +1547,6 @@ p {
       align-items: center;
       padding: 20px 0;
       transition: background-color var(--fast) var(--transition-out);
-
-      i {
-        font-size: 48px;
-        color: var(--white);
-      }
     }
 
     &.active {
@@ -1651,7 +1622,7 @@ form.schema {
       width: max-content;
 
       &:not(.disabled):hover {
-        color: var(--accent);
+        color: var(--darkest-gray);
       }
 
       > *:first-child {
@@ -1736,9 +1707,9 @@ details {
 }
 
 .required {
-  color: var(--accent);
+  color: var(--darkest-gray);
   vertical-align: super;
-  font-size: 7px;
+  font-size: 7px !important;
 }
 
 .single {
@@ -1860,5 +1831,16 @@ details {
 
 .toggles {
   margin-top: 32px;
+}
+
+label {
+  font-size: var(--size-2);
+  margin-bottom: 12px;
+}
+
+hr {
+  margin: 32px 0;
+  border: 0;
+  border-top: 2px solid var(--lightest-gray);
 }
 </style>

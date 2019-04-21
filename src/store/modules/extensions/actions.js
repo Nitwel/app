@@ -23,11 +23,7 @@ function translateFields(meta, type, id) {
       //   like $t:option $t:or $t:value
       return value
         .split(" ")
-        .map(word =>
-          word.startsWith("$t:")
-            ? i18n.t(`${type}-${id}-${word.substring(3)}`)
-            : word
-        )
+        .map(word => (word.startsWith("$t:") ? i18n.t(`${type}-${id}-${word.substring(3)}`) : word))
         .join(" ");
     }
 
@@ -142,9 +138,7 @@ export function getExtensions({ commit }, type) {
        *   with previously registered translations
        */
       .then(extensions =>
-        extensions.map(extension =>
-          translateFields(extension, type, extension.id)
-        )
+        extensions.map(extension => translateFields(extension, type, extension.id))
       )
 
       /**

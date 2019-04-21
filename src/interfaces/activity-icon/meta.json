@@ -8,6 +8,11 @@
       "activity-icon": "Activity Icon",
       "radius": "Radius",
       "radius-comment": "The radius of the icon circle in pixels"
+    },
+	"fr-FR": {
+      "activity-icon": "Icone d'activité",
+      "radius": "Radius",
+      "radius-comment": "Le radius de l'icone circulaire, en pixels"
     }
   }
 }

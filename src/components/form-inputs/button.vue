@@ -6,7 +6,7 @@
     class="form-button style-btn"
     @click="$emit('click')"
   >
-    <i v-if="icon && !loading" class="material-icons">{{ icon }}</i>
+    <v-icon v-if="icon && !loading" :name="icon" class="icon" />
     <v-spinner
       v-if="loading"
       :line-size="2"
@@ -51,8 +51,7 @@ export default {
     bg: {
       type: String,
       default: "action",
-      validator: value =>
-        ["action", "secondary", "warning", "danger"].includes(value)
+      validator: value => ["action", "secondary", "warning", "danger"].includes(value)
     }
   }
 };
@@ -118,7 +117,7 @@ button {
   justify-content: center;
   padding: 0 20px 1px;
   height: 44px;
-  min-width: var(--width-small);
+  min-width: 136px;
   border: var(--input-border-width) solid var(--action);
 
   &:disabled:not(.loading) {
@@ -136,7 +135,7 @@ button {
     width: 100%;
   }
 
-  i {
+  .icon {
     vertical-align: -6px;
     margin-right: 6px;
   }

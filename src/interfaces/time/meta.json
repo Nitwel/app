@@ -18,6 +18,13 @@
       "include_seconds_comment": "Include seconds in the interface",
       "24hour": "Display 24 hour clock",
       "24hour_comment": "Show the time in 24-hour format (eg.: 15:30)"
+    },
+	"fr-FR": {
+      "time": "Heure et minute",
+      "include_seconds": "Inclure les secondes",
+      "include_seconds_comment": "Ajoute les secondes écoulées dans l'interface",
+      "24hour": "Affichage 24 heures",
+      "24hour_comment": "Affiche le temps dans une journée sur 24 heures (ex: 15:30)"
     }
   }
 }

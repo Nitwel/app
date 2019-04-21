@@ -1,3 +1,3 @@
 <template>
-  <i class="material-icons">short_text</i>
+  <v-icon name="short_text" />
 </template>

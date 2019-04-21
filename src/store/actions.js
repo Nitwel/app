@@ -45,15 +45,7 @@ export function latency({ commit }) {
 export function getCurrentUser({ commit }) {
   return api
     .getMe({
-      fields: [
-        "id",
-        "avatar.*",
-        "email",
-        "first_name",
-        "last_name",
-        "locale",
-        "roles.*.*"
-      ]
+      fields: ["id", "avatar.*", "email", "first_name", "last_name", "locale", "roles.*.*"]
     })
     .then(res => res.data)
     .then(userInfo => {
@@ -74,12 +66,7 @@ export function track({ commit, state }, { page }) {
   };
 
   commit(UPDATE_CURRENT_USER, data);
-  return api.request(
-    "PATCH",
-    `/users/${currentUserID}/tracking/page`,
-    {},
-    data
-  );
+  return api.request("PATCH", `/users/${currentUserID}/tracking/page`, {}, data);
 }
 
 export function getBookmarks({ commit }) {

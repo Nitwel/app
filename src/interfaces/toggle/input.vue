@@ -7,19 +7,14 @@
       @change="updateValue($event.target.checked)"
     />
     <label :for="name">
-      <i class="material-icons icon">{{ icon }}</i> {{ label }}
+      <v-icon :name="icon" class="icon" />
+      {{ label }}
     </label>
   </div>
 
-  <div v-else class="toggle">
-    <input
-      type="checkbox"
-      :disabled="readonly"
-      :id="name"
-      :checked="value"
-      @change="updateValue($event.target.checked)"
-    />
-    <label :for="name"><span></span>{{ label }}&nbsp;</label>
+  <div v-else class="toggle" :class="{ on: value }">
+    <v-toggle :value="value" @input="updateValue" :disabled="readonly" />
+    <span>{{ label }}</span>
   </div>
 </template>
 
@@ -73,7 +68,7 @@ input {
     color: var(--darker-gray);
   }
   input:checked + label {
-    color: var(--accent);
+    color: var(--darkest-gray);
   }
   input:disabled + label {
     color: var(--light-gray);
@@ -82,82 +77,21 @@ input {
     cursor: not-allowed;
   }
 }
+
 .toggle {
-  position: relative;
-  display: inline-block;
+  display: flex;
+  align-items: center;
 
-  &:hover {
-    label:after {
-      background-color: var(--lighter-gray);
-    }
+  span {
+    text-transform: uppercase;
+    margin-left: 4px;
+    font-size: var(--size-3);
+    font-weight: var(--weight-bold);
+    color: var(--gray);
   }
 
-  label {
-    padding: 0.5rem 0 0.5rem 2.75rem;
-    position: relative;
-
-    span {
-      position: relative;
-      vertical-align: middle;
-    }
-
-    &:before,
-    &:after {
-      content: "";
-      position: absolute;
-      margin: 0;
-      outline: 0;
-      top: 50%;
-      transform: translate(0, -50%);
-      transition: all 300ms var(--transition);
-      cursor: pointer;
-    }
-
-    &:before {
-      left: 0.0625rem;
-      width: 2.125rem;
-      height: 0.875rem;
-      border-radius: 0.5rem;
-      background-color: var(--gray);
-    }
-
-    &:after {
-      left: 0;
-      width: 1.25rem;
-      height: 1.25rem;
-      background-color: var(--lightest-gray);
-      border-radius: 50%;
-      box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.14),
-        0 2px 2px 0 rgba(0, 0, 0, 0.098), 0 1px 5px 0 rgba(0, 0, 0, 0.084);
-    }
-  }
-
-  input:checked + label {
-    color: var(--accent);
-    &:before {
-      background-color: var(--accent);
-      opacity: 0.4;
-    }
-    &:after {
-      background-color: var(--accent);
-      transform: translate(80%, -50%);
-    }
-  }
-
-  input:disabled + label {
-    cursor: not-allowed;
-    color: var(--light-gray);
-    &:before,
-    &:after {
-      background-color: var(--light-gray);
-    }
-    &:before {
-      opacity: 0.4;
-    }
-  }
-
-  input:disabled {
-    cursor: not-allowed;
+  &.on span {
+    color: var(--darker-gray);
   }
 }
 </style>

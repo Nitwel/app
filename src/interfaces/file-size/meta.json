@@ -43,6 +43,17 @@
       "format_input_comment": "Enter the value using a dropdown for units",
       "decimal": "Decimal",
       "decimal_comment": "Show the value in decimal counting (10MB vs 10MiB)"
+    },
+	"en-US": {
+      "file_size": "Taille de fichier",
+      "placeholder": "Paramètre fictif",
+      "placeholder_comment": "Texte statique qui est affiché avant la sélection d'une valeur",
+      "format": "Format de la valeur",
+      "format_comment": "Affiche la valeur dans un format lisible par l'utilisateur (ex: 10Mo)",
+      "format_input": "Format de l'entrée",
+      "format_input_comment": "Saisir l'unité de mesure des valeurs du menu déroulant",
+      "decimal": "Décimal",
+      "decimal_comment": "Affiche les valeurs au format décimal et non binaire (ex: 10Mo contre 10Mio)"
     }
   }
 }

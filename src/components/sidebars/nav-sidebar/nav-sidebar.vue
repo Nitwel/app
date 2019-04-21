@@ -1,11 +1,6 @@
 <template>
   <div class="nav-sidebar">
-    <v-blocker
-      v-show="active"
-      class="blocker"
-      @click="disableNav"
-      :z-index="2"
-    />
+    <v-blocker v-show="active" class="blocker" @click="disableNav" :z-index="2" />
     <transition name="nav">
       <aside :class="{ active }">
         <button class="a11y-close" @click="disableNav">Close nav</button>
@@ -18,11 +13,7 @@
           <template v-for="section in navStructure">
             <nav-bookmarks
               class="menu-section"
-              v-if="
-                section.include &&
-                  section.include === 'bookmarks' &&
-                  bookmarks.length > 0
-              "
+              v-if="section.include && section.include === 'bookmarks' && bookmarks.length > 0"
               :bookmarks="bookmarks"
               :key="section.id"
             />
@@ -90,10 +81,7 @@ export default {
             collection.collection.startsWith("directus_") === false
         )
         .filter(collection => {
-          if (
-            collection.status_mapping &&
-            this.permissions[collection.collection].statuses
-          ) {
+          if (collection.status_mapping && this.permissions[collection.collection].statuses) {
             return this.$lodash.some(
               this.permissions[collection.collection].statuses,
               permission => permission.read !== "none"
@@ -176,14 +164,7 @@ export default {
     },
     toBookmark(bookmark) {
       /* eslint-disable camelcase */
-      const {
-        collection,
-        search_query,
-        filters,
-        view_options,
-        view_type,
-        view_query
-      } = bookmark;
+      const { collection, search_query, filters, view_options, view_type, view_query } = bookmark;
 
       this.$store
         .dispatch("setListingPreferences", {

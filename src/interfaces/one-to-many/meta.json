@@ -53,6 +53,18 @@
       "template": "Dropdown Template",
       "template_comment": "How to format the dropdown options",
       "template_placeholder": "{{title}} — {{author}}"
+    },
+	"fr-FR": {
+      "o2m": "Un-à-plusieurs (O2M)",
+      "select_items": "Sélection des élements",
+      "relation_not_setup": "La relation n'a pas été configurée correctement",
+      "visible_columns": "Colonnes visibles",
+      "visible_columns_comment": "Ajout d'une liste (SCV) de colonnes à afficher pour la prévisualisation",
+      "preferences": "Liste des préférence de visualisation",
+      "preferences_comment": "Sélectionne les options à utiliser dans la fenêtre",
+      "template": "Modèle de menu déroulant",
+      "template_comment": "Format des options du menu déroulant",
+      "template_placeholder": "{{title}} — {{author}}"
     }
   }
 }

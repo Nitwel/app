@@ -70,8 +70,7 @@ export default {
         });
     },
     emitValue(value) {
-      const currentJunctionRecordID =
-        this.value && this.value[0] && this.value[0].id;
+      const currentJunctionRecordID = this.value && this.value[0] && this.value[0].id;
 
       if (currentJunctionRecordID) {
         this.$emit("input", [

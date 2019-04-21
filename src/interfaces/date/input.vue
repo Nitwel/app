@@ -23,6 +23,6 @@ export default {
 
 <style lang="scss" scoped>
 .interface-date {
-  max-width: var(--width-small);
+  width: 100%;
 }
 </style>

@@ -20,6 +20,12 @@
       "select_language": "Select a language...",
       "limit": "Limit to Directus Availability",
       "limit_comment": "Only show languages that are available as translations in Directus"
+    },
+	"fr-FR": {
+      "input": "Langage",
+      "select_language": "Sélectionner le langage",
+      "limit": "Se limiter à ce qui est disponible",
+      "limit_comment": "N'affiche que les langages dont les traductions sont disponibles au sein de Directus"
     }
   }
 }

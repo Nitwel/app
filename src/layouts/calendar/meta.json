@@ -1,6 +1,6 @@
 {
   "name": "$t:calendar",
-  "version": "1.0.0",
+  "icon": "date_range",
   "translation": {
     "en-US": {
       "calendar": "Calendar",
@@ -69,6 +69,41 @@
         "friday": "Freitag",
         "saturday": "Samstag",
         "sunday": "Sonntag"
+      }
+    },
+	"fr-FR": {
+      "calendar": "Calendrier",
+      "fields": "Champs",
+      "today": "aujourd'hui",
+      "events": "Evénements",
+      "moreEvents": "et {amount} plus...",
+      "noEvents": "pas encore d'événements positionnés",
+      "date": "Date",
+      "time": "Heure et minute",
+      "title": "Titre",
+      "color": "Couleur",
+      "months": {
+        "january": "Janvier",
+        "february": "Février",
+        "march": "Mars",
+        "april": "Avril",
+        "may": "Mai",
+        "june": "Juin",
+        "july": "Juillet",
+        "august": "Août",
+        "september": "Septembre",
+        "october": "Octobre",
+        "november": "Novembre",
+        "december": "Décembre"
+      },
+      "weeks": {
+        "monday": "Lundi",
+        "tuesday": "Mardi",
+        "wednesday": "Mercredi",
+        "thursday": "Jeudi",
+        "friday": "Vendredi",
+        "saturday": "Samedi",
+        "sunday": "Dimanche"
       }
     }
   }

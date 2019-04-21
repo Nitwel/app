@@ -26,7 +26,7 @@
 }
 
 .CodeMirror.CodeMirror-focused {
-	border-color: var(--accent);
+	border-color: var(--darker-gray);
 	color: var(--darker-gray);
 }
 

@@ -28,8 +28,9 @@
           :loading="loading"
           :disabled="required && disabled"
           @click="$emit('confirm')"
-          >{{ confirmText || $t("ok") }}</v-button
         >
+          {{ confirmText || $t("ok") }}
+        </v-button>
       </div>
     </div>
   </v-modal-base>

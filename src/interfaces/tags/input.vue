@@ -10,11 +10,7 @@
       @keydown="onInput"
     ></v-input>
     <div class="buttons">
-      <button
-        v-for="value in valueArray"
-        :key="value"
-        @click.prevent="removeTag(value)"
-      >
+      <button v-for="value in valueArray" :key="value" @click.prevent="removeTag(value)">
         {{ value }}
       </button>
     </div>

@@ -32,6 +32,13 @@
       "rows_comment": "The starting number of text rows available",
       "placeholder": "Placeholder",
       "placeholder_comment": "Enter placeholder text"
+    },
+	"fr-FR": {
+      "markdown": "Editeur de texte au format Markdown",
+      "rows": "Lignes",
+      "rows_comment": "Le nombre initial de lignes de texte disponibles",
+      "placeholder": "Paramètre fictif",
+      "placeholder_comment": "Texte statique qui est affiché avant la sélection d'une valeur"
     }
   }
 }

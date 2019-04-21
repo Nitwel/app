@@ -34,7 +34,11 @@ export default {
   computed: {
     columns() {
       return Object.values(this.fields).map(field => {
-        return { field: field.field, name: field.name, fieldInfo: field };
+        return {
+          field: field.field,
+          name: field.name,
+          fieldInfo: field
+        };
       });
     }
   },

@@ -6,16 +6,17 @@
     :id="name"
     multiple
   >
-    <option v-if="options.placeholder" value="" :disabled="required">{{
-      options.placeholder
-    }}</option>
+    <option v-if="options.placeholder" value="" :disabled="required">
+      {{ options.placeholder }}
+    </option>
     <option
       v-for="(display, val) in choices"
       :key="val"
       :value="val"
       :selected="value && value.includes(val)"
-      >{{ display }}</option
     >
+      {{ display }}
+    </option>
   </select>
 </template>
 
@@ -70,7 +71,7 @@ export default {
     border-color: var(--light-gray);
   }
   &:focus {
-    border-color: var(--accent);
+    border-color: var(--darker-gray);
     option {
       color: var(--dark-gray);
     }
@@ -81,11 +82,11 @@ export default {
     color: var(--gray);
     &:hover {
       transition: none;
-      color: var(--accent);
+      color: var(--darker-gray);
     }
     &:checked {
-      background: var(--accent)
-        linear-gradient(0deg, var(--accent) 0%, var(--accent) 100%);
+      background: var(--darkest-gray)
+        linear-gradient(0deg, var(--darkest-gray) 0%, var(--darkest-gray) 100%);
       position: relative;
       color: var(--white);
       -webkit-text-fill-color: var(--white);

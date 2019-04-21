@@ -93,8 +93,7 @@ export default {
 
       // Lookup the raw db datatype based on the current vendor in the type-map
       // to extract the fallback interface to use.
-      const fallback =
-        datatypes[this.databaseVendor][this.datatype].fallbackInterface;
+      const fallback = datatypes[this.databaseVendor][this.datatype].fallbackInterface;
 
       return this.interfaces[fallback];
     },
@@ -133,9 +132,7 @@ export default {
       if (!this.interfaceInfo) {
         component = VExtDisplayFallback;
       } else if (this.interfaceInfo.core) {
-        component = import("@/interfaces/" +
-          this.interfaceInfo.id +
-          "/display.vue");
+        component = import("@/interfaces/" + this.interfaceInfo.id + "/display.vue");
       } else {
         const filePath = `${this.$api.url}/${this.interfaceInfo.path.replace(
           "meta.json",

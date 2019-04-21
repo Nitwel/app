@@ -1,8 +1,6 @@
 <template>
   <div
-    :class="
-      options.theme ? `button-group-${options.theme}` : 'button-group-outline'
-    "
+    :class="options.theme ? `button-group-${options.theme}` : 'button-group-outline'"
     class="interface-button-group"
   >
     <div
@@ -24,7 +22,7 @@
           @change="$emit('input', subitem.value)"
         />
         <span class="button-group-button">
-          <i v-if="subitem.icon" class="material-icons">{{ subitem.icon }}</i>
+          <v-icon v-if="subitem.icon" />
           <span v-if="subitem.label">{{ subitem.label }}</span>
         </span>
       </label>
@@ -118,7 +116,7 @@ Theme: Outline
 		*/
     &:checked {
       + .button-group-button {
-        background-color: var(--accent);
+        background-color: var(--darkest-gray);
         color: var(--white);
       }
     }
@@ -224,7 +222,7 @@ Theme: Solid | Default
       }
       &:checked {
         + .button-group-button {
-          background-color: var(--accent);
+          background-color: var(--darkest-gray);
         }
       }
       /**

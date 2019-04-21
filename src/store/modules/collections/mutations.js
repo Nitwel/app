@@ -16,10 +16,7 @@ const mutations = {
   [SET_COLLECTIONS](state, data) {
     const collections = _.mapValues(_.keyBy(data, "collection"), info => {
       const statusField = _.find(info.fields, { interface: "status" });
-      let status_mapping =
-        statusField &&
-        statusField.options &&
-        statusField.options.status_mapping;
+      let status_mapping = statusField && statusField.options && statusField.options.status_mapping;
 
       if (status_mapping && typeof status_mapping === "string") {
         status_mapping = JSON.parse(status_mapping);
@@ -37,9 +34,7 @@ const mutations = {
   },
 
   [ADD_COLLECTION](state, collection) {
-    if (
-      Object.values(collection.fields).some(field => field.type === "status")
-    ) {
+    if (Object.values(collection.fields).some(field => field.type === "status")) {
       const statusField = Object.values(collection.fields).filter(
         field => field.type === "status"
       )[0];
@@ -66,11 +61,7 @@ const mutations = {
     });
 
     if (field.type === "status") {
-      Vue.set(
-        state[collection],
-        "status_mapping",
-        field.options.status_mapping
-      );
+      Vue.set(state[collection], "status_mapping", field.options.status_mapping);
     }
   },
 

@@ -1,16 +1,13 @@
 <template>
   <div v-if="error || !relation" class="translation error">
     <p>
-      <i class="material-icons">warning</i>
+      <v-icon name="warning" />
       {{ $t("interfaces-translation-translation_not_setup") }}
     </p>
   </div>
-  <div
-    v-else-if="languages && languages.length === 0"
-    class="translation error"
-  >
+  <div v-else-if="languages && languages.length === 0" class="translation error">
     <p>
-      <i class="material-icons">warning</i>
+      <v-icon name="warning" />
       {{ $t("interfaces-translation-translation_no_languages") }}
     </p>
   </div>
@@ -20,11 +17,7 @@
       v-model="activeLanguage"
       :placeholder="$t('interfaces-translation-choose_language')"
     >
-      <option
-        v-for="language in languages"
-        :key="language.code"
-        :value="language.code"
-      >
+      <option v-for="language in languages" :key="language.code" :value="language.code">
         {{ language.name }}
       </option>
     </v-simple-select>
@@ -56,11 +49,7 @@ export default {
   },
   computed: {
     error() {
-      if (
-        !this.options.languagesCollection ||
-        !this.options.translationLanguageField
-      )
-        return true;
+      if (!this.options.languagesCollection || !this.options.translationLanguageField) return true;
       return false;
     },
     primaryKeyField() {
@@ -75,8 +64,7 @@ export default {
     },
     languageFields() {
       if (!this.options.languagesCollection) return null;
-      return this.$store.state.collections[this.options.languagesCollection]
-        .fields;
+      return this.$store.state.collections[this.options.languagesCollection].fields;
     },
     langValue() {
       if (!this.languages || !this.activeLanguage) return {};
@@ -86,10 +74,7 @@ export default {
     },
     valuesByLang() {
       if (!this.value) return {};
-      return this.$lodash.keyBy(
-        this.value,
-        this.options.translationLanguageField
-      );
+      return this.$lodash.keyBy(this.value, this.options.translationLanguageField);
     },
     fieldManyName() {
       return this.relation.field_many.field;
@@ -100,11 +85,7 @@ export default {
   },
   methods: {
     fetchLanguages() {
-      if (
-        !this.options.languagesCollection ||
-        !this.options.translationLanguageField
-      )
-        return null;
+      if (!this.options.languagesCollection || !this.options.translationLanguageField) return null;
       this.$api
         .getItems(this.options.languagesCollection, { limit: -1 })
         .then(res => res.data)
@@ -152,10 +133,7 @@ export default {
             ];
       } else {
         newValue = this.value.map(translation => {
-          if (
-            translation[this.options.translationLanguageField] ===
-            this.activeLanguage
-          ) {
+          if (translation[this.options.translationLanguageField] === this.activeLanguage) {
             return {
               ...translation,
               [field]: value

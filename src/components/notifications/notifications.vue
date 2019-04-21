@@ -1,11 +1,7 @@
 <template>
   <div class="notifications">
     <transition-group name="slide-fade" tag="div">
-      <v-item
-        v-for="notification in notifications"
-        :key="notification.id"
-        :item="notification"
-      />
+      <v-item v-for="notification in notifications" :key="notification.id" :item="notification" />
     </transition-group>
   </div>
 </template>
@@ -32,11 +28,12 @@ export default {
   width: 100%;
   left: 0;
   right: 0;
-  padding: 0 10px;
+  padding: 0 8px;
 
   @media (min-width: 800px) {
     width: 300px;
-    right: 10px;
+    right: 32px;
+    bottom: 20px;
     left: auto;
     padding: 0;
   }

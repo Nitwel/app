@@ -1,49 +1,36 @@
 <template>
   <div class="interface-map">
     <div :class="{ 'map-readonly': readonly }" class="map">
-      <div
-        class="map-container"
-        id="directusMap"
-        :style="{ height: options.height + 'px' }"
-      >
+      <div class="map-container" id="directusMap" :style="{ height: options.height + 'px' }">
         <!-- Map Renders Here -->
       </div>
 
       <div class="map-actions">
         <div class="address-input" v-if="options.address_to_code">
-          <v-input
-            v-model="placeName"
-            placeholder="Enter address to geocode"
-          ></v-input>
+          <v-input v-model="placeName" placeholder="Enter address to geocode"></v-input>
           <button v-if="isInteractive" @click="getCoordinatesforPlaceName()">
-            <i class="material-icons">add_location</i>
+            <v-icon name="add_location" />
           </button>
         </div>
 
-        <button
-          v-if="isInteractive"
-          class="map-my-location"
-          @click="locateMe()"
-        >
-          <i class="material-icons">my_location</i>
+        <button v-if="isInteractive" class="map-my-location" @click="locateMe()">
+          <v-icon name="my_location" />
         </button>
       </div>
     </div>
 
     <div class="map-details">
       <div class="map-location">
-        <span v-if="latlng"
-          >Latitude: <b>{{ latlng.lat }}</b></span
-        >
-        <span v-if="latlng"
-          >Longitude: <b>{{ latlng.lng }}</b></span
-        >
+        <span v-if="latlng">
+          Latitude:
+          <b>{{ latlng.lat }}</b>
+        </span>
+        <span v-if="latlng">
+          Longitude:
+          <b>{{ latlng.lng }}</b>
+        </span>
       </div>
-      <button
-        v-if="isInteractive && latlng"
-        class="map-clear"
-        @click="setValue()"
-      >
+      <button v-if="isInteractive && latlng" class="map-clear" @click="setValue()">
         {{ $t("clear") }}
       </button>
     </div>
@@ -204,10 +191,7 @@ export default {
      */
     setValue(latlng) {
       this.latlng = latlng;
-      this.$emit(
-        "input",
-        this.latlng ? JSON.parse(JSON.stringify(this.latlng)) : null
-      );
+      this.$emit("input", this.latlng ? JSON.parse(JSON.stringify(this.latlng)) : null);
     },
 
     toggleMarkerInteractions(status) {
@@ -263,16 +247,12 @@ export default {
               : this.$t("interfaces-map-user_location_error"),
           error: result
         });
-        this.isLocating
-          ? this.$store.dispatch("loadingFinished", this.isLocating)
-          : "";
+        this.isLocating ? this.$store.dispatch("loadingFinished", this.isLocating) : "";
       });
 
       //Location Success
       this.map.on("locationfound", result => {
-        this.isLocating
-          ? this.$store.dispatch("loadingFinished", this.isLocating)
-          : "";
+        this.isLocating ? this.$store.dispatch("loadingFinished", this.isLocating) : "";
         this.setValue(result.latlng);
       });
     },
@@ -400,7 +380,7 @@ export default {
   background: #fff;
 
   &:hover {
-    color: var(--accent);
+    color: var(--darkest-gray);
   }
 }
 
@@ -422,7 +402,7 @@ export default {
 
 .map-clear {
   text-transform: initial;
-  color: var(--accent);
+  color: var(--darkest-gray);
   font-style: italic;
   padding-right: 2px; // To avoid cropping
 }

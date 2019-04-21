@@ -1,11 +1,7 @@
 <template>
   <not-found v-if="!collectionInfo" />
   <div class="settings-fields" v-else>
-    <v-header
-      :breadcrumb="breadcrumb"
-      :icon-link="`/settings/collections`"
-      icon-color="warning"
-    >
+    <v-header :breadcrumb="breadcrumb" :icon-link="`/settings/collections`" icon-color="warning">
       <template slot="buttons">
         <v-header-button
           icon="delete_outline"
@@ -27,15 +23,12 @@
       </template>
     </v-header>
 
-    <label class="label "
-      >{{ $t("fields") }}
-      <em class="notice">{{ $t("fields_are_saved_instantly") }}</em></label
-    >
-
+    <label class="label">{{ $t("fields") }}</label>
+    <v-notice color="warning">{{ $t("fields_are_saved_instantly") }}</v-notice>
     <div class="table">
       <div class="header">
         <div class="row">
-          <div class="drag"><i class="material-icons">swap_vert</i></div>
+          <div class="drag"><v-icon name="swap_vert" /></div>
           <div>{{ $t("field") }}</div>
           <div>{{ $t("interface") }}</div>
         </div>
@@ -43,22 +36,13 @@
       <div class="body" :class="{ dragging }">
         <draggable v-model="fields" @start="startSort" @end="saveSort">
           <div class="row" v-for="field in fields" :key="field.field">
-            <div class="drag"><i class="material-icons">drag_handle</i></div>
+            <div class="drag"><v-icon name="drag_handle" /></div>
             <div class="inner row" @click.stop="startEditingField(field)">
               <div>
                 {{ $helpers.formatTitle(field.field) }}
-                <i
-                  v-tooltip="$t('required')"
-                  class="material-icons required"
-                  v-if="field.required !== true || field.required === '0'"
-                  >star</i
-                >
-                <i
-                  v-tooltip="$t('primary_key')"
-                  class="material-icons key"
-                  v-if="field.primary_key"
-                  >vpn_key</i
-                >
+                <span class="optional" v-if="field.required === false && !field.primary_key">
+                  — {{ $t("optional") }}
+                </span>
               </div>
               <div>
                 {{
@@ -74,7 +58,7 @@
               v-if="canDuplicate(field.interface) || fields.length > 1"
             >
               <button type="button" class="menu-toggle">
-                <i class="material-icons">more_vert</i>
+                <v-icon name="more_vert" />
               </button>
               <template slot="popover">
                 <ul class="ctx-menu">
@@ -85,7 +69,7 @@
                       @click.stop="duplicateField(field)"
                       :disabled="!canDuplicate(field.interface)"
                     >
-                      <i class="material-icons">control_point_duplicate</i>
+                      <v-icon name="control_point_duplicate" />
                       {{ $t("duplicate") }}
                     </button>
                   </li>
@@ -96,7 +80,8 @@
                       type="button"
                       @click.stop="warnRemoveField(field.field)"
                     >
-                      <i class="material-icons">close</i> {{ $t("delete") }}
+                      <v-icon name="close" />
+                      {{ $t("delete") }}
                     </button>
                   </li>
                 </ul>
@@ -107,9 +92,9 @@
       </div>
     </div>
 
-    <v-button @click="startEditingField({})" class="new-field"
-      >New Field</v-button
-    >
+    <v-button @click="startEditingField({})" class="new-field">
+      {{ $t("new_field") }}
+    </v-button>
 
     <v-form
       v-if="fields"
@@ -327,9 +312,7 @@ export default {
       this.$set(this.edits, field, value);
     },
     canDuplicate(fieldInterface) {
-      return (
-        this.duplicateInterfaceBlacklist.includes(fieldInterface) === false
-      );
+      return this.duplicateInterfaceBlacklist.includes(fieldInterface) === false;
     },
     duplicateFieldSettings({ fieldInfo, collection }) {
       const requests = [];
@@ -377,9 +360,9 @@ export default {
     setFieldSettings({ fieldInfo, relation }) {
       this.fieldSaving = true;
 
-      const existingField = this.$store.state.collections[
-        this.collection
-      ].fields.hasOwnProperty(fieldInfo.field);
+      const existingField = this.$store.state.collections[this.collection].fields.hasOwnProperty(
+        fieldInfo.field
+      );
 
       const requests = [];
 
@@ -387,9 +370,7 @@ export default {
       this.$store.dispatch("loadingStart", { id });
 
       if (existingField) {
-        requests.push(
-          this.$api.updateField(this.collection, fieldInfo.field, fieldInfo)
-        );
+        requests.push(this.$api.updateField(this.collection, fieldInfo.field, fieldInfo));
       } else {
         delete fieldInfo.id;
         fieldInfo.collection = this.collection;
@@ -587,7 +568,7 @@ export default {
             directusFields.map(field => ({
               ...field,
               name: formatTitle(field.field),
-              note: vm.$t("note_" + field.field)
+              note: field.note
             })),
             "field"
           );
@@ -638,14 +619,10 @@ h2 {
   border-radius: var(--border-radius);
   border-spacing: 0;
   width: 100%;
-  max-width: 1000px;
+  max-width: 632px;
   margin: 10px 0 20px;
 
   .header {
-    color: var(--gray);
-    font-size: 10px;
-    text-transform: uppercase;
-    font-weight: 700;
     border-bottom: 2px solid var(--lightest-gray);
     height: 60px;
     .row {
@@ -681,10 +658,10 @@ h2 {
   .dragging .sortable-chosen,
   .sortable-chosen:active {
     background-color: var(--highlight) !important;
-    color: var(--accent);
+    color: var(--darkest-gray);
 
     .manual-sort {
-      color: var(--accent);
+      color: var(--darkest-gray);
     }
   }
 
@@ -705,19 +682,6 @@ h2 {
 
       &:hover {
         background-color: var(--highlight);
-      }
-
-      .required {
-        color: var(--accent);
-        vertical-align: super;
-        font-size: 7px;
-      }
-
-      .key {
-        color: var(--light-gray);
-        font-size: 16px;
-        vertical-align: -3px;
-        margin-left: 2px;
       }
     }
 
@@ -763,18 +727,6 @@ em.note {
   display: block;
 }
 
-.notice {
-  margin-left: 4px;
-  background-color: var(--warning);
-  border-radius: var(--border-radius);
-  color: var(--white);
-  padding: 3px 6px 4px;
-  text-transform: uppercase;
-  font-size: 11px;
-  font-weight: 600;
-  font-style: normal;
-}
-
 label.label {
   margin-bottom: 10px;
   text-transform: none;
@@ -787,7 +739,7 @@ label.label {
 .ctx-menu {
   list-style: none;
   padding: 0;
-  width: var(--width-small);
+  width: 136px;
 
   li {
     display: block;
@@ -823,5 +775,9 @@ label.label {
       }
     }
   }
+}
+
+.optional {
+  color: var(--lighter-gray);
 }
 </style>

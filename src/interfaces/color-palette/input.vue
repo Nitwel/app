@@ -10,9 +10,7 @@
       @click="$emit('input', color)"
     >
       <template v-if="value === color">
-        <i :class="{ dark: useDarkIconColor(color) }" class="material-icons"
-          >check</i
-        >
+        <v-icon name="check" :class="{ dark: useDarkIconColor(color) }" size="18" />
       </template>
     </button>
   </div>
@@ -48,8 +46,7 @@ export default {
           return Math.pow((val + 0.055) / 1.055, 2.4);
         });
 
-      const lightness =
-        0.2126 * colors[0] + 0.7152 * colors[1] + 0.0722 * colors[2];
+      const lightness = 0.2126 * colors[0] + 0.7152 * colors[1] + 0.0722 * colors[2];
 
       return lightness > 0.25;
     }
@@ -59,18 +56,17 @@ export default {
 
 <style lang="scss" scoped>
 .interface-color-picker {
-  position: relative;
   --swatch-size: 20px;
+
+  position: relative;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   height: calc(var(--swatch-size) * 11);
-  width: calc(var(--swatch-size) * 18);
   margin-bottom: var(--swatch-size);
 
   button {
     flex-basis: var(--swatch-size);
-    width: var(--swatch-size);
     height: var(--swatch-size);
     display: block;
     transform: scale(1);
@@ -84,7 +80,6 @@ export default {
     }
 
     i {
-      font-size: 18px;
       margin-top: -3px;
       color: var(--white);
 

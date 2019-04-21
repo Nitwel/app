@@ -11,6 +11,10 @@
     "en-US": {
       "primary_key": "Primary Key",
       "immutable": "Can not be changed"
+    },
+	"fr-FR": {
+      "primary_key": "Clef primaire",
+      "immutable": "Ne peut être modifié"
     }
   }
 }

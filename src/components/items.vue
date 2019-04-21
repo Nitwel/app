@@ -15,11 +15,7 @@
   />
 
   <v-error
-    v-else-if="
-      collection === 'directus_files' &&
-        items.meta &&
-        items.meta.total_count === 0
-    "
+    v-else-if="collection === 'directus_files' && items.meta && items.meta.total_count === 0"
     icon="image"
     :title="$t('no_files')"
     :body="$t('no_files_body')"
@@ -34,9 +30,7 @@
 
   <v-error
     v-else-if="
-      items.data &&
-        items.data.length === 0 &&
-        (items.meta && items.meta.total_count !== 0)
+      items.data && items.data.length === 0 && (items.meta && items.meta.total_count !== 0)
     "
     :title="$t('no_results')"
     :body="$t('no_results_body')"
@@ -117,15 +111,10 @@ export default {
   },
   computed: {
     allSelected() {
-      const primaryKeys = this.items.data
-        .map(item => item[this.primaryKeyField])
-        .sort();
+      const primaryKeys = this.items.data.map(item => item[this.primaryKeyField]).sort();
       const selection = [...this.selection];
       selection.sort();
-      return (
-        this.selection.length > 0 &&
-        this.$lodash.isEqual(primaryKeys, selection)
-      );
+      return this.selection.length > 0 && this.$lodash.isEqual(primaryKeys, selection);
     },
     primaryKeyField() {
       if (!this.fields) return;
@@ -162,9 +151,7 @@ export default {
     },
     selectionKeys() {
       if (!this.selection) return null;
-      return this.$lodash.uniq(
-        this.selection.map(item => item[this.primaryKeyField])
-      );
+      return this.$lodash.uniq(this.selection.map(item => item[this.primaryKeyField]));
     }
   },
   created() {
@@ -243,9 +230,7 @@ export default {
               ...item,
               __link__: this.collection.startsWith("directus_")
                 ? `/${this.collection.substr(9)}/${item[this.primaryKeyField]}`
-                : `/collections/${this.collection}/${
-                    item[this.primaryKeyField]
-                  }`
+                : `/collections/${this.collection}/${item[this.primaryKeyField]}`
             }));
           } else {
             this.items.data = res.data;
@@ -267,8 +252,7 @@ export default {
           return (
             this.$lodash.find(this.items.data, {
               [this.primaryKeyField]: key
-            }) ||
-            this.$lodash.find(this.selection, { [this.primaryKeyField]: key })
+            }) || this.$lodash.find(this.selection, { [this.primaryKeyField]: key })
           );
         })
       );
@@ -310,12 +294,8 @@ export default {
         });
 
         return Promise.all([
-          update.length > 0
-            ? this.$api.updateItems(this.collection, update)
-            : null,
-          create.length > 0
-            ? this.$api.createItems(this.collection, create)
-            : null
+          update.length > 0 ? this.$api.updateItems(this.collection, update) : null,
+          create.length > 0 ? this.$api.createItems(this.collection, create) : null
         ])
           .then(() => {
             this.$store.dispatch("loadingFinished", id);
@@ -386,12 +366,8 @@ export default {
               ...res.data.map(item => ({
                 ...item,
                 __link__: this.collection.startsWith("directus_")
-                  ? `/${this.collection.substr(9)}/${
-                      item[this.primaryKeyField]
-                    }`
-                  : `/collections/${this.collection}/${
-                      item[this.primaryKeyField]
-                    }`
+                  ? `/${this.collection.substr(9)}/${item[this.primaryKeyField]}`
+                  : `/collections/${this.collection}/${item[this.primaryKeyField]}`
               }))
             ];
           } else {

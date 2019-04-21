@@ -302,7 +302,7 @@ export default {
     }
 
     a {
-      color: var(--accent);
+      color: var(--darkest-gray);
     }
   }
 }

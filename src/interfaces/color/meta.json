@@ -81,6 +81,21 @@
       "palette_only_comment": "Only allow the user to pick from the palette",
       "allow_alpha": "Allow alpha",
       "allow_alpha_comment": "Allow values with an alpha channel"
+    },
+	"fr-FR": {
+      "color": "Couleur",
+      "input": "Entrée",
+      "input_comment": "L'unité dans laquelle l'utilisateur va saisir ses données",
+      "output": "Sortie",
+      "output_comment": "L'unité dans laquelle les données seront enregistrées en base de données",
+      "format": "Format",
+      "format_comment": "Montre la valeur en tant que nuancier",
+      "palette": "Palette",
+      "palette_comment": "Ajoute une couleur en tant que valeur héxadécimale",
+      "palette_only": "Palette seule",
+      "palette_only_comment": "L'utilisateur ne peut sélectionner des valeurs non contenues dans la palette",
+      "allow_alpha": "Autoriser la transparence",
+      "allow_alpha_comment": "Autorise des valeurs avec un canal alpha"
     }
   }
 }

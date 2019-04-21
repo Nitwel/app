@@ -50,6 +50,16 @@
       "max_stars_comment": "Number of maximum rating allowed",
       "display": "Display",
       "display_comment": "How to display rating values"
+    },
+	"fr-FR": {
+      "rating": "Note d'évaluation",
+      "value": "Valeur",
+      "active_color": "Couleur active",
+      "active_color_comment": "Couleur active des étoiles sélectionnées",
+      "max_stars": "Etoiles maximum",
+      "max_stars_comment": "Nombre maximal d'évaluations autorisé",
+      "display": "Affichage",
+      "display_comment": "Mode d'affichage des évaluations"
     }
   }
 }

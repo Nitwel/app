@@ -21,6 +21,12 @@
       "url_template": "URL Template",
       "url_template_comment": "A mustache template for a URL to preview content",
       "preview_item": "Preview this item"
+    },
+	"fr-FR": {
+      "preview": "Prévisualisation",
+      "url_template": "Modèle d'adresse Web (URL)",
+      "url_template_comment": "Le modèle au format <a href=\"http://mustache.github.io/\">Moustache</a> d'une URL de prévisualisation du contenu",
+      "preview_item": "Prévisualiser l'élément"
     }
   }
 }

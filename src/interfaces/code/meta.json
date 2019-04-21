@@ -48,6 +48,17 @@
       "lineNumber_comment": "Show line numbers",
       "loc": "No lines of {lang} | One line of {lang} | {count} lines of {lang}",
       "fill_template": "Fill with Template"
+    },
+	"en-US": {
+      "code": "Code",
+      "template": "Modèle",
+      "template_comment": "Fourni un modèle dont l'utilisateur peut se servir pour démarrer",
+      "language": "Langage",
+      "language_comment": "Spécifie le langage de programmation à utiliser",
+      "lineNumber": "Numéro de ligne",
+      "lineNumber_comment": "Afficher les numéros de ligne",
+      "loc": "Aucune ligne de {lang} | Une ligne de {lang} | {count} lignes de {lang}",
+      "fill_template": "Remplir avec le modèle"
     }
   }
 }

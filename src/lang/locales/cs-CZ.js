@@ -45,11 +45,9 @@ export default {
   collection: "Kategorie",
   collection_updated: "Kategorie {collection} byla akatualizována",
   collection_removed: "Kategorie {collection} byla smazána",
-  collection_names_cannot_be_changed:
-    "Název kategorie nemůže být v současné chvíli změněn.",
+  collection_names_cannot_be_changed: "Název kategorie nemůže být v současné chvíli změněn.",
   collections: "Kategorie",
-  collection_count:
-    "Žádné kategorie | Počet kategorií: 1 | Počet kategorií: {count}",
+  collection_count: "Žádné kategorie | Počet kategorií: 1 | Počet kategorií: {count}",
   "collections-directus_files": "Soubory",
   "collections-directus_users": "Uživatelé",
   "collections-directus_activity": "Aktivity",
@@ -63,13 +61,11 @@ export default {
   creating_item_page_title: "Vytvořit položku: {collection}",
   editing_my_profile: "Upravit můj profil",
   delete: "Smazat",
-  delete_are_you_sure:
-    "Opravdu chcete smazat tuto položku? Operace je nevratná.",
+  delete_are_you_sure: "Opravdu chcete smazat tuto položku? Operace je nevratná.",
   description: "Popis",
   discard_changes: "Ano, odejít bez uložení",
   display_name: "Zobrazit jméno",
-  drop_files:
-    "Nelze přesunout soboury | Přesuňte soubor sem... | Přesuňte soubory sem...",
+  drop_files: "Nelze přesunout soboury | Přesuňte soubor sem... | Přesuňte soubory sem...",
   dont_show: "Nezobrazovat",
   editing: "Úprava položky: {collection}",
   editing_item: "Úprava položky",
@@ -86,6 +82,7 @@ export default {
   equal_to: "Je rovno",
   existing: "Vybrat existující",
   field: "Sloupec",
+  field_already_exists: "{field} Již existuje",
   fields: "Sloupce",
   fields_are_saved_instantly: "Změny jsou ukládány okamžitě",
   file: "Soubor",
@@ -146,8 +143,7 @@ export default {
   signing_in: "Přihlašuji",
   sign_out: "Odhlásit se",
   sign_out_confirm: "Chcete se odhlásit?",
-  sign_out_confirm_edits:
-    "Opravdu se chcete odhlásit? Všechny neuložené změny budou ztraceny.",
+  sign_out_confirm_edits: "Opravdu se chcete odhlásit? Všechny neuložené změny budou ztraceny.",
   unsaved_changes_copy: "Máte neuložené změny. Opravdu chcete opustit stránku?",
   user_directory: "Uživatelé",
   update_confirm: "Opravdu chcete aktualizovat {count} položek?",

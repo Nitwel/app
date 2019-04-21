@@ -1,5 +1,5 @@
 <template>
-  <i class="material-icons">{{ value }}</i>
+  <v-icon :name="value" />
 </template>
 
 <script>

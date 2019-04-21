@@ -17,18 +17,18 @@
             :checked="fieldsInUse.includes(field.field)"
             @change="toggleField(field.field)"
           ></v-checkbox>
-          <i class="material-icons handle">drag_handle</i>
+          <v-icon class="handle" name="drag_handle" />
         </div>
       </draggable>
     </fieldset>
-    <label for="spacing" class="style-3">Spacing</label>
+    <label for="spacing" class="style-3">{{ $t("spacing") }}</label>
     <v-select
       id="spacing"
       :value="viewOptions.spacing || 'comfortable'"
       :options="{
-        compact: 'Compact',
-        cozy: 'Cozy',
-        comfortable: 'Comfortable'
+        compact: $t('compact'),
+        cozy: $t('cozy'),
+        comfortable: $t('comfortable')
       }"
       class="select"
       icon="reorder"
@@ -57,9 +57,7 @@ export default {
 
       if (this.viewQuery.fields === "") return [];
 
-      return this.viewQuery.fields
-        .split(",")
-        .filter(field => this.fields[field]);
+      return this.viewQuery.fields.split(",").filter(field => this.fields[field]);
     }
   },
   created() {

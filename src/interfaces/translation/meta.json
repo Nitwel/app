@@ -64,6 +64,22 @@
       "default_language": "Default Language",
       "default_language_comment": "Add the primary key of the item in the languages collection to use as the default language",
       "choose_language": "Choose Language..."
+    },
+	"fr-FR": {
+      "translation": "Traduction",
+      "languages_collection": "Collection des langues",
+      "languages_collection_comment": "La collection qui stocke les options des langues",
+      "languages_primary": "Champ indentifiant des langues",
+      "languages_primary_comment": "Champ qui contient la clef primaire des langues dans cette collection",
+      "languages_name": "Champ des noms de langues",
+      "languages_name_comment": "Champ qui contient le nom des langages",
+      "translation_language": "Champ de la langue de traduction",
+      "translation_language_comment": "La champ qui contient la clef primaire des langues dans la collection correspondante des traductions",
+      "translation_not_setup": "L'interface n'est pas correctement configurée",
+      "translation_no_languages": "Il n'y a aucun langage dans la collection des langues",
+      "default_language": "Langue par défaut",
+      "default_language_comment": "Ajoute la clef primaire de l'élément dans la collection des langues à utiliser en tant que langage par défaut",
+      "choose_language": "Choisir la langue"
     }
   }
 }

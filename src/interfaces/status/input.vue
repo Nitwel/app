@@ -8,7 +8,7 @@
       :key="key"
       :disabled="readonly"
       :model-value="String(value)"
-      :label="$t(options.name)"
+      :label="options.label"
       :checked="key == value"
       @change="$emit('input', $event)"
     ></v-radio>
@@ -29,12 +29,13 @@ export default {
   computed: {
     statusMapping() {
       if (typeof this.options.status_mapping === "string") {
-        return this.options.status_mapping
-          ? JSON.parse(this.status_mapping)
-          : {};
+        return this.options.status_mapping ? JSON.parse(this.status_mapping) : {};
       }
-
-      return this.options.status_mapping || {};
+      if (!this.options.status_mapping) return {};
+      return this.$lodash.mapValues(this.options.status_mapping, mapping => ({
+        ...mapping,
+        label: this.$helpers.formatTitle(this.$t(mapping.name))
+      }));
     },
     optionValues() {
       const allStatuses = Object.keys(this.statusMapping);
@@ -58,9 +59,7 @@ export default {
         return this.$store.state.permissions[this.collection].$create;
       }
 
-      return this.$store.state.permissions[this.collection].statuses[
-        this.startStatus
-      ];
+      return this.$store.state.permissions[this.collection].statuses[this.startStatus];
     },
     collection() {
       return Object.values(this.fields)[0].collection;
@@ -78,7 +77,7 @@ export default {
   .v-radio {
     display: inline-block;
     margin-right: 40px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
 }
 </style>

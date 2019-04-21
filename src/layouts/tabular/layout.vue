@@ -43,9 +43,7 @@ export default {
         }
       } else {
         queryFields = fieldValues
-          .filter(
-            field => field.primary_key === false || field.primary_key === "0"
-          )
+          .filter(field => field.primary_key === false || field.primary_key === "0")
           .slice(0, 4)
           .map(field => field.field);
       }
@@ -74,8 +72,7 @@ export default {
       return 48;
     },
     sortVal() {
-      let sortQuery =
-        (this.viewQuery && this.viewQuery["sort"]) || this.primaryKeyField;
+      let sortQuery = (this.viewQuery && this.viewQuery["sort"]) || this.primaryKeyField;
 
       return {
         asc: !sortQuery.startsWith("-"),

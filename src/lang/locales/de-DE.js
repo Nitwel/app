@@ -19,8 +19,7 @@ export default {
   about_directus: "Über Directus",
   activity: "Aktivität",
   activity_log: "Aktivitäten-Log",
-  activity_outside_directus:
-    "Dieses Element wurde außerhalb von Directus erstellt.",
+  activity_outside_directus: "Dieses Element wurde außerhalb von Directus erstellt.",
   admin_email: "Admin E-Mail",
   admin_password: "Admin Passwort",
   additional_info: "Weitergehende Infos",
@@ -28,8 +27,7 @@ export default {
   add_field_filter: "Neuen Feld-Filter hinzufügen",
   add_note: "Füge eine hilfreiche Beschreibung für die Benutzer an...",
   admin_settings: "Admin Einstellungen",
-  almost_done_options:
-    "Fast geschaft! Bitte überprüfe unten die Feldeinstellungen.",
+  almost_done_options: "Fast geschaft! Bitte überprüfe unten die Feldeinstellungen.",
   almost_done_copy:
     "Jeder Feldtyp kann perfekt an deine Bedürfnisse angepasst werden. Nachfolgend die verfügbaren Optionen für das Feld, aber nur ein paar sind erforderlich.",
   all: "Alle",
@@ -49,8 +47,7 @@ export default {
   change_project: "Project wechseln",
   choose_one: "Bitte wählen",
   choose_project: "Project auswählen",
-  choose_interface:
-    "Wähle einen Feldtyp über den die Daten gepflegt werden sollen.",
+  choose_interface: "Wähle einen Feldtyp über den die Daten gepflegt werden sollen.",
   click_to_toggle_all_none: "Klicken um die ganze Spalte ein- und auszublenden",
   connection: "Verbindung",
   collection: "Kollektion",
@@ -60,8 +57,7 @@ export default {
   collection_names_cannot_be_changed:
     "Namen von Kollektionen können leider noch nicht bearbeitet werden.",
   collections: "Kollektionen",
-  collection_count:
-    "Keine Kollektionen | Eine Kollektion | {count} Kollektionen",
+  collection_count: "Keine Kollektionen | Eine Kollektion | {count} Kollektionen",
   "collections-directus_files": "Dateien",
   "collections-directus_users": "Benutzer",
   "collections-directus_activity": "Aktivität",
@@ -70,8 +66,7 @@ export default {
   coming_soon: "Coming soon",
   contains: "Enthält",
   config_error: "Keine App-Konfiguration vorhanden",
-  config_error_copy:
-    "Bitte stelle sicher, dass du die Konfigurationsdatei der App erstellt hast.",
+  config_error_copy: "Bitte stelle sicher, dass du die Konfigurationsdatei der App erstellt hast.",
   collection_contains_items: "{collection} enthält {count} Elemente",
   currently_selected: "Aktuelle Auswahl: {thing}",
   create: "Erstellen",
@@ -115,8 +110,7 @@ export default {
   email_address: "E-Mail-Adresse",
   email: "E-Mail",
   empty_collection: "Leere Kollektion",
-  empty_collection_body:
-    "Bisher gibt es noch keine Elemente in dieser Kollektion",
+  empty_collection_body: "Bisher gibt es noch keine Elemente in dieser Kollektion",
   enable_manual_sorting: "Erlaube manuelles Sortieren",
   enter_value: "Wert eingeben",
   enter_collection_name: "Kollektionsnamen eingeben...",
@@ -140,9 +134,9 @@ export default {
   field_created: "Feld {field} erstellt",
   field_updated: "Feld {field} aktualisiert",
   field_removed: "Feld {field} gelöscht",
+  field_already_exists: "{field} Ist bereits vorhanden",
   fields: "Felder",
-  fields_are_saved_automatically:
-    "Feldeinstellungen werden automatisch gespeichert",
+  fields_are_saved_automatically: "Feldeinstellungen werden automatisch gespeichert",
   file: "Datei",
   file_library: "Datei-Browser",
   file_upload: "Datei(en) hochladen",
@@ -179,8 +173,7 @@ export default {
     "Keine gefilterten Elemente | Ein gefiltertes Element | {count} gefiltertes Element",
   item_deleted: "Element gelöscht",
   item_saved: "Element gespeichert | {count} Elemente gespeicherte",
-  extension_error:
-    "Es ist ein Problem beim Laden der {ext} Erweiterung aufgetreten.",
+  extension_error: "Es ist ein Problem beim Laden der {ext} Erweiterung aufgetreten.",
   extensions_missing: "Keine Erweiterungen gefunden",
   extensions_missing_copy:
     "Bitte stelle sicher, dass du die System-Erweiterungen installiert hast.",
@@ -208,8 +201,7 @@ export default {
   not_contains: "Enthält nicht",
   note: "Notiz",
   no_results: "Keine Ergebnisse",
-  no_results_body:
-    "Keine Kollektions-Element bei den aktuellen Filtereinstellungen",
+  no_results_body: "Keine Kollektions-Element bei den aktuellen Filtereinstellungen",
   no_collections: "Keine Kollektionen",
   no_collections_body: "Es wurden noch keine Kollektionen angelegt",
   no_fields: "Keine Felder",
@@ -217,8 +209,7 @@ export default {
   no_files: "Keine Dateien",
   no_files_body: "Es wurden noch keine Dateien hochgeladen",
   page_not_found: "Seite nicht gefunden",
-  page_not_found_body:
-    "Die Seite, nach der Du gesucht hast, wurde nicht gefunden.",
+  page_not_found_body: "Die Seite, nach der Du gesucht hast, wurde nicht gefunden.",
   permissions: "Berechtigungen",
   name_bookmark: "Möchtest Du diesen Bookmark benennen?",
   next: "Weiter",
@@ -238,8 +229,7 @@ export default {
   operator: "Anwender",
   options: "Optionen",
   password: "Passwort",
-  password_reset_sent:
-    "Eine E-Mail zum Zurücksetzen des Passworts wurde an {email} gesendet",
+  password_reset_sent: "Eine E-Mail zum Zurücksetzen des Passworts wurde an {email} gesendet",
   permission_states: {
     none: "Keine",
     mine: "Nur meine",
@@ -269,8 +259,7 @@ export default {
   remove: "Löschen",
   remove_related: "Ähnlichen Eintrag löschen",
   relationship: "Beziehung",
-  relationship_setup:
-    "Für dieses Beziehungsfeld müssen die verknüpften Felder abgebildet werden.",
+  relationship_setup: "Für dieses Beziehungsfeld müssen die verknüpften Felder abgebildet werden.",
   relationship_setup_copy:
     "Es gibt unterschiedliche Type relationaler Daten. Dieses Feld benutzt: {relationship}",
   related_collection: "Verknüpfte Kollektion",
@@ -278,8 +267,7 @@ export default {
   reset_preferences: "Alle Listeneinstellungen zurücksetzen",
   reset_password: "Passwort zurücksetzen",
   revert: "Zurücksetzen",
-  revert_copy:
-    "Möchtest Du dieses Element auf den Stand von {date} zurücksetzen?",
+  revert_copy: "Möchtest Du dieses Element auf den Stand von {date} zurücksetzen?",
   roles: "Benutzerrollen",
   role_settings: "Rolleneinstellungen",
   save: "Speichern",
@@ -307,11 +295,9 @@ export default {
   settings_extensions: "Erweiterungen",
   server_details: "Server Details",
   server_error: "Server Fehler",
-  server_error_copy:
-    "Es ist ein Problem mit dem Server oder der Datenbank aufgetreten.",
+  server_error_copy: "Es ist ein Problem mit dem Server oder der Datenbank aufgetreten.",
   server_trouble: "Server-Problem",
-  server_trouble_copy:
-    "Versuche es später noch einmal oder kontaktiere den Systemadministrator.",
+  server_trouble_copy: "Versuche es später noch einmal oder kontaktiere den Systemadministrator.",
   show_advanced_options: "Erweiterte Optionen anzeigen",
   show_directus_collections: "Directus System-Kollektionen anzeigen",
   something_went_wrong: "Irgendwas ist schief gelaufen...",
@@ -329,8 +315,7 @@ export default {
     "Es gibt ungespeicherte Änderungen! Bist Du sicher, dass Du diese Seite verlassen möchtest?",
   user_directory: "Benutzerverzeichnis",
   update: "Update",
-  update_confirm:
-    "Bist Du sicher, dass Du {count} Elemente aktualisieren möchtest?",
+  update_confirm: "Bist Du sicher, dass Du {count} Elemente aktualisieren möchtest?",
   unique: "Unique",
   user_edit_warning:
     "{first_name} {last_name} bearbeitet dieses Element ebenfalls. Bitte sprecht Euch ab, damit deine Änderungen nicht verloren gehen.",

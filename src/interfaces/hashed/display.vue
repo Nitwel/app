@@ -1,9 +1,5 @@
 <template>
-  <i
-    class="material-icons readonly-hashed"
-    :style="{ color: `var(--${colorChange})` }"
-    >{{ icon }}</i
-  >
+  <v-icon :name="icon" class="readonly-hashed" :style="{ color: `var(--${colorChange})` }" />
 </template>
 
 <script>

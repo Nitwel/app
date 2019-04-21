@@ -12,7 +12,7 @@
       v-tooltip="$t('interfaces-code-fill_template')"
       @click="fillTemplate"
     >
-      <i class="material-icons">playlist_add</i>
+      <v-icon name="playlist_add" />
     </button>
 
     <small class="line-count" v-if="language">
@@ -164,10 +164,7 @@ export default {
         this.$lodash.isObject(this.options.template) ||
         this.$lodash.isArray(this.options.template)
       ) {
-        return this.$emit(
-          "input",
-          JSON.stringify(this.options.template, null, 4)
-        );
+        return this.$emit("input", JSON.stringify(this.options.template, null, 4));
       }
 
       if (this.options.language === "application/json") {
@@ -192,7 +189,7 @@ export default {
   font-size: 13px;
 
   &:focus {
-    border-color: var(--accent);
+    border-color: var(--darker-gray);
   }
 }
 

@@ -33,6 +33,15 @@
       "max_comment": "Maximum date that can be chosen by the user",
       "formatting": "Date Format",
       "formatting_comment": "If left blank, a relative date will be used"
+    },
+	"fr-FR": {
+      "calendar": "Calendrier",
+      "min": "Date minimum",
+      "min_comment": "Date minimale qui peut être sélectionnée par l'utilisateur",
+      "max": "Date maximum",
+      "max_comment": "Date maximale qui peut être sélectionnée par l'utilisateur",
+      "formatting": "Format de date",
+      "formatting_comment": "Si laissé vide, alors une date relative sera utilisée"
     }
   }
 }

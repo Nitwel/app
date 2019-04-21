@@ -62,6 +62,23 @@
       "icon-active-comment": "Choose an active icon",
       "color-active-name": "active Color",
       "color-active-comment": "Choose the active color"
+    },
+	"fr-FR": {
+      "toggle-icon": "Icone de bascule",
+      "text-inactive-name": "Texte d'inactivité",
+      "text-inactive-comment": "Texte à côté de l'icone d'inactivité",
+      "text-inactive-placeholder": "Saisir le texte ici",
+      "icon-inactive-name": "Icone d'inactivité",
+      "icon-inactive-comment": "Choisir l'icone d'inactivité",
+      "color-inactive-name": "Couleur d'inactivité",
+      "color-inactive-comment": "Choisir la couleur d'inactivité",
+      "text-active-name": "Texte d'activité",
+      "text-active-comment": "Texte à côté de l'icone d'activité",
+      "text-active-placeholder": "Saisir le texte ici",
+      "icon-active-name": "Icone d'activité",
+      "icon-active-comment": "Choisir l'icone d'activité",
+      "color-active-name": "Couleur d'activité",
+      "color-active-comment": "Choisir la couleur d'activité"
     }
   }
 }

@@ -1,9 +1,6 @@
 <template>
   <div class="interface-wysiwyg-container" ref="parent">
-    <div
-      ref="editor"
-      :class="['interface-wysiwyg', readonly ? 'readonly' : '']"
-    ></div>
+    <div ref="editor" :class="['interface-wysiwyg', readonly ? 'readonly' : '']"></div>
     <portal to="modal" v-if="chooseExisting">
       <v-modal
         :title="$t('choose_one')"
@@ -66,9 +63,7 @@ export default {
       let uploadURL = null;
 
       if (this.options.upload_files) {
-        uploadURL = `${this.$store.state.auth.url}/${
-          this.$store.state.auth.project
-        }/files`;
+        uploadURL = `${this.$store.state.auth.url}/${this.$store.state.auth.project}/files`;
       }
 
       this.editor = new Quill(this.$refs.editor, {
@@ -98,9 +93,7 @@ export default {
               if (typeof serverResponse === "string") {
                 return next(serverResponse);
               } else if (this.options.custom_url) {
-                return next(
-                  `${this.options.custom_url}${serverResponse.data.filename}`
-                );
+                return next(`${this.options.custom_url}${serverResponse.data.filename}`);
               }
 
               return next(serverResponse.data.data.full_url);
@@ -134,9 +127,7 @@ export default {
       });
 
       // Make custom icons for image buttons
-      const customButton = this.$refs.parent.querySelector(
-        ".ql-choose-existing"
-      );
+      const customButton = this.$refs.parent.querySelector(".ql-choose-existing");
       if (customButton) {
         customButton.className += " material-icons icon";
         customButton.addEventListener("click", () => this.openModal());
@@ -152,10 +143,8 @@ export default {
     },
     insertItem(image) {
       let url = image.data.full_url;
-      if (this.options.custom_url)
-        url = `${this.options.custom_url}${image.filename}`;
-      const index =
-        (this.editor.getSelection() || {}).index || this.editor.getLength();
+      if (this.options.custom_url) url = `${this.options.custom_url}${image.filename}`;
+      const index = (this.editor.getSelection() || {}).index || this.editor.getLength();
       this.editor.insertEmbed(index, "image", url, "user");
       this.chooseExisting = false;
     }
@@ -164,11 +153,15 @@ export default {
 </script>
 
 <style lang="scss">
+.ql-container {
+  font-size: 14px;
+}
+
 .ql-choose-existing {
   padding: 3px 5px;
   color: var(--light-gray);
   &:hover {
-    color: var(--accent);
+    color: var(--darkest-gray);
   }
   &:after {
     content: "collections";
@@ -180,7 +173,7 @@ export default {
   padding: 3px 5px;
   color: var(--light-gray);
   &:hover {
-    color: var(--accent);
+    color: var(--darkest-gray);
   }
   &:after {
     content: "add_photo_alternate";

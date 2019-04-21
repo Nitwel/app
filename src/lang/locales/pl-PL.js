@@ -28,8 +28,7 @@ export default {
   add_field_filter: "Dodaj filtr pola",
   add_note: "Dodaj użyteczne informacje dla użytkowników...",
   admin_settings: "Ustawienia admina",
-  almost_done_options:
-    "Prawie skończone! Teraz możesz przejrzeć opcje poniżej.",
+  almost_done_options: "Prawie skończone! Teraz możesz przejrzeć opcje poniżej.",
   almost_done_copy:
     "Każdy interfejs może być skrojony idealnie do Twoich potrzeb. Poniżej znajdują się wszystkie możliwe ustawienia dla tego pola - pamiętaj, że tylko niektóre są wymagane.",
   all: "Wszystkie",
@@ -50,19 +49,16 @@ export default {
   change_project: "Zmień projekt",
   choose_one: "Wybierz jeden",
   choose_project: "Wybierz projekt",
-  choose_interface:
-    "Zmień interfejs, za pomocą którego te dane będą zmieniane.",
+  choose_interface: "Zmień interfejs, za pomocą którego te dane będą zmieniane.",
   clear: "Wyczyść",
-  click_to_toggle_all_none:
-    "Kliknij, by przełączyć całą kolumnę w stan nie/aktywny",
+  click_to_toggle_all_none: "Kliknij, by przełączyć całą kolumnę w stan nie/aktywny",
   connection: "Połączenie",
   collection: "Kolekcja",
   collections_and_fields: "Kolekcje i pola",
   collection_invalid_name: "Nieprawidłowa nazwa kolekcji",
   collection_updated: "{collection} Kolekcja zaktualizowana",
   collection_removed: "{collection} Kolekcja usunięta",
-  collection_names_cannot_be_changed:
-    "Nazwy kolekcji nie mogą zostać zmienione w tym momencie.",
+  collection_names_cannot_be_changed: "Nazwy kolekcji nie mogą zostać zmienione w tym momencie.",
   collections: "Kolekcje",
   collection_count: "Brak kolekcji | Jedna kolekcja | {count} kolekcje",
   "collections-directus_files": "Pliki",
@@ -73,8 +69,7 @@ export default {
   coming_soon: "Już wkrótce",
   contains: "Zawiera",
   config_error: "Brak pliku konfiguracyjnego",
-  config_error_copy:
-    "Upenij się, że stworzyłeś plik konfiguracyjny dla tej aplikacji",
+  config_error_copy: "Upenij się, że stworzyłeś plik konfiguracyjny dla tej aplikacji",
   collection_contains_items: "{collection} zawiera {count} elementów",
   currently_selected: "Obecnie zaznaczony: {thing}",
   create: "Stwórz",
@@ -94,11 +89,9 @@ export default {
   embed: "Osadzony",
   embed_placeholder: "YouTube, Vimeo, lub inny link",
   fieldtypes: {
-    alias:
-      "Pola, które nie zapisują danych i/lub nie mają odpowiadających kolumn w bazie danych",
+    alias: "Pola, które nie zapisują danych i/lub nie mają odpowiadających kolumn w bazie danych",
     array: "Standardowy format tablicowy zwracany przez API",
-    datetime:
-      "Data i czas zapisana w formacie ISO, np.: 2018-09-19T14:00:43.381Z",
+    datetime: "Data i czas zapisana w formacie ISO, np.: 2018-09-19T14:00:43.381Z",
     date: "Data, np.: 2018-09-19",
     time: "Czas, np.: 14:09:22",
     file: "Klucz obcy nawiązujący do directus_files.id",
@@ -110,8 +103,7 @@ export default {
     lang: "Charakterystyczne dla przekładów, przechowuje klucz języka",
     m2o: "Relacja wiele-do-jednego",
     o2m: "Relacja jeden-do-wielu",
-    sort:
-      "Pole systemowe używane do zmiany kolejności elementów (w stylu przeciągnij i upuść)",
+    sort: "Pole systemowe używane do zmiany kolejności elementów (w stylu przeciągnij i upuść)",
     status: "Pole systemowe używane do publikowania diagramów pracy",
     string:
       "Jakikolwiek tekst, liczba, spacja, lub symbol - zdefiniowany i ograniczany przez swoją długość (liczbę znaków)",
@@ -151,14 +143,11 @@ export default {
         "Liczba całkowita. Jeśli zapisywana ze znakiem przyjmuje liczby z zakresu od -9,223,372,036,854,775,808 do 9,223,372,036,854,775,807, bez znaku od 0 do 18,446,744,073,709,551,615.",
       DECIMAL:
         "Liczba zmiennoprzecinkowa pozwalająca na dokładną reprezentację liczby posiadającej od 1 do 65 cyfr przed (L) i od 0 do 30 cyfr po przecinku (D). Przechowywana w formacie 'L,D'",
-      FLOAT:
-        "Liczba zmienno przecinkowa zapisująca liczbę do długości 4 bajtów.",
-      DOUBLE:
-        "Liczba zmienno przecinkowa zapisująca liczbę do długości 8 bajtów.",
+      FLOAT: "Liczba zmienno przecinkowa zapisująca liczbę do długości 4 bajtów.",
+      DOUBLE: "Liczba zmienno przecinkowa zapisująca liczbę do długości 8 bajtów.",
 
       DATE: "Data z przedziału pomiędzy `1000-01-01`, a `9999-12-31`.",
-      DATETIME:
-        "Data i czas z przedziału pomiędzy `1000-01-01 00:00:00`, a `9999-12-31 23:59:59`.",
+      DATETIME: "Data i czas z przedziału pomiędzy `1000-01-01 00:00:00`, a `9999-12-31 23:59:59`.",
       TIMESTAMP:
         "Data i czas z przedziału pomiędzy `1970-01-01 00:00:01` UTC, a `2038-01-19 03:14:07` UTC.",
       TIME: "Czas z przedziału pomiędzy `-838:59:59`, a `838:59:59`.",
@@ -175,8 +164,7 @@ export default {
   db_update_failed: "Baza danych nie mogła zostać zaktualizowana.",
   default: "Domyślnie",
   delete: "Usuń",
-  delete_are_you_sure:
-    "Na pewno chcesz usunąć ten element? Tej akcji nie będzie można cofnąć.",
+  delete_are_you_sure: "Na pewno chcesz usunąć ten element? Tej akcji nie będzie można cofnąć.",
   delete_collection_are_you_sure:
     "Na pewno chcesz usunąć tę kolekcję? Tej akcji nie będzie można cofnąć.",
   delete_field_are_you_sure:
@@ -184,15 +172,13 @@ export default {
   delete_role_are_you_sure:
     'Na pewno chcesz usunąć rolę "{name}"? Tej akcji nie będzie można cofnąć.',
   delete_bookmark: "Usuń zakładkę",
-  delete_bookmark_body:
-    "Na pewno chcesz usunąć tę zakładkę? Tej akcji nie będzie można cofnąć.",
+  delete_bookmark_body: "Na pewno chcesz usunąć tę zakładkę? Tej akcji nie będzie można cofnąć.",
   description: "Opis",
   delete_confirmation: "Usuń potwierdzenie",
   dialog_beginning: "Początek okna dialogowego.",
   discard_changes: "Odrzuć zmiany.",
   display_name: "Wyświetlana nazwa",
-  drop_files:
-    "Nie można upuścić plików | Upuść plik tutaj... | Upuść pliki tutaj...",
+  drop_files: "Nie można upuścić plików | Upuść plik tutaj... | Upuść pliki tutaj...",
   dont_show: "Nie pokazuj",
   editing: "Edycja elementu: {collection}",
   editing_item: "Edycja elementu",
@@ -219,8 +205,7 @@ export default {
     107: "Użytkownik nie odnaleziony"
   },
   error_unknown: "Nastąpił nieznany błąd. Spróbuj ponownie później.",
-  esc_cancel:
-    "Naciśnięcie klawisza escape spowoduje anulowanie i zamknięcie okna.",
+  esc_cancel: "Naciśnięcie klawisza escape spowoduje anulowanie i zamknięcie okna.",
   equal_to: "Równe z",
   existing: "Istniejące",
   fetching_data: "Trwa pobieranie danych",
@@ -229,6 +214,7 @@ export default {
   field_created: "{field} Utworzono pole",
   field_updated: "{field} Zaktualizowano pole",
   field_removed: "{field} Usunięto pole",
+  field_already_exists: "{field} Już istnieje",
   fields: "Pola",
   fields_are_saved_instantly: "Zmiany zapisane są natychmiastowo",
   file: "Plik",
@@ -272,8 +258,7 @@ export default {
     "Nie możesz wyłączyć typu klucza podstawowego dla istniejącego pola. Zamiast tego usuń takie pole.",
   extension_error: "Wystąpił problem podczas ładowania rozszerzenia {ext}.",
   extensions_missing: "Nie znaleziono rozszerzeń",
-  extensions_missing_copy:
-    "Upewnij się, że zainstalowałeś rozszerzenia systemowe.",
+  extensions_missing_copy: "Upewnij się, że zainstalowałeś rozszerzenia systemowe.",
   latency: "Opóźnienie",
   learn_more: "Dowiedz się więcej",
   leave_comment: "Napisz komentarz...",
@@ -299,24 +284,19 @@ export default {
   not_contains: "Nie zawiera",
   note: "Notatka",
   note_note: "Opis do użytku wewnętrznego...",
-  note_hidden:
-    "[Dowiedz się więcej](https://docs.directus.io/guides/collections.html#hidden)",
+  note_hidden: "[Dowiedz się więcej](https://docs.directus.io/guides/collections.html#hidden)",
   note_icon: "Ikona pokazywana w bocznym pasku nawigacji",
   note_managed:
     "[Dowiedz się więcej](https://docs.directus.io/guides/collections.html#managing-collections)",
-  note_single:
-    "[Dowiedz się więcej](https://docs.directus.io/guides/collections.html#single)",
+  note_single: "[Dowiedz się więcej](https://docs.directus.io/guides/collections.html#single)",
   no_results: "Brak wyników",
   no_results_body: "Żaden element kolekcji nie spełnia obecnych filtrów",
   no_collections: "Brak skonfigurowanych kolekcji",
-  no_collections_body:
-    "Wygląda na to, że nie istnieje jeszcze żadna skonfigurowana kolekcja",
+  no_collections_body: "Wygląda na to, że nie istnieje jeszcze żadna skonfigurowana kolekcja",
   no_fields: "Brak skonfigurowanych pól",
-  no_fields_body:
-    "Wygląda na to, że ta kolekcja nie posiada jeszcze żadnego skonfigurowanego pola",
+  no_fields_body: "Wygląda na to, że ta kolekcja nie posiada jeszcze żadnego skonfigurowanego pola",
   no_files: "Brak plików",
-  no_files_body:
-    "Wygląda na to, że żaden plik nie został jeszcze wgrany na serwer",
+  no_files_body: "Wygląda na to, że żaden plik nie został jeszcze wgrany na serwer",
   numeric: "Numeryczne",
   page_not_found: "Nie odnaleziono strony",
   page_not_found_body: "Strona, której poszukujesz, nie istnieje.",
@@ -345,12 +325,9 @@ export default {
   open_on_gh: "Otwórz na GitHubie",
   options: "Opcje",
   password: "Hasło",
-  password_reset_sent:
-    "Email z instrukcją resetowania hasła został wysłany na adres {email}",
-  permissions_no_collections:
-    "Ten projekt nie posiada jeszcze żadnej kolekcji.",
-  permissions_admin:
-    "Admini mają domyślnie dostęp do wszystkich danych systemu.",
+  password_reset_sent: "Email z instrukcją resetowania hasła został wysłany na adres {email}",
+  permissions_no_collections: "Ten projekt nie posiada jeszcze żadnej kolekcji.",
+  permissions_admin: "Admini mają domyślnie dostęp do wszystkich danych systemu.",
   permission_states: {
     none: "Żaden",
     mine: "Tylko dla mnie",
@@ -411,8 +388,7 @@ export default {
   search_interface: "Wyszukaj interfejs...",
   select_interface_below: "Wybierz interfejs poniżej",
   select_statuses: "Wybierz statusy",
-  select_statuses_copy:
-    "Wybierz statusy, z których będzie mógł korzystać użytkownik",
+  select_statuses_copy: "Wybierz statusy, z których będzie mógł korzystać użytkownik",
   settings: "Ustawienia",
   settings_project: "Ustawienia projektu",
   settings_global: "Ustawienia globalne",
@@ -428,8 +404,7 @@ export default {
   server_error: "Błąd serwera",
   server_error_copy: "Coś jest nie tak z tą instancją serwera lub bazy danych.",
   server_trouble: "Problem z serwerem",
-  server_trouble_copy:
-    "Spróbuj ponownie później lub zwróć się o pomoc do administracji systemu.",
+  server_trouble_copy: "Spróbuj ponownie później lub zwróć się o pomoc do administracji systemu.",
   advanced_options: "Opcje zaawansowane",
   show_directus_collections: "Pokaż systemowe kolekcje Directusa",
   something_went_wrong: "Coś poszło nie tak.",
@@ -445,8 +420,7 @@ export default {
   text: "Tekst",
   this_collection: "Ta kolekcja",
   to: "Do",
-  unsaved_changes_copy:
-    "Dokonano niezapisanych zmian! Na pewno chcesz opuścić już tę stronę?",
+  unsaved_changes_copy: "Dokonano niezapisanych zmian! Na pewno chcesz opuścić już tę stronę?",
   user_directory: "Katalog użytkownika",
   update: "Aktualizuj",
   update_confirm: "Jesteś pewien, że chcesz zaktualizować {count} elementów?",

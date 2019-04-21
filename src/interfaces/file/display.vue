@@ -1,14 +1,11 @@
 <template>
   <div class="readonly-single-file no-wrap">
     <img v-if="imageUrl && !error" @error="handleImageError" :src="imageUrl" />
-    <i v-else-if="error" class="material-icons">broken_image</i>
+    <v-icon v-else-if="error" name="broken_image" />
     <span v-else-if="!value">--</span>
-    <span
-      v-else
-      class="material-icons"
-      v-tooltip.right="value && value.filename"
-      >{{ icon }}</span
-    >
+    <span v-else class="material-icons" v-tooltip.right="value && value.filename">
+      {{ icon }}
+    </span>
   </div>
 </template>
 

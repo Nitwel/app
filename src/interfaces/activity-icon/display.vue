@@ -8,9 +8,9 @@
       :progress="100"
       :stroke="2"
     ></v-progress-ring>
-    <span class="label"
-      ><div>{{ label }}</div></span
-    >
+    <span class="label">
+      <div>{{ label }}</div>
+    </span>
   </div>
 </template>
 

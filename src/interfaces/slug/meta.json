@@ -35,6 +35,15 @@
       "force_lowercase_comment": "Makes sure the slug is in lowercase",
       "mirrored_field": "Mirrored Field",
       "mirrored_field_comment": "Keep the slug up to date with another (text) field"
+    },
+	"fr-FR": {
+      "slug": "Identifiant d'adresse Web (URL)",
+      "placeholder_name": "Paramètre fictif",
+      "placeholder_comment": "Texte statique qui est affiché avant la sélection d'une valeur",
+      "force_lowercase": "Tout transformer en minuscules",
+      "force_lowercase_comment": "S'assurer que les identifiants d'URL sont écrits en minuscules",
+      "mirrored_field": "Champ en miroir",
+      "mirrored_field_comment": "Garder l'identifiant d'URL à jour avec un autre champ textuel"
     }
   }
 }

@@ -30,11 +30,7 @@
       />
 
       <div class="content">
-        <details
-          v-if="
-            activity.action !== 'external' && activity.changes && activity.name
-          "
-        >
+        <details v-if="activity.action !== 'external' && activity.changes && activity.name">
           <summary class="title">
             <span class="name">{{ activity.name }}</span>
             <v-timeago
@@ -44,14 +40,12 @@
                 delay: { show: 1500, hide: 100 }
               }"
               :auto-update="1"
-              :since="activity.date"
+              :datetime="activity.date"
               :locale="$i18n.locale"
               class="date"
             />
-            <i class="material-icons chevron" v-tooltip="'Revision Details'"
-              >chevron_left</i
-            ></summary
-          >
+            <v-icon class="chevron" v-tooltip="'Rivision Details'" name="chevron_left" size="18" />
+          </summary>
           <div v-if="activity.changes">
             <v-diff :changes="activity.changes" />
             <button
@@ -60,7 +54,7 @@
               class="revert"
               @click="$emit('revert', activity)"
             >
-              <i class="material-icons">restore</i>
+              <v-icon name="restore" />
             </button>
           </div>
         </details>
@@ -73,7 +67,7 @@
               delay: { show: 1500, hide: 100 }
             }"
             :auto-update="1"
-            :since="activity.date"
+            :datetime="activity.date"
             :locale="$i18n.locale"
             class="date"
           />
@@ -82,8 +76,7 @@
           v-if="activity.htmlcomment"
           v-html="activity.htmlcomment"
           :class="{
-            comment:
-              activity.action && activity.action.toLowerCase() === 'comment'
+            comment: activity.action && activity.action.toLowerCase() === 'comment'
           }"
         ></p>
       </div>
@@ -130,9 +123,7 @@ export default {
         revision: this.revisions[activity.id]
       }));
 
-      const lastItem =
-        activityWithChanges &&
-        activityWithChanges[activityWithChanges.length - 1];
+      const lastItem = activityWithChanges && activityWithChanges[activityWithChanges.length - 1];
 
       if (!lastItem) {
         activityWithChanges.push({
@@ -264,15 +255,6 @@ export default {
     }
   }
 
-  i.material-icons {
-    width: 13px;
-    font-size: 24px;
-    transform: translateX(-6px);
-    height: 20px;
-    background-color: var(--lightest-gray);
-    color: var(--lighter-gray);
-  }
-
   article {
     display: flex;
     margin-bottom: 30px;
@@ -336,7 +318,7 @@ export default {
         color: var(--lightest-gray);
       }
       &:hover {
-        background-color: var(--accent);
+        background-color: var(--dark-gray);
         i.material-icons {
           color: var(--white);
         }
@@ -365,10 +347,10 @@ export default {
         border-color: transparent transparent var(--lightest-gray) transparent;
       }
       a {
-        color: var(--accent);
+        color: var(--darker-gray);
         text-decoration: none;
         &:hover {
-          color: var(--accent-dark);
+          color: var(--darkest-gray);
         }
       }
       strong {
@@ -397,9 +379,9 @@ export default {
         font-size: 1.2em;
         font-weight: 400;
         margin: 20px 10px 20px 10px;
-        border-left: 2px solid var(--accent);
+        border-left: 2px solid var(--lighter-gray);
         padding-left: 10px;
-        color: var(--accent);
+        color: var(--darkest-gray);
         line-height: 1.4em;
       }
       hr {
@@ -439,10 +421,10 @@ export default {
     transition-property: color, opacity;
     opacity: 0;
 
-    color: var(--accent);
+    color: var(--darker-gray);
     cursor: pointer;
     &:hover {
-      color: var(--accent-dark);
+      color: var(--darkest-gray);
     }
 
     &[disabled] {
@@ -466,10 +448,10 @@ export default {
 <style lang="scss">
 .v-activity .content .comment {
   a {
-    color: var(--accent);
+    color: var(--darker-gray);
     text-decoration: none;
     &:hover {
-      color: var(--accent-dark);
+      color: var(--darkest-gray);
     }
   }
   strong {
@@ -499,9 +481,9 @@ export default {
     font-size: 1.2em;
     font-weight: 400;
     margin: 20px 10px 20px 10px;
-    border-left: 2px solid var(--accent);
+    border-left: 2px solid var(--lighter-gray);
     padding-left: 10px;
-    color: var(--accent);
+    color: var(--darkest-gray);
     line-height: 1.4em;
   }
   hr {

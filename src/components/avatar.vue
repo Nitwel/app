@@ -16,18 +16,9 @@
         @load="loading = false"
         @error="onImageLoadingError"
       />
-      <i
-        v-else
-        :style="{ fontSize: size / 2 + 2 + 'px' }"
-        class="material-icons"
-        >person</i
-      >
+      <v-icon v-else :style="{ fontSize: size / 2 + 2 + 'px' }" name="person" />
     </div>
-    <div
-      v-if="indicator"
-      :style="{ backgroundColor: `var(--${color})` }"
-      class="indicator"
-    />
+    <div v-if="indicator" :style="{ backgroundColor: `var(--${color})` }" class="indicator" />
   </div>
 </template>
 

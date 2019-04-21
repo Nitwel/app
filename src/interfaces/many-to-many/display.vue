@@ -1,8 +1,5 @@
 <template>
-  <v-popover
-    trigger="hover"
-    v-if="options.template && options.template.length > 0"
-  >
+  <v-popover trigger="hover" v-if="options.template && options.template.length > 0">
     <div class="readonly-many-to-many">{{ itemCount }}</div>
 
     <template slot="popover">

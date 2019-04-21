@@ -51,6 +51,14 @@
       "buttons": "Buttons",
       "buttons_comment": "Choose what buttons to use in the toolbar",
       "distraction_free_mode": "Distracton Free Mode"
+    },
+	"fr-FR": {
+      "wysiwyg": "Editeur simplifié de contenu avec présentation « tel écran, tel écrit »",
+      "placeholder": "Paramètre fictif",
+      "placeholder_comment": "Texte statique qui est affiché avant la sélection d'une valeur",
+      "buttons": "Boutons",
+      "buttons_comment": "Choix des boutons utilisables à travers la barre d'outils",
+      "distraction_free_mode": "Mode « non distractif »"
     }
   }
 }

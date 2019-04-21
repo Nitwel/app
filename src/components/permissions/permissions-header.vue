@@ -1,60 +1,60 @@
 <template>
   <div class="header">
     <div class="row">
-      <div class="cell">{{ $t("collection") }}</div>
-      <div class="cell">
+      <div class="cell style-4">{{ $t("collection") }}</div>
+      <div class="cell style-4">
         <button
           type="button"
-          v-tooltip="$t('click_to_toggle_all_none')"
+          v-tooltip="$t('create')"
           class="cell"
           @click="$emit('toggle-all', 'create')"
         >
-          {{ $t("create") }}
+          <v-icon name="add_circle" />
         </button>
       </div>
-      <div class="cell">
+      <div class="cell style-4">
         <button
           type="button"
-          v-tooltip="$t('click_to_toggle_all_none')"
+          v-tooltip="$t('read')"
           class="cell"
           @click="$emit('toggle-all', 'read')"
         >
-          {{ $t("read") }}
+          <v-icon name="visibility" />
         </button>
       </div>
-      <div class="cell">
+      <div class="cell style-4">
         <button
           type="button"
-          v-tooltip="$t('click_to_toggle_all_none')"
+          v-tooltip="$t('update')"
           class="cell"
           @click="$emit('toggle-all', 'update')"
         >
-          {{ $t("update") }}
+          <v-icon name="edit" />
         </button>
       </div>
-      <div class="cell">
+      <div class="cell style-4">
         <button
           type="button"
-          v-tooltip="$t('click_to_toggle_all_none')"
+          v-tooltip="$t('delete')"
           class="cell"
           @click="$emit('toggle-all', 'delete')"
         >
-          {{ $t("delete") }}
+          <v-icon name="delete" />
         </button>
       </div>
-      <div class="cell">
+      <div class="cell style-4">
         <button
           type="button"
-          v-tooltip="$t('click_to_toggle_all_none')"
+          v-tooltip="$t('comment')"
           class="cell"
           @click="$emit('toggle-all', 'comment')"
         >
-          {{ $t("comment") }}
+          <v-icon name="comment" />
         </button>
       </div>
       <!-- <div class="cell">{{ $t("explain") }}</div> -->
-      <div class="cell">{{ $t("fields") }}</div>
-      <div class="cell">{{ $t("statuses") }}</div>
+      <div class="cell style-4">{{ $t("fields") }}</div>
+      <div class="cell style-4">{{ $t("statuses") }}</div>
     </div>
   </div>
 </template>
@@ -67,13 +67,9 @@
     align-items: center;
     padding: 10px;
     height: 60px;
-  }
-
-  .cell {
-    text-transform: uppercase;
-    font-size: 10px;
-    color: var(--gray);
-    font-weight: 700;
+    .material-icons {
+      margin-left: -2px;
+    }
   }
 
   button {

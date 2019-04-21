@@ -1,4 +1,5 @@
 import _ from "lodash";
+import Vue from "vue";
 import * as types from "./types";
 
 export default {
@@ -9,7 +10,7 @@ export default {
   },
 
   [types.SET_SETTING](state, { id, key, value }) {
-    state.values[key] = value;
-    state.primaryKeys[key] = id;
+    Vue.set(state.values, key, value);
+    Vue.set(state.primaryKeys, key, id);
   }
 };

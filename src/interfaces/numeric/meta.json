@@ -43,6 +43,17 @@
       "icon_left_comment": "Choose an optional icon to display on the left of the input",
       "icon_right": "Icon Right",
       "icon_right_comment": "Choose an optional icon to display on the right of the input"
+    },
+	"fr-FR": {
+      "numeric": "Numérique",
+      "placeholder": "Paramètre fictif",
+      "placeholder_comment": "Texte statique qui est affiché avant la sélection d'une valeur",
+      "localized": "Localisé",
+      "localized_comment": "Afficher la sortie dans le format local de l'utilisateur",
+      "icon_left": "Icone de gauche",
+      "icon_left_comment": "Choisir l'icone optionnelle à afficher à gauche de l'entrée",
+      "icon_right": "Icone de droite",
+      "icon_right_comment": "Choisir l'icone optionnelle à afficher à droite de l'entrée"
     }
   }
 }

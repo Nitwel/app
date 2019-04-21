@@ -31,6 +31,15 @@
       "option": "Option",
       "include_system": "Include System",
       "include_system_comment": "Include system collections in the options"
+    },
+	"fr-FR": {
+      "collections": "Collections",
+      "placeholder": "Paramètre fictif",
+      "placeholder_comment": "Texte statique qui est affiché avant la sélection d'une valeur",
+      "placeholder_default": "Choisir une collection",
+      "option": "Option",
+      "include_system": "Inclure les collections systèmes",
+      "include_system_comment": "Inclure les collections systèmes dans les options"
     }
   }
 }

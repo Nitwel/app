@@ -91,11 +91,9 @@ export default {
   embed: "Benamkan",
   embed_placeholder: "YouTube, Vimeo, atau pautan lain",
   fieldtypes: {
-    alias:
-      "Medan yang tidak menyimpan data atau tidak mempunyai lajur pangkalan data yang sepadan",
+    alias: "Medan yang tidak menyimpan data atau tidak mempunyai lajur pangkalan data yang sepadan",
     array: "Respon API dalam format tatasusunan standard",
-    datetime:
-      "Tarikh dan masa dalam format ISO, contoh: 2018-09-19T14:00:43.381Z",
+    datetime: "Tarikh dan masa dalam format ISO, contoh: 2018-09-19T14:00:43.381Z",
     date: "Tarikh, contoh: 2018-09-19",
     time: "Masa, contoh: 14:09:22",
     file: "Kunci asing ke directus_files.id",
@@ -103,13 +101,11 @@ export default {
       "Kumpulkan medan secara visual, kumpulan kanak-kanak tersimpan ke dalam directus_fields.group",
     integer: "Nombor bulat",
     decimal: "Nombor yang ada perpuluhan",
-    json:
-      "Standard JSON format in API response Respons API dalam format JSON standard",
+    json: "Standard JSON format in API response Respons API dalam format JSON standard",
     lang: "Khusus untuk antaramuka penterjemahan, ini menyimpan kekunci bahasa",
     m2o: "Hubungan Ramai-ke-Satu",
     o2m: "Hubungan Satu-ke-Ramai",
-    sort:
-      "Medan sistem yang digunakan dalam menyusun semula benda seret-dan-lepas",
+    sort: "Medan sistem yang digunakan dalam menyusun semula benda seret-dan-lepas",
     status: "Medan sistem yang digunakan untuk menerbitkan aliran kerja",
     string:
       "Apa-apa teks, nombor, ruang, atau simbol; ditakrifkan dan dihadkan oleh panjangnya (bilangan aksara)",
@@ -133,10 +129,8 @@ export default {
         "Perkataan/Ayat bukan-binari yang panjangnya tidak tetap. Panjang karakter boleh diantara 0 hingga 255 (MySQL 5.0.3+).",
       TINYTEXT: "Perkataan/Ayat dengan panjang maksimum sebanyak 255 karakter.",
       TEXT: "Perkataan/Ayat dengan panjang maksimum sebanyak 65,535 karakter.",
-      MEDIUMTEXT:
-        "Perkataan/Ayat dengan panjang maksimum sebanyak 16,777,215 karakter.",
-      LONGTEXT:
-        "Perkataan/Ayat dengan panjang maksimum sebanyak 4,294,967,295 karakter.",
+      MEDIUMTEXT: "Perkataan/Ayat dengan panjang maksimum sebanyak 16,777,215 karakter.",
+      LONGTEXT: "Perkataan/Ayat dengan panjang maksimum sebanyak 4,294,967,295 karakter.",
 
       BOOLEAN: "Betul atau salah. Disimpan sama ada 1 atau 0.",
       TINYINT:
@@ -152,14 +146,11 @@ export default {
 
       DECIMAL:
         "Nombor yang tepat (misalnya: untuk mata wang), dengan panjang 1 hingga 65 digit (L) dan 0 hingga 30 digit perpuluhan (D). Format panjang: `L, D`",
-      FLOAT:
-        "Nombor binari secara anggaran, 4 bait dengan titik perpuluhan terapung.",
-      DOUBLE:
-        "Nombor binari secara anggaran, 8 bait dengan titik perpuluhan terapung.",
+      FLOAT: "Nombor binari secara anggaran, 4 bait dengan titik perpuluhan terapung.",
+      DOUBLE: "Nombor binari secara anggaran, 8 bait dengan titik perpuluhan terapung.",
 
       DATE: "Tarikh. Dibenarkan `1000-01-01` hingga `9999-12-31`.",
-      DATETIME:
-        "Tarikh dan masa. Dibenarkan `1000-01-01 00:00:00` hingga `9999-12-31 23:59:59`.",
+      DATETIME: "Tarikh dan masa. Dibenarkan `1000-01-01 00:00:00` hingga `9999-12-31 23:59:59`.",
       TIMESTAMP:
         "Tarikh dan masa. Dibenarkan `1970-01-01 00:00:01` UTC hingga `2038-01-19 03:14:07` UTC.",
       TIME: "Masa. Dibenarkan `-838:59:59` hingga `838:59:59`.",
@@ -229,6 +220,7 @@ export default {
   field_created: "{field} Medan Dicipta",
   field_updated: "{field} Medan Dikemaskini",
   field_removed: "{field} Medan Dibuang",
+  field_already_exists: "{field} Sudah wujud",
   fields: "Medan-medan",
   fields_are_saved_instantly: "Perubahan disimpan dengan serta-merta",
   file: "Fail",
@@ -263,8 +255,7 @@ export default {
   item_count: "Tiada Benda | Satu Benda | {count} Benda",
   event_count: "tiada Peristiwa | Satu Peristiwa | {count} Peristiwa",
   role_count: "Tiada Peranan | Satu Peranan | {count} Peranan",
-  item_count_filter:
-    "Tiada Benda yang Ditapis | Satu Benda Ditapis | {count} Benda Ditapis",
+  item_count_filter: "Tiada Benda yang Ditapis | Satu Benda Ditapis | {count} Benda Ditapis",
   item_deleted: "Benda telah dipadam",
   item_saved: "Benda telah disimpan | {count} Benda telah disimpan",
   junction_collection: "Koleksi Persimpangan",
@@ -288,8 +279,7 @@ export default {
   m2o: "Ramai-ke-Satu (M2O)",
   o2m: "Satu-ke-Ramai (O2M)",
   name: "Nama",
-  name_field:
-    "Jom namakan medan {field} dan tambahkan nota yang berguna untuk pengguna.",
+  name_field: "Jom namakan medan {field} dan tambahkan nota yang berguna untuk pengguna.",
   navigate_changes:
     "Adakah anda pasti mahu meninggalkan halaman ini? Perubahan yang anda buat akan hilang jika anda menavigasi dari halaman ini.",
   new: "Baru",
@@ -299,16 +289,13 @@ export default {
   not_contains: "Tidak mengandungi",
   note: "Nota",
   note_note: "Keterangan dalaman...", //
-  note_hidden:
-    "[Ketahui lebih lanjut](https://docs.directus.io/guides/collections.html#hidden)",
+  note_hidden: "[Ketahui lebih lanjut](https://docs.directus.io/guides/collections.html#hidden)",
   note_icon: "Ikon yang dipaparkan dalam bar sisi navigasi aplikasi",
   note_managed:
     "[Ketahui lebih lanjut](https://docs.directus.io/guides/collections.html#managing-collections)",
-  note_single:
-    "[Ketahui lebih lanjut](https://docs.directus.io/guides/collections.html#single)",
+  note_single: "[Ketahui lebih lanjut](https://docs.directus.io/guides/collections.html#single)",
   no_results: "Tiada keputusan",
-  no_results_body:
-    "Penapis semasa tidak sepadan dengan sebarang benda dalam koleksi",
+  no_results_body: "Penapis semasa tidak sepadan dengan sebarang benda dalam koleksi",
   no_collections: "Tiada Persediaan Koleksi",
   no_collections_body: "Nampaknya belum ada persediaan koleksi lagi",
   no_fields: "Tiada Persediaan Medan",
@@ -330,8 +317,7 @@ export default {
   manage_started: "Mula Mengurus {collection}",
   manage_stopped: "Berhenti Mengurus {collection}",
   max_size: "Saiz Maks.: {size}",
-  max_one_primary_key:
-    "Anda hanya boleh mempunyai 1 medan utama utama untuk setiap kumpulan",
+  max_one_primary_key: "Anda hanya boleh mempunyai 1 medan utama utama untuk setiap kumpulan",
   dont_manage: "Jangan Urus",
   dont_manage_copy:
     "Keistimewaan, keutamaan, dan tetapan untuk koleksi {koleksi} akan dikeluarkan secara kekal dari sistem! Adakah anda pasti?",
@@ -345,8 +331,7 @@ export default {
   options: "Pilihan-pilihan",
   password: "Katalaluan",
   password_reset_sent: "Emel reset katalaluan dihantar ke {email}",
-  permissions_no_collections:
-    "Projek ini tidak mempunyai sebarang koleksi lagi.",
+  permissions_no_collections: "Projek ini tidak mempunyai sebarang koleksi lagi.",
   permissions_admin:
     "Pentadbir mempunyai akses kepada semua data terurus dalam sistem secara lalai.",
   permission_states: {
@@ -392,8 +377,7 @@ export default {
   reset_preferences: "Tetapkan semula semua pilihan penyenaraian",
   reset_password: "Tetapkan Semula Katalaluan",
   revert: "Kembalikan",
-  revert_copy:
-    "Adakah anda ingin kembalikan benda ini semula seperti pada {date}?",
+  revert_copy: "Adakah anda ingin kembalikan benda ini semula seperti pada {date}?",
   roles: "Peranan-peranan Pengguna",
   role_settings: "Tetapan Peranan",
   save: "Simpan",
@@ -418,15 +402,13 @@ export default {
   settings_update_database_subtext: "Jalankan Skrip",
   settings_update_database_confirm:
     "Ini akan mengemas kini medan sistem dalam pangkalan data anda kepada versi terbaru Directus. Sila pastikan untuk membuat sandaran sebelum anda menjalankan operasi ini.",
-  settings_collections_fields:
-    "Collections & Fields Koleksi-koleksi & Medan-medan",
+  settings_collections_fields: "Collections & Fields Koleksi-koleksi & Medan-medan",
   settings_permissions: "Peranan-peranan & Kebenaran",
   settings_extensions: "Sambungan",
   settings_saved: "Settings Saved Tetapan Disimpan",
   server_details: "Butiran Pelayan",
   server_error: "Ralat Pelayan",
-  server_error_copy:
-    "Sesuatu yang salah dengan pelayan atau pangkalan data ini.",
+  server_error_copy: "Sesuatu yang salah dengan pelayan atau pangkalan data ini.",
   server_trouble: "Masalah Pelayan",
   server_trouble_copy: "Cuba lagi kemudian atau hubungi pentadbir sistem anda.",
   advanced_options: "Pilihan lanjutan",

@@ -48,6 +48,7 @@ export default {
 
 .disabled {
   opacity: 0.5;
+  cursor: not-allowed;
 }
 
 input {
@@ -60,38 +61,32 @@ input {
   &::after {
     content: "";
     display: block;
-    height: 14px;
+    height: 20px;
     width: 36px;
-    background-color: var(--light-gray);
-    border-radius: 100px;
+    background-color: transparent;
+    border-radius: 12px;
     cursor: pointer;
-    transition: var(--fast) var(--transition);
+    border: 2px solid var(--darker-gray);
   }
 
   &.active::after {
-    background-color: var(--accent);
-    opacity: 0.5;
+    background-color: var(--darker-gray);
   }
-}
-
-.user-is-tabbing input:focus ~ .switch-track {
-  box-shadow: 0 0 0 6px var(--white), 0 0 0 8px var(--accent);
 }
 
 .switch-thumb {
   position: absolute;
-  top: 0;
+  top: 8px;
+  left: 8px;
   display: block;
-  width: 20px;
-  height: 20px;
-  border-radius: 100px;
-  background-color: var(--white);
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14),
-    0 1px 5px 0 rgba(0, 0, 0, 0.12);
-  transition: var(--fast) var(--transition);
+  width: 14px;
+  height: 14px;
+  border-radius: 7px;
+  background-color: var(--darker-gray);
+  transition: transform var(--fast) var(--transition);
 
   &.active {
-    background-color: var(--accent);
+    background-color: var(--white);
     transform: translateX(16px);
   }
 }

@@ -43,7 +43,7 @@
 
 .leaflet-control-zoom-in:hover,
 .leaflet-control-zoom-out:hover {
-	color: var(--accent);
+	color: var(--darkest-gray);
 }
 
 .leaflet-control-zoom-in {

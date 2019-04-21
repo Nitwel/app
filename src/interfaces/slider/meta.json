@@ -42,6 +42,17 @@
       "step_comment": "Increments at which the value can be set",
       "unit": "Unit",
       "unit_comment": "Show an unit next to the slider value, e.g. 15 Pounds"
+    },
+	"fr-FR": {
+      "slider": "Curseur",
+      "min": "Minimum",
+      "min_comment": "La valeur valide minimale",
+      "max": "Maximum",
+      "max_comment": "La valeur valide maximale",
+      "step": "Pas",
+      "step_comment": "Le pas utilisé pour incrémenter la valeur",
+      "unit": "Unité",
+      "unit_comment": "Affiche l'unité de mesure à côté de la valeur du curseur (ex: 15 grammes)"
     }
   }
 }

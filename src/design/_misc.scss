@@ -1,0 +1,23 @@
+:root {
+  --border-radius: 3px;
+  --box-shadow: 0;
+  --box-shadow-accent: 0;
+
+  --transition: cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-in: cubic-bezier(0, 0, 0.2, 1);
+  --transition-out: cubic-bezier(0.4, 0, 1, 1);
+
+  --fast: 125ms;
+  --medium: 200ms;
+  --slow: 300ms;
+
+  --input-border-width: 2px;
+  --input-height: 44px;
+
+  --nav-sidebar-width: 220px;
+  --header-height: 60px;
+  --info-sidebar-width: 284px;
+
+  --page-padding-bottom: 100px;
+  --page-padding: 32px;
+}

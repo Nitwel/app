@@ -27,10 +27,14 @@
     ></v-upload>
 
     <v-button type="button" :disabled="readonly" @click="newFile = true">
-      <i class="material-icons">add</i>{{ $t("new_file") }} </v-button
-    ><!--
-    --><v-button type="button" :disabled="readonly" @click="existing = true">
-      <i class="material-icons">playlist_add</i>{{ $t("existing") }}
+      <v-icon name="add" />
+      {{ $t("new_file") }}
+    </v-button>
+    <!--
+    -->
+    <v-button type="button" :disabled="readonly" @click="existing = true">
+      <v-icon name="playlist_add" />
+      {{ $t("existing") }}
     </v-button>
 
     <portal to="modal" v-if="newFile">
@@ -44,11 +48,7 @@
         }"
       >
         <div class="body">
-          <v-upload
-            @upload="saveUpload"
-            :accept="options.accept"
-            :multiple="false"
-          ></v-upload>
+          <v-upload @upload="saveUpload" :accept="options.accept" :multiple="false"></v-upload>
         </div>
       </v-modal>
     </portal>
@@ -164,11 +164,7 @@ export default {
       };
     },
     filters() {
-      return [
-        ...this.options.filters,
-        ...this.fileTypeFilters,
-        ...this.filtersOverride
-      ];
+      return [...this.options.filters, ...this.fileTypeFilters, ...this.filtersOverride];
     },
     fileTypeFilters() {
       if (

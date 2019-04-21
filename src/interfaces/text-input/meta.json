@@ -79,6 +79,27 @@
       "small": "Small",
       "medium": "Medium",
       "large": "Large"
+    },
+	"fr-FR": {
+      "input": "Saisie de libellé",
+      "placeholder": "Paramètre fictif",
+      "placeholder_comment": "Texte statique qui est affiché avant la sélection d'une valeur",
+      "trim": "Rognage",
+      "trim_comment": "Supprime les espaces en début et fin de texte avant enregistrement",
+      "char_count": "Montrer le nombre de caractères",
+      "char_count_comment": "Affiche le nombre de caractères restants disponibles à côté de l'entrée",
+      "icon_left": "Icon Left",
+      "icon_left_comment": "Choose an optional icon to display on the left of the input",
+      "icon_right": "Icon Right",
+      "icon_right_comment": "Choose an optional icon to display on the right of the input",
+      "format": "Embellir la sortie",
+      "format_comment": "Convertir la sortie en majuscules",
+      "width": "Taille",
+      "width_comment": "Saisir la longueur de texte à utiliser pour cette entrée",
+      "auto": "Automatique",
+      "small": "Petit",
+      "medium": "Moyen",
+      "large": "Grand"
     }
   }
 }

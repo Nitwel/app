@@ -16,6 +16,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# Avoid yarn.lock dulplication in favor of package-lock.json
+yarn.lock
+
 # Editor directories and files
 .idea
 .vscode

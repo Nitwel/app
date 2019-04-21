@@ -8,11 +8,9 @@
           <transition name="months">
             <div v-show="showMonthSelect" id="date-select">
               <div id="date-header">
-                <i class="material-icons" @click="decreaseYear()">arrow_back</i>
+                <v-icon @click="decreaseYear()" name="arrow_back" />
                 {{ date.getFullYear() }}
-                <i class="material-icons" @click="increaseYear()"
-                  >arrow_forward</i
-                >
+                <v-icon @click="increaseYear()" name="arrow_forward" />
               </div>
               <div id="date-months">
                 <div
@@ -28,10 +26,8 @@
           </transition>
         </div>
         <div id="arrows">
-          <i class="material-icons icon" @click="decreaseMonth()">arrow_back</i>
-          <i class="material-icons icon" @click="increaseMonth()"
-            >arrow_forward</i
-          >
+          <v-icon class="icon" @click="decreaseMonth()" name="arrow_back" />
+          <v-icon class="icon" @click="increaseMonth()" name="arrow_forward" />
         </div>
       </div>
       <div id="header-end">
@@ -56,11 +52,7 @@
         ></Calendar>
       </transition>
     </div>
-    <Popup
-      :open="showPopup"
-      :date="popupDate"
-      @close="showPopup = false"
-    ></Popup>
+    <Popup :open="showPopup" :date="popupDate" @close="showPopup = false"></Popup>
   </div>
 </template>
 
@@ -103,15 +95,7 @@ export default {
         "november",
         "december"
       ],
-      weekNames: [
-        "monday",
-        "tuesday",
-        "wednesday",
-        "thursday",
-        "friday",
-        "saturday",
-        "sunday"
-      ]
+      weekNames: ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
     };
   },
   mixins: [mixin],
@@ -120,11 +104,7 @@ export default {
     // has scrolled
     date() {
       var date = new Date();
-      date = new Date(
-        date.getFullYear(),
-        date.getMonth() + this.monthDistance,
-        1
-      );
+      date = new Date(date.getFullYear(), date.getMonth() + this.monthDistance, 1);
       return date;
     }
   },
@@ -296,7 +276,7 @@ export default {
 }
 .button {
   height: 40px;
-  width: var(--width-small);
+  width: 136px;
   border-radius: var(--border-radius);
   border: var(--input-border-width) solid var(--gray);
   cursor: pointer;

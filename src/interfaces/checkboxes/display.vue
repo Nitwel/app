@@ -12,8 +12,7 @@ export default {
     selection() {
       if (this.value == null) return [];
 
-      const selection =
-        this.type === "VARCHAR" ? this.value.split(",") : this.value;
+      const selection = this.type === "VARCHAR" ? this.value.split(",") : this.value;
 
       if (this.options.wrap) {
         selection.pop();

@@ -1,10 +1,6 @@
 <template>
   <div>
-    <i
-      class="material-icons readonly-toggle-icon"
-      :style="{ color: `var(--${colorChange})` }"
-      >{{ icon }}</i
-    >
+    <v-icon class="readonly-toggle-icon" :style="{ color: `var(--${colorChange})` }" :name="icon" />
     <span :style="{ color: `var(--${colorChange})` }">{{ textChange }}</span>
   </div>
 </template>

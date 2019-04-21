@@ -3,7 +3,7 @@
     <div v-if="isImage" class="image">
       <img id="image" :src="vUrl" @error="imgError = true" v-if="!imgError" />
       <div class="broken-image" v-if="imgError">
-        <i class="material-icons">broken_image</i>
+        <v-icon name="broken_image" />
       </div>
     </div>
 
@@ -49,7 +49,8 @@
       <!-- Default Toolbar -->
       <div v-if="!editMode" class="original">
         <a class="file-link" :href="url" target="_blank">
-          <i class="material-icons">link</i> {{ url }}
+          <v-icon name="link" />
+          {{ url }}
         </a>
         <button
           v-if="isImage && options.edit.includes('image_editor')"
@@ -58,7 +59,7 @@
           class="image-edit-start"
           @click="initImageEdit()"
         >
-          <i class="material-icons">crop_rotate</i>
+          <v-icon name="crop_rotate" />
         </button>
       </div>
 
@@ -66,42 +67,30 @@
       <ul v-if="editMode" class="image-edit">
         <li>
           <div class="image-aspect-ratio">
-            <i class="material-icons">image_aspect_ratio</i>
+            <v-icon name="image_aspect_ratio" />
             <span>{{ image.cropRatioOptions[image.cropRatio] }}</span>
-            <i class="material-icons">arrow_drop_down</i>
+            <v-icon name="arrow_drop_down" />
             <select v-model="image.cropRatio" title="Select aspect ratio">
-              <option
-                v-for="(option, value) in image.cropRatioOptions"
-                :key="value"
-                :value="value"
-              >
+              <option v-for="(option, value) in image.cropRatioOptions" :key="value" :value="value">
                 {{ option }}
               </option>
             </select>
           </div>
         </li>
         <li>
-          <button
-            type="button"
-            title="Discard changes"
-            @click="cancelImageEdit()"
-          >
-            <i class="material-icons">not_interested</i>
+          <button type="button" title="Discard changes" @click="cancelImageEdit()">
+            <v-icon name="not_interested" />
           </button>
           <button type="button" title="Save changes" @click="saveImage()">
-            <i class="material-icons">check_circle</i>
+            <v-icon name="check_circle" />
           </button>
         </li>
         <li>
           <button type="button" title="Flip horizontally" @click="flipImage()">
-            <i class="material-icons">flip</i>
+            <v-icon name="flip" />
           </button>
-          <button
-            type="button"
-            title="Rotate counter-clockwise"
-            @click="rotateImage()"
-          >
-            <i class="material-icons">rotate_90_degrees_ccw</i>
+          <button type="button" title="Rotate counter-clockwise" @click="rotateImage()">
+            <v-icon name="rotate_90_degrees_ccw" />
           </button>
         </li>
       </ul>

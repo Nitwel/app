@@ -10,6 +10,9 @@
   "translation": {
     "en-US": {
       "sort": "Sort"
+    },
+	"fr-FR": {
+      "sort": "Triage"
     }
   }
 }

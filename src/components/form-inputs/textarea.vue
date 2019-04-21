@@ -117,12 +117,12 @@ textarea {
 
   &:focus:not(:read-only) {
     color: var(--dark-gray);
-    border-color: var(--accent);
+    border-color: var(--dark-gray);
     outline: 0;
   }
 
   &:focus:not(:read-only) + i {
-    color: var(--accent);
+    color: var(--dark-gray);
   }
 
   &:-webkit-autofill {

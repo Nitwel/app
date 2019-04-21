@@ -51,6 +51,19 @@
       "desc-comment": "Add here a description",
       "hr-name": "HR",
       "hr-comment": "Display a horizontal rule?"
+    },
+	"fr-FR": {
+      "divider": "Intercalaire",
+      "style-name": "Style d'intercalaire",
+      "style-comment": "Change le style de l'intercalaire",
+      "weight-name": "Epaisseur de la ligne",
+      "weight-comment": "Change l'épaisseur de la ligne",
+      "input-name": "Texte de l'intercalaire",
+      "input-comment": "Saisie du texte de l'intercalaire",
+      "desc-name": "Description de l'intercalaire",
+      "desc-comment": "Ajoute une description de l'intercalaire",
+      "hr-name": "Règle horizontale",
+      "hr-comment": "Affiche ou non un élément de rupture thématique HTML"
     }
   }
 }

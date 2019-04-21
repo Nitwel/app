@@ -56,8 +56,7 @@ export default {
   collections_and_fields: "Collecties & Velden",
   collection_updated: "{collection} Collectie Geüpdatet",
   collection_removed: "{collection} Collectie verwijderd",
-  collection_names_cannot_be_changed:
-    "Collectie namen kunnen niet gewijzigd worden.",
+  collection_names_cannot_be_changed: "Collectie namen kunnen niet gewijzigd worden.",
   collections: "Collecties",
   collection_count: "Geen Collecties | Één Collectie | {count} Collecties",
   "collections-directus_files": "Bestanden",
@@ -85,8 +84,7 @@ export default {
   db_datatype: "{db} Datatype",
   editing_my_profile: "Mijn profiel wijzigen",
   fieldtypes: {
-    alias:
-      "Velden die geen informatie opslaan en geen eigen kolom hebben in de database",
+    alias: "Velden die geen informatie opslaan en geen eigen kolom hebben in de database",
     array: "Gebruik een JSON array in de data",
     datetime: "Een datum en tijd in ISO, bijv.: 2018-09-19T14:00:43.381Z",
     date: "Datum, bijv.: 2018-09-19",
@@ -102,8 +100,7 @@ export default {
     sort: "Gebruikt om items van een volgorde te voorzien",
     status: "Gebruikt om de workflow te beheren",
     string: "Tekst, nummers, spaties of symbolen.",
-    translation:
-      "Vertaling. Dit veld slaat de one-to-many relatie op met de vertalingen collectie",
+    translation: "Vertaling. Dit veld slaat de one-to-many relatie op met de vertalingen collectie",
     uuid: "Universally Unique Identifier",
     datetime_created: "Datum en tijd wanneer het item werd aangemaakt.",
     datetime_updated: "Datum en tijd wanneer het item werd geüpdatet.",
@@ -121,10 +118,8 @@ export default {
       LONGTEXT: "Tekst met een maximale lengte van 4.294.967.295 karakters.",
 
       BOOLEAN: "Goed of fout, aan of uit, true of false.",
-      TINYINT:
-        "Een nummer. 'signed' lengte is -128 tot 127, unsigned lengte is 255.",
-      SMALLINT:
-        "Een nummer. 'signed' lengte is -32.768 tot 32.767. unsigned lengte is 65.535.",
+      TINYINT: "Een nummer. 'signed' lengte is -128 tot 127, unsigned lengte is 255.",
+      SMALLINT: "Een nummer. 'signed' lengte is -32.768 tot 32.767. unsigned lengte is 65.535.",
       MEDIUMINT:
         "Een nummer. 'signed' lengte is -8.388.608 tot 8.388.607. unsigned lengte is 16.777.215.",
       INT:
@@ -137,8 +132,7 @@ export default {
       DOUBLE: "Een nummer met decimalen.",
 
       DATE: "Een datum. Accepteert `1000-01-01` tot `9999-12-31`.",
-      DATETIME:
-        "Datum en tijd. Accepteert `1000-01-01 00:00:00` tot `9999-12-31 23:59:59`.",
+      DATETIME: "Datum en tijd. Accepteert `1000-01-01 00:00:00` tot `9999-12-31 23:59:59`.",
       TIMESTAMP:
         "Datum en tijd. Accepteert `1970-01-01 00:00:01` UTC tot `2038-01-19 03:14:07` UTC.",
       TIME: "Een tijd. Accepteert `-838:59:59` to `838:59:59`.",
@@ -169,8 +163,7 @@ export default {
   dialog_beginning: "Start van het dialoog scherm.",
   discard_changes: "Wijzigingen ongedaan maken",
   display_name: "Getoonde naam",
-  drop_files:
-    "Je kunt geen bestanden plaatsen | Sleep bestand hier... | Sleep bestanden hier...",
+  drop_files: "Je kunt geen bestanden plaatsen | Sleep bestand hier... | Sleep bestanden hier...",
   dont_show: "Verberg",
   editing: "Item aan het wijzigen in {collection}",
   editing_item: "Item aan het wijzigen",
@@ -206,6 +199,7 @@ export default {
   field_created: "{field} Veld Gecreëerd",
   field_updated: "{field} Veld Geüpdatet",
   field_removed: "{field} Veld Verwijderd",
+  field_already_exists: "{field} Bestaat al",
   fields: "Velden",
   fields_are_saved_instantly: "Wijzigingen worden meteen opgeslagen",
   file: "Bestand",
@@ -232,26 +226,21 @@ export default {
   interface_settings:
     "Elke interface kan aangepast worden naar wens. Hieronder vind je alle opties die beschikbaar zijn voor deze interface",
   install: "Installeer",
-  install_copy:
-    "Deze API is not niet geïnstalleerd. Wil je hem nu installeren?",
+  install_copy: "Deze API is not niet geïnstalleerd. Wil je hem nu installeren?",
   is_empty: "Is leeg",
   is_not_null: "Is niet NULL",
   is_null: "Is NULL",
   item_count: "Geen items | Één item | {count} items",
   event_count: "Geen Events | Één Event | {count} Events",
   role_count: "Geen rollen | Één rol | {count} rollen",
-  item_count_filter:
-    "Geen gefilterde items | Één gefilterd item | {count} gefilterde items",
+  item_count_filter: "Geen gefilterde items | Één gefilterd item | {count} gefilterde items",
   item_deleted: "Item verwijderd",
   item_saved: "Item opgeslagen | {count} items opgeslagen",
   junction_collection: "Verbindingscollectie",
-  cant_disable_primary:
-    "Je kunt primary key niet ongedaan maken op een bestaand veld.",
-  extension_error:
-    "Er was een probleem tijdens het laden van de {ext} extensie.",
+  cant_disable_primary: "Je kunt primary key niet ongedaan maken op een bestaand veld.",
+  extension_error: "Er was een probleem tijdens het laden van de {ext} extensie.",
   extensions_missing: "Geen extensies gevonden",
-  extensions_missing_copy:
-    "Dubbelcheck of de systeem extensies zijn geïnstalleerd",
+  extensions_missing_copy: "Dubbelcheck of de systeem extensies zijn geïnstalleerd",
   latency: "Vertraging",
   learn_more: "Meer info",
   leave_comment: "Plaats een reactie...",
@@ -276,13 +265,11 @@ export default {
   not_contains: "Bevat niet",
   note: "Notitie",
   note_note: "Een interne beschrijving...",
-  note_hidden:
-    "[Meer info](https://docs.directus.io/guides/collections.html#hidden)",
+  note_hidden: "[Meer info](https://docs.directus.io/guides/collections.html#hidden)",
   note_icon: "The icon shown in the App's navigation sidebar",
   note_managed:
     "[Meer info](https://docs.directus.io/guides/collections.html#managing-collections)",
-  note_single:
-    "[Meer info](https://docs.directus.io/guides/collections.html#single)",
+  note_single: "[Meer info](https://docs.directus.io/guides/collections.html#single)",
   no_results: "Geen resultaten",
   no_results_body: "Er zijn geen items die voldoen aan de huidige filters",
   no_collections: "Geen collecties",
@@ -290,12 +277,10 @@ export default {
   no_fields: "Geen velden",
   no_fields_body: "Het ziet er naar uit dat deze collectie geen velden bevat.",
   no_files: "Geen bestanden",
-  no_files_body:
-    "Het ziet er naar uit dat er nog geen bestanden zijn geüploadet.",
+  no_files_body: "Het ziet er naar uit dat er nog geen bestanden zijn geüploadet.",
   numeric: "Nummer",
   page_not_found: "Pagina niet gevonden",
-  page_not_found_body:
-    "Deze pagina of item bestaat niet of is recentelijk verwijderd.",
+  page_not_found_body: "Deze pagina of item bestaat niet of is recentelijk verwijderd.",
   permissions: "Permissies",
   name_bookmark: "Hoe wil je deze bladwijzer noemen?",
   next: "Volgende",
@@ -321,8 +306,7 @@ export default {
   password: "Wachtwoord",
   password_reset_sent: "Wachtwoord reset email verstuurd naar {email}",
   permissions_no_collections: "Dit project heeft nog geen collecties.",
-  permissions_admin:
-    "Administratoren hebben volledige toegang tot het systeem.",
+  permissions_admin: "Administratoren hebben volledige toegang tot het systeem.",
   permission_states: {
     none: "Geen",
     mine: "Van mij",
@@ -352,8 +336,7 @@ export default {
   report_issue: "Rapporteer probleem",
   request_feature: "Vraag nieuwe feature aan",
   regex: "RegEx",
-  relation_setup:
-    "Dit is een relationeel veld. We moeten de relatie configureren.",
+  relation_setup: "Dit is een relationeel veld. We moeten de relatie configureren.",
   relation_setup_copy:
     "Er zijn verschillende types relaties. Deze interface gebruikt een {relation} relatie.",
   related_entries: "Heeft gerelateerde entries",
@@ -365,8 +348,7 @@ export default {
   reset_preferences: "Reset alle weergaveopties",
   reset_password: "Reset wachtwoord",
   revert: "Terugzetten",
-  revert_copy:
-    "Weet je zeker dat je dit item wilt terugzetten naar hoe het was op {date}?",
+  revert_copy: "Weet je zeker dat je dit item wilt terugzetten naar hoe het was op {date}?",
   roles: "Gebruikersrollen",
   role_settings: "Rol Instellingen",
   save: "Sla op",
@@ -394,8 +376,7 @@ export default {
   server_error: "Server Error",
   server_error_copy: "Iets is mis met de project server of database",
   server_trouble: "Server Problemen",
-  server_trouble_copy:
-    "Probeer het later nog eens of neem contact op met je systeembeheerder.",
+  server_trouble_copy: "Probeer het later nog eens of neem contact op met je systeembeheerder.",
   advanced_options: "Geavanceerde opties",
   show_directus_collections: "Toon Directus systeem collecties",
   something_went_wrong: "Iets ging mis.",
@@ -405,8 +386,7 @@ export default {
   signing_in: "Aan het inloggen",
   sign_out: "Log out",
   sign_out_confirm: "Weet je zeker dat je uit wilt loggen?",
-  sign_out_confirm_edits:
-    "Weet je zeker dat je uit wilt loggen? Alle wijzigingen gaan verloren.",
+  sign_out_confirm_edits: "Weet je zeker dat je uit wilt loggen? Alle wijzigingen gaan verloren.",
   text: "Tekst",
   this_collection: "Deze collectie",
   to: "Aan",
@@ -416,8 +396,7 @@ export default {
   update: "Update",
   update_confirm: "Weet je zeker dat je {count} items wilt wijzigen?",
   unique: "Uniek",
-  user_edit_warning:
-    "{first_name} {last_name} is dit item ook aan het wijzigen.",
+  user_edit_warning: "{first_name} {last_name} is dit item ook aan het wijzigen.",
   value: "Waarde",
   values: "Waardes",
   validation: "Validatie",

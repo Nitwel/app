@@ -5,7 +5,7 @@
     :style="style"
     v-tooltip="options.simpleBadge ? currentStatus.name : false"
   >
-    {{ options.simpleBadge ? null : $t(currentStatus.name) }}
+    {{ options.simpleBadge ? null : currentStatus.name }}
   </div>
 </template>
 

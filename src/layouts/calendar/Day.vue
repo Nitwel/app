@@ -81,8 +81,8 @@ export default {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 2px solid var(--accent);
-  color: var(--accent);
+  border: 2px solid var(--darkest-gray);
+  color: var(--darkest-gray);
   line-height: 0;
 }
 

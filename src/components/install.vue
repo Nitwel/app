@@ -24,21 +24,11 @@
         </label>
         <label>
           {{ $t("project_key") }}
-          <v-input
-            class="input"
-            id="environment"
-            disabled
-            value="Default ( _ )"
-          />
+          <v-input class="input" id="environment" disabled value="Default ( _ )" />
         </label>
         <label>
           {{ $t("admin_email") }}
-          <v-input
-            class="input"
-            id="admin-email"
-            type="email"
-            v-model="values.user_email"
-          />
+          <v-input class="input" id="admin-email" type="email" v-model="values.user_email" />
         </label>
         <label>
           {{ $t("admin_password") }}
@@ -72,12 +62,7 @@
         </label>
         <label>
           {{ $t("db_password") }}
-          <v-input
-            type="password"
-            class="input"
-            id="db_password"
-            v-model="values.db_password"
-          />
+          <v-input type="password" class="input" id="db_password" v-model="values.db_password" />
         </label>
         <label>
           {{ $t("db_name") }}
@@ -85,12 +70,7 @@
         </label>
         <label>
           {{ $t("db_type") }}
-          <v-input
-            class="input"
-            disabled
-            id="db_type"
-            value="MySQL & Variants"
-          />
+          <v-input class="input" disabled id="db_type" value="MySQL & Variants" />
         </label>
         <input type="submit" class="hidden" />
       </form>
@@ -129,9 +109,7 @@ export default {
       const { isEmpty } = this.$lodash;
       const { project_name, user_email, user_password } = this.values;
 
-      return (
-        isEmpty(project_name) || isEmpty(user_email) || isEmpty(user_password)
-      );
+      return isEmpty(project_name) || isEmpty(user_email) || isEmpty(user_password);
     },
     schemaDisabled() {
       const { isEmpty } = this.$lodash;
@@ -148,14 +126,12 @@ export default {
     buttons() {
       let disabled = false;
 
-      if (this.activeTab === "project" && this.databaseDisabled)
-        disabled = true;
+      if (this.activeTab === "project" && this.databaseDisabled) disabled = true;
 
       return {
         next: {
           disabled,
-          text:
-            this.activeTab === "database" ? this.$t("save") : this.$t("next"),
+          text: this.activeTab === "database" ? this.$t("save") : this.$t("next"),
           loading: this.saving
         }
       };
@@ -251,13 +227,13 @@ export default {
       position: absolute;
       height: 3px;
       bottom: -2px;
-      background-color: var(--accent);
+      background-color: var(--darkest-gray);
       transform: scaleY(0);
       transition: transform var(--fast) var(--transition-out);
     }
 
     &.active {
-      color: var(--accent);
+      color: var(--darkest-gray);
 
       &::after {
         transform: scaleY(1);

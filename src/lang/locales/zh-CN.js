@@ -79,8 +79,7 @@ export default {
   update_field: "更新字段",
   create_collection: "创建集合",
   database_connection: "数据库连接",
-  database_connection_copy:
-    "接下来，我们需要知道如何连接到管理此项目的数据库。",
+  database_connection_copy: "接下来，我们需要知道如何连接到管理此项目的数据库。",
   datatype: "数据类型",
   db_datatype: "{db}数据类型",
   editing_my_profile: "编辑我的个人资料",
@@ -111,8 +110,7 @@ export default {
   datatypes: {
     mysql: {
       CHAR: "固定长度的非二进制字符串，右填充空格。长度可以是0到255个字符。",
-      VARCHAR:
-        "一个可变长度的非二进制字符串。长度可以是0到65,535个字符(MySQL 5.0.3+)。",
+      VARCHAR: "一个可变长度的非二进制字符串。长度可以是0到65,535个字符(MySQL 5.0.3+)。",
       TINYTEXT: "一个最大长度255个字符的字符串。",
       TEXT: "最大长度为65535个字符的字符串。",
       MEDIUMTEXT: "最大长度为16,777,215个字符的字符串。",
@@ -120,8 +118,7 @@ export default {
 
       BOOLEAN: "是或否。分别保存为1或0",
       TINYINT: "一个整数。若带符号(允许负值)长度为-128到127，否则最大长度为255",
-      SMALLINT:
-        "一个整数。若带符号时(允许负值)长度为-32,768到32,767，否则最大值为65,535",
+      SMALLINT: "一个整数。若带符号时(允许负值)长度为-32,768到32,767，否则最大值为65,535",
       MEDIUMINT:
         "一个整数。若带符号时(允许负值)长度为-8,388,608到8,388,607，否则最大值为16,777,215",
       INT:
@@ -129,16 +126,13 @@ export default {
       BIGINT:
         "一个整数。若带符号时(允许负值)长度为-9,223,372,036,854,775,808到9,223,372,036,854,775,807，否则最大值为18,446,74,073,709,551,615",
 
-      DECIMAL:
-        "一个精确的数字(例如:货币)，长度为1至65位(L)，小数为0至30位(D)。长度格式:`L,D`",
+      DECIMAL: "一个精确的数字(例如:货币)，长度为1至65位(L)，小数为0至30位(D)。长度格式:`L,D`",
       FLOAT: "一个估算的二进制数，4字节，带一个浮点小数点。",
       DOUBLE: "一个估算的二进制数，8字节，带一个浮点小数点。",
 
       DATE: "一个日期，`1000-01-01`到'9999-12-31`。",
-      DATETIME:
-        "一个日期和时间。允许 `1000-01-01 00:00:00` 至 `9999-12-31 23:59:59`。",
-      TIMESTAMP:
-        "日期和时间。允许 `1970-01-01 00:00:01` UTC 至 `2038-01-19 03:14:07` UTC.",
+      DATETIME: "一个日期和时间。允许 `1000-01-01 00:00:00` 至 `9999-12-31 23:59:59`。",
+      TIMESTAMP: "日期和时间。允许 `1970-01-01 00:00:01` UTC 至 `2038-01-19 03:14:07` UTC.",
       TIME: "一个时间。允许 `-838:59:59` 至 `838:59:59`.",
       YEAR: "一年。允许 `1901` 至 `2155` 或 `0000`"
     }
@@ -164,8 +158,7 @@ export default {
   dialog_beginning: "对话框窗口开始。",
   discard_changes: "不保存修改并离开此页",
   display_name: "显示名称",
-  drop_files:
-    "不能拖放多个文件 | 拖放单个文件到此处... | 拖放多个文件到此处...",
+  drop_files: "不能拖放多个文件 | 拖放单个文件到此处... | 拖放多个文件到此处...",
   dont_show: "不显示",
   editing: "编辑数据: {collection}",
   editing_item: "正在编辑数据",
@@ -201,6 +194,7 @@ export default {
   field_created: "{field} 字段已创建",
   field_updated: "{field} 字段已更新",
   field_removed: "{field} 字段已移除",
+  field_already_exists: "{field} 已经存在",
   fields: "字段",
   fields_are_saved_instantly: "立即保存修改",
   file: "文件",
@@ -216,14 +210,12 @@ export default {
   host: "主机",
   in_list: "其中之一",
   initial_schema: "选择一个初始化模式",
-  initial_schema_copy:
-    "从现有的数据库架构中选择，或者重新开始。你可以在以后扩展和调整它。",
+  initial_schema_copy: "从现有的数据库架构中选择，或者重新开始。你可以在以后扩展和调整它。",
   interface: "界面接口",
   interface_count: "暂未创建界面接口 | 一个界面接口 | {count} 个项界面接口",
   interfaces: "界面接口",
   info: "更多信息",
-  intelligent_defaults:
-    "高级选项可让您配置数据在数据库中的存储方式，并调整其他应用程序设置。",
+  intelligent_defaults: "高级选项可让您配置数据在数据库中的存储方式，并调整其他应用程序设置。",
   interface_settings:
     "每个界面接口都可以完美地满足你的需求。以下是该接口的可用选项，但只有一些是必需的。",
   install: "安装",
@@ -258,8 +250,7 @@ export default {
   o2m: "一对多（O2M）",
   name: "名称",
   name_field: "让我们为这个{field}字段命名并为用户添加一个有用的注释。",
-  navigate_changes:
-    "你确定要离开当前页面吗？如果您离开此页面，您所做的更改将会丢失。",
+  navigate_changes: "你确定要离开当前页面吗？如果您离开此页面，您所做的更改将会丢失。",
   new: "新建",
   new_file: "上传新文件",
   no_related_entries: "没有相关条目",
@@ -267,13 +258,11 @@ export default {
   not_contains: "不包含",
   note: "注解",
   note_note: "note_note：“内部描述...",
-  note_hidden:
-    "[了解更多](https://docs.directus.io/app/admin/collections.html#hidden)",
+  note_hidden: "[了解更多](https://docs.directus.io/app/admin/collections.html#hidden)",
   note_icon: "应用程序导航侧栏中显示的图标",
   note_managed:
     "[了解更多](https://docs.directus.io/app/admin/collections.html#managing-collections)",
-  note_single:
-    "[了解更多](https://docs.directus.io/app/admin/collections.html#single)",
+  note_single: "[了解更多](https://docs.directus.io/app/admin/collections.html#single)",
   no_results: "找不到查询结果",
   no_results_body: "当前筛选项未匹配到相关的内容，请更改筛选项后重试。",
   no_collections: "没有集合配置",
@@ -297,8 +286,7 @@ export default {
   max_size: "最大限制: {size}",
   max_one_primary_key: "每个集合只能有一个主键字段",
   dont_manage: "不要管理",
-  dont_manage_copy:
-    "即将永久删除 {collection}集合的权限、首选项和设置! 你确定吗?",
+  dont_manage_copy: "即将永久删除 {collection}集合的权限、首选项和设置! 你确定吗?",
   more_options: "更多选项",
   mixed: "混合",
   my_profile: "我的资料",
@@ -331,8 +319,7 @@ export default {
   project: "项目",
   project_name: "项目名称",
   project_info: "项目信息",
-  project_info_copy:
-    "以下是关于您的项目的一些问题，包括您的第一位管理员的凭据。",
+  project_info_copy: "以下是关于您的项目的一些问题，包括您的第一位管理员的凭据。",
   read: "查看",
   readable_fields: "可查看的字段",
   readable_fields_copy: "选择用户可以查看的字段",
@@ -342,8 +329,7 @@ export default {
   request_feature: "功能建议",
   regex: "正则表达式",
   relation_setup: "由于这是一个关系字段，我们需要映射相关字段。",
-  relation_setup_copy:
-    "存在多个不同的类型关系数据，此界面接口使用的关系名为 {relationship}。",
+  relation_setup_copy: "存在多个不同的类型关系数据，此界面接口使用的关系名为 {relationship}。",
   related_entries: "有相关条目",
   related_collection: "相关集合",
   remove: "移除",
@@ -404,8 +390,7 @@ export default {
   update: "更新",
   update_confirm: "您确定要更新 {count} 个项目吗?",
   unique: "唯一",
-  user_edit_warning:
-    "{first_name} {last_name}也正在编辑此项目。请与他们协调，以免丢失您的更改。",
+  user_edit_warning: "{first_name} {last_name}也正在编辑此项目。请与他们协调，以免丢失您的更改。",
   value: "值",
   values: "值",
   validation: "验证",

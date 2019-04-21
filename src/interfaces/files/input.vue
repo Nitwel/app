@@ -25,10 +25,14 @@
       ></v-card>
     </div>
     <v-button type="button" :disabled="readonly" @click="newFile = true">
-      <i class="material-icons">add</i>{{ $t("new_file") }} </v-button
-    ><!--
-    --><v-button type="button" :disabled="readonly" @click="existing = true">
-      <i class="material-icons">playlist_add</i>{{ $t("existing") }}
+      <v-icon name="add" />
+      {{ $t("new_file") }}
+    </v-button>
+    <!--
+    -->
+    <v-button type="button" :disabled="readonly" @click="existing = true">
+      <v-icon name="playlist_add" />
+      {{ $t("existing") }}
     </v-button>
 
     <portal to="modal" v-if="newFile">
@@ -43,11 +47,7 @@
         @done="newFile = false"
       >
         <div class="body">
-          <v-upload
-            @upload="saveUpload"
-            :multiple="true"
-            :accept="options.accept"
-          ></v-upload>
+          <v-upload @upload="saveUpload" :multiple="true" :accept="options.accept"></v-upload>
         </div>
       </v-modal>
     </portal>
@@ -171,21 +171,10 @@ export default {
             id: file[this.relatedPrimaryKeyField.field],
             title: file.title,
             subtitle:
-              file.filename.split(".").pop() +
-              " • " +
-              this.$d(new Date(file.uploaded_on), "short"),
-            src:
-              file.type && file.type.startsWith("image")
-                ? file.data.thumbnails[0].url
-                : null,
-            icon:
-              file.type && !file.type.startsWith("image")
-                ? getIcon(file.type)
-                : null,
-            href:
-              file.type && file.type === "application/pdf"
-                ? file.data.full_url
-                : null
+              file.filename.split(".").pop() + " • " + this.$d(new Date(file.uploaded_on), "short"),
+            src: file.type && file.type.startsWith("image") ? file.data.thumbnails[0].url : null,
+            icon: file.type && !file.type.startsWith("image") ? getIcon(file.type) : null,
+            href: file.type && file.type === "application/pdf" ? file.data.full_url : null
           };
         });
     },
@@ -211,9 +200,7 @@ export default {
     selection() {
       if (!this.value) return [];
 
-      return this.value
-        .filter(jr => !jr.$delete)
-        .map(jr => jr[this.junctionFieldName]);
+      return this.value.filter(jr => !jr.$delete).map(jr => jr[this.junctionFieldName]);
     },
 
     viewOptions() {
@@ -238,11 +225,7 @@ export default {
     },
 
     filters() {
-      return [
-        ...this.options.filters,
-        ...this.fileTypeFilters,
-        ...this.filtersOverride
-      ];
+      return [...this.options.filters, ...this.fileTypeFilters, ...this.filtersOverride];
     },
 
     fileTypeFilters() {
@@ -289,18 +272,12 @@ export default {
     selectItems(newSelection) {
       // this.value is an array of the junction collection rows
       const currentValue = this.value || [];
-      const currentSelection = currentValue.map(
-        jr => jr[this.junctionFieldName]
-      );
+      const currentSelection = currentValue.map(jr => jr[this.junctionFieldName]);
 
       const relatedPrimaryKeyFieldName = this.relatedPrimaryKeyField.field;
 
-      const currentSelectionIDs = currentSelection.map(
-        file => file[relatedPrimaryKeyFieldName]
-      );
-      const newSelectionIDs = newSelection.map(
-        file => file[relatedPrimaryKeyFieldName]
-      );
+      const currentSelectionIDs = currentSelection.map(file => file[relatedPrimaryKeyFieldName]);
+      const newSelectionIDs = newSelection.map(file => file[relatedPrimaryKeyFieldName]);
 
       // We need to merge both the selections where the current selected files
       // that aren't selected anymore get the $delete flag. Files that are selected
@@ -311,9 +288,7 @@ export default {
 
       const junctionRowsForDeletedFiles = currentValue
         .filter(jr =>
-          deletedFileIDs.includes(
-            jr[this.junctionFieldName][relatedPrimaryKeyFieldName]
-          )
+          deletedFileIDs.includes(jr[this.junctionFieldName][relatedPrimaryKeyFieldName])
         )
         .map(jr => ({
           ...jr,

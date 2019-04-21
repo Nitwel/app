@@ -31,6 +31,13 @@
       "rows_comment": "The number of text rows available for the input before scrolling",
       "placeholder": "Placeholder",
       "placeholder_comment": "Enter placeholder text"
+    },
+	"fr-FR": {
+      "textarea": "Saisie de long texte",
+      "rows": "Lignes",
+      "rows_comment": "Le nombre de lignes de texte disponibles avant de proposer un ascenseur sur l'entrée",
+      "placeholder": "Paramètre fictif",
+      "placeholder_comment": "Texte statique qui est affiché avant la sélection d'une valeur"
     }
   }
 }

@@ -2,7 +2,7 @@
   <div v-if="value" class="gray style-3">
     <v-timeago
       v-if="options.showRelative"
-      :since="date"
+      :datetime="date"
       :auto-update="60"
       :locale="$i18n.locale"
       v-tooltip="displayValue"

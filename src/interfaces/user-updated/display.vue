@@ -9,9 +9,9 @@
       v-tooltip="options.display === 'avatar' ? displayValue : null"
       color="light-gray"
     ></v-avatar>
-    <span v-if="options.display !== 'avatar'" class="label"
-      ><div>{{ displayValue }}</div></span
-    >
+    <span v-if="options.display !== 'avatar'" class="label">
+      <div>{{ displayValue }}</div>
+    </span>
   </div>
 </template>
 
@@ -28,10 +28,7 @@ export default {
       return this.$store.state.users[this.value];
     },
     displayValue() {
-      return this.$helpers.micromustache.render(
-        this.options.template,
-        this.userInfo
-      );
+      return this.$helpers.micromustache.render(this.options.template, this.userInfo);
     },
     src() {
       if (!this.userInfo.avatar) return null;

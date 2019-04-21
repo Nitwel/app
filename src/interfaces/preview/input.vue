@@ -1,7 +1,7 @@
 <template>
   <v-button class="launch" :disabled="required && disabled" @click="preview">
     {{ $t("interfaces-preview-preview_item") }}
-    <i class="material-icons">launch</i>
+    <v-icon name="launch" />
   </v-button>
 </template>
 
@@ -24,9 +24,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.input {
-  max-width: var(--width-small);
-}
 .launch {
   margin-top: 10px;
   .material-icons {

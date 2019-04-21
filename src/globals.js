@@ -6,6 +6,7 @@ import Loader from "./components/loader.vue";
 import VAvatar from "./components/avatar.vue";
 import VCard from "./components/card.vue";
 import VDetails from "./components/details.vue";
+import VNotice from "./components/notice.vue";
 import VTable from "./components/table/table.vue";
 
 // Extensions
@@ -46,6 +47,8 @@ import VInfoSidebar from "./components/sidebars/info-sidebar.vue";
 import VError from "./components/error.vue";
 import VUpload from "./components/upload.vue";
 import VProgressRing from "./components/progress-ring.vue";
+
+import VIcon from "./components/icon.vue";
 
 // Extensions
 Vue.component("v-ext-page", VExtPage);
@@ -90,7 +93,9 @@ Vue.component("v-spinner", VSpinner);
 Vue.component("v-avatar", VAvatar);
 Vue.component("v-card", VCard);
 Vue.component("v-details", VDetails);
+Vue.component("v-notice", VNotice);
 Vue.component("v-table", VTable);
 
 Vue.component("v-upload", VUpload);
 Vue.component("v-progress-ring", VProgressRing);
+Vue.component("v-icon", VIcon);

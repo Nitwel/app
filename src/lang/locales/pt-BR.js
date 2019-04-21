@@ -33,8 +33,7 @@ export default {
   add_field_filter: "Adicionar filtro de campo",
   add_note: "Crie uma nota de ajuda para os usuários...",
   admin_settings: "Configurações do Administrador",
-  almost_done_options:
-    "Quase Pronto! Agora apenas revise as opções de interface abaixo.",
+  almost_done_options: "Quase Pronto! Agora apenas revise as opções de interface abaixo.",
   almost_done_copy:
     "Toda interface pode ser perfeitamente customizada para as suas necessidades. Abaixo se encontram as opções disponíveis para esse campo, mas apenas algumas são exigidas.",
   all: "Tudo",
@@ -56,15 +55,13 @@ export default {
   choose_project: "Escolher Projeto",
   choose_interface: "Escolha uma interface para gerenciar esses dados.",
   clear: "Limpar",
-  click_to_toggle_all_none:
-    "Clique para selecionar/deselecionar a coluna inteira",
+  click_to_toggle_all_none: "Clique para selecionar/deselecionar a coluna inteira",
   connection: "Conexão",
   collection: "Coleção",
   collections_and_fields: "Coleção & Campos",
   collection_updated: "{collection} Coleção Atualizada",
   collection_removed: "{collection} Coleção Removida",
-  collection_names_cannot_be_changed:
-    "Os nomes da coleção não podem ser editados no momento.",
+  collection_names_cannot_be_changed: "Os nomes da coleção não podem ser editados no momento.",
   collections: "Coleções",
   collection_count: "Nenhuma Coleção | Uma Coleção | {count} Coleções",
   "collections-directus_files": "Arquivos",
@@ -75,8 +72,7 @@ export default {
   coming_soon: "Em Breve",
   contains: "Contém",
   config_error: "Configuração Faltando",
-  config_error_copy:
-    "Certifique-se que você criou o arquivo de configuração da aplicação",
+  config_error_copy: "Certifique-se que você criou o arquivo de configuração da aplicação",
   collection_contains_items: "{collection} contém {count} itens",
   currently_selected: "Atualmente selecionado: {thing}",
   create: "Criar",
@@ -94,15 +90,13 @@ export default {
   db_datatype: "{db} Tipo de Dado",
   editing_my_profile: "Editando meu Perfil",
   fieldtypes: {
-    alias:
-      "Campos que não armazenam dados ou não pertencem a uma coluna no banco de dados",
+    alias: "Campos que não armazenam dados ou não pertencem a uma coluna no banco de dados",
     array: "Formato padrão do array de resposta da API",
     datetime: "Uma data e hora em formato ISO, ex.: 2018-09-19T14:00:43.381Z",
     date: "Data, ex.: 2018-09-19",
     time: "Hora, ex.: 14:09:22",
     file: "Chave estrangeira para directus_files.id",
-    group:
-      "Agrupa campos visualmente e salva campo resultante para directus_fields.group",
+    group: "Agrupa campos visualmente e salva campo resultante para directus_fields.group",
     integer: "Número inteiro",
     decimal: "Número que inclua um decimal",
     json: "Formato padrão JSON de resposta da API",
@@ -133,10 +127,8 @@ export default {
         "Uma string de tamanho variável não binária. Comprimento pode ser entre 0 e 65.535 caracteres (MySQL 5.0.3+).",
       TINYTEXT: "Uma string com no máximo 255 caracteres de comprimento.",
       TEXT: "Uma string com no máximo 65.535 caracteres de comprimento.",
-      MEDIUMTEXT:
-        "Uma string com no máximo 16.777.215 caracteres de comprimento.",
-      LONGTEXT:
-        "Uma stringo com no máximo 4.294.967.295 caracteres de comprimento.",
+      MEDIUMTEXT: "Uma string com no máximo 16.777.215 caracteres de comprimento.",
+      LONGTEXT: "Uma stringo com no máximo 4.294.967.295 caracteres de comprimento.",
 
       BOOLEAN: "Verdadeiro ou falso. É salvo como 1 ou 0 respectivamente.",
       TINYINT:
@@ -152,14 +144,11 @@ export default {
 
       DECIMAL:
         "Um número preciso (ex.: para moeda), com 1 a 65 dígitos de comprimento (L) e 0 a 30 dígitos decimais (D). Formato de comprimento: `L,D`",
-      FLOAT:
-        "Um número binário aproximado, 4 bytes com um ponto decimal flutuante.",
-      DOUBLE:
-        "Um número binário aproximado, 8 bytes com um ponto decimal flutuante.",
+      FLOAT: "Um número binário aproximado, 4 bytes com um ponto decimal flutuante.",
+      DOUBLE: "Um número binário aproximado, 8 bytes com um ponto decimal flutuante.",
 
       DATE: "Uma data. Permite datas entre `1000-01-01` e `9999-12-31`.",
-      DATETIME:
-        "Uma data e hora. Permite entre `1000-01-01 00:00:00` e `9999-12-31 23:59:59`.",
+      DATETIME: "Uma data e hora. Permite entre `1000-01-01 00:00:00` e `9999-12-31 23:59:59`.",
       TIMESTAMP:
         "Uma data e hora. Permite entre `1970-01-01 00:00:01` UTC e `2038-01-19 03:14:07` UTC.",
       TIME: "Uma hora. Permite entre `-838:59:59` e `838:59:59`.",
@@ -176,8 +165,7 @@ export default {
   db_update_failed: "Banco de Dados não pode ser atualizado.",
   default: "Padrão",
   delete: "Deletar",
-  delete_are_you_sure:
-    "Tem certeza que deseja deletar este item? Esta ação não pode ser mudada.",
+  delete_are_you_sure: "Tem certeza que deseja deletar este item? Esta ação não pode ser mudada.",
   delete_collection_are_you_sure:
     "Tem certeza que deseja deletar esta coleção? Esta ação não pode ser mudada.",
   delete_field_are_you_sure:
@@ -229,6 +217,7 @@ export default {
   field_created: "{field} Campo criado",
   field_updated: "{field} Campo Atualizado",
   field_removed: "{field} Campo Removido",
+  field_already_exists: "{field} Já existe",
   fields: "Campos",
   fields_are_saved_instantly: "Mudanças salvas instantaneamente",
   file: "Arquivo",
@@ -263,8 +252,7 @@ export default {
   item_count: "Sem Itens | Um Item | {count} Itens",
   event_count: "Sem Eventos | Um Evento | {count} Eventos",
   role_count: "Sem Funções | Uma Função | {count} Funções",
-  item_count_filter:
-    "Sem Itens filtrados | Um Item filtrado | {count} Itens filtrados",
+  item_count_filter: "Sem Itens filtrados | Um Item filtrado | {count} Itens filtrados",
   item_deleted: "Item Deletado",
   item_saved: "Item Salvo | {count} Itens Salvos",
   junction_collection: "Jução da coleção",
@@ -272,8 +260,7 @@ export default {
     "Você não pode desabilitar a chave primária em um campo existente. Em vez disso, remova este campo.",
   extension_error: "Houve um problema ao carregar a extensão {ext}.",
   extensions_missing: "Nenhuma extensão encontrada.",
-  extensions_missing_copy:
-    "Certifique-se de que você possui as extensões do sistema instaladas.",
+  extensions_missing_copy: "Certifique-se de que você possui as extensões do sistema instaladas.",
   latency: "Latência",
   learn_more: "Saiba Mais",
   leave_comment: "Deixe um comentário...",
@@ -289,10 +276,8 @@ export default {
   m2o: "Muitos-para-um (N para 1)",
   o2m: "Um-para-muitos (1 para N)",
   name: "Nome",
-  name_field:
-    "Vamos nomear esse campo {field}, e adicionar uma anotação para ajudar os usuários.",
-  navigate_changes:
-    "Tem certeza que deseja sair desta página? As mudanças feitas serão perdidas.",
+  name_field: "Vamos nomear esse campo {field}, e adicionar uma anotação para ajudar os usuários.",
+  navigate_changes: "Tem certeza que deseja sair desta página? As mudanças feitas serão perdidas.",
   new: "Novo",
   new_file: "Novo Arquivo",
   no_related_entries: "Não possui entradas relacionadas.",
@@ -300,21 +285,17 @@ export default {
   not_contains: "Não contém",
   note: "Nota",
   note_note: "Uma descrição interna...",
-  note_hidden:
-    "[Learn More](https://docs.directus.io/guides/collections.html#hidden)",
+  note_hidden: "[Learn More](https://docs.directus.io/guides/collections.html#hidden)",
   note_icon: "O ícone mostrado na barra lateral do App",
   note_managed:
     "[Learn More](https://docs.directus.io/guides/collections.html#managing-collections)",
-  note_single:
-    "[Learn More](https://docs.directus.io/guides/collections.html#single)",
+  note_single: "[Learn More](https://docs.directus.io/guides/collections.html#single)",
   no_results: "Sem resultados",
-  no_results_body:
-    "Os filtros atuais não correspondem à nenhum item de coleção",
+  no_results_body: "Os filtros atuais não correspondem à nenhum item de coleção",
   no_collections: "Nenhuma coleção registrada",
   no_collections_body: "Parece que não há coleções registradas ainda",
   no_fields: "Nenhum campo registrado",
-  no_fields_body:
-    "Parece que esta coleção ainda não possui campos registrados ainda",
+  no_fields_body: "Parece que esta coleção ainda não possui campos registrados ainda",
   no_files: "Nenhum arquivo",
   no_files_body: "Parece que não foi feito upload de nenhum arquivo ainda",
   numeric: "Numérico",
@@ -345,8 +326,7 @@ export default {
   password: "Senha",
   password_reset_sent: "E-mail para recuperar senha enviado para {email}",
   permissions_no_collections: "Esse projeto ainda não tem nenhuma coleção.",
-  permissions_admin:
-    "Admins tem acesso à todos os dados gerenciáveis do sistema por padrão.",
+  permissions_admin: "Admins tem acesso à todos os dados gerenciáveis do sistema por padrão.",
   permission_states: {
     none: "Nada",
     mine: "Apenas meus",
@@ -377,8 +357,7 @@ export default {
   report_issue: "Reportar problema",
   request_feature: "Pedir funcionalidade",
   regex: "RegEx",
-  relation_setup:
-    "Por ser uma campo relacionável, nós precisamos mapear os campos relacionados.",
+  relation_setup: "Por ser uma campo relacionável, nós precisamos mapear os campos relacionados.",
   relation_setup_copy:
     "Existem diferentes tipos de dados relacionáveis, essa interface usa um chamado {relation}.",
   related_entries: "Existem entradas relacionadas",
@@ -390,8 +369,7 @@ export default {
   reset_preferences: "Reverter todas as preferências de listagem",
   reset_password: "Recuperar senha",
   revert: "Reverter",
-  revert_copy:
-    "Tem certeza que deseja reverter esse item para como ele estava em {date}?",
+  revert_copy: "Tem certeza que deseja reverter esse item para como ele estava em {date}?",
   roles: "Funções de usuário",
   role_settings: "Configuração de funções",
   save: "Salvar",
@@ -422,11 +400,9 @@ export default {
   settings_saved: "Configurações Salvas",
   server_details: "Detalhes do servidor",
   server_error: "Erro no servidor",
-  server_error_copy:
-    "Algo está errado com essa instância do servidor ou banco de dados.",
+  server_error_copy: "Algo está errado com essa instância do servidor ou banco de dados.",
   server_trouble: "Problema no servidor",
-  server_trouble_copy:
-    "Tente mais tarde ou contate o administrador do sistema para ajuda.",
+  server_trouble_copy: "Tente mais tarde ou contate o administrador do sistema para ajuda.",
   advanced_options: "Opções avançadas",
   show_directus_collections: "Mostrar coleções do sistema Directus",
   something_went_wrong: "Algo está errado.",
@@ -441,8 +417,7 @@ export default {
   text: "Texto",
   this_collection: "Esta coleção",
   to: "Em",
-  unsaved_changes_copy:
-    "Você tem alterações não salvas! Tem certeza que deseja sair dessa página?",
+  unsaved_changes_copy: "Você tem alterações não salvas! Tem certeza que deseja sair dessa página?",
   user_directory: "Usuários",
   update: "Alterar",
   update_confirm: "Tem certeza que deseja alterar {count} itens?",

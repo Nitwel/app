@@ -56,6 +56,18 @@
       "wrap_comment": "Wrap the values with a pair of delimiters to allow strict searching for a single value",
       "format": "Browse Format",
       "format_comment": "The output format on the Browse Items page"
+    },
+	"fr-FR": {
+      "multiselect": "Sélection multiple",
+      "choices": "Choix",
+      "choices_comment": "Saisir des pairs de clefs et valeurs en JSON avec la valeur enregistrée et le texte affiché",
+      "placeholder": "Paramètre fictif",
+      "placeholder_comment": "Texte statique qui est affiché avant la sélection d'une valeur",
+      "option": "Option",
+      "wrap": "Encapsuler avec un délimiteur",
+      "wrap_comment": "Encapsuler les valeurs enregistrées avec une paire de délimiteurs afin de permettre une recherche stricte sur une valeur unitaire",
+      "format": "Format du parcours",
+      "format_comment": "Le format de sortie sur la page de recherche des éléments"
     }
   }
 }

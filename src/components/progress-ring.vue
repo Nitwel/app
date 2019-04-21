@@ -27,12 +27,12 @@
         :cy="radius"
       />
     </svg>
-    <i
+    <v-icon
       v-if="icon"
       class="material-icons"
       :style="{ fontSize: iconSize, color: `var(--${color})` }"
-      >{{ icon }}</i
-    >
+      :name="icon"
+    />
   </div>
 </template>
 

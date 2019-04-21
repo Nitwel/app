@@ -63,6 +63,24 @@
       "medium": "Medium",
       "large": "Large",
       "secured": "Value Secured"
+    },
+	"fr-FR": {
+      "hashed": "Hachage cryptographique",
+      "hide": "Cacher la valeur",
+      "hide_comment": "Afficher des points à la place des caractères saisis",
+      "placeholder": "Paramètre fictif",
+      "placeholder_comment": "Texte statique qui est affiché avant la sélection d'une valeur",
+      "show_hash": "Afficher la sortie hachée cryptographiquement",
+      "show_hash_comment": "Affichage de la valeur hachée cryptographiquement qui a été enregistrée",
+      "hashing_type": "Type de hachage cryptographique",
+      "hashing_type_comment": "Quelle méthode cryptographique doit être utilisée pour hacher la valeur",
+      "width": "Taille",
+      "width_comment": "Saisir la longueur de texte à utiliser pour cette entrée",
+      "auto": "Automatique",
+      "small": "Petit",
+      "medium": "Moyen",
+      "large": "Grand",
+      "secured": "Valeur sécurisée"
     }
   }
 }

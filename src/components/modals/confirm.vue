@@ -5,10 +5,12 @@
         {{ cancelText || $t("cancel") }}
       </button>
       <v-button :bg="color" class="confirm" @click="$emit('confirm')">
-        <template v-if="loading"
-          ><v-spinner :size="20" :line-size="2"
-        /></template>
-        <template v-else>{{ confirmText || $t("ok") }}</template>
+        <template v-if="loading">
+          <v-spinner :size="20" :line-size="2" />
+        </template>
+        <template v-else>
+          {{ confirmText || $t("ok") }}
+        </template>
       </v-button>
     </div>
   </v-modal-base>

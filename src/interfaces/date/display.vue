@@ -1,7 +1,7 @@
 <template>
   <v-timeago
     v-if="value && options.showRelative"
-    :since="date"
+    :datetime="date"
     :auto-update="86400"
     :locale="$i18n.locale"
     class="no-wrap"

@@ -5,8 +5,7 @@
       :config="configs"
       :value="value"
       @input="$emit('input', $event)"
-    >
-    </flat-pickr>
+    ></flat-pickr>
   </div>
 </template>
 

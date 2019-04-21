@@ -30,10 +30,7 @@ export default function formatSize(bytes = 0, decimal = true) {
   do {
     remainingBytes /= threshold;
     unitIndex += 1;
-  } while (
-    Math.abs(remainingBytes) >= threshold &&
-    unitIndex < units.length - 1
-  );
+  } while (Math.abs(remainingBytes) >= threshold && unitIndex < units.length - 1);
 
   return `${remainingBytes.toFixed(1)} ${units[unitIndex]}`;
 }

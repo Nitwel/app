@@ -11,11 +11,7 @@
   </div>
 
   <div class="settings-permissions" v-else>
-    <v-header
-      :breadcrumb="breadcrumb"
-      icon-link="/settings/roles"
-      icon-color="warning"
-    >
+    <v-header :breadcrumb="breadcrumb" icon-link="/settings/roles" icon-color="warning">
       <template slot="buttons">
         <v-header-button
           v-if="!isNew && !isSystem"
@@ -38,7 +34,9 @@
     </v-header>
 
     <label>{{ $t("permissions") }}</label>
-    <p v-if="isAdmin" class="admin-note">{{ $t("permissions_admin") }}</p>
+    <v-notice v-if="isAdmin" color="warning" class="admin-note">
+      {{ $t("permissions_admin") }}
+    </v-notice>
     <v-permissions
       v-else
       :loading="!(permissions && statuses)"
@@ -82,9 +80,9 @@ export default {
     if (!this.role) return;
 
     return {
-      title: `${this.$t("settings")} | ${this.$helpers.formatTitle(
-        this.role.name
-      )} ${this.$t("permissions")}`
+      title: `${this.$t("settings")} | ${this.$helpers.formatTitle(this.role.name)} ${this.$t(
+        "permissions"
+      )}`
     };
   },
   components: {
@@ -166,10 +164,7 @@ export default {
       ];
     },
     editing() {
-      return (
-        Object.keys(this.roleEdits).length > 0 ||
-        Object.keys(this.permissionEdits).length > 0
-      );
+      return Object.keys(this.roleEdits).length > 0 || Object.keys(this.permissionEdits).length > 0;
     },
     permissions() {
       if (!this.statuses) return null;
@@ -212,20 +207,14 @@ export default {
             status
           };
 
-          if (
-            this.savedPermissions[collection] &&
-            this.savedPermissions[collection][status]
-          ) {
+          if (this.savedPermissions[collection] && this.savedPermissions[collection][status]) {
             permissions[collection][status] = {
               ...permissions[collection][status],
               ...this.savedPermissions[collection][status]
             };
           }
 
-          if (
-            this.permissionEdits[collection] &&
-            this.permissionEdits[collection][status]
-          ) {
+          if (this.permissionEdits[collection] && this.permissionEdits[collection][status]) {
             permissions[collection][status] = {
               ...permissions[collection][status],
               ...this.permissionEdits[collection][status]
@@ -341,8 +330,7 @@ export default {
       return this.$api.updateRole(this.role.id, this.roleEdits);
     },
     savePermissions() {
-      if (Object.keys(this.permissionEdits).length === 0)
-        return Promise.resolve();
+      if (Object.keys(this.permissionEdits).length === 0) return Promise.resolve();
 
       // We have to split up all the edits in updates and to-be-created items
       // because they need to be send to the API with a different HTTP Method
@@ -404,9 +392,7 @@ export default {
           }
 
           const id =
-            (this.savedPermissions[collection] &&
-              this.savedPermissions[collection].id) ||
-            null;
+            (this.savedPermissions[collection] && this.savedPermissions[collection].id) || null;
 
           if (id) {
             update.push({
@@ -424,12 +410,8 @@ export default {
       });
 
       return Promise.all([
-        create.length > 0
-          ? this.$api.createPermissions(create)
-          : Promise.resolve(),
-        update.length > 0
-          ? this.$api.updatePermissions(update)
-          : Promise.resolve()
+        create.length > 0 ? this.$api.createPermissions(create) : Promise.resolve(),
+        update.length > 0 ? this.$api.updatePermissions(update) : Promise.resolve()
       ]);
     },
     remove() {
@@ -497,9 +479,7 @@ export default {
 
           this.statuses = this.$lodash.keyBy(
             fields
-              .filter(
-                field => field.type && field.type.toLowerCase() === "status"
-              )
+              .filter(field => field.type && field.type.toLowerCase() === "status")
               .map(field => ({
                 mapping: field.options.status_mapping,
                 collection: field.collection
@@ -578,10 +558,6 @@ h2 {
 }
 
 .admin-note {
-  color: var(--warning);
-  font-size: 1.2rem;
-  line-height: 1.1;
-  font-weight: 400;
   margin-bottom: 40px;
 }
 </style>

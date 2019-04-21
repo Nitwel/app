@@ -7,7 +7,8 @@
       @change="updateValue($event.target.checked)"
     />
     <label for="icon-toggle" :style="{ color: `var(--${colorChange})` }">
-      <i class="material-icons">{{ icon }}</i> <span>{{ textChange }}</span>
+      <v-icon :name="icon" />
+      <span>{{ textChange }}</span>
     </label>
   </div>
 </template>

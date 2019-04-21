@@ -23,12 +23,7 @@
 
     <p>Prompt entered text: {{ promptText }}</p>
 
-    <v-alert
-      v-if="alert"
-      :message="title"
-      :confirmText="confirmText"
-      @confirm="alert = false"
-    />
+    <v-alert v-if="alert" :message="title" :confirmText="confirmText" @confirm="alert = false" />
     <v-confirm
       v-if="confirm"
       :message="title"

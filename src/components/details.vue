@@ -14,7 +14,7 @@ export default {
       default: null
     },
     open: {
-      type: Boolean,
+      type: [Boolean, Number],
       default: false
     },
     type: {

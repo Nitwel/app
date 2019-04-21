@@ -12,10 +12,7 @@ export function discardChanges({ commit }) {
   commit(DISCARD_CHANGES);
 }
 
-export function startEditing(
-  { commit },
-  { collection, primaryKey, savedValues }
-) {
+export function startEditing({ commit }, { collection, primaryKey, savedValues }) {
   commit(START_EDITING, { collection, primaryKey, savedValues });
 }
 
@@ -39,10 +36,7 @@ export function save({ commit, state, rootState }, overrides) {
     ...overrides
   };
 
-  if (
-    info.collection === "directus_users" &&
-    info.primaryKey == rootState.currentUser.id
-  ) {
+  if (info.collection === "directus_users" && info.primaryKey == rootState.currentUser.id) {
     commit(UPDATE_CURRENT_USER, info.values);
   }
 
@@ -54,12 +48,10 @@ export function save({ commit, state, rootState }, overrides) {
   }
 
   if (info.collection.startsWith("directus_")) {
-    return api
-      .updateItem(info.collection, info.primaryKey, info.values)
-      .then(res => {
-        commit(ITEM_CREATED);
-        return res;
-      });
+    return api.updateItem(info.collection, info.primaryKey, info.values).then(res => {
+      commit(ITEM_CREATED);
+      return res;
+    });
   }
 
   return api

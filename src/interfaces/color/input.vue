@@ -1,11 +1,6 @@
 <template>
   <div class="interface-color">
-    <div
-      class="input"
-      v-if="
-        !options.paletteOnly && options.input === 'hex' && readonly === false
-      "
-    >
+    <div class="input" v-if="!options.paletteOnly && options.input === 'hex' && readonly === false">
       <v-input
         v-if="options.allowAlpha"
         type="text"
@@ -27,9 +22,7 @@
     </div>
     <div
       class="sliders"
-      v-else-if="
-        !options.paletteOnly && options.input === 'rgb' && readonly === false
-      "
+      v-else-if="!options.paletteOnly && options.input === 'rgb' && readonly === false"
     >
       <template v-for="(label, idx) in rgbLabels">
         <label
@@ -40,13 +33,11 @@
               rawValue[idx] === 0 ||
               (options.allowAlpha && rawValue[idx] === undefined)
           "
-          >{{ label }}</label
         >
+          {{ label }}
+        </label>
         <v-slider
-          v-if="
-            (rawValue[idx] && label !== 'A') ||
-              (rawValue[idx] === 0 && label !== 'A')
-          "
+          v-if="(rawValue[idx] && label !== 'A') || (rawValue[idx] === 0 && label !== 'A')"
           :key="idx"
           :min="0"
           :max="256"
@@ -58,10 +49,9 @@
           :key="'hidden-model-fix' + idx"
           v-if="options.allowAlpha && label === 'A'"
           style="display: none; visibility: hidden; opacity: 0"
-          >{{
-            rawValue[idx] === undefined ? (rawValue[idx] = 1) : rawValue[idx]
-          }}</span
         >
+          {{ rawValue[idx] === undefined ? (rawValue[idx] = 1) : rawValue[idx] }}
+        </span>
         <v-slider
           v-if="
             options.allowAlpha && label === 'A' && rawValue[idx] === undefined
@@ -81,9 +71,7 @@
     </div>
     <div
       class="sliders"
-      v-else-if="
-        !options.paletteOnly && options.input === 'hsl' && readonly === false
-      "
+      v-else-if="!options.paletteOnly && options.input === 'hsl' && readonly === false"
     >
       <template v-for="(label, idx) in hslLabels">
         <label
@@ -94,13 +82,11 @@
               rawValue[idx] === 0 ||
               (options.allowAlpha && rawValue[idx] === undefined)
           "
-          >{{ label }}</label
         >
+          {{ label }}
+        </label>
         <v-slider
-          v-if="
-            (rawValue[idx] && label !== 'A') ||
-              (rawValue[idx] === 0 && label !== 'A')
-          "
+          v-if="(rawValue[idx] && label !== 'A') || (rawValue[idx] === 0 && label !== 'A')"
           :key="idx"
           :min="0"
           :max="idx < 1 ? 100 : 360"
@@ -112,10 +98,9 @@
           :key="'hidden-model-fix' + idx"
           v-if="options.allowAlpha && label === 'A'"
           style="display: none; visibility: hidden; opacity: 0"
-          >{{
-            rawValue[idx] === undefined ? (rawValue[idx] = 1) : rawValue[idx]
-          }}</span
         >
+          {{ rawValue[idx] === undefined ? (rawValue[idx] = 1) : rawValue[idx] }}
+        </span>
         <v-slider
           v-if="options.allowAlpha && label === 'A'"
           :key="idx"
@@ -131,9 +116,7 @@
     </div>
     <div
       class="sliders"
-      v-else-if="
-        !options.paletteOnly && options.input === 'cmyk' && readonly === false
-      "
+      v-else-if="!options.paletteOnly && options.input === 'cmyk' && readonly === false"
     >
       <template v-for="(label, idx) in cmykLabels">
         <label
@@ -144,13 +127,11 @@
               rawValue[idx] === 0 ||
               (options.allowAlpha && rawValue[idx] === undefined)
           "
-          >{{ label }}</label
         >
+          {{ label }}
+        </label>
         <v-slider
-          v-if="
-            (rawValue[idx] && label !== 'A') ||
-              (rawValue[idx] === 0 && label !== 'A')
-          "
+          v-if="(rawValue[idx] && label !== 'A') || (rawValue[idx] === 0 && label !== 'A')"
           :key="idx"
           :min="0"
           :max="100"
@@ -162,10 +143,9 @@
           :key="'hidden-model-fix' + idx"
           v-if="options.allowAlpha && label === 'A'"
           style="display: none; visibility: hidden; opacity: 0"
-          >{{
-            rawValue[idx] === undefined ? (rawValue[idx] = 1) : rawValue[idx]
-          }}</span
         >
+          {{ rawValue[idx] === undefined ? (rawValue[idx] = 1) : rawValue[idx] }}
+        </span>
         <v-slider
           v-if="options.allowAlpha && label === 'A'"
           :key="idx"
@@ -179,11 +159,8 @@
         <br :key="'break-' + idx" />
       </template>
     </div>
-    <div
-      class="swatch"
-      :style="`background-color: ${color ? color.hex() : 'transparent'}`"
-    >
-      <i class="material-icons">check</i>
+    <div class="swatch" :style="`background-color: ${color ? color.hex() : 'transparent'}`">
+      <v-icon name="check" />
     </div>
     <template v-if="readonly === false">
       <button
@@ -192,7 +169,7 @@
         :style="{ borderColor: color, color: color, backgroundColor: color }"
         @click="setRawValue(color)"
       >
-        <i class="material-icons">colorize</i>
+        <v-icon name="colorize" />
       </button>
     </template>
   </div>
@@ -290,11 +267,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.interface-color {
-  max-width: var(--width-large);
-}
 .input {
-  max-width: var(--width-small);
   display: inline-block;
   margin-right: 8px;
   vertical-align: middle;

@@ -1,11 +1,6 @@
 <template>
   <transition name="fade">
-    <div
-      :style="{ zIndex }"
-      class="blocker"
-      @click="$emit('click')"
-      @touchend="$emit('click')"
-    />
+    <div :style="{ zIndex }" class="blocker" @click="$emit('click')" @touchend="$emit('click')" />
   </transition>
 </template>
 

@@ -46,11 +46,22 @@
       "m2m": "Many to Many",
       "visible_columns": "Visible Columns",
       "visible_columns_comment": "Add a CSV of columns you want to display as preview",
-      "preferences": "Listing View Preferences",
+	    "preferences": "Listing View Preferences",
       "preferences_comment": "Set what options to use for the modal",
       "relation_not_setup": "The relationship hasn't been configured correctly",
       "template": "Display Template",
       "template_comment": "Choose how to display values on the item layouts",
+      "template_placeholder": "{{movie.name}} — {{member.first_name}}"
+    },
+	"fr-FR": {
+      "m2m": "Plusieurs-à-plusieurs (M2M)",
+      "visible_columns": "Colonnes visibles",
+      "visible_columns_comment": "Ajout d'une liste (SCV) de colonnes à afficher pour la prévisualisation",
+      "preferences": "Liste des préférence de visualisation",
+      "preferences_comment": "Sélectionne les options à utiliser dans la fenêtre",
+      "relation_not_setup": "La relation n'a pas été configurée correctement",
+      "template": "Modèle d'affichage",
+      "template_comment": "Choix de la mise en page des valeurs",
       "template_placeholder": "{{movie.name}} — {{member.first_name}}"
     }
   }

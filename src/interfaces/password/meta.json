@@ -57,6 +57,18 @@
       "show_hash_comment": "Display the saved hash",
       "hashing_type": "Hashing Type",
       "hashing_type_comment": "What method of hashing to use"
+    },
+	"en-US": {
+      "password": "Mot de passe",
+      "hide": "Cacher la valeur",
+      "hide_comment": "Afficher des points à la place des caractères saisis",
+      "placeholder": "Paramètre fictif",
+      "placeholder_comment": "Texte statique qui est affiché avant la sélection d'une valeur",
+      "confirm_placeholder": "Confirmer le mot de passe",
+      "show_hash": "Afficher la sortie hachée cryptographiquement",
+      "show_hash_comment": "Affichage de la valeur hachée cryptographiquement",
+      "hashing_type": "Type de hachage cryptographique",
+      "hashing_type_comment": "Quelle méthode cryptographique doit être utilisée pour hacher la valeur"
     }
   }
 }

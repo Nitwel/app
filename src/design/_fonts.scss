@@ -1,0 +1,34 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/roboto-regular.woff2") format("woff2"),
+    url("../assets/fonts/roboto-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../assets/fonts/roboto-medium.woff2") format("woff2"),
+    url("../assets/fonts/roboto-medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto Mono";
+  src: url("../assets/fonts/robotomono-regular.woff2") format("woff2"),
+    url("../assets/fonts/robotomono-regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Material Icons";
+  src: url("../assets/fonts/material-icons.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: block;
+}

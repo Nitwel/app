@@ -105,6 +105,18 @@
       "under_review": "Under Review",
       "draft": "Draft",
       "deleted": "Deleted"
+    },
+	"fr-FR": {
+      "status": "Etat",
+      "status_mapping": "Cartographie d'états",
+      "status_mapping_comment": "Saisir les options d'états au format JSON",
+      "simple_badge": "Badge simple",
+      "simple_badge_comment":
+        "Affiche un point coloré sur la page d'énumération des éléments.",
+      "published": "Publié",
+      "under_review": "En révision",
+      "draft": "Brouillon",
+      "deleted": "Supprimé"
     }
   }
 }

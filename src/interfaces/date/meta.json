@@ -38,6 +38,17 @@
       "localized_comment": "Show the date localized in the output",
       "relative": "Show relative date",
       "relative_comment": "Show the date relatively (eg 2 days ago)"
+    },
+	"fr-FR": {
+      "date": "Date",
+      "min": "Date minimum",
+      "min_comment": "Date minimale qui peut être sélectionnée par l'utilisateur",
+      "max": "Date maximum",
+      "max_comment": "Date maximale qui peut être sélectionnée par l'utilisateur",
+      "localized": "Localisé",
+      "localized_comment": "Afficher la date dans le format local en sortie",
+      "relative": "Afficher une date relative",
+      "relative_comment": "Affiche une date relative (ex: il y a 2 jours)"
     }
   }
 }

@@ -1,9 +1,9 @@
 <template>
   <v-modal-base :message="message" @cancel="$emit('confirm')">
     <div class="buttons" @keydown.esc="$emit('confirm')">
-      <v-button class="confirm" @click="$emit('confirm')">{{
-        confirmText || $t("ok")
-      }}</v-button>
+      <v-button class="confirm" @click="$emit('confirm')">
+        {{ confirmText || $t("ok") }}
+      </v-button>
     </div>
   </v-modal-base>
 </template>

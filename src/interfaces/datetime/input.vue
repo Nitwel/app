@@ -28,7 +28,12 @@ export default {
   computed: {
     formattedValue() {
       if (!this.value) return null;
-      return format(parse(this.value, "YYYY-MM-DD HH:mm:ss"), this.format);
+
+      if (this.value.includes("+")) {
+        return format(new Date(this.value), this.format);
+      }
+
+      return format(parse(this.value, "yyyy-MM-dd HH:mm:ss", new Date()), this.format);
     },
     placeholder() {
       switch (this.options.format) {
@@ -52,17 +57,17 @@ export default {
     format() {
       switch (this.options.format) {
         case "dmy":
-          return "DD/MM/YYYY HH:mm:ss";
+          return "dd/MM/yyyy HH:mm:ss";
         case "mdy":
-          return "MM/DD/YYYY HH:mm:ss";
+          return "MM/dd/yyyy HH:mm:ss";
         case "ymd":
-          return "YYYY-MM-DD HH:mm:ss";
+          return "yyyy-MM-dd HH:mm:ss";
       }
     }
   },
   created() {
     if (this.options.defaultToCurrentDatetime && !this.value) {
-      this.$emit("input", format(new Date(), "YYYY-MM-DD HH:mm:ss"));
+      this.$emit("input", format(new Date(), "yyyy-MM-dd HH:mm:ss"));
     }
   },
   methods: {
@@ -72,11 +77,7 @@ export default {
       if (value.length === 0) return this.$emit("input", null);
 
       if (value.length === 19) {
-        const dbValue = format(
-          parse(value, this.format),
-          "YYYY-MM-DD HH:mm:ss"
-        );
-
+        const dbValue = format(parse(value, this.format, new Date()), "yyyy-MM-dd HH:mm:ss");
         if (dbValue !== "Invalid Date") return this.$emit("input", dbValue);
       }
     }

@@ -20,8 +20,9 @@
       :class="{
         'output-shown': alwaysShowOutput
       }"
-      >{{ valueOrDefault }} {{ unit }}</output
     >
+      {{ valueOrDefault }} {{ unit }}
+    </output>
   </div>
 </template>
 
@@ -72,11 +73,7 @@ export default {
       return this.value;
     },
     progress() {
-      return (
-        Math.round(
-          ((this.valueOrDefault - this.min) / (this.max - this.min)) * 100
-        ) / 100
-      );
+      return Math.round(((this.valueOrDefault - this.min) / (this.max - this.min)) * 100) / 100;
     }
   }
 };
@@ -117,7 +114,7 @@ export default {
     position: relative;
 
     .track-fill {
-      background-color: var(--accent);
+      background-color: var(--darkest-gray);
       width: 100%;
       height: 100%;
       transform-origin: left;
@@ -153,7 +150,7 @@ export default {
       height: 14px;
       width: 14px;
       border-radius: 50%;
-      background: var(--accent);
+      background: var(--darkest-gray);
       margin-top: -5px;
       cursor: ew-resize;
       box-shadow: 0 0 0 2px var(--white);
@@ -169,7 +166,7 @@ export default {
       height: 14px;
       width: 14px;
       border-radius: 50%;
-      background: var(--accent);
+      background: var(--darkest-gray);
       margin-top: -5px;
       cursor: ew-resize;
       box-shadow: 0 0 0 2px var(--white);
@@ -187,7 +184,7 @@ export default {
     left: calc(100% + 10px);
     top: 50%;
     transform: translateY(-50%);
-    color: var(--accent);
+    color: var(--darkest-gray);
     opacity: 0;
     transition: var(--fast) var(--transition-out);
     &.output-shown {

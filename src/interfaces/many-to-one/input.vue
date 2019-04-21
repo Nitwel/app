@@ -2,7 +2,7 @@
   <div class="interface-many-to-one">
     <div v-if="relationSetup === false" class="notice">
       <p>
-        <i class="material-icons">warning</i>
+        <v-icon name="warning" />
         {{ $t("interfaces-many-to-many-relation_not_setup") }}
       </p>
     </div>
@@ -18,11 +18,7 @@
         @input="$emit('input', $event)"
       ></v-select>
 
-      <button
-        v-if="count > options.threshold"
-        type="button"
-        @click="showListing = true"
-      ></button>
+      <button v-if="count > options.threshold" type="button" @click="showListing = true"></button>
 
       <v-spinner
         v-show="loading"
@@ -106,8 +102,7 @@ export default {
       }).field;
     },
     valuePK() {
-      if (this.$lodash.isObject(this.value))
-        return this.value[this.relatedPrimaryKeyField];
+      if (this.$lodash.isObject(this.value)) return this.value[this.relatedPrimaryKeyField];
 
       return this.value;
     },
@@ -142,16 +137,12 @@ export default {
     },
     filters() {
       if (this.relationSetup === false) return null;
-      return [
-        ...((this.preferences && this.preferences.filters) || []),
-        ...this.filtersOverride
-      ];
+      return [...((this.preferences && this.preferences.filters) || []), ...this.filtersOverride];
     },
     viewOptions() {
       if (this.relationSetup === false) return null;
 
-      const viewOptions =
-        (this.preferences && this.preferences.viewOptions) || {};
+      const viewOptions = (this.preferences && this.preferences.viewOptions) || {};
       return {
         ...viewOptions,
         ...this.viewOptionsOverride
@@ -235,10 +226,7 @@ export default {
       this.selectionSaving = true;
 
       this.items.forEach(item => {
-        if (
-          item[this.relatedPrimaryKeyField] ===
-          this.newSelected[this.relatedPrimaryKeyField]
-        ) {
+        if (item[this.relatedPrimaryKeyField] === this.newSelected[this.relatedPrimaryKeyField]) {
           exists = true;
         }
       });

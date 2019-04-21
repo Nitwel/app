@@ -1,7 +1,7 @@
 <template>
   <header class="v-header" :class="{ scrolled }">
     <button :disabled="navActive" class="nav-toggle" @click="activateNav">
-      <i class="material-icons">menu</i>
+      <v-icon name="menu" />
     </button>
     <v-header-button
       class="back"
@@ -12,11 +12,7 @@
     />
     <div class="title" :class="{ 'has-breadcrumb': navBreadcrumb }">
       <ol class="breadcrumb" v-if="navBreadcrumb">
-        <li
-          v-for="{ name, path } in navBreadcrumb"
-          :key="path"
-          class="breadcrumb-item"
-        >
+        <li v-for="{ name, path } in navBreadcrumb" :key="path" class="breadcrumb-item">
           <router-link :to="path">{{ name }}</router-link>
         </li>
       </ol>

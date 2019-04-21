@@ -35,19 +35,11 @@ export default {
       return date;
     },
     monthBegin() {
-      var date = new Date(
-        this.date.getFullYear(),
-        this.date.getMonth(),
-        1
-      ).getDay();
+      var date = new Date(this.date.getFullYear(), this.date.getMonth(), 1).getDay();
       return date == 0 ? 7 : date;
     },
     monthLength() {
-      return new Date(
-        this.date.getFullYear(),
-        this.date.getMonth() + 1,
-        0
-      ).getDate();
+      return new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getDate();
     },
     today() {
       var date = new Date();
@@ -68,9 +60,7 @@ export default {
 
     renderWeek(index) {
       if (index < 8) {
-        return this.$t(
-          "layouts-calendar-weeks." + this.$parent.weekNames[index - 1]
-        );
+        return this.$t("layouts-calendar-weeks." + this.$parent.weekNames[index - 1]);
       } else {
         return null;
       }
@@ -98,10 +88,7 @@ export default {
      * calculates the display type for each day (hidden | today | default)
      */
     display(index) {
-      if (
-        index < this.monthBegin ||
-        index >= this.monthBegin + this.monthLength
-      ) {
+      if (index < this.monthBegin || index >= this.monthBegin + this.monthLength) {
         return "hidden";
       } else if (this.month == 0 && index - this.monthBegin + 1 == this.today) {
         return "today";

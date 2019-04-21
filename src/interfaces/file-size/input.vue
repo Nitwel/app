@@ -1,5 +1,5 @@
 <template>
-  <div v-if="options.formatInput">
+  <div class="interface-container" v-if="options.formatInput">
     <v-input
       v-model="reducedValue"
       type="number"
@@ -7,9 +7,10 @@
       :readonly="readonly"
       :placeholder="options.placeholder"
       @input="calculateValue"
-    ></v-input
-    ><!--
-    --><v-select
+    ></v-input>
+    <!--
+    -->
+    <v-select
       v-model="units"
       class="interface-file-size-units"
       :readonly="readonly"
@@ -28,9 +29,7 @@
       :value="value"
       @input="$emit('input', $event)"
     ></v-input>
-    <span class="interface-file-size-formatted">
-      ({{ formatSize(value, true) }})
-    </span>
+    <span class="interface-file-size-formatted">({{ formatSize(value, true) }})</span>
   </div>
 </template>
 
@@ -97,21 +96,26 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.interface-container {
+  position: relative;
+}
 .interface-file-size-formatted {
   color: var(--light-gray);
   margin-left: 10px;
   font-style: italic;
 }
 .interface-file-size {
-  display: inline-block;
-  max-width: calc(var(--width-small) - 50px);
+  width: calc(100% - 78px);
+  z-index: 2;
 }
 .interface-file-size-units {
   position: absolute;
   top: 0;
+  right: 0;
   margin: 0;
   display: inline-block;
-  width: 62px;
+  width: 80px;
   margin-left: -12px;
+  z-index: 1;
 }
 </style>

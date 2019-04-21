@@ -9,9 +9,7 @@ export async function getSettings({ commit }) {
 
 export function setSettings({ dispatch }, settings) {
   return Promise.all(
-    Object.keys(settings).map(key =>
-      dispatch("setSetting", { key, value: settings[key] })
-    )
+    Object.keys(settings).map(key => dispatch("setSetting", { key, value: settings[key] }))
   );
 }
 
@@ -25,11 +23,9 @@ export async function setSetting({ commit, state }, { key, value }) {
     });
     commit(types.SET_SETTING, setting);
   } else {
-    const { data: setting } = await api.updateItem(
-      "directus_settings",
-      settingPrimaryKey,
-      { value }
-    );
+    const { data: setting } = await api.updateItem("directus_settings", settingPrimaryKey, {
+      value
+    });
     commit(types.SET_SETTING, setting);
   }
 }

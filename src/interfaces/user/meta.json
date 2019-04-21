@@ -44,6 +44,17 @@
       "placeholder_comment": "Add a placeholder",
       "display": "Display",
       "display_comment": "How to display the users on the layouts"
+    },
+	"fr-FR": {
+      "user": "Utilisateur",
+      "avatar": "Avatar",
+      "name": "Nom",
+      "template": "Modèle",
+      "template_comment": "Mode d'affichage des utilisateurs dans le menu déroulant",
+      "placeholder": "Paramètre fictif",
+      "placeholder_comment": "Texte statique qui est affiché avant la sélection d'une valeur",
+      "display": "Affichage",
+      "display_comment": "Mode d'affichage des utilisateurs dans la mise en page"
     }
   }
 }

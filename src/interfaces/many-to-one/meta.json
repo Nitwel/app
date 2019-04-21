@@ -70,6 +70,22 @@
       "select_one": "Select one",
       "threshold": "Threshold",
       "threshold_comment": "The amount of items after which the interface will render a modal instead of a dropdown"
+    },
+	"fr-FR": {
+      "m2o": "Plusieurs-à-un (M2O)",
+      "template": "Modèle de menu déroulant",
+      "template_comment": "Format des options du menu déroulant",
+      "template_placeholder": "{{title}} — {{author}}",
+      "placeholder": "Paramètre fictif",
+      "placeholder_comment": "Texte statique qui est affiché avant la sélection d'une valeur",
+      "preferences": "Liste des préférences d'affichage",
+      "preferences_comment": "Sélectionne les options à utiliser dans la fenêtre",
+      "relationship_not_setup": "La relation n'a pas été configurée correctement",
+      "icon": "Icone",
+      "icon_comment": "Choisir l'icone optionnelle à afficher à gauche de l'entrée",
+      "select_one": "Sélectionner un",
+      "threshold": "Seuil",
+      "threshold_comment": "La quantité d'éléments dont l'interface sera basée sur une fenêtre modale et non un menu déroulant"
     }
   }
 }

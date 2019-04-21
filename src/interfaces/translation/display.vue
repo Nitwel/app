@@ -1,8 +1,6 @@
 <template>
   <div class="display-translation">
-    {{
-      $tc("item_count", (value || []).length, { count: (value || []).length })
-    }}
+    {{ $tc("item_count", (value || []).length, { count: (value || []).length }) }}
   </div>
 </template>
 

@@ -1,16 +1,7 @@
 <template>
   <div class="interfaces">
-    <v-header
-      :breadcrumb="links"
-      :icon-link="`/settings`"
-      icon-color="warning"
-    />
-    <v-table
-      :columns="columns"
-      :items="items"
-      link="__link"
-      primary-key-field="id"
-    />
+    <v-header :breadcrumb="links" :icon-link="`/settings`" icon-color="warning" />
+    <v-table :columns="columns" :items="items" link="__link" primary-key-field="id" />
   </div>
 </template>
 
@@ -48,7 +39,7 @@ export default {
         },
         {
           field: "id",
-          name: "id"
+          name: "ID"
         },
         {
           field: "version",

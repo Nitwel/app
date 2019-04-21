@@ -1,11 +1,7 @@
 import api from "../../../api";
 import { defaultFull, defaultNone } from "./defaults";
 import { mapValues, omit, forEach } from "lodash";
-import {
-  SET_PERMISSIONS,
-  UPDATE_COLLECTION,
-  ADD_PERMISSION
-} from "../../mutation-types";
+import { SET_PERMISSIONS, UPDATE_COLLECTION, ADD_PERMISSION } from "../../mutation-types";
 
 export function addPermission({ commit }, { collection, permission }) {
   commit(ADD_PERMISSION, { collection, permission });
@@ -61,10 +57,7 @@ export function getPermissions({ commit, rootState }) {
     })
     .then(permissions => {
       forEach(permissions, permission => {
-        if (
-          permission.read_field_blacklist &&
-          permission.read_field_blacklist.length > 0
-        ) {
+        if (permission.read_field_blacklist && permission.read_field_blacklist.length > 0) {
           const collection = collections[permission.collection];
 
           commit(UPDATE_COLLECTION, {

@@ -1,5 +1,5 @@
 <template>
-  <i class="material-icons">file</i>
+  <v-icon name="file" />
 </template>
 
 <script>

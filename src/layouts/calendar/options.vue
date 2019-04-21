@@ -1,8 +1,8 @@
 <template>
   <form @submit.prevent>
-    <label for="spacing" class="style-3 required">{{
-      $t("layouts-calendar-date")
-    }}</label>
+    <label for="spacing" class="style-3 required">
+      {{ $t("layouts-calendar-date") }}
+    </label>
     <v-select
       id="spacing"
       :value="viewOptions.date || '__none__'"
@@ -11,9 +11,9 @@
       icon="today"
       @input="setOption('date', $event)"
     ></v-select>
-    <label for="spacing" class="style-3">{{
-      $t("layouts-calendar-time")
-    }}</label>
+    <label for="spacing" class="style-3">
+      {{ $t("layouts-calendar-time") }}
+    </label>
     <v-select
       id="spacing"
       :value="viewOptions.time || '__none__'"
@@ -22,9 +22,9 @@
       icon="schedule"
       @input="setOption('time', $event)"
     ></v-select>
-    <label for="spacing" class="style-3 required">{{
-      $t("layouts-calendar-title")
-    }}</label>
+    <label for="spacing" class="style-3 required">
+      {{ $t("layouts-calendar-title") }}
+    </label>
     <v-select
       id="spacing"
       :value="viewOptions.title || '__none__'"
@@ -33,9 +33,9 @@
       icon="title"
       @input="setOption('title', $event)"
     ></v-select>
-    <label for="spacing" class="style-3">{{
-      $t("layouts-calendar-color")
-    }}</label>
+    <label for="spacing" class="style-3">
+      {{ $t("layouts-calendar-color") }}
+    </label>
     <v-select
       id="spacing"
       :value="viewOptions.color || '__none__'"
@@ -73,18 +73,14 @@ export default {
     timeOptions() {
       var options = {
         __none__: `(${this.$t("dont_show")})`,
-        ...this.$lodash.mapValues(this.fields, info =>
-          info.type == "time" ? info.name : null
-        )
+        ...this.$lodash.mapValues(this.fields, info => (info.type == "time" ? info.name : null))
       };
       return this.$lodash.pickBy(options, this.$lodash.identity);
     },
     colorOptions() {
       var options = {
         __none__: `(${this.$t("dont_show")})`,
-        ...this.$lodash.mapValues(this.fields, info =>
-          info.type == "string" ? info.name : null
-        )
+        ...this.$lodash.mapValues(this.fields, info => (info.type == "string" ? info.name : null))
       };
       return this.$lodash.pickBy(options, this.$lodash.identity);
     }

@@ -80,6 +80,27 @@
       "default_to_current_datetime_comment": "Sets the default value to current datetime",
       "format": "Format",
       "format_comment": "The DateTime format to use for the input"
+    },
+	"fr-FR": {
+      "datetime": "Date, heure et minute",
+      "min": "Temps minimum",
+      "min_comment": "Temps minimal qui peut être sélectionné par l'utilisateur",
+      "max": "Temps maximum",
+      "max_comment": "Temps maximal qui peut être sélectionné par l'utilisateur",
+      "localized": "Localisé",
+      "localized_comment": "Afficher le temps dans le format local en sortie",
+      "relative": "Affiche le temps relatif",
+      "relative_comment": "Affiche le temps écoulé depuis maintenant (ex: il y a 50 minutes)",
+      "icon_left": "Icone de gauche",
+      "icon_left_comment": "Choisir l'icone optionnelle à afficher à gauche de l'entrée",
+      "icon_right": "Icone de droite",
+      "icon_right_comment": "Choisir l'icone optionnelle à afficher à droite de l'entrée",
+      "utc": "Enrregistré en temps universel (UTC)",
+      "utc_comment": "Enregistre et affiche le temps dans le fuseau horaire Zulu (UTC)",
+      "default_to_current_datetime": "Maintenant par défaut",
+      "default_to_current_datetime_comment": "Positionne la date et heure à celle en cours",
+      "format": "Format",
+      "format_comment": "Le format de date et heure à utiliser en entrée"
     }
   }
 }

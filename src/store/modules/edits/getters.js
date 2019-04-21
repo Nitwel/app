@@ -5,7 +5,5 @@ export function editing(state) {
   const valuesExist = state.values && Object.keys(state.values).length > 0;
   const saving = state.saving;
 
-  return (
-    (collectionExists && primaryKeyExists && valuesExist && !saving) || false
-  );
+  return (collectionExists && primaryKeyExists && valuesExist && !saving) || false;
 }

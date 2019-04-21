@@ -1,67 +1,47 @@
 <template>
-  <div class="v-field">
-    <component :is="fieldset ? 'fieldset' : 'p'">
-      <div>
-        <div class="heading">
-          <template v-if="hideLabel === false">
-            <div class="label">
-              <component :is="fieldset ? 'legend' : 'label'" :for="field.field">
-                {{ field.name || $helpers.formatTitle(field.field)
-                }}<span
-                  class="optional"
-                  v-if="field.required !== true || field.required === '0'"
-                >
-                  — Optional</span
-                >
-              </component>
-              <label v-if="batchMode" class="batch-label">
-                <v-toggle
-                  :value="!blocked"
-                  @input="
-                    $emit(blocked ? 'activate' : 'deactivate', field.field)
-                  "
-                />
-              </label>
-            </div>
-          </template>
-        </div>
-        <div class="field-wrapper">
-          <v-ext-input
-            :id="field.interface || 'text-input'"
-            :name="name"
-            :required="field.required === true || field.required === '1'"
-            :readonly="readonly || blocked"
-            :options="field.options"
-            :type="field.type"
-            :datatype="field.datatype"
-            :value="values[field.field]"
-            :relation="relation"
-            :fields="fields"
-            :values="values"
-            :length="field.length"
-            :new-item="newItem"
-            @input="
-              $emit('stage-value', {
-                field: field.field,
-                value: $event
-              })
-            "
-            @setfield="
-              $emit('stage-value', {
-                field: $event.field,
-                value: $event.value
-              })
-            "
-          />
-          <div
-            class="blocker"
-            v-if="blocked"
-            @click="$emit('activate', field.field)"
-          />
-        </div>
-      </div>
-      <small v-if="field.note" v-html="$helpers.snarkdown(field.note)" />
-    </component>
+  <div>
+    <div class="name" v-if="showLabel">
+      {{ field.name || $helpers.formatTitle(field.field) }}
+      <span class="optional" v-if="field.required === false">— {{ $t("optional") }}</span>
+      <v-toggle
+        v-if="batchMode"
+        class="batch-toggle"
+        :value="!blocked"
+        @input="$emit(blocked ? 'activate' : 'deactivate', field.field)"
+      />
+    </div>
+
+    <div class="field">
+      <v-ext-input
+        :id="field.interface || 'text-input'"
+        :name="name"
+        :required="field.required"
+        :readonly="field.readonly || blocked"
+        :options="field.options"
+        :type="field.type"
+        :datatype="field.datatype"
+        :value="values[field.field]"
+        :relation="relation"
+        :fields="fields"
+        :values="values"
+        :length="field.length"
+        :new-item="newItem"
+        @input="
+          $emit('stage-value', {
+            field: field.field,
+            value: $event
+          })
+        "
+        @setfield="
+          $emit('stage-value', {
+            field: $event.field,
+            value: $event.value
+          })
+        "
+      />
+    </div>
+
+    <div class="note" v-if="field.note" v-html="$helpers.snarkdown(field.note)" />
   </div>
 </template>
 
@@ -69,17 +49,21 @@
 export default {
   name: "v-field",
   props: {
+    name: {
+      type: String,
+      required: true
+    },
     field: {
+      type: Object,
+      required: true
+    },
+    fields: {
       type: Object,
       required: true
     },
     values: {
       type: Object,
       required: true
-    },
-    readonly: {
-      type: Boolean,
-      default: false
     },
     blocked: {
       type: Boolean,
@@ -89,138 +73,69 @@ export default {
       type: Boolean,
       default: false
     },
-    fields: {
-      type: Object,
-      required: true
-    },
     newItem: {
       type: Boolean,
       default: false
-    },
-    name: {
-      type: String,
-      required: true
     }
   },
+
   computed: {
-    fieldset() {
-      const interfaceInfo = this.$store.state.extensions.interfaces[
-        this.field.interface
-      ];
-
-      return (interfaceInfo && interfaceInfo.fieldset) || false;
-    },
-    hideLabel() {
+    showLabel() {
       const interfaceName = this.field.interface;
-      const interfaceMeta = this.$store.state.extensions.interfaces[
-        interfaceName
-      ];
+      const interfaceMeta = this.getInterfaceMeta(interfaceName);
 
-      if (!interfaceMeta) return false;
+      // In case the current field doesn't have an interface setup
+      if (!interfaceMeta) return;
 
-      if (interfaceMeta && interfaceMeta.hideLabel)
-        return interfaceMeta.hideLabel;
+      const hideLabel = interfaceMeta.hideLabel;
 
-      return false;
+      if (hideLabel === true) return false;
+
+      return true;
     },
+
     relation() {
       const { collection, field, type } = this.field;
 
-      if (type.toLowerCase() === "m2o")
-        return this.$store.getters.m2o(collection, field);
-      if (type.toLowerCase() === "o2m")
-        return this.$store.getters.o2m(collection, field);
-      if (type.toLowerCase() === "translation")
-        return this.$store.getters.o2m(collection, field);
+      if (type.toLowerCase() === "m2o") return this.$store.getters.m2o(collection, field);
+      if (type.toLowerCase() === "o2m") return this.$store.getters.o2m(collection, field);
+      if (type.toLowerCase() === "translation") return this.$store.getters.o2m(collection, field);
       return null;
+    }
+  },
+
+  methods: {
+    getInterfaceMeta(interfaceName) {
+      const interfaceMeta = this.$store.state.extensions.interfaces[interfaceName];
+
+      return interfaceMeta || undefined;
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.heading {
-  margin-bottom: 12px;
-}
-.field-wrapper {
-  position: relative;
+.name {
+  font-size: var(--size-2);
+  margin-bottom: 10px;
+  color: var(--darkest-gray);
+
+  .optional {
+    color: var(--gray);
+  }
 }
 
-label,
-legend {
-  text-transform: none;
-  color: var(--darker-gray);
-  font-size: 16px;
-  line-height: 1.1;
-  font-weight: 400;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-label.batch-label {
-  overflow: initial;
-  display: flex;
-}
-
-fieldset,
-p {
-  border: 0;
-  padding: 0;
-}
-
-fieldset > div,
-p {
-  display: flex;
-  flex-direction: column;
-}
-
-small {
-  order: 2;
-  display: block;
+.note {
   margin-top: 8px;
   font-style: italic;
+  font-size: var(--size-3);
+  font-weight: var(--weight-bold);
   color: var(--light-gray);
 }
 
-.label {
-  display: flex;
-  align-items: center;
-
-  > * {
-    display: inline-block;
-    max-width: max-content;
-
-    &:first-child {
-      margin-right: 10px;
-    }
-  }
-
-  .optional {
-    color: var(--lighter-gray);
-  }
-
-  i {
-    color: var(--accent);
-    vertical-align: super;
-    font-size: 7px;
-  }
-}
-
-.blocker {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background-color: var(--body-background);
-  opacity: 0.7;
-  transition: opacity var(--fast) var(--transition-out);
-  cursor: pointer;
-
-  &:hover {
-    opacity: 0.3;
-    transition: opacity var(--fast) var(--transition-in);
-  }
+.batch-toggle {
+  display: inline-block;
+  vertical-align: -4px;
+  margin-left: 4px;
 }
 </style>

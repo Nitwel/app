@@ -83,6 +83,21 @@
       "sleep": "Sleep",
       "flight": "Flight",
       "cruise": "Cruise"
+    },
+	"fr-FR": {
+      "button_group": "Groupe de boutons",
+      "choices": "choix",
+      "choices_comment":
+        "Saisir des pairs de clefs et valeurs en JSON avec la valeur enregistrée et le texte affiché",
+      "theme": "Thème d'interface",
+      "theme_comment": "Sélectionne l'interface utilisateur si supporté",
+      "value": "Valeur",
+      "car": "Voiture",
+      "bike": "Vélo",
+      "bus": "Bus",
+      "sleep": "Dormir",
+      "flight": "Vol",
+      "cruise": "Croisière"
     }
   }
 }

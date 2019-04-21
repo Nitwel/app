@@ -18,6 +18,13 @@
       "relative_comment": "Show the time relatively (eg 50 minutes ago)",
       "now": "You are creating this now",
       "unknown": "Unknown"
+    },
+	"fr-FR": {
+      "datetime_updated": "Date, heure et minute de mise à jour",
+      "relative": "Afficher le temps relatif",
+      "relative_comment": "Affiche le temps écoulé depuis maintenant (ex: il y a 50 minutes)",
+      "now": "Vous êtes entrain de créer ceci maintenant",
+      "unknown": "Inconnu"
     }
   }
 }
