@@ -658,6 +658,7 @@ export default {
           interfaces: [
             "code",
             "hashed",
+            "json",
             "markdown",
             "password",
             "primary-key",

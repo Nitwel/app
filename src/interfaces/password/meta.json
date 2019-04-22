@@ -58,7 +58,7 @@
       "hashing_type": "Hashing Type",
       "hashing_type_comment": "What method of hashing to use"
     },
-	"en-US": {
+    "fr-FR": {
       "password": "Mot de passe",
       "hide": "Cacher la valeur",
       "hide_comment": "Afficher des points à la place des caractères saisis",

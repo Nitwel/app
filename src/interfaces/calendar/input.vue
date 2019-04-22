@@ -13,7 +13,6 @@
 import flatPickr from "vue-flatpickr-component";
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
-import "flatpickr/dist/flatpickr.css";
 import "./calendar.css";
 
 export default {

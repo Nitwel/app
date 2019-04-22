@@ -44,7 +44,7 @@
       "decimal": "Decimal",
       "decimal_comment": "Show the value in decimal counting (10MB vs 10MiB)"
     },
-	"en-US": {
+    "fr-FR": {
       "file_size": "Taille de fichier",
       "placeholder": "Paramètre fictif",
       "placeholder_comment": "Texte statique qui est affiché avant la sélection d'une valeur",
