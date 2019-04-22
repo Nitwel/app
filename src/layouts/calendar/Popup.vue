@@ -27,7 +27,9 @@
         </div>
         <div id="header">
           <span>{{ $t("layouts-calendar-events") }}</span>
-          <v-icon @click="close" name="close" />
+          <button @click="close">
+            <v-icon name="close" />
+          </button>
         </div>
         <div id="events">
           <div
@@ -214,6 +216,8 @@ export default {
 }
 
 #header {
+  display: flex;
+  justify-content: space-between;
   padding: 20px;
   grid-column: 2 / 3;
 }
@@ -225,7 +229,6 @@ export default {
 
 #header i {
   cursor: pointer;
-  float: right;
 }
 
 #sidebar-header {

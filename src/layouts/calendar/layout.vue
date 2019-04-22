@@ -8,9 +8,13 @@
           <transition name="months">
             <div v-show="showMonthSelect" id="date-select">
               <div id="date-header">
-                <v-icon @click="decreaseYear()" name="arrow_back" />
+                <button @click="decreaseYear()">
+                  <v-icon name="arrow_back" />
+                </button>
                 {{ date.getFullYear() }}
-                <v-icon @click="increaseYear()" name="arrow_forward" />
+                <button @click="increaseYear()">
+                  <v-icon name="arrow_forward" />
+                </button>
               </div>
               <div id="date-months">
                 <div
@@ -26,8 +30,12 @@
           </transition>
         </div>
         <div id="arrows">
-          <v-icon class="icon" @click="decreaseMonth()" name="arrow_back" />
-          <v-icon class="icon" @click="increaseMonth()" name="arrow_forward" />
+          <button @click="decreaseMonth()">
+            <v-icon class="icon" name="arrow_back" />
+          </button>
+          <button @click="increaseMonth()">
+            <v-icon class="icon" name="arrow_forward" />
+          </button>
         </div>
       </div>
       <div id="header-end">
