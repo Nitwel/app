@@ -1,0 +1,110 @@
+{
+  "name": "$t:timeline",
+  "icon": "date_range",
+  "translation": {
+    "en-US": {
+      "timeline": "Timeline",
+      "fields": "Fields",
+      "today": "today",
+      "events": "Events",
+      "moreEvents": "and {amount} more...",
+      "noEvents": "no events yet!",
+      "date": "Date",
+      "content": "Content",
+      "title": "Title",
+      "color": "Color",
+      "months": {
+        "january": "January",
+        "february": "February",
+        "march": "March",
+        "april": "April",
+        "may": "May",
+        "june": "June",
+        "july": "July",
+        "august": "August",
+        "september": "September",
+        "october": "October",
+        "november": "November",
+        "december": "December"
+      },
+      "weeks": {
+        "monday": "Monday",
+        "tuesday": "Tuesday",
+        "wednesday": "Wednesday",
+        "thursday": "Thursday",
+        "friday": "Friday",
+        "saturday": "Saturday",
+        "sunday": "Sunday"
+      }
+    },
+    "de-DE": {
+      "timeline": "Kalendar",
+      "today": "Heute",
+      "events": "Termine",
+      "moreEvents": "und {amount} mehr...",
+      "noEvents": "noch keine Termine!",
+      "date": "Datum",
+      "content": "Inhalt",
+      "title": "Titel",
+      "color": "Farbe",
+      "months": {
+        "january": "Januar",
+        "february": "Februar",
+        "march": "März",
+        "april": "April",
+        "may": "Mai",
+        "june": "Juni",
+        "july": "Juli",
+        "august": "August",
+        "september": "September",
+        "october": "Oktober",
+        "november": "November",
+        "december": "Dezember"
+      },
+      "weeks": {
+        "monday": "Montag",
+        "tuesday": "Dienstag",
+        "wednesday": "Mittwoch",
+        "thursday": "Donnerstag",
+        "friday": "Freitag",
+        "saturday": "Samstag",
+        "sunday": "Sonntag"
+      }
+    },
+	"fr-FR": {
+      "timeline": "Calendrier",
+      "fields": "Champs",
+      "today": "aujourd'hui",
+      "events": "Evénements",
+      "moreEvents": "et {amount} plus...",
+      "noEvents": "pas encore d'événements positionnés",
+      "date": "Date",
+      "content": "Contenu",
+      "title": "Titre",
+      "color": "Couleur",
+      "months": {
+        "january": "Janvier",
+        "february": "Février",
+        "march": "Mars",
+        "april": "Avril",
+        "may": "Mai",
+        "june": "Juin",
+        "july": "Juillet",
+        "august": "Août",
+        "september": "Septembre",
+        "october": "Octobre",
+        "november": "Novembre",
+        "december": "Décembre"
+      },
+      "weeks": {
+        "monday": "Lundi",
+        "tuesday": "Mardi",
+        "wednesday": "Mercredi",
+        "thursday": "Jeudi",
+        "friday": "Vendredi",
+        "saturday": "Samedi",
+        "sunday": "Dimanche"
+      }
+    }
+  }
+}
