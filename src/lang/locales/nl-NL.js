@@ -254,6 +254,20 @@ export default {
   m2m: "Many-to-Many (M2M)",
   m2o: "Many-to-One (M2O)",
   o2m: "One-to-Many (O2M)",
+  months: {
+    january: "Januari",
+    february: "Februari",
+    march: "Maart",
+    april: "April",
+    may: "Mei",
+    june: "Juni",
+    july: "Juli",
+    august: "Augustus",
+    september: "September",
+    october: "Oktober",
+    november: "November",
+    december: "December"
+  },
   name: "Naam",
   name_field: "Hoe wil je deze kolom noemen?",
   navigate_changes:
@@ -403,6 +417,15 @@ export default {
   version: "Versie",
   version_and_updates: "Versie en Updates",
   view_type: "Bekijk als...",
+  weeks: {
+    monday: "Maandag",
+    tuesday: "Dinsdag",
+    wednesday: "Woensdag",
+    thursday: "Donderdag",
+    friday: "Vrijdag",
+    saturday: "Zaterdag",
+    sunday: "Zondag"
+  },
   welcome: "Welkom",
   writable_fields: "Bewerkbare velden",
   writable_fields_copy: "Selecteer de velden die de gebruiker kan bewerken.",

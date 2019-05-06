@@ -111,6 +111,20 @@ export default {
   name: "Jméno",
   navigate_changes: "Pokud opustíte stránku Vaše úpravy budou ztraceny",
   new: "Nový",
+  months: {
+    january: "Január",
+    february: "Február",
+    march: "Marec",
+    april: "Apríl",
+    may: "Smieť",
+    june: "Jún",
+    july: "Júl",
+    august: "August",
+    september: "Septembra",
+    october: "Október",
+    november: "November",
+    december: "December"
+  },
   new_file: "Nový soubor",
   no_results: "Bez výsledků",
   no_results_body: "Podle zadaných filtrů nebyly nalezeny žádné položky",
@@ -149,5 +163,14 @@ export default {
   update_confirm: "Opravdu chcete aktualizovat {count} položek?",
   view_type: "Zobrazit jako...",
   welcome: "Vítejte",
+  weeks: {
+    monday: "Pondelok",
+    tuesday: "Utorok",
+    wednesday: "Streda",
+    thursday: "Štvrtok",
+    friday: "Piatok",
+    saturday: "Sobota",
+    sunday: "Nedeľa"
+  },
   yes: "Ano"
 };

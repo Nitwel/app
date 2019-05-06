@@ -266,6 +266,20 @@ export default {
   m2m: "Molti a molti (M2M)",
   m2o: "Molti a uno (M2O)",
   o2m: "Uno a molti (O2M)",
+  months: {
+    january: "Gennaio",
+    february: "Febbraio",
+    march: "Marzo",
+    april: "Aprile",
+    may: "Potrebbe",
+    june: "Giugno",
+    july: "luglio",
+    august: "Agosto",
+    september: "Settembre",
+    october: "Ottobre",
+    november: "Novembre",
+    december: "Dicembre"
+  },
   name: "Nome",
   name_field: "Diamo un nome al campo {field} e aggiungiamo una nota utile per gli utenti.",
   navigate_changes:
@@ -420,6 +434,15 @@ export default {
   version_and_updates: "Versione e aggiornamenti",
   view_type: "Visualizza come...",
   welcome: "benvenuto",
+  weeks: {
+    monday: "Lunedi",
+    tuesday: "Martedì",
+    wednesday: "Mercoledì",
+    thursday: "Giovedi",
+    friday: "Venerdì",
+    saturday: "Sabato",
+    sunday: "Domenica"
+  },
   writable_fields: "Campi scrivibili",
   writable_fields_copy: "Seleziona i campi che l'utente può modificare",
   yes: "sì",
