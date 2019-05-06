@@ -60,7 +60,7 @@ export default {
 
     renderWeek(index) {
       if (index < 8) {
-        return this.$t("layouts-calendar-weeks." + this.$parent.weekNames[index - 1]);
+        return this.$t("weeks." + this.$parent.weekNames[index - 1]);
       } else {
         return null;
       }

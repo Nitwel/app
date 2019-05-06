@@ -1,8 +1,8 @@
 <template>
   <div class="day">
     <div class="date">
-      Activity on {{ $t("layouts-timeline-months." + $parent.monthNames[date.getMonth()]) }}
-      {{ date.getDate() }}, {{ date.getFullYear() }}
+      Activity on {{ $t("months." + $parent.monthNames[date.getMonth()]) }} {{ date.getDate() }},
+      {{ date.getFullYear() }}
     </div>
     <div class="events">
       <Event

@@ -190,6 +190,20 @@ export default {
   m2m: "m:n-Beziehung (M2M)",
   m2o: "n:1-Beziehung (M2O)",
   o2m: "1:n-Beziehung (O2M)",
+  months: {
+    january: "Januar",
+    february: "Februar",
+    march: "März",
+    april: "April",
+    may: "Mai",
+    june: "Juni",
+    july: "Juli",
+    august: "August",
+    september: "September",
+    october: "Oktober",
+    november: "November",
+    december: "Dezember"
+  },
   name: "Name",
   name_field: "Gib diesem {field}-Feld einen Namen und konfiguriere es.",
   navigate_changes:
@@ -325,6 +339,15 @@ export default {
   version: "Version",
   version_and_updates: "Version und Updates",
   view_type: "Ansehen als...",
+  weeks: {
+    monday: "Montag",
+    tuesday: "Dienstag",
+    wednesday: "Mittwoch",
+    thursday: "Donnerstag",
+    friday: "Freitag",
+    saturday: "Samstag",
+    sunday: "Sonntag"
+  },
   writable_fields: "Beschreibbare Felder",
   write_fields_copy: "Wähle die Felder aus, die der User bearbeiten darf.",
   yes: "Ja",

@@ -1,7 +1,7 @@
 <template>
   <form @submit.prevent>
     <label for="spacing" class="style-3 required">
-      {{ $t("layouts-calendar-date") }}
+      {{ $t("layouts-timeline-date") }}
     </label>
     <v-select
       id="spacing"
@@ -12,7 +12,7 @@
       @input="setOption('date', $event)"
     ></v-select>
     <label for="spacing" class="style-3 required">
-      {{ $t("layouts-calendar-title") }}
+      {{ $t("layouts-timeline-title") }}
     </label>
     <v-select
       id="spacing"
@@ -23,7 +23,7 @@
       @input="setOption('title', $event)"
     ></v-select>
     <label for="spacing" class="style-3 required">
-      {{ $t("layouts-calendar-subTitle") }}
+      {{ $t("layouts-timeline-content") }}
     </label>
     <v-select
       id="spacing"
@@ -34,7 +34,7 @@
       @input="setOption('content', $event)"
     ></v-select>
     <label for="spacing" class="style-3">
-      {{ $t("layouts-calendar-color") }}
+      {{ $t("layouts-timeline-color") }}
     </label>
     <v-select
       id="spacing"

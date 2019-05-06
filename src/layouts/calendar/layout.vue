@@ -3,7 +3,7 @@
     <div id="header">
       <div id="header-start">
         <div id="date" ref="dropdown">
-          {{ $t("layouts-calendar-months." + monthNames[date.getMonth()]) }}
+          {{ $t("months." + monthNames[date.getMonth()]) }}
           {{ date.getFullYear() }}
           <transition name="months">
             <div v-show="showMonthSelect" id="date-select">

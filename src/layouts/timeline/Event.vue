@@ -6,22 +6,20 @@
         :style="{ backgroundColor: 'var(--' + (data.color || 'gray') + ')' }"
       ></div>
     </div>
-    <div class="content" @click="$router.push(data.to)">
+    <div class="container" @click="$router.push(data.to)">
       <div class="title">
         {{ data.title }}
       </div>
-      <div class="text">
+      <div class="content">
         <v-ext-display
           @click.native.stop=""
-          class="user"
-          :id="'user'"
-          :name="'Admin User'"
-          :type="'integer'"
+          class="display"
+          :id="data.contentType.name"
+          :name="data.contentType.name"
+          :type="data.contentType.type"
           :value="data.content"
-          :interfaceType="'user'"
-          :options="{
-            template: '{{first_name}} {{last_name}}'
-          }"
+          :interfaceType="data.contentType.interface"
+          :options="data.contentType.options"
         />
         <v-timeago class="time" :datetime="data.time" :auto-update="86400" :locate="$i18n.locale" />
       </div>
@@ -72,7 +70,7 @@ export default {
     }
   }
 
-  .content {
+  .container {
     cursor: pointer;
     margin-left: 50px;
     padding-left: 5px;
@@ -88,12 +86,12 @@ export default {
       font-size: 15px;
     }
 
-    .text {
+    .content {
       padding: 4px 0px;
       display: flex;
       align-items: center;
 
-      .user {
+      .display {
         margin-right: 5px;
         font-weight: 500;
         color: var(--gray);

@@ -51,6 +51,7 @@ export default {
           time: new Date(item[this.viewOptions.date]),
           title: item[this.viewOptions.title],
           content: item[this.viewOptions.content],
+          contentType: this.fields[this.viewOptions.content],
           color: item[this.viewOptions.color],
           to: item.__link__
         };

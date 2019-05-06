@@ -4,7 +4,7 @@
       <div id="background" @click="close()"></div>
       <div id="popup">
         <div id="sidebar-header">
-          {{ $t("layouts-calendar-months." + $parent.monthNames[date.getMonth()]) }}
+          {{ $t("months." + $parent.monthNames[date.getMonth()]) }}
           {{ date.getFullYear() }}
         </div>
         <div id="sidebar" @wheel="scroll">
@@ -98,9 +98,7 @@ export default {
      *   Gets the name of the week for a specific position in the sidebar.
      */
     weekname(day) {
-      return this.$t(
-        "layouts-calendar-weeks." + this.$parent.weekNames[day == 0 ? 6 : day - 1]
-      ).substr(0, 3);
+      return this.$t("weeks." + this.$parent.weekNames[day == 0 ? 6 : day - 1]).substr(0, 3);
     },
 
     changeDay(distance) {

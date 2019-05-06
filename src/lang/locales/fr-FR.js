@@ -290,6 +290,20 @@ export default {
   modified_by: "Modifié par",
   modified_on: "Modifié le",
   o2m: "One-to-Many (O2M)",
+  months: {
+    january: "Janvier",
+    february: "Février",
+    march: "Mars",
+    april: "Avril",
+    may: "Mai",
+    june: "Juin",
+    july: "Juillet",
+    august: "Août",
+    september: "Septembre",
+    october: "Octobre",
+    november: "Novembre",
+    december: "Décembre"
+  },
   name: "Nom",
   name_field: "Donnez un nom à ce champ {field} et ajoutez lui une note utile aux utilisateurs.",
   navigate_changes:
@@ -459,6 +473,15 @@ export default {
   version: "Version",
   version_and_updates: "Version et mises à jour",
   view_type: "Voir comme…",
+  weeks: {
+    monday: "Lundi",
+    tuesday: "Mardi",
+    wednesday: "Mercredi",
+    thursday: "Jeudi",
+    friday: "Vendredi",
+    saturday: "Samedi",
+    sunday: "Dimanche"
+  },
   welcome: "Bienvenue",
   writable_fields: "Champs modifiables",
   writable_fields_copy: "Sélectionnez les champs que l’utilisateur peut modifier",

@@ -287,6 +287,20 @@ export default {
   modified_by: "Modified By",
   modified_on: "Modified On",
   o2m: "One-to-Many (O2M)",
+  months: {
+    january: "January",
+    february: "February",
+    march: "March",
+    april: "April",
+    may: "May",
+    june: "June",
+    july: "July",
+    august: "August",
+    september: "September",
+    october: "October",
+    november: "November",
+    december: "December"
+  },
   name: "Name",
   name_field: "Let’s name this {field} field and add a helpful note for users.",
   navigate_changes:
@@ -453,6 +467,15 @@ export default {
   version_and_updates: "Version and Updates",
   view_type: "View As...",
   visible_all_users: "Visible for all users",
+  weeks: {
+    monday: "Monday",
+    tuesday: "Tuesday",
+    wednesday: "Wednesday",
+    thursday: "Thursday",
+    friday: "Friday",
+    saturday: "Saturday",
+    sunday: "Sunday"
+  },
   welcome: "Welcome",
   writable_fields: "Writable Fields",
   writable_fields_copy: "Select the fields that the user can edit",
