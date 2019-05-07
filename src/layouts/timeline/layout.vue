@@ -15,6 +15,13 @@ export default {
   },
   data() {
     return {
+      actionColor: {
+        create: "success",
+        update: "success",
+        authenticate: "dark-gray",
+        delete: "warning",
+        upload: "accent"
+      },
       monthNames: [
         "january",
         "february",
@@ -35,7 +42,7 @@ export default {
   mixins: [mixin],
   computed: {
     events() {
-      return this.$lodash.orderBy(this.items, ["date"], ["desc"]);
+      return this.$lodash.orderBy(this.items, [this.viewOptions.date], ["desc"]);
     },
 
     days() {
@@ -44,15 +51,20 @@ export default {
       for (var i = 0; i < this.events.length; i++) {
         var item = this.events[i];
 
-        var date = new Date(item.date.substr(0, 10) + "T00:00:00");
+        var date = new Date(item[this.viewOptions.date].substr(0, 10) + "T00:00:00");
         var existingDay = this.$lodash.find(days, { date: date });
+
+        var color = item[this.viewOptions.color];
+        if (this.fields[this.viewOptions.color].field == "action") {
+          color = this.actionColor[color];
+        }
 
         var event = {
           time: new Date(item[this.viewOptions.date]),
           title: item[this.viewOptions.title],
           content: item[this.viewOptions.content],
           contentType: this.fields[this.viewOptions.content],
-          color: item[this.viewOptions.color],
+          color: color,
           to: item.__link__
         };
 
