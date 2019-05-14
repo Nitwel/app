@@ -101,7 +101,7 @@ export default {
     },
     pattern: {
       type: String,
-      default: ""
+      default: ".*"
     },
     placeholder: {
       type: String,
