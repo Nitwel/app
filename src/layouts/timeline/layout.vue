@@ -60,7 +60,7 @@ export default {
 
         var event = {
           time: new Date(item[this.viewOptions.date]),
-          title: item[this.viewOptions.title],
+          title: this.$helpers.micromustache.render(this.viewOptions.title, item),
           content: item[this.viewOptions.content],
           contentType: this.fields[this.viewOptions.content],
           color: color,

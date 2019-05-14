@@ -14,14 +14,13 @@
     <label for="spacing" class="style-3 required">
       {{ $t("layouts-timeline-title") }}
     </label>
-    <v-select
+    <v-input
       id="spacing"
-      :value="viewOptions.title || '__none__'"
+      :pattern="titleValidator"
+      :value="viewOptions.title"
       :options="textOptions"
-      class="select"
-      icon="title"
       @input="setOption('title', $event)"
-    ></v-select>
+    ></v-input>
     <label for="spacing" class="style-3 required">
       {{ $t("layouts-timeline-content") }}
     </label>
@@ -54,7 +53,8 @@ export default {
   mixins: [mixin],
   data() {
     return {
-      sortList: null
+      sortList: null,
+      titleValid: true
     };
   },
   computed: {
@@ -67,7 +67,15 @@ export default {
       };
       return this.$lodash.pickBy(options, this.$lodash.identity);
     },
-
+    titleValidator() {
+      var fields = this.$lodash.keys(this.fields);
+      fields = fields
+        .toString()
+        .replace('"', "")
+        .replace(/,/g, "|");
+      var regex = new RegExp("^([^\\{\\}]*?\\{\\{\\s*?(" + fields + ")\\s*?\\}\\})*?[^\\{\\}]*?$");
+      return regex.toString().replace(/\//g, "");
+    },
     textOptions() {
       var options = {
         __none__: `(${this.$t("dont_show")})`,

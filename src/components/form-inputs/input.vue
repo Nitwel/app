@@ -14,6 +14,7 @@
       :min="min"
       :minlength="minlength"
       :name="name"
+      :pattern="pattern"
       :placeholder="placeholder"
       :required="required"
       :readonly="readonly || disabled"
@@ -37,6 +38,7 @@
       :min="min"
       :minlength="minlength"
       :name="name"
+      :pattern="pattern"
       :placeholder="placeholder"
       :required="required"
       :readonly="readonly || disabled"
@@ -94,6 +96,10 @@ export default {
       default: null
     },
     name: {
+      type: String,
+      default: ""
+    },
+    pattern: {
       type: String,
       default: ""
     },
