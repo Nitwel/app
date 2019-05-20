@@ -68,7 +68,7 @@ export default {
       return this.$lodash.pickBy(options, this.$lodash.identity);
     },
     titleValidator() {
-      var fields = this.$lodash.keys(this.fields);
+      var fields = this.$lodash.keys(this.fields); //this.getKeys(this.fields)
       fields = fields
         .toString()
         .replace('"', "")
@@ -93,6 +93,19 @@ export default {
     }
   },
   methods: {
+    getKeys(obj) {
+      var keys = this.$lodash.keys(obj);
+      var subKeys = [];
+      for (var i = 0; i < keys.length; i++) {
+        if (typeof obj[keys[i]] === "object") {
+          var subKeyList = this.getKeys(obj[keys[i]]);
+          for (var k = 0; k < subKeyList.length; k++) {
+            subKeys.push(keys[i] + "." + subKeyList[k]);
+          }
+        }
+      }
+      return [...keys, ...subKeys];
+    },
     setOption(option, value) {
       this.$emit("options", {
         ...this.viewOptions,
