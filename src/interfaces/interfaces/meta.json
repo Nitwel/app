@@ -1,0 +1,34 @@
+{
+  "name": "$t:interfaces",
+  "version": "1.0.0",
+  "types": ["string"],
+  "icon": "category",
+  "recommended": {
+    "length": 100
+  },
+  "options": {
+    "placeholder": {
+      "name": "$t:placeholder",
+      "interface": "text-input",
+      "comment": "$t:placeholder_comment",
+      "default": "$t:placeholder_default",
+      "length": 200
+    }
+  },
+  "translation": {
+    "en-US": {
+      "interfaces": "Interfaces",
+      "placeholder": "Placeholder",
+      "placeholder_comment": "Static text that shown before a value is selected",
+      "placeholder_default": "Choose an interface",
+      "option": "Option"
+    },
+	"fr-FR": {
+      "interfaces": "Interfaces",
+      "placeholder": "Paramètre fictif",
+      "placeholder_comment": "Texte statique qui est affiché avant la sélection d'une valeur",
+      "placeholder_default": "Choisir une interface",
+      "option": "Option"
+    }
+  }
+}
