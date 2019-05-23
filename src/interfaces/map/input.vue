@@ -8,31 +8,45 @@
       <div class="map-actions">
         <div class="address-input" v-if="options.address_to_code">
           <v-input v-model="placeName" placeholder="Enter address to geocode"></v-input>
-          <button v-if="isInteractive" @click="getCoordinatesforPlaceName()">
-            <v-icon name="add_location" />
+          <button
+            v-if="isInteractive"
+            @click="getCoordinatesforPlaceName()"
+            v-tooltip="$t('interfaces-map-address_location')"
+          >
+            <v-icon name="search" />
           </button>
         </div>
 
-        <button v-if="isInteractive" class="map-my-location" @click="locateMe()">
+        <button
+          v-if="isInteractive"
+          class="map-my-location"
+          @click="locateMe()"
+          v-tooltip="$t('interfaces-map-my_location')"
+        >
           <v-icon name="my_location" />
+        </button>
+
+        <button
+          v-if="isInteractive"
+          class="clear-location"
+          @click="setValue()"
+          v-tooltip="$t('interfaces-map-clear_location')"
+        >
+          <v-icon name="clear" />
         </button>
       </div>
     </div>
 
-    <div class="map-details">
-      <div class="map-location">
-        <span v-if="latlng">
-          Latitude:
-          <b>{{ latlng.lat }}</b>
-        </span>
-        <span v-if="latlng">
-          Longitude:
-          <b>{{ latlng.lng }}</b>
-        </span>
-      </div>
-      <button v-if="isInteractive && latlng" class="map-clear" @click="setValue()">
-        {{ $t("clear") }}
-      </button>
+    <div class="map-coordinates">
+      <span v-if="latlng">
+        Latitude:
+        <b>{{ latlng.lat }}</b>
+        ,&nbsp;
+      </span>
+      <span v-if="latlng">
+        Longitude:
+        <b>{{ latlng.lng }}</b>
+      </span>
     </div>
   </div>
 </template>
@@ -96,12 +110,12 @@ export default {
     },
     accentColor() {
       return getComputedStyle(document.documentElement)
-        .getPropertyValue("--accent")
+        .getPropertyValue("--darkest-gray")
         .trim();
     },
     darkAccentColor() {
       return getComputedStyle(document.documentElement)
-        .getPropertyValue("--accent-dark")
+        .getPropertyValue("--darkest-gray")
         .trim();
     }
   },
@@ -206,7 +220,7 @@ export default {
       // Handle drag event of marker.
       this.marker.on(
         "drag",
-        this.$lodash.debounce(e => {
+        _.debounce(e => {
           this.setValue(e.latlng);
         }, 100)
       );
@@ -323,6 +337,7 @@ export default {
 .interface-map {
   overflow-x: auto;
   overflow-y: hidden;
+  position: relative;
 }
 
 .map {
@@ -343,7 +358,6 @@ export default {
 .map-actions {
   position: absolute;
   display: flex;
-  justify-content: space-between;
   width: 100%;
   top: 20px;
   left: 0px;
@@ -356,55 +370,64 @@ export default {
 
   .v-input {
     width: 250px;
+    margin-right: 8px;
   }
 
   button {
-    margin-left: 4px;
-    transition: var(--fast) var(--transition) color;
-    width: 40px;
-    height: 40px;
+    transition: all var(--fast) var(--transition);
+    width: 44px;
+    height: 44px;
     border-radius: var(--border-radius);
-    color: var(--light-gray);
-    box-shadow: var(--box-shadow);
-    background: #fff;
+    color: var(--white);
+    background: var(--lighter-gray);
+    margin-right: 8px;
+    &:hover {
+      background: var(--light-gray);
+    }
   }
 }
 
 .map-my-location {
   transition: var(--fast) var(--transition) color;
-  height: 40px;
-  width: 40px;
+  height: 44px;
+  width: 44px;
   border-radius: var(--border-radius);
-  color: var(--light-gray);
-  box-shadow: var(--box-shadow);
-  background: #fff;
+  color: var(--white);
+  background: var(--lighter-gray);
+  margin-right: 8px;
 
   &:hover {
-    color: var(--darkest-gray);
+    background: var(--light-gray);
   }
 }
 
-.map-details {
-  display: flex;
-  margin-top: 4px;
-  justify-content: space-between;
-  height: 18px;
+.clear-location {
+  transition: var(--fast) var(--transition) color;
+  height: 44px;
+  width: 44px;
+  border-radius: var(--border-radius);
+  color: var(--white);
+  background: var(--lighter-gray);
+  margin-right: 8px;
+
+  &:hover {
+    background: var(--light-gray);
+  }
 }
 
-.map-location {
+.map-coordinates {
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  z-index: 1;
+  padding: 4px 8px 4px 4px;
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 0 var(--border-radius) 0 0;
   span {
     color: var(--light-gray);
     text-transform: initial;
-    margin-right: 20px;
     font-style: italic;
   }
-}
-
-.map-clear {
-  text-transform: initial;
-  color: var(--darkest-gray);
-  font-style: italic;
-  padding-right: 2px; // To avoid cropping
 }
 
 //Read Only Map

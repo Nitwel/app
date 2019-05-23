@@ -32,7 +32,7 @@ export default {
     //The primary key of related table
     relatedPk() {
       let fields = this.relation.junction.collection_one.fields;
-      return this.$lodash.find(fields, {
+      return _.find(fields, {
         primary_key: true
       }).field;
     },
@@ -45,7 +45,7 @@ export default {
     //Junction Table Primary Key
     //? In normal case it would be "ID" only!
     junctionPk() {
-      return this.$lodash.find(this.relation.collection_many.fields, {
+      return _.find(this.relation.collection_many.fields, {
         primary_key: true
       }).field;
     }

@@ -159,6 +159,7 @@ export default {
     height: 100%;
     opacity: 0;
     cursor: pointer;
+    appearance: none;
   }
 
   .value,

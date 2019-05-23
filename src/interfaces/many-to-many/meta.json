@@ -1,6 +1,6 @@
 {
   "name": "$t:m2m",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "types": ["o2m"],
   "relation": "m2m",
   "icon": "compare_arrows",

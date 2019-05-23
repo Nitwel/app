@@ -101,7 +101,7 @@ export default {
     }
   },
   created() {
-    this.updateHeight = this.$lodash.throttle(this.updateHeight, 100);
+    this.updateHeight = _.throttle(this.updateHeight, 100);
     window.addEventListener("resize", () => {
       this.updateHeight();
     });

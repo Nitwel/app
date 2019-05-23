@@ -14,7 +14,7 @@
       </button>
     </div>
 
-    <portal to="modal" v-if="confirmSignOut">
+    <portal v-if="confirmSignOut" to="modal">
       <v-confirm
         :busy="confirmSignOutLoading"
         :message="editing ? $t('sign_out_confirm_edits') : $t('sign_out_confirm')"
@@ -30,7 +30,7 @@
 import NavMenu from "./nav-menu.vue";
 
 export default {
-  name: "user-menu",
+  name: "UserMenu",
   components: {
     NavMenu
   },
@@ -152,8 +152,6 @@ export default {
   }
 
   header {
-    position: sticky;
-    top: 0;
     padding: 10px 20px;
     margin-bottom: 10px;
     z-index: +1;

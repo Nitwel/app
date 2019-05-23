@@ -161,8 +161,8 @@ export default {
     }
   },
   created() {
-    this.search = this.$lodash.debounce(this.search, 300);
-    this.updateFilter = this.$lodash.debounce(this.updateFilter, 300);
+    this.search = _.debounce(this.search, 300);
+    this.updateFilter = _.debounce(this.updateFilter, 300);
   },
   mounted() {
     window.addEventListener("click", this.closeFilter);
@@ -185,13 +185,13 @@ export default {
       ]);
     },
     updateFilter(index, key, value) {
-      const filters = this.$lodash.cloneDeep(this.filters);
+      const filters = _.cloneDeep(this.filters);
       filters[index][key] = value;
 
       this.$emit("filter", filters);
     },
     deleteFilter(index) {
-      const filters = this.$lodash.cloneDeep(this.filters);
+      const filters = _.cloneDeep(this.filters);
       filters.splice(index, 1);
 
       this.$emit("filter", filters);

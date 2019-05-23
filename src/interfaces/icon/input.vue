@@ -56,7 +56,7 @@ export default {
       return icons;
     },
     iconsArray() {
-      return this.$lodash.flatten(Object.values(this.icons));
+      return _.flatten(Object.values(this.icons));
     },
     filteredArray() {
       return this.iconsArray.filter(icon => icon.includes(this.searchText.toLowerCase()));

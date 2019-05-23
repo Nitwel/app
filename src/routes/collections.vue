@@ -53,7 +53,7 @@ export default {
         )
         .filter(collection => {
           if (collection.status_mapping) {
-            return this.$lodash.some(
+            return _.some(
               this.permissions[collection.collection].statuses,
               permission => permission.read !== "none"
             );

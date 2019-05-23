@@ -27,7 +27,7 @@
           "published": {
             "name": "$t:published",
             "text_color": "white",
-            "background_color": "accent",
+            "background_color": "green",
             "browse_subdued": false,
             "browse_badge": true,
             "soft_delete": false,

@@ -46,26 +46,21 @@
               type="button"
               class="remove-item"
               v-tooltip="$t('remove_related')"
-              @click.stop="
-                removeRelated({
-                  relatedKey: item[relatedKey],
-                  item
-                })
-              "
+              @click.stop="removeRelated(item[relatedKey])"
             >
               <v-icon name="close" />
             </button>
           </div>
         </div>
       </div>
-      <button type="button" class="style-btn select" @click="addNew = true">
+      <v-button type="button" :disabled="readonly" @click="addNew = true">
         <v-icon name="add" />
         {{ $t("add_new") }}
-      </button>
-      <button type="button" class="style-btn select" @click="selectExisting = true">
+      </v-button>
+      <v-button type="button" :disabled="readonly" @click="selectExisting = true">
         <v-icon name="playlist_add" />
         <span>{{ $t("select_existing") }}</span>
-      </button>
+      </v-button>
     </template>
 
     <portal to="modal" v-if="selectExisting">
@@ -196,9 +191,12 @@ export default {
       return this.relation.collection_many.fields;
     },
     relatedKey() {
-      return this.$lodash.find(this.relation.collection_many.fields, {
+      return _.find(this.relation.collection_many.fields, {
         primary_key: true
       }).field;
+    },
+    relatedField() {
+      return this.relation.field_many.field;
     },
 
     visibleFields() {
@@ -214,7 +212,7 @@ export default {
     items() {
       if (this.relationSetup === false) return [];
 
-      return this.$lodash.orderBy(
+      return _.orderBy(
         (this.value || []).filter(val => !val.$delete),
         item => item[this.sort.field],
         this.sort.asc ? "asc" : "desc"
@@ -232,7 +230,7 @@ export default {
       if (this.relationSetup === false) return null;
       if (!this.relatedCollectionFields) return null;
 
-      return this.$lodash.mapValues(this.relatedCollectionFields, field => field.default_value);
+      return _.mapValues(this.relatedCollectionFields, field => field.default_value);
     },
     relatedDefaultsWithEdits() {
       if (this.relationSetup === false) return null;
@@ -279,7 +277,7 @@ export default {
       this.setSelection();
     }
 
-    this.onSearchInput = this.$lodash.debounce(this.onSearchInput, 200);
+    this.onSearchInput = _.debounce(this.onSearchInput, 200);
   },
   watch: {
     value() {
@@ -329,7 +327,7 @@ export default {
       const selectedPKs = this.selection.map(item => item[this.relatedKey]);
 
       // Set $delete: true to all items that aren't selected anymore
-      const newValue = (this.value || []).map(item => {
+      let newValue = (this.value || []).map(item => {
         const relatedPK = item[this.relatedKey];
 
         if (!relatedPK) return item;
@@ -360,6 +358,15 @@ export default {
         }
       });
 
+      // Filter out copies of the current relational parent item
+      newValue = newValue.map(item => {
+        if (typeof item === "object" && item.hasOwnProperty(this.relatedField)) {
+          delete item[this.relatedField];
+        }
+
+        return item;
+      });
+
       this.$emit("input", newValue);
 
       this.selectExisting = false;
@@ -374,48 +381,82 @@ export default {
     },
     saveEdits() {
       this.$emit("input", [
-        ...(this.value || []).map(val => {
-          if (val.id === this.editExisting[this.relatedKey]) {
-            return {
-              ...val,
-              ...this.edits
-            };
-          }
+        ...(this.value || [])
+          .map(val => {
+            if (val.id === this.editExisting[this.relatedKey]) {
+              return {
+                ...val,
+                ...this.edits
+              };
+            }
 
-          return val;
-        })
+            return val;
+          })
+          // Filter out copies of the current relational parent item
+          .map(item => {
+            if (typeof item === "object" && item.hasOwnProperty(this.relatedField)) {
+              delete item[this.relatedField];
+            }
+
+            return item;
+          })
       ]);
 
       this.edits = {};
       this.editExisting = false;
     },
     addNewItem() {
-      this.$emit("input", [...(this.value || []), this.edits]);
+      this.$emit("input", [
+        ...(this.value || []).map(item => {
+          if (typeof item === "object" && item.hasOwnProperty(this.relatedField)) {
+            delete item[this.relatedField];
+          }
+
+          return item;
+        }),
+        this.edits
+      ]);
 
       this.edits = {};
       this.addNew = false;
     },
-    removeRelated({ relatedKey }) {
+    removeRelated(relatedKey) {
       if (relatedKey) {
         this.$emit(
           "input",
-          (this.value || []).map(val => {
-            if (val[this.relatedKey] === relatedKey) {
-              return {
-                [this.relatedKey]: val[this.relatedKey],
-                $delete: true
-              };
-            }
+          (this.value || [])
+            .map(val => {
+              if (val[this.relatedKey] === relatedKey) {
+                return {
+                  [this.relatedKey]: val[this.relatedKey],
+                  $delete: true
+                };
+              }
 
-            return val;
-          })
+              return val;
+            })
+            .map(item => {
+              if (typeof item === "object" && item.hasOwnProperty(this.relatedField)) {
+                delete item[this.relatedField];
+              }
+
+              return item;
+            })
         );
       } else {
         this.$emit(
           "input",
-          (this.value || []).filter(val => {
-            return val[this.relatedKey] !== relatedKey;
-          })
+          (this.value || [])
+            .filter(val => {
+              return val[this.relatedKey] !== relatedKey;
+            })
+            .map(item => {
+              if (typeof item === "object" && item.hasOwnProperty(this.relatedField)) {
+                delete item[this.relatedField];
+              }
+
+              return item;
+            })
         );
       }
     },
@@ -515,23 +556,11 @@ export default {
   }
 }
 
-button.select {
-  background-color: var(--darker-gray);
-  border-radius: var(--border-radius);
-  height: var(--input-height);
-  padding: 0 10px;
-  display: inline-flex;
-  align-items: center;
-  margin-right: 10px;
-  transition: background-color var(--fast) var(--transition);
-
-  i {
-    margin-right: 5px;
-  }
-
-  &:hover {
-    transition: none;
-    background-color: var(--darkest-gray);
+button {
+  display: inline-block;
+  margin-left: 20px;
+  &:first-of-type {
+    margin-left: 0;
   }
 }
 

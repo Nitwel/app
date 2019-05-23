@@ -158,7 +158,7 @@ export default {
     }
   },
   created() {
-    this.scroll = this.$lodash.throttle(this.scroll, 150);
+    this.scroll = _.throttle(this.scroll, 150);
   }
 };
 </script>

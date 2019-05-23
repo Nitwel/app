@@ -22,18 +22,17 @@
 .leaflet-control-zoom {
 	position: absolute;
 	left: 20px;
-	top: 70px;
+	top: 72px;
 }
 
 .leaflet-control-zoom-in,
 .leaflet-control-zoom-out {
 	display: block;
 	transition: var(--fast) var(--transition) color;
-	height: 40px;
-	width: 40px;
-	color: var(--light-gray);
-	box-shadow: var(--box-shadow);
-	background: #fff;
+	height: 44px;
+	width: 44px;
+	color: var(--white);
+	background: var(--lighter-gray);
 	text-decoration: none;
 	font-size: 24px;
 	font-weight: 300;
@@ -43,12 +42,12 @@
 
 .leaflet-control-zoom-in:hover,
 .leaflet-control-zoom-out:hover {
-	color: var(--darkest-gray);
+	background: var(--light-gray);
 }
 
 .leaflet-control-zoom-in {
 	border-radius: var(--border-radius) var(--border-radius) 0 0;
-	border-bottom: 1px solid var(--lightest-gray);
+	border-bottom: 2px solid var(--lightest-gray);
 }
 
 .leaflet-control-zoom-out {

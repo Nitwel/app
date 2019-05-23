@@ -49,24 +49,21 @@ export default {
   computed: {
     titleFieldOptions() {
       return {
-        ...this.$lodash.mapValues(this.fields, info => info.name)
+        ..._.mapValues(this.fields, info => info.name)
       };
     },
     fieldOptions() {
       return {
         __none__: `(${this.$t("dont_show")})`,
-        ...this.$lodash.mapValues(this.fields, info => info.name)
+        ..._.mapValues(this.fields, info => info.name)
       };
     },
     fileOptions() {
-      const fileTypeFields = this.$lodash.filter(
-        this.fields,
-        info => info.type.toLowerCase() === "file"
-      );
-      const fields = this.$lodash.keyBy(fileTypeFields, "field");
+      const fileTypeFields = _.filter(this.fields, info => info.type.toLowerCase() === "file");
+      const fields = _.keyBy(fileTypeFields, "field");
       const options = {
         __none__: `(${this.$t("dont_show")})`,
-        ...this.$lodash.mapValues(fields, info => info.name)
+        ..._.mapValues(fields, info => info.name)
       };
 
       // Check if one of the fields is `data`. If that's the case, make sure that this

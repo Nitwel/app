@@ -32,7 +32,7 @@ export default {
         return this.options.status_mapping ? JSON.parse(this.status_mapping) : {};
       }
       if (!this.options.status_mapping) return {};
-      return this.$lodash.mapValues(this.options.status_mapping, mapping => ({
+      return _.mapValues(this.options.status_mapping, mapping => ({
         ...mapping,
         label: this.$helpers.formatTitle(this.$t(mapping.name))
       }));
@@ -40,13 +40,9 @@ export default {
     optionValues() {
       const allStatuses = Object.keys(this.statusMapping);
 
-      const allowedStatuses = this.$lodash.differenceWith(
-        allStatuses,
-        this.blacklist,
-        this.$lodash.isEqual
-      );
+      const allowedStatuses = _.differenceWith(allStatuses, this.blacklist, _.isEqual);
 
-      return this.$lodash.pick(this.statusMapping, allowedStatuses);
+      return _.pick(this.statusMapping, allowedStatuses);
     },
     blacklist() {
       if (typeof this.permissions.status_blacklist === "string")

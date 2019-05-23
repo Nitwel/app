@@ -22,7 +22,7 @@
           @change="$emit('input', subitem.value)"
         />
         <span class="button-group-button">
-          <v-icon v-if="subitem.icon" />
+          <v-icon v-if="subitem.icon" :name="subitem.icon" />
           <span v-if="subitem.label">{{ subitem.label }}</span>
         </span>
       </label>
@@ -68,25 +68,26 @@ Theme: Outline
 .button-group-subgroup {
   display: inline-flex;
   flex-wrap: wrap;
-  margin-right: 10px;
+  margin-right: 12px;
 }
 
 .button-group-button {
-  border: var(--input-border-width) solid var(--action);
+  border: var(--input-border-width) solid var(--gray);
   cursor: pointer;
   transition: var(--fast) var(--transition);
   transition-property: border-color, background-color, color;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0px 20px;
-  height: 40px;
-  line-height: 40px;
+  padding: 0px 16px;
+  height: 44px;
+  line-height: 44px;
   white-space: nowrap;
-  color: var(--action-dark);
+  color: var(--gray);
+  margin-bottom: 8px;
 
   &:hover {
-    background-color: var(--light-blue-50);
+    background-color: var(--lightest-gray);
   }
 
   i {
@@ -108,7 +109,7 @@ Theme: Outline
 		*/
     &:focus {
       + .button-group-button {
-        background-color: var(--light-blue-50);
+        background-color: var(--light-gray);
       }
     }
     /**
@@ -116,7 +117,7 @@ Theme: Outline
 		*/
     &:checked {
       + .button-group-button {
-        background-color: var(--darkest-gray);
+        background-color: var(--gray);
         color: var(--white);
       }
     }
@@ -127,7 +128,7 @@ Theme: Outline
       + .button-group-button {
         border-color: var(--lighter-gray);
         background-color: var(--lightest-gray);
-        color: var(--gray);
+        color: var(--light-gray);
         cursor: not-allowed;
       }
       &:checked {
@@ -201,11 +202,16 @@ Theme: Solid | Default
 */
 .button-group-solid {
   .button-group-button {
-    border: none;
-    background-color: var(--dark-gray);
-    color: var(--white);
+    border-top: none;
+    // border-right-color: var(--gray);
+    border-right: none;
+    border-bottom: none;
+    border-left: none;
+    margin-right: 2px;
+    background-color: var(--lightest-gray);
+    color: var(--dark-gray);
     &:hover {
-      background-color: var(--darker-gray);
+      background-color: var(--light-gray);
       color: var(--white);
     }
   }
@@ -217,12 +223,14 @@ Theme: Solid | Default
 			*/
       &:focus {
         + .button-group-button {
-          background-color: var(--darker-gray);
+          background-color: var(--dark-gray);
+          color: var(--white);
         }
       }
       &:checked {
         + .button-group-button {
-          background-color: var(--darkest-gray);
+          background-color: var(--dark-gray);
+          color: var(--white);
         }
       }
       /**
@@ -230,13 +238,12 @@ Theme: Solid | Default
 			*/
       &:disabled {
         + .button-group-button {
-          background-color: var(--lighter-gray);
           color: var(--light-gray);
         }
         &:checked {
           + .button-group-button {
-            background-color: var(--blue-grey-200);
-            color: var(--gray);
+            background-color: var(--gray);
+            color: var(--lightest-gray);
           }
         }
       }
@@ -245,6 +252,13 @@ Theme: Solid | Default
     + .button-group-item {
       .button-group-button {
         margin-left: 0;
+      }
+    }
+
+    &:last-child {
+      .button-group-button {
+        border-right: none;
+        margin-right: 0;
       }
     }
   }

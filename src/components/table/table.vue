@@ -116,11 +116,11 @@
               }"
               class="cell"
             >
-              <div v-if="row[field] === '' || $lodash.isNil(row[field])" class="empty">
+              <div v-if="row[field] === '' || isNil(row[field])" class="empty">
                 --
               </div>
               <v-ext-display
-                v-else-if="useInterfaces && !$lodash.isNil(row[field])"
+                v-else-if="useInterfaces && !isNil(row[field])"
                 :interface-type="fieldInfo.interface"
                 :id="field"
                 :name="field"
@@ -160,11 +160,11 @@
               }"
               class="cell"
             >
-              <div v-if="row[field] === '' || $lodash.isNil(row[field])" class="empty">
+              <div v-if="row[field] === '' || isNil(row[field])" class="empty">
                 --
               </div>
               <v-ext-display
-                v-else-if="useInterfaces && !$lodash.isNil(row[field])"
+                v-else-if="useInterfaces && !isNil(row[field])"
                 :interface-type="fieldInfo.interface"
                 :id="field"
                 :name="field"
@@ -262,16 +262,16 @@ export default {
       const primaryKeyFields = this.items.map(item => item[this.primaryKeyField]).sort();
       const selection = [...this.selection];
       selection.sort();
-      return this.selection.length > 0 && this.$lodash.isEqual(primaryKeyFields, selection);
+      return this.selection.length > 0 && _.isEqual(primaryKeyFields, selection);
     },
     selectable() {
       return Array.isArray(this.selection);
     },
     sortable() {
-      return this.$lodash.isObject(this.sortVal);
+      return _.isObject(this.sortVal);
     },
     resizeable() {
-      return this.$lodash.isObject(this.columnWidths);
+      return _.isObject(this.columnWidths);
     },
     totalWidth() {
       return (
@@ -309,6 +309,9 @@ export default {
     }
   },
   methods: {
+    isNil(val) {
+      return _.isNil(val)
+    },
     selectAll() {
       if (this.allSelected) {
         return this.$emit("select", []);

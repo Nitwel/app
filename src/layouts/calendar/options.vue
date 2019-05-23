@@ -59,30 +59,28 @@ export default {
   },
   computed: {
     textOptions() {
-      var options = this.$lodash.mapValues(this.fields, info =>
+      var options = _.mapValues(this.fields, info =>
         info.type == "string" || info.type == "integer" ? info.name : null
       );
-      return this.$lodash.pickBy(options, this.$lodash.identity);
+      return _.pickBy(options, _.identity);
     },
     dateOptions() {
-      var options = this.$lodash.mapValues(this.fields, info =>
-        info.type == "date" ? info.name : null
-      );
-      return this.$lodash.pickBy(options, this.$lodash.identity);
+      var options = _.mapValues(this.fields, info => (info.type == "date" ? info.name : null));
+      return _.pickBy(options, _.identity);
     },
     timeOptions() {
       var options = {
         __none__: `(${this.$t("dont_show")})`,
-        ...this.$lodash.mapValues(this.fields, info => (info.type == "time" ? info.name : null))
+        ..._.mapValues(this.fields, info => (info.type == "time" ? info.name : null))
       };
-      return this.$lodash.pickBy(options, this.$lodash.identity);
+      return _.pickBy(options, _.identity);
     },
     colorOptions() {
       var options = {
         __none__: `(${this.$t("dont_show")})`,
-        ...this.$lodash.mapValues(this.fields, info => (info.type == "string" ? info.name : null))
+        ..._.mapValues(this.fields, info => (info.type == "string" ? info.name : null))
       };
-      return this.$lodash.pickBy(options, this.$lodash.identity);
+      return _.pickBy(options, _.identity);
     }
   },
   methods: {

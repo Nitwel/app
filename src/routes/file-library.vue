@@ -211,7 +211,7 @@ export default {
           view_type: bookmark.view_type,
           view_query: bookmark.view_query
         };
-        return this.$lodash.isEqual(bookmarkPreferences, preferences);
+        return _.isEqual(bookmarkPreferences, preferences);
       })[0];
       return currentBookmark || null;
     },
@@ -245,9 +245,8 @@ export default {
       if (!this.meta || !this.preferences) return this.$t("loading");
 
       const isFiltering =
-        !this.$lodash.isEmpty(this.preferences.filters) ||
-        (!this.$lodash.isNil(this.preferences.search_query) &&
-          this.preferences.search_query.length > 0);
+        !_.isEmpty(this.preferences.filters) ||
+        (!_.isNil(this.preferences.search_query) && this.preferences.search_query.length > 0);
 
       return isFiltering
         ? this.$tc("item_count_filter", this.meta.result_count, {

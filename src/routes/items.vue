@@ -241,7 +241,7 @@ export default {
           view_type: bookmark.view_type,
           view_query: bookmark.view_query
         };
-        return this.$lodash.isEqual(bookmarkPreferences, preferences);
+        return _.isEqual(bookmarkPreferences, preferences);
       })[0];
       return currentBookmark || null;
     },
@@ -308,9 +308,8 @@ export default {
       if (!this.meta || !this.preferences) return this.$t("loading");
 
       const isFiltering =
-        !this.$lodash.isEmpty(this.preferences.filters) ||
-        (!this.$lodash.isNil(this.preferences.search_query) &&
-          this.preferences.search_query.length > 0);
+        !_.isEmpty(this.preferences.filters) ||
+        (!_.isNil(this.preferences.search_query) && this.preferences.search_query.length > 0);
 
       return isFiltering
         ? this.$tc("item_count_filter", this.meta.result_count, {
@@ -342,10 +341,7 @@ export default {
     statusField() {
       if (!this.fields) return null;
       return (
-        this.$lodash.find(
-          Object.values(this.fields),
-          field => field.type.toLowerCase() === "status"
-        ) || {}
+        _.find(Object.values(this.fields), field => field.type.toLowerCase() === "status") || {}
       ).field;
     },
 
@@ -356,7 +352,7 @@ export default {
       if (!this.collectionInfo.status_mapping || !this.statusField) return null;
 
       const statusKeys = Object.keys(this.collectionInfo.status_mapping);
-      const index = this.$lodash.findIndex(Object.values(this.collectionInfo.status_mapping), {
+      const index = _.findIndex(Object.values(this.collectionInfo.status_mapping), {
         soft_delete: true
       });
       return statusKeys[index];
@@ -366,15 +362,13 @@ export default {
       if (!this.fields) return null;
 
       return (
-        this.$lodash.find(
-          Object.values(this.fields),
-          field => field.type.toLowerCase() === "user_created"
-        ) || {}
+        _.find(Object.values(this.fields), field => field.type.toLowerCase() === "user_created") ||
+        {}
       ).field;
     },
     primaryKeyField() {
       if (!this.fields) return null;
-      return this.$lodash.find(this.fields, { primary_key: true }).field;
+      return _.find(this.fields, { primary_key: true }).field;
     },
     permissions() {
       return this.$store.state.permissions;

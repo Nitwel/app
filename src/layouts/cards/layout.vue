@@ -55,7 +55,7 @@ export default {
   mixins: [mixin],
   computed: {
     sortableFields() {
-      return this.$lodash.pickBy(this.fields, field => field.datatype);
+      return _.pickBy(this.fields, field => field.datatype);
     },
     sortedOn() {
       let fieldName;

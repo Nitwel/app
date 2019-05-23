@@ -19,8 +19,8 @@
       <div>
         <v-details
           v-for="group in interfacesGrouped"
-          :title="group.title"
           :key="group.title"
+          :title="group.title"
           :open="true"
         >
           <div class="interfaces">
@@ -44,20 +44,20 @@
       </div>
     </template>
 
-    <template slot="schema" v-if="interfaceName">
+    <template v-if="interfaceName" slot="schema">
       <template v-if="!existing">
         <h1 class="style-0">
           {{ $t("name_field", { field: $helpers.formatTitle(interfaces[interfaceName].name) }) }}
         </h1>
         <p class="subtext">{{ $t("intelligent_defaults") }}</p>
       </template>
-      <form @submit.prevent class="schema">
+      <form class="schema" @submit.prevent>
         <div class="name">
           <label>
             {{ $t("name") }}*
             <v-input
-              type="text"
               v-model="field"
+              type="text"
               :placeholder="$t('db_column_name')"
               class="name-input"
               :disabled="existing"
@@ -73,8 +73,8 @@
           <label>
             {{ $t("default_value") }}
             <v-input
-              type="text"
               v-model="default_value"
+              type="text"
               placeholder="NULL"
               :disabled="type === 'o2m' || type === 'translation'"
             />
@@ -82,12 +82,15 @@
         </div>
         <label>
           {{ $t("note") }}
-          <v-input type="text" v-model="note" :placeholder="$t('add_note')" />
+          <v-input v-model="note" type="text" :placeholder="$t('add_note')" />
         </label>
 
         <div class="toggles">
-          <label class="toggle" v-if="type !== 'alias'">
-            <v-toggle v-model="required" :disabled="fieldInfo.primary_key" />
+          <label class="toggle">
+            <v-toggle
+              v-model="required"
+              :disabled="fieldInfo.primary_key || this.type === 'alias'"
+            />
             {{ $t("required") }}
           </label>
           <label class="toggle">
@@ -137,20 +140,20 @@
               {{ $t("length") }}
               <v-input
                 :type="selectedDatatypeInfo && selectedDatatypeInfo.decimal ? 'string' : 'number'"
-                @input="length = $event"
                 :value="lengthDisabled ? null : length"
                 :disabled="lengthDisabled"
                 :placeholder="lengthDisabled ? $t('length_disabled_placeholder') : ''"
+                @input="length = $event"
               />
             </label>
             <label>
               {{ $t("validation") }}
-              <v-input type="text" v-model="validation" :placeholder="$t('regex')" />
+              <v-input v-model="validation" type="text" :placeholder="$t('regex')" />
             </label>
             <label
+              v-tooltip="primaryKeyTooltip"
               class="toggle"
               :class="{ disabled: primaryKeyDisabled }"
-              v-tooltip="primaryKeyTooltip"
             >
               <v-toggle v-model="primary_key" :disabled="primaryKeyDisabled" />
               {{ $t("primary_key") }}
@@ -167,7 +170,7 @@
               <v-toggle v-model="hidden_browse" />
               {{ $t("hidden_browse") }}
             </label>
-            <label class="toggle" v-if="isNumeric">
+            <label v-if="isNumeric" class="toggle">
               <v-toggle v-model="signed" />
               {{ $t("signed") }}
             </label>
@@ -176,7 +179,7 @@
       </form>
     </template>
 
-    <template slot="relation" v-if="selectedInterfaceInfo && relation">
+    <template v-if="selectedInterfaceInfo && relation" slot="relation">
       <template v-if="!existing">
         <h1 class="style-0">{{ $t("relation_setup") }}</h1>
         <p class="subtext">
@@ -201,7 +204,7 @@
 
         <p>{{ $t("related_collection") }}</p>
 
-        <v-simple-select class="select" v-model="relationInfo.collection_one">
+        <v-simple-select v-model="relationInfo.collection_one" class="select">
           <optgroup :label="$t('collections')">
             <option
               v-for="collection in collectionsGrouped.user"
@@ -252,7 +255,7 @@
 
         <p>{{ $t("related_collection") }}</p>
 
-        <v-simple-select class="select" v-model="relationInfo.collection_many">
+        <v-simple-select v-model="relationInfo.collection_many" class="select">
           <optgroup :label="$t('collections')">
             <option
               v-for="collection in collectionsGrouped.user"
@@ -273,7 +276,7 @@
           </optgroup>
         </v-simple-select>
 
-        <v-simple-select class="select" v-model="relationInfo.field_many">
+        <v-simple-select v-model="relationInfo.field_many" class="select">
           <option
             v-for="{ field } in fields(relationInfo.collection_many)"
             :key="field"
@@ -335,10 +338,10 @@
         </v-simple-select>
 
         <v-input
-          class="select"
           v-if="createM2Mjunction"
-          type="text"
           v-model="createM2MjunctionName"
+          class="select"
+          type="text"
           :placeholder="
             autoM2Msuggestion(
               collectionInfo.collection,
@@ -349,8 +352,8 @@
 
         <v-simple-select
           v-if="!createM2Mjunction"
-          class="select"
           v-model="relationInfoM2M[currentM2MIndex].field_many"
+          class="select"
         >
           <option
             v-for="{ field } in fields(relationInfoM2M[0].collection_many)"
@@ -362,17 +365,17 @@
         </v-simple-select>
 
         <v-input
-          class="select"
           v-if="createM2Mjunction"
-          type="text"
           v-model="relationInfoM2M[currentM2MIndex].field_many"
+          class="select"
+          type="text"
           :placeholder="autoM2Msuggestion(collectionInfo.collection, 'id')"
         />
 
         <v-simple-select
           v-if="!createM2Mjunction"
-          class="select"
           v-model="relationInfoM2M[currentM2MIndex === 0 ? 1 : 0].field_many"
+          class="select"
         >
           <option
             v-for="{ field } in fields(relationInfoM2M[0].collection_many)"
@@ -384,19 +387,19 @@
         </v-simple-select>
 
         <v-input
-          class="select"
           v-if="createM2Mjunction"
-          type="text"
           v-model="relationInfoM2M[currentM2MIndex === 0 ? 1 : 0].field_many"
+          class="select"
+          type="text"
           :placeholder="
             autoM2Msuggestion(relationInfoM2M[currentM2MIndex == 0 ? 1 : 0].collection_one, 'id')
           "
         />
 
         <v-checkbox
+          id="createM2Mjunction"
           value="m2mjunction"
           :label="$t('auto_generate')"
-          id="createM2Mjunction"
           :checked="createM2Mjunction"
           @change="createM2Mjunction = !createM2Mjunction"
         />
@@ -406,8 +409,8 @@
         <p>{{ $t("related_collection") }}</p>
 
         <v-simple-select
-          class="select"
           v-model="relationInfoM2M[currentM2MIndex == 0 ? 1 : 0].collection_one"
+          class="select"
         >
           <optgroup :label="$t('collections')">
             <option
@@ -471,8 +474,8 @@
 
       <hr />
 
-      <form @submit.prevent v-if="selectedInterfaceInfo" class="options">
-        <div v-for="(option, optionID) in interfaceOptions.regular" class="options" :key="optionID">
+      <form v-if="selectedInterfaceInfo" class="options" @submit.prevent>
+        <div v-for="(option, optionID) in interfaceOptions.regular" :key="optionID" class="options">
           <label :for="optionID">{{ option.name }}</label>
           <v-ext-input
             :id="option.interface"
@@ -499,8 +502,8 @@
           <summary>{{ $t("advanced_options") }}</summary>
           <div
             v-for="(option, optionID) in interfaceOptions.advanced"
-            class="options"
             :key="optionID"
+            class="options"
           >
             <label :for="optionID">{{ option.name }}</label>
             <v-ext-input
@@ -517,7 +520,7 @@
               :values="options"
               @input="$set(options, optionID, $event)"
             />
-            <p v-html="$helpers.snarkdown(option.comment || '')" class="note" />
+            <p class="note" v-html="$helpers.snarkdown(option.comment || '')" />
           </div>
         </details>
       </form>
@@ -530,7 +533,7 @@ import mapping, { datatypes } from "../type-map";
 import { defaultFull } from "../store/modules/permissions/defaults";
 
 export default {
-  name: "v-field-setup",
+  name: "VFieldSetup",
   props: {
     collectionInfo: {
       type: Object,
@@ -691,8 +694,9 @@ export default {
             "one-to-many",
             "many-to-one",
             "many-to-many",
-            "file",
             "translation",
+            "file",
+            "files",
             "checkboxes-relational"
           ]
         }
@@ -741,8 +745,8 @@ export default {
     interfaceOptions() {
       if (!this.selectedInterfaceInfo) return null;
       const options = Object.assign({}, this.selectedInterfaceInfo.options);
-      const regular = this.$lodash.pickBy(options, opt => !opt.advanced);
-      const advanced = this.$lodash.pickBy(options, opt => opt.advanced === true);
+      const regular = _.pickBy(options, opt => !opt.advanced);
+      const advanced = _.pickBy(options, opt => opt.advanced === true);
 
       return { regular, advanced };
     },
@@ -869,12 +873,12 @@ export default {
       return false;
     },
     primaryKeyField() {
-      return this.$lodash.find(this.collectionInfo.fields, {
+      return _.find(this.collectionInfo.fields, {
         primary_key: true
       });
     },
     currentM2MIndex() {
-      const index = this.$lodash.findIndex(this.relationInfoM2M, info => {
+      const index = _.findIndex(this.relationInfoM2M, info => {
         return info.collection_one === this.collectionInfo.collection;
       });
 
@@ -884,12 +888,6 @@ export default {
     isNumeric() {
       return this.type === "integer";
     }
-  },
-  created() {
-    this.useFieldInfo();
-    this.initRelation();
-
-    this.activeTab = this.existing ? "schema" : "interface";
   },
   watch: {
     fieldInfo() {
@@ -904,7 +902,7 @@ export default {
           ...this.interfaceOptions.regular
         };
 
-        this.$lodash.forEach(options, (info, key) => {
+        _.forEach(options, (info, key) => {
           this.$set(this.options, key, info.default);
         });
       }
@@ -918,7 +916,12 @@ export default {
       if (this.existing) return;
 
       if (this.selectedInterfaceInfo && this.selectedInterfaceInfo.recommended) {
-        const { defaultValue, length, validation } = this.selectedInterfaceInfo.recommended;
+        const {
+          defaultValue,
+          length,
+          validation,
+          required
+        } = this.selectedInterfaceInfo.recommended;
 
         if (defaultValue) {
           this.default_value = defaultValue;
@@ -930,6 +933,10 @@ export default {
 
         if (validation) {
           this.validation = validation;
+        }
+
+        if (required !== undefined) {
+          this.required = required;
         }
       }
 
@@ -1049,8 +1056,19 @@ export default {
       this.relationInfoM2M[1].collection_many = formatval;
     }
   },
+  created() {
+    this.useFieldInfo();
+    this.initRelation();
+
+    this.activeTab = this.existing ? "schema" : "interface";
+  },
   methods: {
     nextTab() {
+      if (this.existing && this.activeTab === "interface") {
+        this.initRelation();
+        return;
+      }
+
       if (this.existing) {
         return this.saveField();
       }
@@ -1155,7 +1173,7 @@ export default {
       // that way). +1 for future optimizations!
       const fieldName = this.fieldInfo.field;
       const collectionName = this.collectionInfo.collection;
-      const storeFieldCopy = this.$lodash.clone(
+      const storeFieldCopy = _.clone(
         this.$store.state.collections[collectionName].fields[fieldName]
       );
 
@@ -1180,7 +1198,7 @@ export default {
         const existingRelation = this.$store.getters.m2o(collection, field);
 
         if (existingRelation) {
-          this.$lodash.forEach(existingRelation, (val, key) => {
+          _.forEach(existingRelation, (val, key) => {
             if (key && val && key.startsWith("collection")) {
               return this.$set(this.relationInfo, key, val.collection);
             }
@@ -1199,7 +1217,7 @@ export default {
           this.relationInfo.collection_one = Object.values(
             this.$store.state.collections
           )[0].collection;
-          this.relationInfo.field_one = this.$lodash.find(
+          this.relationInfo.field_one = _.find(
             Object.values(this.$store.state.collections)[0].fields,
             { primary_key: true }
           ).field;
@@ -1208,7 +1226,7 @@ export default {
         const existingRelation = this.$store.getters.o2m(collection, field);
 
         if (existingRelation) {
-          this.$lodash.forEach(existingRelation, (val, key) => {
+          _.forEach(existingRelation, (val, key) => {
             if (key && val && key.startsWith("collection")) {
               return this.$set(this.relationInfo, key, val.collection);
             }
@@ -1229,7 +1247,7 @@ export default {
             this.$store.state.collections
           )[0].collection;
 
-          this.relationInfo.field_many = this.$lodash.find(
+          this.relationInfo.field_many = _.find(
             Object.values(this.$store.state.collections)[0].fields,
             { primary_key: true }
           ).field;
@@ -1322,7 +1340,7 @@ export default {
     },
     primaryKeyFieldByCollection(collection) {
       const fields = this.fields(collection);
-      return this.$lodash.find(fields, { primary_key: true });
+      return _.find(fields, { primary_key: true });
     },
     validateFieldName(string) {
       // Based on https://gist.github.com/mathewbyrne/1280286

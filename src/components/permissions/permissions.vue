@@ -78,23 +78,23 @@ export default {
   },
   computed: {
     directusRows() {
-      const permissions = this.$lodash.pickBy(this.permissions, (permission, collection) =>
+      const permissions = _.pickBy(this.permissions, (permission, collection) =>
         collection.startsWith("directus_")
       );
 
-      return this.$lodash(permissions)
+      return _(permissions)
         .toPairs()
         .sortBy(0)
         .fromPairs()
         .value();
     },
     rows() {
-      const permissions = this.$lodash.pickBy(
+      const permissions = _.pickBy(
         this.permissions,
         (permission, collection) => collection.startsWith("directus_") === false
       );
 
-      return this.$lodash(permissions)
+      return _(permissions)
         .toPairs()
         .sortBy(0)
         .fromPairs()
@@ -106,10 +106,10 @@ export default {
       const changes = [];
       let full = true;
 
-      this.$lodash.forEach(this.permissions, (column, collection) => {
+      _.forEach(this.permissions, (column, collection) => {
         if (collection.startsWith("directus_")) return;
         if (this.statuses[collection]) {
-          this.$lodash.forEach(column, statusColumn => {
+          _.forEach(column, statusColumn => {
             if (statusColumn[permission] === "full") {
               full = false;
             }

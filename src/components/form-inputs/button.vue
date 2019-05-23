@@ -11,8 +11,8 @@
       v-if="loading"
       :line-size="2"
       size="13"
-      line-foreground-color="#fff"
-      line-background-color="var(--darkest-gray)"
+      line-fg-color="var(--light-gray)"
+      line-bg-color="#fff"
       class="spinner"
     />
     <slot />

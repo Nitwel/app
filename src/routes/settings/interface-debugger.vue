@@ -353,7 +353,7 @@ export default {
       this.type = this.extension.types[0];
 
       // Populate the options with the default values
-      const defaults = this.$lodash.mapValues(this.extension.options, settings =>
+      const defaults = _.mapValues(this.extension.options, settings =>
         settings.default === undefined ? null : settings.default
       );
 

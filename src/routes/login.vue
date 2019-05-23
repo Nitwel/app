@@ -184,7 +184,7 @@ export default {
   computed: {
     urls() {
       if (!window.__DirectusConfig__) return;
-      return this.$lodash.mapKeys(window.__DirectusConfig__.api, (val, key) =>
+      return _.mapKeys(window.__DirectusConfig__.api, (val, key) =>
         key.endsWith("/") === false ? key + "/" : key
       );
     },
@@ -242,7 +242,7 @@ export default {
   },
 
   created() {
-    this.checkUrl = this.$lodash.debounce(this.checkUrl, 300);
+    this.checkUrl = _.debounce(this.checkUrl, 300);
 
     if (this.url) {
       this.checkUrl();

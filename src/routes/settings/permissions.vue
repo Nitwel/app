@@ -477,7 +477,7 @@ export default {
           this.permissionsLoading = false;
           this.savedPermissions = savedPermissions;
 
-          this.statuses = this.$lodash.keyBy(
+          this.statuses = _.keyBy(
             fields
               .filter(field => field.type && field.type.toLowerCase() === "status")
               .map(field => ({
@@ -487,9 +487,8 @@ export default {
             "collection"
           );
 
-          this.permissionFields = this.$lodash.mapValues(
-            this.$lodash.groupBy(fields, "collection"),
-            array => this.$lodash.keyBy(array, "field")
+          this.permissionFields = _.mapValues(_.groupBy(fields, "collection"), array =>
+            _.keyBy(array, "field")
           );
         })
         .catch(error => {

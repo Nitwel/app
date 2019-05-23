@@ -44,9 +44,6 @@
             >
               <div>
                 {{ $helpers.formatTitle(field.field) }}
-                <span class="optional" v-if="field.required === false && !field.primary_key">
-                  — {{ $t("optional") }}
-                </span>
               </div>
               <div>
                 {{
@@ -673,7 +670,7 @@ h2 {
       padding: 5px 5px;
 
       &:not(.drag):not(.more-options) {
-        flex-basis: 200px;
+        flex-basis: 260px;
       }
     }
   }

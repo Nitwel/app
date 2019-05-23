@@ -54,9 +54,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.rating-input {
-  display: inline-block;
-  margin-right: 5px;
-  width: 100%;
+.rating-value {
+  position: relative;
+  display: flex;
+  .rating-input {
+    display: inline-block;
+    margin-right: 8px;
+    width: 100%;
+  }
+  span {
+    padding: 13px 12px;
+    background-color: var(--lightest-gray);
+    border-radius: var(--border-radius);
+  }
 }
 </style>

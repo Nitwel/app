@@ -106,13 +106,13 @@ export default {
   },
   computed: {
     databaseDisabled() {
-      const { isEmpty } = this.$lodash;
+      const { isEmpty } = _;
       const { project_name, user_email, user_password } = this.values;
 
       return isEmpty(project_name) || isEmpty(user_email) || isEmpty(user_password);
     },
     schemaDisabled() {
-      const { isEmpty } = this.$lodash;
+      const { isEmpty } = _;
       const { db_host, db_port, db_name, db_user, db_password } = this.values;
 
       return (

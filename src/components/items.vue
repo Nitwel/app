@@ -114,27 +114,27 @@ export default {
       const primaryKeys = this.items.data.map(item => item[this.primaryKeyField]).sort();
       const selection = [...this.selection];
       selection.sort();
-      return this.selection.length > 0 && this.$lodash.isEqual(primaryKeys, selection);
+      return this.selection.length > 0 && _.isEqual(primaryKeys, selection);
     },
     primaryKeyField() {
       if (!this.fields) return;
-      return this.$lodash.find(Object.values(this.fields), {
+      return _.find(Object.values(this.fields), {
         primary_key: true
       }).field;
     },
     sortField() {
-      const field = this.$lodash.find(this.fields, { type: "sort" });
+      const field = _.find(this.fields, { type: "sort" });
       return (field && field.field) || null;
     },
     statusField() {
-      const field = this.$lodash.find(this.fields, { type: "status" });
+      const field = _.find(this.fields, { type: "status" });
       return (field && field.field) || null;
     },
     userCreatedField() {
       if (!this.fields) return null;
 
       return (
-        this.$lodash.find(
+        _.find(
           Object.values(this.fields),
           field => field.type && field.type.toLowerCase() === "user_created"
         ) || {}
@@ -143,7 +143,7 @@ export default {
     fields() {
       const fields = this.$store.state.collections[this.collection].fields;
       return (
-        this.$lodash.mapValues(fields, field => ({
+        _.mapValues(fields, field => ({
           ...field,
           name: this.$helpers.formatTitle(field.field)
         })) || {}
@@ -151,7 +151,7 @@ export default {
     },
     selectionKeys() {
       if (!this.selection) return null;
-      return this.$lodash.uniq(this.selection.map(item => item[this.primaryKeyField]));
+      return _.uniq(this.selection.map(item => item[this.primaryKeyField]));
     }
   },
   created() {
@@ -159,25 +159,25 @@ export default {
   },
   watch: {
     collection(newVal, oldVal) {
-      if (this.$lodash.isEqual(newVal, oldVal)) return;
+      if (_.isEqual(newVal, oldVal)) return;
       this.hydrate();
     },
     viewQuery: {
       deep: true,
       handler(newVal, oldVal) {
-        if (this.$lodash.isEqual(newVal, oldVal)) return;
+        if (_.isEqual(newVal, oldVal)) return;
         this.getItems();
       }
     },
     filters: {
       deep: true,
       handler(newVal, oldVal) {
-        if (this.$lodash.isEqual(newVal, oldVal)) return;
+        if (_.isEqual(newVal, oldVal)) return;
         this.getItems();
       }
     },
     searchQuery(newVal, oldVal) {
-      if (this.$lodash.isEqual(newVal, oldVal)) return;
+      if (_.isEqual(newVal, oldVal)) return;
       this.getItems();
     }
   },
@@ -250,9 +250,9 @@ export default {
         "select",
         primaryKeys.map(key => {
           return (
-            this.$lodash.find(this.items.data, {
+            _.find(this.items.data, {
               [this.primaryKeyField]: key
-            }) || this.$lodash.find(this.selection, { [this.primaryKeyField]: key })
+            }) || _.find(this.selection, { [this.primaryKeyField]: key })
           );
         })
       );

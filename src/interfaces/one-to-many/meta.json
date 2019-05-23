@@ -1,6 +1,6 @@
 {
   "name": "$t:o2m",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "types": ["o2m"],
   "options": {
     "fields": {

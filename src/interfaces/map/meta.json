@@ -83,7 +83,10 @@
       "user_location_error": "There was an error while trying to get your location. Plese try again.",
       "address_to_code": "Address Input",
       "address_to_code_comment": "Add an input field to automatically get the geocodes from an address. Uses <a href=\"https://wiki.openstreetmap.org/wiki/Nominatim\">Nominatim</a>. Please check their usage policy.",
-      "address_to_code_error": "No geocode found for this address"
+      "address_to_code_error": "No geocode found for this address",
+      "clear_location": "Clear Location",
+      "my_location": "Set My Location",
+      "address_location": "Set Address Location"
     },
 	"fr-FR": {
       "map": "Carte",

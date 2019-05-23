@@ -61,7 +61,7 @@ export default {
   },
   computed: {
     urls() {
-      return this.$lodash.mapKeys(window.__DirectusConfig__.api, (val, key) =>
+      return _.mapKeys(window.__DirectusConfig__.api, (val, key) =>
         key.endsWith("/") === false ? key + "/" : key
       );
     },

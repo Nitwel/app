@@ -113,10 +113,7 @@ export default {
     optionsWithDefaults() {
       if (!this.interface) return {};
 
-      const defaults = this.$lodash.mapValues(
-        this.interface.options,
-        settings => settings.default || null
-      );
+      const defaults = _.mapValues(this.interface.options, settings => settings.default || null);
 
       return {
         ...defaults,

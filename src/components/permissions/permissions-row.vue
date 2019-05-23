@@ -351,7 +351,7 @@ export default {
   },
   computed: {
     primaryKeyFieldName() {
-      return this.$lodash.find(this.fields, { primary_key: true }).field;
+      return _.find(this.fields, { primary_key: true }).field;
     },
     fieldsWithoutPK() {
       const fieldsCopy = Object.assign({}, this.fields);
@@ -385,7 +385,7 @@ export default {
       if (this.statuses) {
         let all = true;
 
-        this.$lodash.forEach(this.permission, permission => {
+        _.forEach(this.permission, permission => {
           if (
             permission.read_field_blacklist.length > 0 ||
             permission.write_field_blacklist.length > 0
@@ -407,7 +407,7 @@ export default {
       return true;
     },
     userCreatedField() {
-      return this.$lodash.find(
+      return _.find(
         this.fields,
         field => field.type && field.type.toLowerCase() === "user_created"
       );
@@ -481,7 +481,7 @@ export default {
 
       let value = this.permission[Object.keys(this.statuses)[0]][field];
 
-      this.$lodash.forEach(this.permission, (status, name) => {
+      _.forEach(this.permission, (status, name) => {
         if (name !== "$create" && status[field] !== value) value = "indeterminate";
       });
 

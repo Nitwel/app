@@ -149,7 +149,7 @@ export default {
     },
 
     junctionPrimaryKey() {
-      return this.$lodash.find(this.relation.collection_many.fields, {
+      return _.find(this.relation.collection_many.fields, {
         primary_key: true
       }).field;
     },
@@ -185,7 +185,7 @@ export default {
      * we need to make sure we use the value dynamically
      */
     relatedPrimaryKeyField() {
-      return this.$lodash.find(this.relation.junction.collection_one.fields, {
+      return _.find(this.relation.junction.collection_one.fields, {
         primary_key: true
       });
     },
@@ -375,7 +375,7 @@ export default {
     }
   },
   created() {
-    this.onSearchInput = this.$lodash.debounce(this.onSearchInput, 200);
+    this.onSearchInput = _.debounce(this.onSearchInput, 200);
   }
 };
 </script>

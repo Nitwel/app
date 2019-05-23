@@ -1,6 +1,7 @@
 <template>
-  <div class="interface-markdown">
+  <div class="interface-markdown" :class="{ float: !options.tabbed }">
     <v-textarea
+      v-if="!preview || !options.tabbed"
       class="textarea"
       :value="value"
       :placeholder="options.placeholder"
@@ -8,7 +9,22 @@
       @input="$emit('input', $event)"
       :id="name"
     ></v-textarea>
-    <div class="preview" v-html="compiledMarkdown"></div>
+    <div
+      v-if="preview || !options.tabbed"
+      class="preview"
+      v-html="compiledMarkdown"
+      :style="{ height: options.rows * 23 + 'px' }"
+    ></div>
+    <div v-if="options.tabbed" class="toolbar">
+      <span @click="preview = false" :class="{ active: !preview }">
+        <v-icon name="code" size="22" />
+        {{ $t("interfaces-markdown-edit") }}
+      </span>
+      <span @click="preview = true" :class="{ active: preview }">
+        <v-icon name="visibility" size="22" />
+        {{ $t("interfaces-markdown-preview") }}
+      </span>
+    </div>
   </div>
 </template>
 
@@ -19,6 +35,11 @@ import marked from "marked";
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
+  data() {
+    return {
+      preview: false
+    };
+  },
   computed: {
     compiledMarkdown() {
       if (this.value) {
@@ -35,25 +56,76 @@ export default {
 .interface-markdown {
   position: relative;
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: column-reverse;
   width: 100%;
+  &.float {
+    flex-wrap: nowrap;
+    flex-direction: row;
+    .textarea {
+      margin-right: 20px;
+      width: calc((100% - 20px) / 2);
+      border-radius: var(--border-radius);
+    }
+    .preview {
+      width: calc((100% - 20px) / 2);
+      border-radius: var(--border-radius);
+    }
+  }
+  .toolbar {
+    display: flex;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    border: var(--input-border-width) solid var(--lighter-gray);
+    border-bottom: none;
+    background-color: var(--off-white);
+    width: 100%;
+    span {
+      transition: color var(--fast) var(--transition);
+      cursor: pointer;
+      padding: 10px 16px 10px 12px;
+      line-height: 20px;
+      &:hover {
+        color: var(--darkest-gray);
+      }
+      &.active {
+        font-weight: 500;
+        border-radius: var(--border-radius) var(--border-radius) 0 0;
+        border: var(--input-border-width) solid var(--lighter-gray);
+        border-bottom: none;
+        color: var(--darkest-gray);
+        background-color: var(--white);
+        margin: -2px;
+        z-index: 1;
+      }
+      i {
+        margin-right: 0px;
+        margin-top: -2px;
+      }
+    }
+  }
   .textarea,
   .preview {
     flex-grow: 1;
-    width: calc(50% - 10px);
+    width: 100%;
     max-width: var(--width-large);
     min-height: 200px;
     max-height: 800px;
     overflow: scroll;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
   }
   .textarea {
     font-family: "Roboto Mono", monospace;
+    &:hover ~ .toolbar span.active {
+      border-color: var(--gray);
+    }
+    &:focus ~ .toolbar span.active {
+      border-color: var(--darkest-gray);
+    }
   }
   .preview {
     background-color: var(--white);
     padding: 10px;
     border: var(--input-border-width) solid var(--lighter-gray);
-    border-radius: var(--border-radius);
-    margin-left: 20px;
   }
 }
 </style>
@@ -80,7 +152,7 @@ export default {
     h6 {
       margin: 20px 0 10px;
       padding: 0;
-      font-weight: 700;
+      font-weight: 600;
       cursor: text;
       position: relative;
     }
@@ -186,6 +258,9 @@ export default {
     ul,
     ol {
       padding-left: 30px;
+      li {
+        margin: 0;
+      }
     }
     ul :first-child,
     ol :first-child {
@@ -298,7 +373,7 @@ export default {
 
     b,
     strong {
-      font-weight: 700;
+      font-weight: 600;
     }
 
     a {

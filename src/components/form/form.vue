@@ -2,15 +2,15 @@
   <div class="form" :class="{ 'full-width': fullWidth }">
     <v-field
       v-for="field in filteredFields"
-      :class="field.width"
       :key="uniqueID + '-' + field.field"
+      :class="field.width || 'full'"
       :name="uniqueID + '-' + field.field"
       :field="field"
       :fields="fields"
       :values="values"
       :blocked="batchMode && !activeFields.includes(field.field)"
-      :batchMode="batchMode"
-      :newItem="newItem"
+      :batch-mode="batchMode"
+      :new-item="newItem"
       @activate="activateField"
       @deactivate="deactivateField"
       @stage-value="$emit('stage-value', $event)"
@@ -23,7 +23,7 @@ import VField from "./field.vue";
 import { defaultFull } from "../../store/modules/permissions/defaults";
 
 export default {
-  name: "v-form",
+  name: "VForm",
   components: {
     VField
   },
@@ -56,6 +56,12 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  data() {
+    return {
+      // The fields that are actively being edited in batch mode
+      activeFields: []
+    };
   },
   computed: {
     // Field names should be prefixed by a unique ID per form. There's a possibility that multiple
@@ -131,12 +137,6 @@ export default {
 
       return fields;
     }
-  },
-  data() {
-    return {
-      // The fields that are actively being edited in batch mode
-      activeFields: []
-    };
   },
   methods: {
     activateField(fieldName) {

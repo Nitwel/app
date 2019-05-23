@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="name" v-if="showLabel">
+    <div v-if="showLabel" class="name">
       {{ field.name || $helpers.formatTitle(field.field) }}
-      <span class="optional" v-if="field.required === false">— {{ $t("optional") }}</span>
+      <span v-if="field.required === false" class="optional">— {{ $t("optional") }}</span>
       <v-toggle
         v-if="batchMode"
         class="batch-toggle"
@@ -41,13 +41,13 @@
       />
     </div>
 
-    <div class="note" v-if="field.note" v-html="$helpers.snarkdown(field.note)" />
+    <div v-if="field.note" class="note" v-html="$helpers.snarkdown(field.note)" />
   </div>
 </template>
 
 <script>
 export default {
-  name: "v-field",
+  name: "VField",
   props: {
     name: {
       type: String,
@@ -85,7 +85,7 @@ export default {
       const interfaceMeta = this.getInterfaceMeta(interfaceName);
 
       // In case the current field doesn't have an interface setup
-      if (!interfaceMeta) return;
+      if (!interfaceMeta) return true;
 
       const hideLabel = interfaceMeta.hideLabel;
 

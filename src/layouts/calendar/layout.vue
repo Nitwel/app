@@ -247,7 +247,7 @@ export default {
     }
   },
   created() {
-    this.scroll = this.$lodash.throttle(this.scroll, 200);
+    this.scroll = _.throttle(this.scroll, 200);
     document.addEventListener("click", this.documentClick);
     document.addEventListener("keypress", this.keyPress);
   },

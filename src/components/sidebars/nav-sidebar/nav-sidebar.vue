@@ -82,7 +82,7 @@ export default {
         )
         .filter(collection => {
           if (collection.status_mapping && this.permissions[collection.collection].statuses) {
-            return this.$lodash.some(
+            return _.some(
               this.permissions[collection.collection].statuses,
               permission => permission.read !== "none"
             );
@@ -144,7 +144,7 @@ export default {
       const links = [];
       const pages = this.$store.state.extensions.pages;
 
-      this.$lodash.forEach(pages, (info, key) => {
+      _.forEach(pages, (info, key) => {
         links.push({
           path: `/ext/${key}`,
           name: info.name,

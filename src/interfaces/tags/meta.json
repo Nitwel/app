@@ -64,7 +64,7 @@
       "format_comment": "Convert the tags to Title Case when displaying the value",
       "sanitize": "Sanitize",
       "sanitize_comment": "Removes any non-alphanumeric characters and converts spaces to hyphens",
-      "placeholder_text": "Enter tag and then hit enter or comma...",
+      "placeholder_text": "Type a tag and then hit enter or comma...",
       "icon_left": "Icon Left",
       "icon_left_comment": "Choose an optional icon to display on the left of the input",
       "icon_right": "Icon Right",

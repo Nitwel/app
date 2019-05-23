@@ -7,6 +7,16 @@
     "length": 65534
   },
   "options": {
+    "tabbed": {
+      "name": "$t:tabbed_preview",
+      "comment": "$t:tabbed_preview_comment",
+      "interface": "toggle",
+      "options": {
+        "labelOn": "$t:tabbed_preview_on",
+        "labelOff": "$t:tabbed_preview_off"
+      },
+      "default": true
+    },
     "rows": {
       "name": "$t:rows",
       "comment": "$t:rows_comment",
@@ -28,6 +38,12 @@
   "translation": {
     "en-US": {
       "markdown": "Markdown",
+      "edit": "Edit",
+      "preview": "Preview",
+      "tabbed_preview": "Tabbed Preview",
+      "tabbed_preview_comment": "How to display the editor and preview",
+      "tabbed_preview_on": "Tabbed Preview",
+      "tabbed_preview_off": "Side-by-side Preview",
       "rows": "Rows",
       "rows_comment": "The starting number of text rows available",
       "placeholder": "Placeholder",

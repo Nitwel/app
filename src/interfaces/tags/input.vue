@@ -10,9 +10,9 @@
       @keydown="onInput"
     ></v-input>
     <div class="buttons">
-      <button v-for="value in valueArray" :key="value" @click.prevent="removeTag(value)">
+      <v-tag v-for="value in valueArray" :key="value" @click.prevent="removeTag(value)" clickable>
         {{ value }}
-      </button>
+      </v-tag>
     </div>
   </div>
 </template>
@@ -139,19 +139,5 @@ export default {
   display: flex;
   flex-wrap: wrap;
   padding: 5px 0;
-
-  button {
-    transition: var(--fast) var(--transition);
-    margin: 2px;
-    padding: 2px 4px 3px;
-    background-color: var(--gray);
-    color: var(--white);
-    border-radius: var(--border-radius);
-
-    &:hover,
-    .user-is-tabbing &:focus {
-      background-color: var(--danger);
-    }
-  }
 }
 </style>

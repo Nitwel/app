@@ -37,6 +37,16 @@ const base =
 const router = new Router({
   mode: routerMode || "hash",
   base: base || "/",
+  // Make sure that the page is scrolled to the top on navigation
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      // If the scroll position is saved from the previous route (eg back and forth buttons in the
+      // browser, use those positions instead).
+      return savedPosition;
+    } else {
+      return { x: 0, y: 0 };
+    }
+  },
   routes: [
     {
       path: "/modals",

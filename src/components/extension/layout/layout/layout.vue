@@ -83,7 +83,7 @@ export default {
       return `layout-${this.viewType}`;
     },
     primaryKeyField() {
-      const fieldInfo = this.$lodash.filter(this.fields, info => info.primary_key === true)[0];
+      const fieldInfo = _.filter(this.fields, info => info.primary_key === true)[0];
 
       return fieldInfo && fieldInfo.field;
     }

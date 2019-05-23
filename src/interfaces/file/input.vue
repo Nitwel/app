@@ -208,7 +208,7 @@ export default {
     }
   },
   created() {
-    this.onSearchInput = this.$lodash.debounce(this.onSearchInput, 200);
+    this.onSearchInput = _.debounce(this.onSearchInput, 200);
   }
 };
 </script>

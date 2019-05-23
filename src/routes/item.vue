@@ -17,18 +17,18 @@
     <v-loader area="content" />
   </div>
 
-  <div v-else class="edit" :key="`${collection}-${primaryKey}`">
+  <div v-else :key="`${collection}-${primaryKey}`" class="edit">
     <v-header
       :breadcrumb="breadcrumb"
       :info-toggle="!newItem && !batch && !activityDetail"
       :icon-link="singleItem ? null : `/collections/${collection}`"
-      :icon="singleItem ? collectionInfo.icon : 'arrow_back'"
+      :icon="singleItem ? collectionInfo.icon || 'box' : 'arrow_back'"
       item-detail
     >
       <template v-if="status" slot="title">
         <span
-          class="status-indicator"
           v-tooltip="statusName"
+          class="status-indicator"
           :style="{ backgroundColor: `var(--${statusColor})` }"
         />
       </template>
@@ -58,17 +58,7 @@
           :disabled="!editing"
           :loading="saving"
           :label="$t('save')"
-          :options="
-            !editing
-              ? {
-                  copy: $t('save_as_copy')
-                }
-              : {
-                  stay: $t('save_and_stay'),
-                  add: $t('save_and_add'),
-                  copy: $t('save_as_copy')
-                }
-          "
+          :options="saveOptions"
           icon="check"
           color="action"
           hover-color="success"
@@ -88,7 +78,7 @@
         @revert="revertActivity = $event"
       />
 
-      <router-link to="/activity" class="notifications" v-if="canReadActivity">
+      <router-link v-if="canReadActivity" to="/activity" class="notifications">
         <div class="preview">
           <v-icon name="notifications" color="light-gray" />
           <span>{{ $t("notifications") }}</span>
@@ -97,6 +87,7 @@
     </v-info-sidebar>
 
     <v-form
+      ref="form"
       :readonly="readonly"
       :fields="fields"
       :values="values"
@@ -104,12 +95,11 @@
       :batch-mode="batch"
       :permissions="permission"
       :new-item="newItem"
-      ref="form"
       @unstage-value="unstageValue"
       @stage-value="stageValue"
     />
 
-    <portal to="modal" v-if="confirmRemove">
+    <portal v-if="confirmRemove" to="modal">
       <v-confirm
         :message="
           batch
@@ -124,7 +114,7 @@
       />
     </portal>
 
-    <portal to="modal" v-if="confirmNavigation">
+    <portal v-if="confirmNavigation" to="modal">
       <v-confirm
         :message="$t('unsaved_changes_copy')"
         :confirm-text="$t('keep_editing')"
@@ -137,7 +127,7 @@
       />
     </portal>
 
-    <portal to="modal" v-if="confirmBatchSave">
+    <portal v-if="confirmBatchSave" to="modal">
       <v-confirm
         :message="$t('update_confirm', { count: primaryKey.split(',').length })"
         :confirm-text="$t('update')"
@@ -146,7 +136,7 @@
       />
     </portal>
 
-    <portal to="modal" v-if="revertActivity">
+    <portal v-if="revertActivity" to="modal">
       <v-modal
         :title="$t('preview_and_revert')"
         :buttons="{
@@ -213,7 +203,7 @@ function getFieldsQuery(collection) {
 }
 
 export default {
-  name: "edit",
+  name: "Edit",
   metaInfo() {
     const collection = this.collection.startsWith("directus_")
       ? this.$helpers.formatTitle(this.collection.substr(9))
@@ -278,6 +268,23 @@ export default {
     };
   },
   computed: {
+    saveOptions() {
+      if (this.singleItem) {
+        return {};
+      }
+
+      if (this.editing) {
+        return {
+          stay: this.$t("save_and_stay"),
+          add: this.$t("save_and_add"),
+          copy: this.$t("save_as_copy")
+        };
+      }
+
+      return {
+        copy: this.$t("save_as_copy")
+      };
+    },
     breadcrumb() {
       if (this.collection === "directus_users") {
         let crumbName = this.$t("editing_item");
@@ -366,9 +373,9 @@ export default {
       return this.$store.state.collections[this.collection];
     },
     defaultValues() {
-      return this.$lodash.mapValues(this.fields, field => {
+      return _.mapValues(this.fields, field => {
         if (field.type === "array") {
-          return [field.default_value];
+          return field.default_value ? [field.default_value] : [];
         }
 
         if (field.type === "boolean") {
@@ -410,7 +417,7 @@ export default {
       if (!this.collectionInfo.status_mapping || !this.statusField) return null;
 
       const statusKeys = Object.keys(this.collectionInfo.status_mapping);
-      const index = this.$lodash.findIndex(Object.values(this.collectionInfo.status_mapping), {
+      const index = _.findIndex(Object.values(this.collectionInfo.status_mapping), {
         soft_delete: true
       });
       return statusKeys[index];
@@ -420,7 +427,7 @@ export default {
       return this.collectionInfo && this.collectionInfo.single === true;
     },
     primaryKeyField() {
-      return this.$lodash.find(this.fields, { primary_key: true }).field;
+      return _.find(this.fields, { primary_key: true }).field;
     },
     batch() {
       return this.primaryKey.includes(",");
@@ -428,7 +435,7 @@ export default {
     statusField() {
       if (!this.fields) return null;
       return (
-        this.$lodash.find(
+        _.find(
           Object.values(this.fields),
           field => field.type && field.type.toLowerCase() === "status"
         ) || {}
@@ -444,7 +451,7 @@ export default {
       if (this.batch) {
         if (this.statusField) {
           const statuses = this.savedValues.map(item => item[this.statusField]);
-          return this.$lodash.merge({}, ...statuses.map(status => permission.statuses[status]));
+          return _.merge({}, ...statuses.map(status => permission.statuses[status]));
         }
 
         return permission;
@@ -522,6 +529,16 @@ export default {
       return null;
     }
   },
+  watch: {
+    $route() {
+      this.fetchActivity();
+    },
+    notFound(notFound) {
+      if (this.singleItem && notFound === true) {
+        this.$router.push(`/collections/${this.collection}/+`);
+      }
+    }
+  },
   created() {
     if (this.isNew) {
       this.stageDefaultValues();
@@ -546,19 +563,9 @@ export default {
     this.$helpers.mousetrap.unbind("mod+s");
     this.formtrap.unbind("mod+s");
   },
-  watch: {
-    $route() {
-      this.fetchActivity();
-    },
-    notFound(notFound) {
-      if (this.singleItem && notFound === true) {
-        this.$router.push(`/collections/${this.collection}/+`);
-      }
-    }
-  },
   methods: {
     stageDefaultValues() {
-      this.$lodash.forEach(this.defaultValues, (value, field) => this.stageValue({ field, value }));
+      _.forEach(this.defaultValues, (value, field) => this.stageValue({ field, value }));
     },
     stageValue({ field, value }) {
       this.$store.dispatch("stageValue", { field, value });
@@ -610,7 +617,7 @@ export default {
         const values = Object.assign({}, this.values);
 
         // Delete fields that shouldn't / can't be duplicated
-        this.$lodash.forEach(this.fields, (info, fieldName) => {
+        _.forEach(this.fields, (info, fieldName) => {
           if (info.primary_key === true) delete values[fieldName];
 
           switch (info.type.toLowerCase()) {
@@ -773,7 +780,7 @@ export default {
                 comment: act.comment
               };
             }),
-            revisions: this.$lodash.keyBy(revisions, "activity")
+            revisions: _.keyBy(revisions, "activity")
           };
         })
         .then(({ activity, revisions }) => {
