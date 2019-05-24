@@ -98,6 +98,7 @@ export default {
       }
 
       .time {
+        margin-top: 3px;
         color: var(--light-gray);
       }
     }
