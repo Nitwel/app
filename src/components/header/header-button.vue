@@ -1,20 +1,18 @@
 <template>
   <div
-    class="v-header-button"
     v-tooltip="{
       delay: { show: 750, hide: 100 },
       content: label
     }"
+    class="v-header-button"
   >
-    <div v-if="Object.keys(options).length > 0" class="options">
-      <select v-model="choice" @change="emitChange">
-        <option disabled selected value="">{{ $t("more_options") }}</option>
-        <option v-for="(display, value) in options" :value="value" :key="value">
-          {{ display }}
-        </option>
-      </select>
-      <v-icon class="more-icon" name="more_vert"></v-icon>
-    </div>
+    <v-contextual-menu
+      v-if="Object.keys(options).length > 0"
+      class="options"
+      placement="bottom-start"
+      :options="options"
+      @click="emitChange"
+    ></v-contextual-menu>
     <component
       :is="disabled ? 'button' : to ? 'router-link' : 'button'"
       :style="{
@@ -36,7 +34,7 @@
 
 <script>
 export default {
-  name: "v-header-button",
+  name: "VHeaderButton",
   props: {
     icon: {
       type: String,
@@ -90,7 +88,7 @@ export default {
   },
   methods: {
     emitChange(event) {
-      this.$emit("input", event.target.value);
+      this.$emit("input", event);
       this.choice = null;
     }
   }
@@ -202,29 +200,5 @@ button[disabled] {
   overflow: hidden;
   right: -20px;
   z-index: +1;
-
-  .more-icon {
-    transition: color var(--fast) var(--transition);
-  }
-
-  select {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    top: 0;
-    left: 0;
-    cursor: pointer;
-    z-index: +2;
-    color: var(--black);
-
-    & + .more-icon {
-      color: var(--darker-gray);
-    }
-
-    &:hover + .more-icon {
-      color: var(--darkest-gray);
-    }
-  }
 }
 </style>

@@ -3,7 +3,7 @@
     <v-popover :placement="placement" offset="2" :trigger="trigger" :disabled="disabled">
       <div class="menu-toggle" :class="{ disabled }">
         {{ text }}
-        <v-icon :name="icon" />
+        <v-icon v-if="icon" :name="icon" />
       </div>
 
       <template slot="popover">
@@ -13,7 +13,7 @@
               v-close-popover
               type="button"
               :class="{ disabled: option.disabled }"
-              @click="$emit('click', option.id)"
+              @click.stop="optionClicked(option, id)"
             >
               <v-icon v-if="option.icon" :name="option.icon"></v-icon>
               {{ option.text }}
@@ -31,14 +31,14 @@ export default {
   props: {
     text: {
       type: String,
-      default: null
+      default: ""
     },
     icon: {
       type: String,
       default: "more_vert"
     },
     options: {
-      type: Array,
+      type: [Array, Object],
       default: null
     },
     trigger: {
@@ -54,12 +54,23 @@ export default {
       default: false
     }
   },
-  methods: {}
+  methods: {
+    optionClicked(option, id) {
+      if (!option.disabled) this.$emit("click", id);
+    }
+  }
 };
 </script>
 
+<style>
+.v-popover .trigger {
+  display: block !important;
+}
+</style>
+
 <style lang="scss" scoped>
 .menu-toggle {
+  cursor: pointer;
   display: flex;
   align-items: center;
 
