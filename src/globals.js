@@ -47,7 +47,7 @@ import VInfoSidebar from "./components/sidebars/info-sidebar.vue";
 import VError from "./components/error.vue";
 import VUpload from "./components/upload.vue";
 import VProgressRing from "./components/progress-ring.vue";
-import VContextualMenu from "./components/v-contextual-menu.vue";
+import VContextualMenu from "./components/contextual-menu.vue";
 
 import VIcon from "./components/icon.vue";
 import VTag from "./components/tag.vue";

@@ -1,16 +1,22 @@
 <template>
   <div v-if="options !== null">
-    <v-popover placement="right-start" offset="2">
-      <button type="button" class="menu-toggle" :disabled="disabled">
-        <v-icon name="more_vert" />
-      </button>
+    <v-popover :placement="placement" offset="2" :trigger="trigger" :disabled="disabled">
+      <div class="menu-toggle" :class="{ disabled }">
+        {{ text }}
+        <v-icon :name="icon" />
+      </div>
 
       <template slot="popover">
         <ul class="ctx-menu">
-          <li v-for="({ text, icon }, id) in options" :key="id">
-            <button v-close-popover type="button" @click="emitOptionClick(id)">
-              <v-icon v-if="icon" :name="icon"></v-icon>
-              {{ text }}
+          <li v-for="(option, id) in options" :key="id">
+            <button
+              v-close-popover
+              type="button"
+              :class="{ disabled: option.disabled }"
+              @click="$emit('click', option.id)"
+            >
+              <v-icon v-if="option.icon" :name="option.icon"></v-icon>
+              {{ option.text }}
             </button>
           </li>
         </ul>
@@ -23,38 +29,55 @@
 export default {
   name: "VContextualMenu",
   props: {
-    options: {
-      type: Object,
+    text: {
+      type: String,
       default: null
+    },
+    icon: {
+      type: String,
+      default: "more_vert"
+    },
+    options: {
+      type: Array,
+      default: null
+    },
+    trigger: {
+      type: String,
+      default: "click"
+    },
+    placement: {
+      type: String,
+      default: "right-start"
     },
     disabled: {
       type: Boolean,
       default: false
-    },
-    parentEmit: {
-      type: Boolean,
-      default: true
     }
   },
-  methods: {
-    emitOptionClick(id) {
-      this.$emit(id);
-      if (this.parentEmit) {
-        this.$parent.$emit(id);
-      }
-    }
-  }
+  methods: {}
 };
 </script>
 
 <style lang="scss" scoped>
 .menu-toggle {
-  width: 16px;
-  color: var(--lighter-gray);
-  transition: color var(--fast) var(--transition);
-  &:hover {
-    color: var(--darker-gray);
+  display: flex;
+  align-items: center;
+
+  i {
+    color: var(--lighter-gray);
+    transition: color var(--fast) var(--transition);
+  }
+
+  &:hover i {
+    color: var(--dark-gray);
     transition: none;
+  }
+
+  &.disabled {
+    color: var(--lighter-gray);
+    &:hover i {
+      color: var(--lighter-gray);
+    }
   }
 }
 .ctx-menu {
@@ -63,6 +86,10 @@ export default {
   width: var(--width-small);
   li {
     display: block;
+
+    &:not(:last-of-type) {
+      border-bottom: 1px solid var(--lightest-gray);
+    }
   }
   i {
     color: var(--light-gray);
@@ -77,6 +104,21 @@ export default {
     width: 100%;
     height: 100%;
     transition: color var(--fast) var(--transition);
+
+    &.disabled {
+      color: var(--lighter-gray);
+      i {
+        color: var(--lighter-gray);
+      }
+
+      &:hover {
+        color: var(--lighter-gray);
+        i {
+          color: var(--lighter-gray);
+        }
+      }
+    }
+
     &:hover {
       color: var(--accent);
       transition: none;
