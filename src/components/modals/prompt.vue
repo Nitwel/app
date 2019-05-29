@@ -40,7 +40,10 @@
 import VModalBase from "./modal-base.vue";
 
 export default {
-  name: "v-prompt",
+  name: "VPrompt",
+  components: {
+    VModalBase
+  },
   props: {
     message: {
       type: String,
@@ -78,9 +81,6 @@ export default {
       type: Boolean,
       default: false
     }
-  },
-  components: {
-    VModalBase
   },
   computed: {
     disabled() {

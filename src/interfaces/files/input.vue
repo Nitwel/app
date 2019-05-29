@@ -35,7 +35,7 @@
       {{ $t("existing") }}
     </v-button>
 
-    <portal to="modal" v-if="newFile">
+    <portal v-if="newFile" to="modal">
       <v-modal
         :buttons="{
           done: {
@@ -47,12 +47,12 @@
         @done="newFile = false"
       >
         <div class="body">
-          <v-upload @upload="saveUpload" :multiple="true" :accept="options.accept"></v-upload>
+          <v-upload :multiple="true" :accept="options.accept" @upload="saveUpload"></v-upload>
         </div>
       </v-modal>
     </portal>
 
-    <portal to="modal" v-if="existing">
+    <portal v-if="existing" to="modal">
       <v-modal
         :title="$t('choose_one')"
         :buttons="{
@@ -60,9 +60,9 @@
             text: $t('done')
           }
         }"
+        action-required
         @close="existing = false"
         @done="existing = false"
-        action-required
       >
         <div class="search">
           <v-input
@@ -88,7 +88,7 @@
       </v-modal>
     </portal>
 
-    <portal to="modal" v-if="editExisting" class="edit-modal">
+    <portal v-if="editExisting" to="modal" class="edit-modal">
       <v-modal
         :title="$t('editing_item')"
         :buttons="{
@@ -246,6 +246,9 @@ export default {
       ];
     }
   },
+  created() {
+    this.onSearchInput = _.debounce(this.onSearchInput, 200);
+  },
   methods: {
     /*
      * The values are being stored in the junction table. In order to add a new
@@ -373,9 +376,6 @@ export default {
         q: value
       });
     }
-  },
-  created() {
-    this.onSearchInput = _.debounce(this.onSearchInput, 200);
   }
 };
 </script>

@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "v-ext-layout-options-fallback",
+  name: "VExtLayoutOptionsFallback",
   props: {
     layoutName: {
       type: String,

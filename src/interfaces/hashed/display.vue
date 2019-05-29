@@ -6,7 +6,7 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "readonly-hashed",
+  name: "ReadonlyHashed",
   mixins: [mixin],
   computed: {
     icon() {

@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "v-details",
+  name: "VDetails",
   props: {
     title: {
       type: String,

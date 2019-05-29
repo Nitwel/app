@@ -1,5 +1,5 @@
 <template>
-  <v-icon name="code" v-tooltip.right="tooltipContents" />
+  <v-icon v-tooltip.right="tooltipContents" name="code" />
 </template>
 
 <script>

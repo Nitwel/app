@@ -1,12 +1,12 @@
 <template>
   <v-input
+    :id="name"
     type="number"
     min="0"
     icon-left="swap_vert"
     :value="value"
     :readonly="readonly"
     :maxlength="+length"
-    :id="name"
     @input="updateValue"
   ></v-input>
 </template>

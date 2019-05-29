@@ -4,6 +4,6 @@
 
 <script>
 export default {
-  name: "v-listing-options-loading"
+  name: "VListingOptionsLoading"
 };
 </script>

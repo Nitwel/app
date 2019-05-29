@@ -4,7 +4,7 @@
     :value="value"
     @input="$emit('input', $event)"
   >
-    <option :key="code" v-for="(name, code) in languages" :value="code">
+    <option v-for="(name, code) in languages" :key="code" :value="code">
       {{ name }}
     </option>
   </v-simple-select>

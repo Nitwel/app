@@ -1,8 +1,8 @@
 <template>
   <v-textarea
+    :id="name"
     class="textarea"
     :readonly="readonly"
-    :id="name"
     :value="value"
     :placeholder="options.placeholder"
     :rows="+options.rows"

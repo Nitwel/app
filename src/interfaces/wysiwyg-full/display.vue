@@ -6,7 +6,7 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "display-wysiwyg-full",
+  name: "DisplayWysiwygFull",
   mixins: [mixin],
   computed: {
     cleanValue() {

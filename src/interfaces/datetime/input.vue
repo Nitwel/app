@@ -1,8 +1,8 @@
 <template>
   <v-input
+    :id="name"
     type="text"
     class="interface-datetime"
-    :id="name"
     :name="name"
     :min="options.min"
     :max="options.max"

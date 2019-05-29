@@ -3,9 +3,9 @@
     <v-radio
       v-for="(options, key) in optionValues"
       :id="`${name}-${key}`"
+      :key="key"
       :name="name"
       :value="key"
-      :key="key"
       :disabled="readonly"
       :model-value="String(value)"
       :label="options.label"
@@ -19,7 +19,7 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "interface-status",
+  name: "InterfaceStatus",
   mixins: [mixin],
   data() {
     return {

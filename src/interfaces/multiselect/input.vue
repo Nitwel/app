@@ -1,10 +1,10 @@
 <template>
   <select
+    :id="name"
     :disabled="readonly"
     class="select"
-    @change="updateValue($event.target.options)"
-    :id="name"
     multiple
+    @change="updateValue($event.target.options)"
   >
     <option v-if="options.placeholder" value="" :disabled="required">
       {{ options.placeholder }}

@@ -23,7 +23,7 @@ import VExtLayoutOptionsFallback from "./layout-options-fallback.vue";
 import VExtLayoutOptionsLoading from "./layout-options-loading.vue";
 
 export default {
-  name: "v-ext-layout-options",
+  name: "VExtLayoutOptions",
   props: {
     type: {
       type: String,

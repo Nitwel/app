@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:style="{ color: 'var(--' + color + ')' }">
+  <div :style="{ color: 'var(--' + color + ')' }">
     <v-progress-ring
       class="icon"
       :radius="17"
@@ -18,7 +18,7 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "readonly-activity-icon",
+  name: "ReadonlyActivityIcon",
   mixins: [mixin],
   data() {
     return {

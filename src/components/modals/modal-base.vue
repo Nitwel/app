@@ -14,7 +14,7 @@
 
 <script>
 export default {
-  name: "v-modal-base",
+  name: "VModalBase",
   props: {
     message: {
       type: String,

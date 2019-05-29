@@ -29,7 +29,7 @@ import VExtLayoutFallback from "./layout-fallback.vue";
 import VExtLayoutLoading from "./layout-loading.vue";
 
 export default {
-  name: "v-layout",
+  name: "VLayout",
   props: {
     fields: {
       type: Object,

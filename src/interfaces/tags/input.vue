@@ -10,7 +10,7 @@
       @keydown="onInput"
     ></v-input>
     <div class="buttons">
-      <v-tag v-for="value in valueArray" :key="value" @click.prevent="removeTag(value)" clickable>
+      <v-tag v-for="value in valueArray" :key="value" clickable @click.prevent="removeTag(value)">
         {{ value }}
       </v-tag>
     </div>
@@ -27,6 +27,18 @@ export default {
     return {
       valueArray: []
     };
+  },
+
+  // Make sure to re-populate the local state if the value changes from outside
+  // of the interface
+  watch: {
+    value() {
+      this.getLocalValueArray();
+    }
+  },
+
+  created() {
+    this.getLocalValueArray();
   },
 
   methods: {
@@ -113,18 +125,6 @@ export default {
       array = array.filter(value => value);
 
       this.valueArray = array;
-    }
-  },
-
-  created() {
-    this.getLocalValueArray();
-  },
-
-  // Make sure to re-populate the local state if the value changes from outside
-  // of the interface
-  watch: {
-    value() {
-      this.getLocalValueArray();
     }
   }
 };

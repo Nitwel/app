@@ -10,6 +10,6 @@
 
 <script>
 export default {
-  name: "v-layout-loading"
+  name: "VLayoutLoading"
 };
 </script>

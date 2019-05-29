@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: "v-avatar",
+  name: "VAvatar",
   props: {
     src: {
       type: String,
@@ -53,15 +53,15 @@ export default {
       error: false
     };
   },
+  watch: {
+    src() {
+      this.error = false;
+    }
+  },
   methods: {
     onImageLoadingError(error) {
       this.error = error;
       this.loading = false;
-    }
-  },
-  watch: {
-    src() {
-      this.error = false;
     }
   }
 };

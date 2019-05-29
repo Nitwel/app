@@ -2,25 +2,25 @@
   <div class="interface-markdown" :class="{ float: !options.tabbed }">
     <v-textarea
       v-if="!preview || !options.tabbed"
+      :id="name"
       class="textarea"
       :value="value"
       :placeholder="options.placeholder"
       :rows="+options.rows"
       @input="$emit('input', $event)"
-      :id="name"
     ></v-textarea>
     <div
       v-if="preview || !options.tabbed"
       class="preview"
-      v-html="compiledMarkdown"
       :style="{ height: options.rows * 23 + 'px' }"
+      v-html="compiledMarkdown"
     ></div>
     <div v-if="options.tabbed" class="toolbar">
-      <span @click="preview = false" :class="{ active: !preview }">
+      <span :class="{ active: !preview }" @click="preview = false">
         <v-icon name="code" size="22" />
         {{ $t("interfaces-markdown-edit") }}
       </span>
-      <span @click="preview = true" :class="{ active: preview }">
+      <span :class="{ active: preview }" @click="preview = true">
         <v-icon name="visibility" size="22" />
         {{ $t("interfaces-markdown-preview") }}
       </span>
@@ -35,6 +35,7 @@ import marked from "marked";
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
+  mixins: [mixin],
   data() {
     return {
       preview: false
@@ -47,8 +48,7 @@ export default {
       }
       return this.value;
     }
-  },
-  mixins: [mixin]
+  }
 };
 </script>
 

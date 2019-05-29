@@ -1,8 +1,8 @@
 <template>
   <component
     :is="componentName"
-    :name="name"
     :id="name"
+    :name="name"
     :input-name="id"
     :value="value"
     :type="typeOrDefault"
@@ -32,7 +32,7 @@ import InputLoading from "./input-loading.vue";
 import { datatypes } from "../../../../type-map";
 
 export default {
-  name: "v-ext-input",
+  name: "VExtInput",
   props: {
     id: {
       type: String,

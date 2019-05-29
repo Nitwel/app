@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ open }" ref="searchFilter" class="search-filter">
+  <div ref="searchFilter" :class="{ open }" class="search-filter">
     <v-header-button
       class="toggle"
       icon-color="lighter-gray"
@@ -69,8 +69,8 @@
             </button>
           </div>
           <v-input
-            autofocus
             :id="`filter-${i}`"
+            autofocus
             :value="filter.value"
             type="text"
             @input="updateFilter(i, 'value', $event)"
@@ -101,7 +101,7 @@
 import VBlocker from "../blocker.vue";
 
 export default {
-  name: "search-filter",
+  name: "SearchFilter",
   components: {
     VBlocker
   },

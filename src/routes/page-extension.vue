@@ -8,7 +8,7 @@ import store from "../store/";
 import VNotFound from "./not-found.vue";
 
 export default {
-  name: "page-extension",
+  name: "PageExtension",
   metaInfo() {
     const page = this.$store.state.extensions.pages[this.id];
 

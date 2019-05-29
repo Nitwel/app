@@ -13,8 +13,8 @@
   </div>
   <div v-else-if="activeLanguage" class="translation">
     <v-simple-select
-      class="language-select"
       v-model="activeLanguage"
+      class="language-select"
       :placeholder="$t('interfaces-translation-choose_language')"
     >
       <option v-for="language in languages" :key="language.code" :value="language.code">
@@ -25,12 +25,12 @@
     <hr />
 
     <v-form
-      class="form"
       :key="activeLanguage"
+      ref="form"
+      class="form"
       :fields="relatedFields"
       :values="langValue"
       :collection="relation.collection_many"
-      ref="form"
       @stage-value="stageValue"
     />
   </div>

@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "v-logo",
+  name: "VLogo",
   data() {
     return {
       customLogoPath: "",

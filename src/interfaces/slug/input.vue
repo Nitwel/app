@@ -1,12 +1,12 @@
 <template>
   <v-input
+    :id="name"
     type="text"
     class="slug"
     :value="value"
     :readonly="readonly"
     :placeholder="options.placeholder"
     :maxlength="length"
-    :id="name"
     @input="updateValue"
   ></v-input>
 </template>

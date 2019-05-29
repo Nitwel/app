@@ -9,7 +9,7 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "readonly-toggle-icon",
+  name: "ReadonlyToggleIcon",
   mixins: [mixin],
   computed: {
     icon() {

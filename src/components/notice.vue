@@ -24,7 +24,7 @@
 
 <script>
 export default {
-  name: "v-notice",
+  name: "VNotice",
   props: {
     color: {
       type: String,

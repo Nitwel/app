@@ -4,8 +4,8 @@
       <div class="cell style-4">{{ $t("collection") }}</div>
       <div class="cell style-4">
         <button
-          type="button"
           v-tooltip="$t('create')"
+          type="button"
           class="cell"
           @click="$emit('toggle-all', 'create')"
         >
@@ -14,8 +14,8 @@
       </div>
       <div class="cell style-4">
         <button
-          type="button"
           v-tooltip="$t('read')"
+          type="button"
           class="cell"
           @click="$emit('toggle-all', 'read')"
         >
@@ -24,8 +24,8 @@
       </div>
       <div class="cell style-4">
         <button
-          type="button"
           v-tooltip="$t('update')"
+          type="button"
           class="cell"
           @click="$emit('toggle-all', 'update')"
         >
@@ -34,8 +34,8 @@
       </div>
       <div class="cell style-4">
         <button
-          type="button"
           v-tooltip="$t('delete')"
+          type="button"
           class="cell"
           @click="$emit('toggle-all', 'delete')"
         >
@@ -44,8 +44,8 @@
       </div>
       <div class="cell style-4">
         <button
-          type="button"
           v-tooltip="$t('comment')"
+          type="button"
           class="cell"
           @click="$emit('toggle-all', 'comment')"
         >

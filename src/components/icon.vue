@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: "v-icon",
+  name: "VIcon",
   props: {
     // Name of the material design icon. See https://material.io/tools/icons
     name: {

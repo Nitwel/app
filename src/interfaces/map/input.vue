@@ -1,17 +1,17 @@
 <template>
   <div class="interface-map">
     <div :class="{ 'map-readonly': readonly }" class="map">
-      <div class="map-container" id="directusMap" :style="{ height: options.height + 'px' }">
+      <div id="directusMap" class="map-container" :style="{ height: options.height + 'px' }">
         <!-- Map Renders Here -->
       </div>
 
       <div class="map-actions">
-        <div class="address-input" v-if="options.address_to_code">
+        <div v-if="options.address_to_code" class="address-input">
           <v-input v-model="placeName" placeholder="Enter address to geocode"></v-input>
           <button
             v-if="isInteractive"
-            @click="getCoordinatesforPlaceName()"
             v-tooltip="$t('interfaces-map-address_location')"
+            @click="getCoordinatesforPlaceName()"
           >
             <v-icon name="search" />
           </button>
@@ -19,18 +19,18 @@
 
         <button
           v-if="isInteractive"
+          v-tooltip="$t('interfaces-map-my_location')"
           class="map-my-location"
           @click="locateMe()"
-          v-tooltip="$t('interfaces-map-my_location')"
         >
           <v-icon name="my_location" />
         </button>
 
         <button
           v-if="isInteractive"
+          v-tooltip="$t('interfaces-map-clear_location')"
           class="clear-location"
           @click="setValue()"
-          v-tooltip="$t('interfaces-map-clear_location')"
         >
           <v-icon name="clear" />
         </button>
@@ -57,7 +57,7 @@ import leaflet from "leaflet";
 import "./leaflet.css";
 
 export default {
-  name: "interface-map",
+  name: "InterfaceMap",
   mixins: [mixin],
   data() {
     return {
@@ -79,8 +79,20 @@ export default {
       ]
     };
   },
-  mounted() {
-    this.init();
+  computed: {
+    isInteractive() {
+      return !this.readonly;
+    },
+    accentColor() {
+      return getComputedStyle(document.documentElement)
+        .getPropertyValue("--darkest-gray")
+        .trim();
+    },
+    darkAccentColor() {
+      return getComputedStyle(document.documentElement)
+        .getPropertyValue("--darkest-gray")
+        .trim();
+    }
   },
   watch: {
     "options.theme"(newVal) {
@@ -104,20 +116,8 @@ export default {
       this.setMarker(newVal);
     }
   },
-  computed: {
-    isInteractive() {
-      return !this.readonly;
-    },
-    accentColor() {
-      return getComputedStyle(document.documentElement)
-        .getPropertyValue("--darkest-gray")
-        .trim();
-    },
-    darkAccentColor() {
-      return getComputedStyle(document.documentElement)
-        .getPropertyValue("--darkest-gray")
-        .trim();
-    }
+  mounted() {
+    this.init();
   },
   methods: {
     init() {

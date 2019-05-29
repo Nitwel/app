@@ -20,8 +20,8 @@
                 <div
                   v-for="i in 12"
                   :key="i"
-                  @click="setMonth(monthDistance - date.getMonth() + (i - 1))"
                   :class="date.getMonth() + 1 == i ? 'mark-month' : ''"
+                  @click="setMonth(monthDistance - date.getMonth() + (i - 1))"
                 >
                   {{ monthNames[i - 1].substr(0, 3) }}
                 </div>
@@ -70,11 +70,12 @@ import Calendar from "./Calendar.vue";
 import Popup from "./Popup.vue";
 
 export default {
-  props: ["items"],
   components: {
     Calendar,
     Popup
   },
+  mixins: [mixin],
+  props: ["items"],
   data() {
     return {
       //the distance (in months) of the current month
@@ -106,7 +107,6 @@ export default {
       weekNames: ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
     };
   },
-  mixins: [mixin],
   computed: {
     // Get the date of the view based on the delta of the months that the user
     // has scrolled
@@ -115,6 +115,15 @@ export default {
       date = new Date(date.getFullYear(), date.getMonth() + this.monthDistance, 1);
       return date;
     }
+  },
+  created() {
+    this.scroll = _.throttle(this.scroll, 200);
+    document.addEventListener("click", this.documentClick);
+    document.addEventListener("keypress", this.keyPress);
+  },
+  destroyed() {
+    document.removeEventListener("click", this.documentClick);
+    document.removeEventListener("keypress", this.keyPress);
   },
   methods: {
     increaseYear() {
@@ -245,15 +254,6 @@ export default {
         this.decreaseMonth();
       }
     }
-  },
-  created() {
-    this.scroll = _.throttle(this.scroll, 200);
-    document.addEventListener("click", this.documentClick);
-    document.addEventListener("keypress", this.keyPress);
-  },
-  destroyed() {
-    document.removeEventListener("click", this.documentClick);
-    document.removeEventListener("keypress", this.keyPress);
   }
 };
 </script>

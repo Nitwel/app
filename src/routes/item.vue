@@ -275,14 +275,26 @@ export default {
 
       if (this.editing) {
         return {
-          stay: this.$t("save_and_stay"),
-          add: this.$t("save_and_add"),
-          copy: this.$t("save_as_copy")
+          stay: {
+            text: this.$t("save_and_stay"),
+            icon: "create"
+          },
+          add: {
+            text: this.$t("save_and_add"),
+            icon: "add"
+          },
+          copy: {
+            text: this.$t("save_as_copy"),
+            icon: "file_copy"
+          }
         };
       }
 
       return {
-        copy: this.$t("save_as_copy")
+        copy: {
+          text: this.$t("save_as_copy"),
+          icon: "file_copy"
+        }
       };
     },
     breadcrumb() {

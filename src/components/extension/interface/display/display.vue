@@ -23,7 +23,10 @@ import VExtDisplayLoading from "./display-loading.vue";
 import { datatypes } from "../../../../type-map";
 
 export default {
-  name: "v-ext-display",
+  name: "VExtDisplay",
+  components: {
+    VExtDisplayFallback
+  },
   props: {
     interfaceType: {
       type: String,
@@ -65,9 +68,6 @@ export default {
       type: Object,
       default: () => ({})
     }
-  },
-  components: {
-    VExtDisplayFallback
   },
   computed: {
     interfaces() {

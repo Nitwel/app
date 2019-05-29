@@ -21,11 +21,6 @@ export default {
       newValue: ""
     };
   },
-  watch: {
-    newValue(val) {
-      this.$emit("input", val);
-    }
-  },
   computed: {
     placeholder() {
       if (!this.originalValue) {
@@ -47,6 +42,11 @@ export default {
     },
     iconColor() {
       return this.valueChanged ? "warning" : "accent";
+    }
+  },
+  watch: {
+    newValue(val) {
+      this.$emit("input", val);
     }
   }
 };

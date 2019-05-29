@@ -1,13 +1,13 @@
 <template>
   <div class="display-rating">
     <!-- If 'number' is selected for display option -->
-    <div class="rating-numbers" v-if="options.display == 'number'">
+    <div v-if="options.display == 'number'" class="rating-numbers">
       <v-icon name="star" />
       <span>{{ value ? value : 0 }}</span>
     </div>
 
     <!-- If 'star' is selected for display option -->
-    <div class="rating-stars" v-if="options.display == 'star'">
+    <div v-if="options.display == 'star'" class="rating-stars">
       <stars :options="options" :rating="value" :readonly="true" :small="true"></stars>
     </div>
   </div>
@@ -18,10 +18,10 @@ import mixin from "@directus/extension-toolkit/mixins/interface";
 import Stars from "./stars.vue";
 
 export default {
-  mixins: [mixin],
   components: {
     Stars
-  }
+  },
+  mixins: [mixin]
 };
 </script>
 

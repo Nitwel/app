@@ -2,11 +2,11 @@
   <div v-if="userInfo">
     <v-avatar
       v-if="options.display !== 'name'"
+      v-tooltip="options.display === 'avatar' ? displayValue : null"
       class="display-user"
       :size="28"
       :src="src"
       :alt="displayValue"
-      v-tooltip="options.display === 'avatar' ? displayValue : null"
       color="light-gray"
     ></v-avatar>
     <span v-if="options.display !== 'avatar'" class="label gray style-3">

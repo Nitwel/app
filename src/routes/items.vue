@@ -1,6 +1,6 @@
 <template>
   <v-not-found v-if="notFound" />
-  <div class="route-item-listing" v-else>
+  <div v-else class="route-item-listing">
     <v-header
       info-toggle
       :item-detail="false"
@@ -51,8 +51,8 @@
         />
         <v-header-button
           v-if="addButton && !activity"
-          icon="add"
           key="add"
+          icon="add"
           color="action"
           :label="$t('new')"
           :to="`/collections/${collection}/+`"
@@ -80,8 +80,8 @@
     <v-info-sidebar v-if="preferences">
       <template slot="system">
         <div class="layout-picker">
-          <select @input="updatePreferences('view_type', $event.target.value)" :value="viewType">
-            <option v-for="(name, val) in layoutNames" :value="val" :key="val">
+          <select :value="viewType" @input="updatePreferences('view_type', $event.target.value)">
+            <option v-for="(name, val) in layoutNames" :key="val" :value="val">
               {{ name }}
             </option>
           </select>
@@ -93,8 +93,8 @@
         </div>
       </template>
       <v-ext-layout-options
-        class="layout-options"
         :key="`${collection}-${viewType}`"
+        class="layout-options"
         :type="viewType"
         :collection="collection"
         :fields="$lodash.keyBy(fields, 'field')"
@@ -106,7 +106,7 @@
         @options="setViewOptions"
       />
 
-      <router-link to="/activity" class="notifications" v-if="canReadActivity">
+      <router-link v-if="canReadActivity" to="/activity" class="notifications">
         <div class="preview">
           <v-icon name="notifications" color="light-gray" />
           <span>{{ $t("notifications") }}</span>
@@ -114,7 +114,7 @@
       </router-link>
     </v-info-sidebar>
 
-    <portal to="modal" v-if="confirmRemove">
+    <portal v-if="confirmRemove" to="modal">
       <v-confirm
         :message="
           $tc('batch_delete_confirm', selection.length, {
@@ -128,7 +128,7 @@
       />
     </portal>
 
-    <portal to="modal" v-if="bookmarkModal">
+    <portal v-if="bookmarkModal" to="modal">
       <v-create-bookmark :preferences="preferences" @close="closeBookmark"></v-create-bookmark>
     </portal>
   </div>
@@ -144,7 +144,7 @@ import VNotFound from "./not-found.vue";
 import api from "../api";
 
 export default {
-  name: "items",
+  name: "Items",
   metaInfo() {
     return {
       title: this.$helpers.formatTitle(this.collection)
@@ -469,6 +469,15 @@ export default {
       return enabled;
     }
   },
+  watch: {
+    $route() {
+      if (this.$route.query.b) {
+        this.$router.replace({
+          path: this.$route.path
+        });
+      }
+    }
+  },
   methods: {
     closeBookmark() {
       this.bookmarkModal = false;
@@ -589,15 +598,6 @@ export default {
             error
           });
         });
-    }
-  },
-  watch: {
-    $route() {
-      if (this.$route.query.b) {
-        this.$router.replace({
-          path: this.$route.path
-        });
-      }
     }
   },
   beforeRouteEnter(to, from, next) {

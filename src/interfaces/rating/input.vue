@@ -7,7 +7,7 @@
       :readonly="readonly"
       @update:rating="updateValue"
     ></stars>
-    <div class="rating-value" v-else-if="options.display === 'number'">
+    <div v-else-if="options.display === 'number'" class="rating-value">
       <v-input
         class="rating-input"
         type="number"
@@ -30,15 +30,15 @@ import mixin from "@directus/extension-toolkit/mixins/interface";
 import Stars from "./stars.vue";
 
 export default {
-  name: "interface-rating",
+  name: "InterfaceRating",
+  components: {
+    Stars
+  },
   mixins: [mixin],
   data() {
     return {
       rating: null
     };
-  },
-  components: {
-    Stars
   },
   methods: {
     updateValue(value) {

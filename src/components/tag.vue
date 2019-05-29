@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: "v-tag",
+  name: "VTag",
   props: {
     clickable: {
       type: Boolean,

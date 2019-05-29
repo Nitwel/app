@@ -3,11 +3,11 @@
     <v-radio
       v-for="(display, val) in choices"
       :id="`${name}-${val}`"
+      :key="val"
       :name="name"
       :value="val"
       :disabled="readonly"
-      :key="val"
-      :modelValue="value"
+      :model-value="value"
       :label="display"
       @change="$emit('input', $event)"
     ></v-radio>
@@ -18,7 +18,7 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "interface-radio-buttons",
+  name: "InterfaceRadioButtons",
   mixins: [mixin],
   computed: {
     choices() {

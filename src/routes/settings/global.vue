@@ -21,7 +21,7 @@
 import { mapState } from "vuex";
 
 export default {
-  name: "settings-global",
+  name: "SettingsGlobal",
   metaInfo() {
     return {
       title: `${this.$t("settings")} | ${this.$t("settings_global")}`

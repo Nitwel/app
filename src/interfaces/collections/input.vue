@@ -1,8 +1,8 @@
 <template>
   <v-select
+    :id="name"
     :value="value"
     :disabled="readonly"
-    :id="name"
     :options="choices"
     :placeholder="options.placeholder"
     @input="$emit('input', $event)"

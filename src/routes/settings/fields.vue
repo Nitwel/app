@@ -1,19 +1,19 @@
 <template>
   <not-found v-if="!collectionInfo" />
-  <div class="settings-fields" v-else>
+  <div v-else class="settings-fields">
     <v-header :breadcrumb="breadcrumb" :icon-link="`/settings/collections`" icon-color="warning">
       <template slot="buttons">
         <v-header-button
-          icon="delete_outline"
           key="delete"
+          icon="delete_outline"
           color="gray"
           hover-color="danger"
           :label="$t('delete')"
           @click="confirmRemove = true"
         />
         <v-header-button
-          icon="check"
           key="save"
+          icon="check"
           color="action"
           :loading="saving"
           :disabled="Object.keys(edits).length === 0"
@@ -35,7 +35,7 @@
       </div>
       <div class="body" :class="{ dragging }">
         <draggable v-model="fields" @start="startSort" @end="saveSort">
-          <div class="row" v-for="field in fields" :key="field.field">
+          <div v-for="field in fields" :key="field.field" class="row">
             <div class="drag"><v-icon name="drag_handle" /></div>
             <div
               class="inner row"
@@ -53,54 +53,26 @@
                 <v-button
                   v-if="!field.interface"
                   class="not-managed"
-                  @click="manageField(field)"
                   :loading="toManage.includes(field.field)"
+                  @click="manageField(field)"
                 >
                   {{ $t("manage") }}
                 </v-button>
               </div>
             </div>
-            <v-popover
+            <v-contextual-menu
+              v-if="canDuplicate(field.interface) || fields.length > 1"
               class="more-options"
               placement="left-start"
-              v-if="canDuplicate(field.interface) || fields.length > 1"
-            >
-              <button type="button" class="menu-toggle">
-                <v-icon name="more_vert" />
-              </button>
-              <template slot="popover">
-                <ul class="ctx-menu">
-                  <li>
-                    <button
-                      v-close-popover
-                      type="button"
-                      @click.stop="duplicateField(field)"
-                      :disabled="!canDuplicate(field.interface)"
-                    >
-                      <v-icon name="control_point_duplicate" />
-                      {{ $t("duplicate") }}
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      v-close-popover
-                      :disabled="fields.length === 1"
-                      type="button"
-                      @click.stop="warnRemoveField(field.field)"
-                    >
-                      <v-icon name="close" />
-                      {{ $t("delete") }}
-                    </button>
-                  </li>
-                </ul>
-              </template>
-            </v-popover>
+              :options="fieldOptions(field)"
+              @click="fieldOptionsClicked(field, $event)"
+            ></v-contextual-menu>
           </div>
         </draggable>
       </div>
     </div>
 
-    <v-button @click="startEditingField({})" class="new-field">
+    <v-button class="new-field" @click="startEditingField({})">
       {{ $t("new_field") }}
     </v-button>
 
@@ -112,7 +84,7 @@
       @stage-value="stageValue"
     />
 
-    <portal to="modal" v-if="confirmRemove">
+    <portal v-if="confirmRemove" to="modal">
       <v-confirm
         color="danger"
         :message="$t('delete_collection_are_you_sure')"
@@ -122,7 +94,7 @@
       />
     </portal>
 
-    <portal to="modal" v-if="confirmFieldRemove">
+    <portal v-if="confirmFieldRemove" to="modal">
       <v-confirm
         color="danger"
         :message="$t('delete_field_are_you_sure', { field: fieldToBeRemoved })"
@@ -163,7 +135,7 @@ import VFieldSetup from "../../components/field-setup.vue";
 import VFieldDuplicate from "../../components/field-duplicate.vue";
 
 export default {
-  name: "settings-fields",
+  name: "SettingsFields",
   metaInfo() {
     return {
       title: `${this.$t("settings")} | ${this.$t("editing", {
@@ -495,6 +467,30 @@ export default {
         .finally(() => {
           this.fieldSaving = false;
         });
+    },
+    fieldOptions(field) {
+      return [
+        {
+          text: this.$t("duplicate"),
+          icon: "control_point_duplicate",
+          disabled: this.duplicateInterfaceBlacklist.includes(field.interface)
+        },
+        {
+          text: this.$t("delete"),
+          icon: "close"
+        }
+      ];
+    },
+    fieldOptionsClicked(field, option) {
+      switch (option) {
+        case 0:
+          this.duplicateField(field);
+          break;
+        case 1:
+          this.warnRemoveField(field.field);
+          break;
+        default:
+      }
     },
     duplicateField(field) {
       this.fieldBeingDuplicated = field;

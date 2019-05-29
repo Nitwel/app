@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: "v-slider",
+  name: "VSlider",
   props: {
     id: {
       type: String,

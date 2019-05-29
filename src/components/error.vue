@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "v-error",
+  name: "VError",
   props: {
     color: {
       type: String,

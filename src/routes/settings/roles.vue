@@ -3,8 +3,8 @@
     <v-header :breadcrumb="breadcrumb" icon-link="/settings" icon-color="warning">
       <template slot="buttons">
         <v-header-button
-          icon="add"
           key="add"
+          icon="add"
           color="action"
           :label="$t('new')"
           @click="addNew = true"
@@ -13,7 +13,7 @@
     </v-header>
     <v-table :items="items" :columns="fields" primary-key-field="collection" link="__link__" />
 
-    <portal to="modal" v-if="addNew">
+    <portal v-if="addNew" to="modal">
       <v-prompt
         v-model="newName"
         :confirm-text="$t('create')"
@@ -32,7 +32,7 @@
 import api from "../../api";
 
 export default {
-  name: "settings-roles",
+  name: "SettingsRoles",
   metaInfo() {
     return {
       title: `${this.$t("settings")} | ${this.$t("roles")}`

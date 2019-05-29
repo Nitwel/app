@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: "loader",
+  name: "Loader",
   props: {
     area: {
       type: String,

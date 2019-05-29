@@ -7,14 +7,14 @@
       :icon-right="value"
       icon-left="search"
     ></v-input>
-    <div class="icons-view" v-show="searchText.length === 0">
+    <div v-show="searchText.length === 0" class="icons-view">
       <details v-for="(icongroup, groupname) in icons" :key="groupname" open>
         <summary>{{ $helpers.formatTitle(groupname) }}</summary>
         <div>
           <button
             v-for="icon in icongroup"
-            type="button"
             :key="icon"
+            type="button"
             :class="{ active: value === icon }"
             :disabled="readonly"
             @click="$emit('input', value === icon ? null : icon)"
@@ -27,9 +27,9 @@
     <div v-if="searchText.length > 0" class="search-view">
       <button
         v-for="icon in filteredArray"
+        :key="icon"
         v-tooltip="$helpers.formatTitle(icon)"
         type="button"
-        :key="icon"
         :class="{ active: value === icon }"
         :disabled="readonly"
         @click="$emit('input', value === icon ? null : icon)"

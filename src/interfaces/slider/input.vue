@@ -15,7 +15,7 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "interface-slider",
+  name: "InterfaceSlider",
   mixins: [mixin],
   computed: {
     safeValue() {

@@ -2,13 +2,13 @@
   <div :class="['rating-stars', { 'rating-readonly': readonly }, { 'rating-small': small }]">
     <button
       v-for="n in options.max_stars"
+      :key="`star_${n}`"
+      :class="ratingClass(n)"
+      :style="ratingStyle(n)"
+      :v-tooltip="n"
       @mouseenter="readonly ? '' : (hovered = n)"
       @mouseleave="readonly ? '' : (hovered = null)"
       @click="readonly ? '' : set(n)"
-      :class="ratingClass(n)"
-      :style="ratingStyle(n)"
-      :key="`star_${n}`"
-      :v-tooltip="n"
     ></button>
   </div>
 </template>

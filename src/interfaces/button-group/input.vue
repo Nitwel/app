@@ -34,7 +34,7 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "interface-button-group",
+  name: "InterfaceButtonGroup",
   mixins: [mixin],
   computed: {
     choices() {

@@ -1,5 +1,5 @@
 <template>
-  <div :style="{ backgroundColor: `var(--${value})` }" v-tooltip="tooltipValue"></div>
+  <div v-tooltip="tooltipValue" :style="{ backgroundColor: `var(--${value})` }"></div>
 </template>
 
 <script>

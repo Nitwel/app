@@ -1,5 +1,5 @@
 <template>
-  <div class="v-permissions interface loading" v-if="loading">
+  <div v-if="loading" class="v-permissions interface loading">
     <v-spinner line-fg-color="var(--light-gray)" line-bg-color="var(--lighter-gray)" />
   </div>
   <div v-else class="interface">
@@ -13,10 +13,10 @@
 
         <v-permissions-row
           v-for="(permission, name) in rows"
+          :key="name"
           :permission="permission"
           :permission-name="name"
           :statuses="(statuses[name] || {}).mapping"
-          :key="name"
           :fields="fields[name]"
           @input="$emit('input', $event)"
         />
@@ -24,11 +24,11 @@
         <template v-if="showDirectus">
           <v-permissions-row
             v-for="(permission, name, i) in directusRows"
+            :key="name"
             :class="{ border: i === 0 }"
             :permission="permission"
             :permission-name="name"
             :statuses="(statuses[name] || {}).mapping"
-            :key="name"
             :fields="fields[name]"
             system
             @input="$emit('input', $event)"
@@ -37,7 +37,7 @@
       </div>
     </div>
     <label>
-      <v-toggle class="toggle" id="toggle-directus" v-model="showDirectus" />
+      <v-toggle id="toggle-directus" v-model="showDirectus" class="toggle" />
       {{ $t("show_directus_collections") }}
     </label>
   </div>
@@ -48,12 +48,7 @@ import VPermissionsHeader from "./permissions-header.vue";
 import VPermissionsRow from "./permissions-row.vue";
 
 export default {
-  name: "v-permissions",
-  data() {
-    return {
-      showDirectus: false
-    };
-  },
+  name: "VPermissions",
   components: {
     VPermissionsHeader,
     VPermissionsRow
@@ -75,6 +70,11 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  data() {
+    return {
+      showDirectus: false
+    };
   },
   computed: {
     directusRows() {

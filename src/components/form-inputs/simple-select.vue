@@ -1,6 +1,6 @@
 <template>
   <div class="v-simple-select">
-    <select @change="stageValue" :value="value" :disabled="disabled" ref="selectElement">
+    <select ref="selectElement" :value="value" :disabled="disabled" @change="stageValue">
       <option disabled :selected="value == null" value="">
         {{ placeholder || "--" }}
       </option>
@@ -10,7 +10,7 @@
       <template v-if="value">
         {{ valueText }}
       </template>
-      <span class="placeholder" v-else>{{ placeholder || "--" }}</span>
+      <span v-else class="placeholder">{{ placeholder || "--" }}</span>
       <v-icon class="icon" name="arrow_drop_down" />
     </div>
   </div>
@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: "v-simple-select",
+  name: "VSimpleSelect",
   props: {
     value: {
       type: String,
@@ -33,15 +33,23 @@ export default {
       default: false
     }
   },
+  data() {
+    return {
+      valueNames: {}
+    };
+  },
   computed: {
     valueText() {
       return this.valueNames[this.value];
     }
   },
-  data() {
-    return {
-      valueNames: {}
-    };
+  watch: {
+    value() {
+      this.getValueNames();
+    }
+  },
+  mounted() {
+    this.getValueNames();
   },
   methods: {
     stageValue(event) {
@@ -57,14 +65,6 @@ export default {
       });
 
       this.valueNames = valueNames;
-    }
-  },
-  mounted() {
-    this.getValueNames();
-  },
-  watch: {
-    value() {
-      this.getValueNames();
     }
   }
 };

@@ -1,5 +1,5 @@
 <template>
-  <v-popover trigger="hover" v-if="options.listing_template && this.value && this.value.length > 0">
+  <v-popover v-if="options.listing_template && this.value && this.value.length > 0" trigger="hover">
     <div class="display-checkbox-relational">{{ itemCount }}</div>
     <template slot="popover">
       <ul class="list">
@@ -15,7 +15,7 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "readonly-checkboxes-relational",
+  name: "ReadonlyCheckboxesRelational",
   mixins: [mixin],
   computed: {
     itemCount() {

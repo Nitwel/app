@@ -42,7 +42,6 @@
 
         <span
           v-else
-          class="style-4"
           v-tooltip="
             (columns[index].fieldInfo && columns[index].fieldInfo.type.toLowerCase() === 'o2m') ||
             (columns[index].fieldInfo && columns[index].fieldInfo.type.toLowerCase() === 'm2o') ||
@@ -51,6 +50,7 @@
               ? $t('cant_sort_by_this_field')
               : undefined
           "
+          class="style-4"
         >
           {{ widths[field] > 40 ? name : null }}
         </span>
@@ -94,9 +94,9 @@
           >
             <div
               v-if="manualSortField"
-              @click.stop.prevent
               class="manual-sort cell"
               :class="{ active: manualSorting }"
+              @click.stop.prevent
             >
               <v-icon name="drag_handle" />
             </div>
@@ -121,8 +121,8 @@
               </div>
               <v-ext-display
                 v-else-if="useInterfaces && !isNil(row[field])"
-                :interface-type="fieldInfo.interface"
                 :id="field"
+                :interface-type="fieldInfo.interface"
                 :name="field"
                 :type="fieldInfo.type"
                 :datatype="fieldInfo.datatype"
@@ -165,8 +165,8 @@
               </div>
               <v-ext-display
                 v-else-if="useInterfaces && !isNil(row[field])"
-                :interface-type="fieldInfo.interface"
                 :id="field"
+                :interface-type="fieldInfo.interface"
                 :name="field"
                 :type="fieldInfo.type"
                 :options="fieldInfo.options"
@@ -190,7 +190,7 @@
 
 <script>
 export default {
-  name: "v-table",
+  name: "VTable",
   props: {
     loading: {
       type: Boolean,
@@ -287,16 +287,6 @@ export default {
       return this.manualSorting ? this.itemsManuallySorted : this.items;
     }
   },
-  created() {
-    this.initWidths();
-
-    if (!this.manualSortField) return;
-
-    if (this.sortVal && this.sortVal.field === this.manualSortField && this.sortVal.asc === true) {
-      this.manualSorting = true;
-      this.itemsManuallySorted = this.items;
-    }
-  },
   watch: {
     columnWidths() {
       this.initWidths();
@@ -308,9 +298,19 @@ export default {
       this.itemsManuallySorted = newVal;
     }
   },
+  created() {
+    this.initWidths();
+
+    if (!this.manualSortField) return;
+
+    if (this.sortVal && this.sortVal.field === this.manualSortField && this.sortVal.asc === true) {
+      this.manualSorting = true;
+      this.itemsManuallySorted = this.items;
+    }
+  },
   methods: {
     isNil(val) {
-      return _.isNil(val)
+      return _.isNil(val);
     },
     selectAll() {
       if (this.allSelected) {

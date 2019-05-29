@@ -21,9 +21,9 @@
       small
       :disabled="readonly"
       class="uploader"
-      @upload="saveUpload"
       :accept="options.accept"
       :multiple="false"
+      @upload="saveUpload"
     ></v-upload>
 
     <v-button type="button" :disabled="readonly" @click="newFile = true">
@@ -37,23 +37,23 @@
       {{ $t("existing") }}
     </v-button>
 
-    <portal to="modal" v-if="newFile">
+    <portal v-if="newFile" to="modal">
       <v-modal
         :title="$t('file_upload')"
-        @close="newFile = false"
         :buttons="{
           done: {
             text: $t('done')
           }
         }"
+        @close="newFile = false"
       >
         <div class="body">
-          <v-upload @upload="saveUpload" :accept="options.accept" :multiple="false"></v-upload>
+          <v-upload :accept="options.accept" :multiple="false" @upload="saveUpload"></v-upload>
         </div>
       </v-modal>
     </portal>
 
-    <portal to="modal" v-if="existing">
+    <portal v-if="existing" to="modal">
       <v-modal
         :title="$t('choose_one')"
         :buttons="{
@@ -61,9 +61,9 @@
             text: $t('done')
           }
         }"
+        action-required
         @close="existing = false"
         @done="existing = false"
-        action-required
       >
         <div class="search">
           <v-input
@@ -184,6 +184,9 @@ export default {
       ];
     }
   },
+  created() {
+    this.onSearchInput = _.debounce(this.onSearchInput, 200);
+  },
   methods: {
     saveUpload(fileInfo) {
       this.$emit("input", fileInfo.data);
@@ -206,9 +209,6 @@ export default {
         q: value
       });
     }
-  },
-  created() {
-    this.onSearchInput = _.debounce(this.onSearchInput, 200);
   }
 };
 </script>

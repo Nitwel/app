@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "v-ext-display-fallback",
+  name: "VExtDisplayFallback",
   props: {
     value: {
       type: null,
