@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "types": ["alias"],
   "icon": "horizontal_split",
+  "hideLabel": true,
   "recommended": {
     "required": false
   },
