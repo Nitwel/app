@@ -189,7 +189,7 @@ export default {
   .icon {
     width: 20px;
     height: 22px;
-    margin-right: 15px;
+    margin-right: 16px;
     color: var(--darker-gray);
     fill: var(--darker-gray);
 
@@ -206,7 +206,7 @@ export default {
     padding: 8px 0 8px 10px;
     
     .i {
-      margin-right: 15px;
+      margin-right: 16px;
     }
   }
 
