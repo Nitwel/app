@@ -204,6 +204,10 @@ export default {
     width: 100%;
     text-align: left;
     padding: 8px 0 8px 10px;
+    
+    .i {
+      margin-right: 15px;
+    }
   }
 
   .sign-out:hover,
