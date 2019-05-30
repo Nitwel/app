@@ -124,6 +124,8 @@
                 :id="field"
                 :interface-type="fieldInfo.interface"
                 :name="field"
+                :values="row"
+                :collection="collection"
                 :type="fieldInfo.type"
                 :datatype="fieldInfo.datatype"
                 :options="fieldInfo.options"

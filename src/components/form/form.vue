@@ -8,6 +8,7 @@
       :field="field"
       :fields="fields"
       :values="values"
+      :collection="collection"
       :blocked="batchMode && !activeFields.includes(field.field)"
       :batch-mode="batchMode"
       :new-item="newItem"
@@ -35,6 +36,10 @@ export default {
     values: {
       type: Object,
       required: true
+    },
+    collection: {
+      type: String,
+      default: null
     },
     readonly: {
       type: Boolean,

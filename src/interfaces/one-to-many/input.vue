@@ -138,6 +138,7 @@
         <div class="edit-modal-body">
           <v-form
             :fields="relatedCollectionFields"
+            :collection="collection"
             :values="editExisting"
             @stage-value="stageValue"
           ></v-form>
@@ -162,6 +163,7 @@
           <v-form
             new-item
             :fields="relatedCollectionFields"
+            :collection="collection"
             :values="relatedDefaultsWithEdits"
             @stage-value="stageValue"
           ></v-form>

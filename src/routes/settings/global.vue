@@ -13,7 +13,12 @@
       </template>
     </v-header>
 
-    <v-form :fields="fields" :values="values" @stage-value="stageValue" />
+    <v-form
+      :fields="fields"
+      :values="values"
+      collection="directus_settings"
+      @stage-value="stageValue"
+    />
   </div>
 </template>
 

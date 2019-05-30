@@ -37,10 +37,12 @@
               <v-ext-display
                 :interface-type="(column.fieldInfo || {}).interface || null"
                 :name="column.field"
+                :collection="relatedCollection"
                 :type="column.fieldInfo.type"
                 :datatype="column.fieldInfo.datatype"
                 :options="column.fieldInfo.options"
                 :value="item[junctionRelatedKey][column.field]"
+                :values="item[junctionRelatedKey]"
               />
             </div>
             <button
@@ -123,6 +125,7 @@
         <div class="edit-modal-body">
           <v-form
             :fields="relatedCollectionFields"
+            :collection="collection"
             :values="editExisting[junctionRelatedKey]"
             @stage-value="stageValue"
           ></v-form>
@@ -147,6 +150,7 @@
           <v-form
             new-item
             :fields="relatedCollectionFields"
+            :collection="collection"
             :values="relatedDefaultsWithEdits"
             @stage-value="stageValue"
           ></v-form>
