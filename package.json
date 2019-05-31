@@ -13,7 +13,7 @@
     "storybook:dev": "vue-cli-service storybook:serve -p 6006 -c ./.storybook -s ./public"
   },
   "dependencies": {
-    "@directus/extension-toolkit": "0.2.0",
+    "@directus/extension-toolkit": "0.3.0",
     "@directus/format-title": "^2.3.1",
     "@directus/sdk-js": "^5.3.1",
     "@rijk/jwt-payload": "^1.0.1",
