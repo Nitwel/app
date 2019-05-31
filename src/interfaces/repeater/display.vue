@@ -12,9 +12,16 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "ReadonlyOneToMany",
   mixins: [mixin],
   computed: {
+    valueFields() {
+      return _.chain(this.options.fields)
+        .pickBy(value => {
+          return value.hasOwnProperty("preview") && value.preview;
+        })
+        .keys()
+        .value();
+    },
     itemCount() {
       return this.$tc("item_count", (this.value || []).length, {
         count: (this.value || []).length
@@ -24,7 +31,7 @@ export default {
       var options = [];
       _.forEach(this.value, value => {
         options.push({
-          text: this.$helpers.micromustache.render(this.options.template, value)
+          text: value[this.valueFields[0]]
         });
       });
       return options;

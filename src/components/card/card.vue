@@ -51,7 +51,11 @@
           <p v-if="subtitle" class="subtitle">{{ subtitle }}</p>
           <p v-if="body" class="content">{{ body }}</p>
         </div>
-        <v-contextual-menu :disabled="disabled" :options="options"></v-contextual-menu>
+        <v-contextual-menu
+          :disabled="disabled"
+          :options="options"
+          @click="$emit($event)"
+        ></v-contextual-menu>
       </div>
     </component>
   </component>

@@ -14,6 +14,7 @@
     :new-item="newItem"
     :relation="relation"
     :fields="fields"
+    :collection="collection"
     :values="values"
     class="v-ext-input"
     @input="$emit('input', $event)"
@@ -47,6 +48,10 @@ export default {
       default: null
     },
     type: {
+      type: String,
+      default: null
+    },
+    collection: {
       type: String,
       default: null
     },

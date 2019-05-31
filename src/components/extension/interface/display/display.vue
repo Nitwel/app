@@ -6,6 +6,8 @@
     :value="value"
     :type="type"
     :length="length"
+    :values="values"
+    :collection="collection"
     :readonly="readonly"
     :required="required"
     :loading="loading"
@@ -50,6 +52,14 @@ export default {
     },
     length: {
       type: [String, Number],
+      default: null
+    },
+    values: {
+      type: Object,
+      default: null
+    },
+    collection: {
+      type: String,
       default: null
     },
     readonly: {

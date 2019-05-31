@@ -52,6 +52,7 @@
                 :interface-type="(column.fieldInfo || {}).interface || null"
                 :name="column.field"
                 :type="column.fieldInfo.type"
+                :collection="collection"
                 :datatype="column.fieldInfo.datatype"
                 :options="column.fieldInfo.options"
                 :value="item[column.field]"
@@ -138,6 +139,7 @@
         <div class="edit-modal-body">
           <v-form
             :fields="relatedCollectionFields"
+            :collection="collection"
             :values="editExisting"
             @stage-value="stageValue"
           ></v-form>
@@ -162,6 +164,7 @@
           <v-form
             new-item
             :fields="relatedCollectionFields"
+            :collection="collection"
             :values="relatedDefaultsWithEdits"
             @stage-value="stageValue"
           ></v-form>

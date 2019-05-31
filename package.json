@@ -13,11 +13,11 @@
     "storybook:dev": "vue-cli-service storybook:serve -p 6006 -c ./.storybook -s ./public"
   },
   "dependencies": {
-    "@directus/extension-toolkit": "0.1.0",
+    "@directus/extension-toolkit": "0.3.0",
     "@directus/format-title": "^2.3.1",
     "@directus/sdk-js": "^5.3.1",
     "@rijk/jwt-payload": "^1.0.1",
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "body-scroll-lock": "^2.6.1",
     "codemirror": "^5.47.0",
     "convert-range": "^1.1.0",
@@ -56,11 +56,11 @@
   },
   "devDependencies": {
     "@storybook/addon-a11y": "^5.0.11",
-    "@storybook/addon-actions": "^4.1.0 || ^5.0.0",
+    "@storybook/addon-actions": "^5.0.11",
     "@storybook/addon-backgrounds": "^5.0.11",
     "@storybook/addon-centered": "^5.0.11",
-    "@storybook/addon-knobs": "^4.1.0 || ^5.0.0",
-    "@storybook/addon-links": "^4.1.0 || ^5.0.0",
+    "@storybook/addon-knobs": "^5.0.11",
+    "@storybook/addon-links": "^5.0.11",
     "@storybook/addon-viewport": "^5.0.11",
     "@storybook/vue": "^5.0.11",
     "@vue/cli-plugin-babel": "^3.8.0",

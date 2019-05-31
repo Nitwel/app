@@ -8,8 +8,38 @@
     "choices": {
       "name": "$t:choices",
       "comment": "$t:choices_comment",
-      "interface": "json",
+      "interface": "repeater",
       "type": "JSON",
+      "options": {
+        "dataType": "value",
+        "buttonText": "Add Group",
+        "fields": {
+          "groups": {
+            "width": "full",
+            "interface": "repeater",
+            "type": "JSON",
+            "options": {
+              "buttonText": "Add Button",
+              "fields": {
+                "label": {
+                  "interface": "text-input",
+                  "type": "String",
+                  "preview": true
+                },
+                "value": {
+                  "interface": "text-input",
+                  "type": "String"
+                },
+                "icon": {
+                  "width": "full",
+                  "interface": "icon",
+                  "type": "String"
+                }
+              }
+            }
+          }
+        }
+      },
       "default": [
         [
           {
@@ -23,26 +53,33 @@
             "value": "cruise"
           }
         ],
-        {
-          "icon": "directions_bus",
-          "value": "bus"
-        },
-        {
-          "icon": "directions_car",
-          "value": "car"
-        },
-        {
-          "icon": "directions_bike",
-          "value": "bike"
-        },
-        {
-          "icon": "directions_run",
-          "value": "run"
-        },
-        {
-          "label": "$t:other",
-          "value": "other"
-        }
+        [
+          {
+            "label": "$t:bus",
+            "icon": "directions_bus",
+            "value": "bus"
+          },
+          {
+            "label": "$t:car",
+            "icon": "directions_car",
+            "value": "car"
+          },
+          {
+            "label": "$t:bike",
+            "icon": "directions_bike",
+            "value": "bike"
+          },
+          {
+            "label": "Run",
+            "icon": "directions_run",
+            "value": "run"
+          },
+          {
+            "label": "Sleep",
+            "label": "$t:sleep",
+            "value": "sleep"
+          }
+        ]
       ]
     },
     "theme": {

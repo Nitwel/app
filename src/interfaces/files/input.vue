@@ -105,6 +105,7 @@
           <v-form
             :fields="relatedCollectionFields"
             :values="editExisting[junctionFieldName]"
+            :collection="collection"
             @stage-value="stageValue"
           ></v-form>
         </div>

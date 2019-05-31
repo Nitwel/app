@@ -1,5 +1,11 @@
 <template>
-  <v-contextual-menu trigger="hover" :text="itemCount" :options="menuOptions" :icon="null" />
+  <v-contextual-menu
+    trigger="hover"
+    :text="itemCount"
+    :options="menuOptions"
+    :icon="null"
+    placement="right-end"
+  />
 </template>
 
 <script>
@@ -26,3 +32,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+.v-ext-display {
+  display: flex;
+}
+</style>

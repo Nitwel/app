@@ -23,6 +23,7 @@
         :value="values[field.field]"
         :relation="relation"
         :fields="fields"
+        :collection="collection"
         :values="values"
         :length="field.length"
         :new-item="newItem"
@@ -64,6 +65,10 @@ export default {
     values: {
       type: Object,
       required: true
+    },
+    collection: {
+      type: String,
+      default: null
     },
     blocked: {
       type: Boolean,

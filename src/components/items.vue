@@ -46,6 +46,7 @@
     :view-options="viewOptions"
     :selection="selectionKeys"
     :loading="items.loading"
+    :collection="collection"
     :lazy-loading="items.lazyLoading"
     :link="links ? '__link__' : null"
     :sort-field="sortField"
