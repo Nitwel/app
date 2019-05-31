@@ -192,9 +192,6 @@ export default {
       if (!this.relation) return false;
       return true;
     },
-    currentCollection() {
-      return this.relation.collection_one.collection;
-    },
     relatedCollection() {
       return this.relation.junction.collection_one.collection;
     },
