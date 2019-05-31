@@ -170,6 +170,7 @@
                 :id="field"
                 :interface-type="fieldInfo.interface"
                 :name="field"
+                :collection="collection"
                 :type="fieldInfo.type"
                 :options="fieldInfo.options"
                 :value="row[field]"
@@ -245,6 +246,10 @@ export default {
     useInterfaces: {
       type: Boolean,
       default: false
+    },
+    collection: {
+      type: String,
+      default: null
     }
   },
   data() {

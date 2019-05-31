@@ -5,6 +5,7 @@
       :class="viewOptions.spacing"
       :items="items"
       :columns="columns"
+      :collection="collection"
       :primary-key-field="primaryKeyField"
       :selection="selection"
       :sort-val="sortVal"
