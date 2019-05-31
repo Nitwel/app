@@ -56,9 +56,6 @@ export default {
       }
 
       return this.$store.state.permissions[this.collection].statuses[this.startStatus];
-    },
-    collection() {
-      return Object.values(this.fields)[0].collection;
     }
   },
   created() {
