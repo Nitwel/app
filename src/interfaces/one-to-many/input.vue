@@ -52,6 +52,7 @@
                 :interface-type="(column.fieldInfo || {}).interface || null"
                 :name="column.field"
                 :type="column.fieldInfo.type"
+                :collection="collection"
                 :datatype="column.fieldInfo.datatype"
                 :options="column.fieldInfo.options"
                 :value="item[column.field]"

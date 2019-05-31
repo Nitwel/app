@@ -55,7 +55,7 @@ export default {
       default: null
     },
     values: {
-      type: String,
+      type: Object,
       default: null
     },
     collection: {

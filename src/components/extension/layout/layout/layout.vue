@@ -5,6 +5,7 @@
     :primary-key-field="primaryKeyField"
     :fields="fields"
     :items="items"
+    :collection="collection"
     :view-options="viewOptions"
     :view-query="viewQuery"
     :loading="loading"
@@ -64,6 +65,10 @@ export default {
       default: false
     },
     link: {
+      type: String,
+      default: null
+    },
+    collection: {
       type: String,
       default: null
     },
