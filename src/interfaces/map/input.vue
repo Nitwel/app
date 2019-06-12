@@ -1,7 +1,7 @@
 <template>
   <div class="interface-map">
     <div :class="{ 'map-readonly': readonly }" class="map">
-      <div id="directusMap" class="map-container" :style="{ height: options.height + 'px' }">
+      <div :id="name" class="map-container" :style="{ height: options.height + 'px' }">
         <!-- Map Renders Here -->
       </div>
 
@@ -67,7 +67,6 @@ export default {
       latlng: null,
       isLocating: false,
       placeName: "",
-      mapPlaceholder: "directusMap",
       mapInteractions: [
         "boxZoom",
         "doubleClickZoom",
@@ -136,7 +135,7 @@ export default {
     },
 
     createMap(latlng) {
-      this.map = leaflet.map(this.mapPlaceholder, {
+      this.map = leaflet.map(this.name, {
         center: latlng,
         zoom: this.options.defaultZoom,
         maxZoom: this.options.maxZoom,
