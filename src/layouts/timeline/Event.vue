@@ -12,14 +12,14 @@
       </div>
       <div class="content">
         <v-ext-display
-          @click.native.stop=""
-          class="display"
           :id="data.contentType.name"
+          class="display"
           :name="data.contentType.name"
           :type="data.contentType.type"
           :value="data.content"
-          :interfaceType="data.contentType.interface"
+          :interface-type="data.contentType.interface"
           :options="data.contentType.options"
+          @click.native.stop=""
         />
         <v-timeago class="time" :datetime="data.time" :auto-update="86400" :locate="$i18n.locale" />
       </div>
@@ -29,23 +29,23 @@
 
 <script>
 export default {
-  props: ["data", "connect"],
   components: {},
+  props: ["data", "connect"],
   data() {
     return {};
   },
   computed: {},
-  methods: {},
   created() {},
   mounted() {},
-  destroyed() {}
+  destroyed() {},
+  methods: {}
 };
 </script>
 
 <style lang="scss" scoped>
 .event {
   position: relative;
-  margin-bottom: 25px;
+  margin-bottom: 16px;
 
   .line {
     position: absolute;
@@ -67,17 +67,19 @@ export default {
       transform: translate(-50%, -50%);
       border: 3px solid white;
       z-index: 10;
+      top: 7px;
+      position: relative;
     }
   }
 
   .container {
     cursor: pointer;
     margin-left: 50px;
-    padding-left: 5px;
+    padding: 8px;
     border-radius: var(--border-radius);
 
     &:hover {
-      background-color: var(--lightest-gray);
+      background-color: var(--highlight);
     }
 
     .title {

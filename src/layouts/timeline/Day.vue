@@ -19,18 +19,18 @@
 import Event from "./Event.vue";
 
 export default {
-  props: ["date", "events"],
   components: {
     Event
   },
+  props: ["date", "events"],
   data() {
     return {};
   },
   computed: {},
-  methods: {},
   created() {},
   mounted() {},
-  destroyed() {}
+  destroyed() {},
+  methods: {}
 };
 </script>
 
@@ -39,10 +39,13 @@ export default {
   margin-bottom: 10px;
 
   .date {
-    margin: 0px 50px;
-    padding: 15px 0px;
-    font-size: 18px;
+    padding: 19px 32px; // 19 visually aligns it with the project switcher
+    font-size: var(--size-2);
     border-bottom: 2px solid var(--lightest-gray);
+    position: sticky;
+    top: var(--header-height);
+    background-color: var(--white);
+    z-index: 2;
   }
 
   .events {
