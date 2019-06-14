@@ -1,7 +1,7 @@
 <template>
   <div class="status-mapping">
     <div class="boxes">
-      <draggable v-model="boxes">
+      <draggable v-model="boxes" handle=".handle">
         <Box
           v-for="(value, index) in boxes"
           :id="index"
