@@ -10,9 +10,9 @@
       @keydown="onInput"
     ></v-input>
     <div class="buttons">
-      <button v-for="value in valueArray" :key="value" @click.prevent="removeTag(value)">
+      <v-tag v-for="value in valueArray" :key="value" clickable @click.prevent="removeTag(value)">
         {{ value }}
-      </button>
+      </v-tag>
     </div>
   </div>
 </template>
@@ -29,6 +29,18 @@ export default {
     };
   },
 
+  // Make sure to re-populate the local state if the value changes from outside
+  // of the interface
+  watch: {
+    value() {
+      this.getLocalValueArray();
+    }
+  },
+
+  created() {
+    this.getLocalValueArray();
+  },
+
   methods: {
     // If the user is typing and hits Enter or `,` add the tag
     onInput(event) {
@@ -41,15 +53,16 @@ export default {
 
     addTag(tag) {
       if (!tag) return;
-      let valueArrayCopy = this.valueArray.splice(0);
 
       // Remove any leading / trailing whitespace from the value
       tag = tag.trim();
 
+      // Convert the tag to lowercase
       if (this.options.lowercase) {
         tag = tag.toLowerCase();
       }
 
+      // Clean up the tag
       if (this.options.sanitize) {
         tag = tag
           // Replace all non alphanumeric characters with a hyphen
@@ -57,6 +70,24 @@ export default {
           // Remove leading / trailing hyphens and remove doubles
           .replace(/^-|-$/g, "");
       }
+
+      // If there is a validation regex option, only add if matches
+      if (this.options.validation) {
+        const regex = RegExp(this.options.validation);
+        let message = this.options.validationMessage
+          ? this.options.validationMessage
+          : this.$t("interfaces-tags-validation_message_default");
+        if (!regex.test(tag)) {
+          this.$notify({
+            title: message,
+            color: "amber",
+            iconMain: "local_offer"
+          });
+          return;
+        }
+      }
+
+      let valueArrayCopy = this.valueArray.splice(0);
 
       valueArrayCopy.push(tag);
 
@@ -114,18 +145,6 @@ export default {
 
       this.valueArray = array;
     }
-  },
-
-  created() {
-    this.getLocalValueArray();
-  },
-
-  // Make sure to re-populate the local state if the value changes from outside
-  // of the interface
-  watch: {
-    value() {
-      this.getLocalValueArray();
-    }
   }
 };
 </script>
@@ -139,19 +158,5 @@ export default {
   display: flex;
   flex-wrap: wrap;
   padding: 5px 0;
-
-  button {
-    transition: var(--fast) var(--transition);
-    margin: 2px;
-    padding: 2px 4px 3px;
-    background-color: var(--gray);
-    color: var(--white);
-    border-radius: var(--border-radius);
-
-    &:hover,
-    .user-is-tabbing &:focus {
-      background-color: var(--danger);
-    }
-  }
 }
 </style>

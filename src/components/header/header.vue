@@ -11,7 +11,7 @@
       :icon-color="iconColor ? iconColor : 'gray'"
     />
     <div class="title" :class="{ 'has-breadcrumb': navBreadcrumb }">
-      <ol class="breadcrumb" v-if="navBreadcrumb">
+      <ol v-if="navBreadcrumb" class="breadcrumb">
         <li v-for="{ name, path } in navBreadcrumb" :key="path" class="breadcrumb-item">
           <router-link :to="path">{{ name }}</router-link>
         </li>
@@ -28,8 +28,8 @@
       :label="$t('info')"
       icon="info"
       no-background
-      @click="toggleInfo"
       icon-color="lighter-gray"
+      @click="toggleInfo"
     />
     <v-header-button
       v-if="infoToggle && itemDetail"
@@ -37,8 +37,8 @@
       icon="info"
       no-background
       class="info-mobile"
-      @click="toggleInfo"
       icon-color="lighter-gray"
+      @click="toggleInfo"
     />
     <slot name="buttons" />
   </header>
@@ -48,7 +48,7 @@
 import { TOGGLE_NAV, TOGGLE_INFO } from "../../store/mutation-types";
 
 export default {
-  name: "v-header",
+  name: "VHeader",
   props: {
     title: {
       type: String,
@@ -127,6 +127,14 @@ export default {
       return breadcrumbClone.length > 0 ? breadcrumbClone : null;
     }
   },
+
+  created() {
+    window.addEventListener("scroll", this.checkIfScrolled);
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.checkIfScrolled);
+  },
   methods: {
     activateNav() {
       this.$store.commit(TOGGLE_NAV, true);
@@ -139,14 +147,6 @@ export default {
       const scrollPos = window.scrollY;
       this.scrolled = scrollPos > 0;
     }
-  },
-
-  created() {
-    window.addEventListener("scroll", this.checkIfScrolled);
-  },
-
-  beforeDestroy() {
-    window.removeEventListener("scroll", this.checkIfScrolled);
   }
 };
 </script>

@@ -1,8 +1,27 @@
 <template>
   <div>
-    <div class="name" v-if="showLabel">
+    <div v-if="showLabel" class="name">
+      <v-icon
+        v-if="field.note"
+        v-tooltip="$helpers.snarkdown(field.note)"
+        name="info"
+        size="18"
+        icon-style="outline"
+        class="note field-action"
+        color="darker-gray"
+      />
       {{ field.name || $helpers.formatTitle(field.field) }}
-      <span class="optional" v-if="field.required === false">— {{ $t("optional") }}</span>
+      <v-icon v-if="field.required !== false" class="required" name="star" color="light-gray" sup />
+      <v-contextual-menu
+        v-if="field.readonly === false"
+        class="options field-action"
+        placement="bottom-start"
+        :options="options"
+        :icon="null"
+        @click="emitChange"
+      >
+        <v-icon name="arrow_drop_down" icon-style="outline" size="18" class="field-action" />
+      </v-contextual-menu>
       <v-toggle
         v-if="batchMode"
         class="batch-toggle"
@@ -20,9 +39,10 @@
         :options="field.options"
         :type="field.type"
         :datatype="field.datatype"
-        :value="values[field.field]"
+        :value="value"
         :relation="relation"
         :fields="fields"
+        :collection="collection"
         :values="values"
         :length="field.length"
         :new-item="newItem"
@@ -40,14 +60,12 @@
         "
       />
     </div>
-
-    <div class="note" v-if="field.note" v-html="$helpers.snarkdown(field.note)" />
   </div>
 </template>
 
 <script>
 export default {
-  name: "v-field",
+  name: "VField",
   props: {
     name: {
       type: String,
@@ -65,6 +83,10 @@ export default {
       type: Object,
       required: true
     },
+    collection: {
+      type: String,
+      default: null
+    },
     blocked: {
       type: Boolean,
       default: false
@@ -79,13 +101,19 @@ export default {
     }
   },
 
+  data() {
+    return {
+      initialValue: this.values[this.field.field]
+    };
+  },
+
   computed: {
     showLabel() {
       const interfaceName = this.field.interface;
       const interfaceMeta = this.getInterfaceMeta(interfaceName);
 
-      // In case the current field doesn't have an interface setup
-      if (!interfaceMeta) return;
+      // In case the current field doesn 't have an interface setup
+      if (!interfaceMeta) return true;
 
       const hideLabel = interfaceMeta.hideLabel;
 
@@ -101,6 +129,39 @@ export default {
       if (type.toLowerCase() === "o2m") return this.$store.getters.o2m(collection, field);
       if (type.toLowerCase() === "translation") return this.$store.getters.o2m(collection, field);
       return null;
+    },
+
+    isChanged() {
+      return this.value !== this.initialValue;
+    },
+
+    isDefault() {
+      const defaultValue = this.field.default_value;
+      return this.value === defaultValue;
+    },
+
+    value() {
+      return this.values[this.field.field];
+    },
+
+    options() {
+      return {
+        setNull: {
+          text: this.$t("clear_value"),
+          icon: "delete_outline",
+          disabled: this.value === null
+        },
+        reset: {
+          text: this.$t("reset_to_default"),
+          icon: "settings_backup_restore",
+          disabled: this.isDefault === true
+        },
+        clear: {
+          text: this.$t("undo_changes"),
+          icon: "undo",
+          disabled: this.isChanged === false
+        }
+      };
     }
   },
 
@@ -109,33 +170,64 @@ export default {
       const interfaceMeta = this.$store.state.extensions.interfaces[interfaceName];
 
       return interfaceMeta || undefined;
+    },
+
+    emitChange(action) {
+      let value;
+
+      switch (action) {
+        case "setNull":
+          value = null;
+          break;
+        case "clear":
+          value = this.initialValue;
+          break;
+        case "reset":
+          value = this.field.default_value;
+          break;
+      }
+
+      this.$emit("stage-value", {
+        field: this.field.field,
+        value: value
+      });
     }
   }
 };
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .name {
   font-size: var(--size-2);
   margin-bottom: 10px;
   color: var(--darkest-gray);
+}
 
-  .optional {
-    color: var(--gray);
+.field-action {
+  transition: all var(--fast) var(--transition);
+  color: var(--light-gray);
+  vertical-align: -4px;
+  &:hover {
+    color: var(--darker-gray);
   }
 }
 
 .note {
-  margin-top: 8px;
-  font-style: italic;
-  font-size: var(--size-3);
-  font-weight: var(--weight-bold);
-  color: var(--light-gray);
+  cursor: help;
 }
 
 .batch-toggle {
   display: inline-block;
   vertical-align: -4px;
   margin-left: 4px;
+}
+
+.options {
+  display: inline-block;
+  margin-left: -3px;
+}
+
+.required {
+  margin-left: -0.5ch;
 }
 </style>

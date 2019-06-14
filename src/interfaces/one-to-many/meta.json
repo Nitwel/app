@@ -1,6 +1,6 @@
 {
   "name": "$t:o2m",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "types": ["o2m"],
   "options": {
     "fields": {
@@ -9,27 +9,6 @@
       "interface": "text-input",
       "placeholder": "name,description"
     },
-    "preferences": {
-      "name": "$t:preferences",
-      "comment": "$t:preferences_comment",
-      "interface": "json",
-      "options": {
-        "language": "application/json",
-        "template": {
-          "viewType": "tabular",
-          "viewQuery": {
-            "fields": ["id", "name"]
-          },
-          "filters": [
-            {
-              "field": "name",
-              "operator": "contains",
-              "value": "hi"
-            }
-          ]
-        }
-      }
-    },
     "template": {
       "name": "$t:template",
       "comment": "$t:template_comment",
@@ -37,6 +16,18 @@
       "options": {
         "placeholder": "$t:template_placeholder"
       }
+    },
+    "allow_create": {
+      "name": "$t:allow_create",
+      "comment": "$t:allow_create_comment",
+      "interface": "toggle",
+      "default": true
+    },
+    "allow_select": {
+      "name": "$t:allow_select",
+      "comment": "$t:allow_select_comment",
+      "interface": "toggle",
+      "default": true
     }
   },
   "relation": "o2m",
@@ -50,11 +41,15 @@
       "visible_columns_comment": "Add a CSV of columns you want to display as preview",
       "preferences": "Listing View Preferences",
       "preferences_comment": "Set what options to use for the modal",
-      "template": "Dropdown Template",
-      "template_comment": "How to format the dropdown options",
-      "template_placeholder": "{{title}} — {{author}}"
+      "template": "Display Template",
+      "template_comment": "How to format value on the item browse display",
+      "template_placeholder": "{{title}} — {{author}}",
+      "allow_create": "Allow Create",
+      "allow_create_comment": "Allow the user to create a new item from this interface",
+      "allow_select": "Allow Select",
+      "allow_select_comment": "Allow the user to select an existing item"
     },
-	"fr-FR": {
+    "fr-FR": {
       "o2m": "Un-à-plusieurs (O2M)",
       "select_items": "Sélection des élements",
       "relation_not_setup": "La relation n'a pas été configurée correctement",

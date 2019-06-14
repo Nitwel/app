@@ -2,16 +2,16 @@
   <form @submit.prevent>
     <fieldset>
       <legend class="style-3">{{ $t("layouts-tabular-fields") }}</legend>
-      <draggable v-model="sortList" @end="sort" handle=".handle">
+      <draggable v-model="sortList" handle=".handle" @end="sort">
         <div
-          class="draggable"
           v-for="field in sortList"
           :key="'tabular-layout-options-field-' + field.field"
+          class="draggable"
         >
           <v-checkbox
-            class="checkbox"
-            :key="field.field"
             :id="'tabular-layout-options-field-' + field.field"
+            :key="field.field"
+            class="checkbox"
             :label="field.name"
             :value="field.field"
             :checked="fieldsInUse.includes(field.field)"
@@ -60,6 +60,11 @@ export default {
       return this.viewQuery.fields.split(",").filter(field => this.fields[field]);
     }
   },
+  watch: {
+    fields() {
+      this.initSortList();
+    }
+  },
   created() {
     this.initSortList();
   },
@@ -103,11 +108,6 @@ export default {
           fieldInfo => !this.fieldsInUse.includes(fieldInfo.field)
         )
       ];
-    }
-  },
-  watch: {
-    fields() {
-      this.initSortList();
     }
   }
 };

@@ -1,12 +1,11 @@
 <template>
   <v-prompt
-    :message="$t('name_bookmark')"
     v-model="bookmarkTitle"
+    :message="$t('name_bookmark')"
     @cancel="cancelBookmark"
     @confirm="saveBookmark"
   >
-    <div class="create-options" v-if="isUserAdmin">
-      <div class="create-label">{{ $t("bookmark_select_visibility") }}</div>
+    <div v-if="isUserAdmin" class="create-options">
       <v-select
         :options="bookmarkOptions"
         :value="bookmarkType"
@@ -21,22 +20,22 @@
 import api from "../../api";
 
 export default {
-  data() {
-    return {
-      bookmarkOptions: {
-        personal: this.$t("bookmark_personal"),
-        global: this.$t("bookmark_global")
-      },
-      bookmarkTitle: "",
-      bookmarkType: "personal",
-      optionsDisabled: true
-    };
-  },
   props: {
     preferences: {
       type: Object,
       default: null
     }
+  },
+  data() {
+    return {
+      bookmarkOptions: {
+        global: this.$t("bookmark_global"),
+        personal: this.$t("bookmark_personal")
+      },
+      bookmarkTitle: "",
+      bookmarkType: "personal",
+      optionsDisabled: true
+    };
   },
   computed: {
     isUserAdmin() {
@@ -121,9 +120,5 @@ export default {
 <style lang="scss" scoped>
 .create-options {
   margin-top: 2rem;
-}
-.create-label {
-  font-size: 14px;
-  margin-bottom: 1rem;
 }
 </style>

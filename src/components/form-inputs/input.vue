@@ -4,8 +4,9 @@
 
     <input
       v-if="mask"
-      v-mask="mask"
+      :id="id"
       ref="input"
+      v-mask="mask"
       :class="{ charactercount }"
       :type="type"
       :autocomplete="autocomplete"
@@ -20,7 +21,6 @@
       :readonly="readonly || disabled"
       :spellcheck="spellcheck"
       :value="value"
-      :id="id"
       :step="step"
       @keyup="$emit('keyup', $event)"
       @keydown="$emit('keydown', $event)"
@@ -29,6 +29,7 @@
 
     <input
       v-else
+      :id="id"
       ref="input"
       :class="{ charactercount }"
       :type="type"
@@ -44,19 +45,18 @@
       :readonly="readonly || disabled"
       :spellcheck="spellcheck"
       :value="value"
-      :id="id"
       :step="step"
       @keyup="$emit('keyup', $event)"
       @keydown="$emit('keydown', $event)"
       @input="$emit('input', $event.target.value)"
     />
 
-    <v-icon v-if="iconLeft" :name="iconLeft" :color="iconLeftColor" v-tooltip="iconLeftTooltip" />
+    <v-icon v-if="iconLeft" v-tooltip="iconLeftTooltip" :name="iconLeft" :color="iconLeftColor" />
     <v-icon
       v-if="iconRight"
+      v-tooltip="iconRightTooltip"
       :name="iconRight"
       :color="iconRightColor"
-      v-tooltip="iconRightTooltip"
     />
 
     <span v-if="charactercount">{{ charsRemaining }}</span>
@@ -65,7 +65,7 @@
 
 <script>
 export default {
-  name: "v-input",
+  name: "VInput",
   props: {
     type: {
       type: String,

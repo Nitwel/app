@@ -229,7 +229,7 @@
 
   --body-background: #fff;
   --off-white: #f9fafa; // Milky
-  --highlight: #f5fafd;
+  --highlight: var(--off-white);
 
   --accent-light: var(--light-blue-50);
   --action-light: var(--blue-grey-50);

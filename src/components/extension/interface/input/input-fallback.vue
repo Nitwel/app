@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "v-ext-input-fallback",
+  name: "VExtInputFallback",
   props: {
     value: {
       type: null,

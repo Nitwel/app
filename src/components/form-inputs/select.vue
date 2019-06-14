@@ -2,8 +2,8 @@
   <div :class="{ icon }" class="v-select">
     <select
       v-if="other"
-      :disabled="disabled || readonly"
       :id="otherActive ? null : id"
+      :disabled="disabled || readonly"
       :value="value"
       @change="change($event.target.value)"
     >
@@ -20,9 +20,9 @@
     </select>
     <select
       v-else
+      :id="otherActive ? null : id"
       ref="select"
       :disabled="disabled || readonly"
-      :id="otherActive ? null : id"
       :value="value"
       @change="change($event.target.value)"
     >
@@ -40,16 +40,16 @@
     </select>
     <input
       v-if="otherActive"
+      :id="id"
       ref="input"
       :type="type"
       :value="customValue"
-      :id="id"
       :placeholder="placeholder"
       autofocus
       @input="changeCustom"
     />
     <div class="value">
-      <v-icon :name="icon" v-if="icon" />
+      <v-icon v-if="icon" :name="icon" />
       <span v-if="placeholder && !value" class="placeholder">{{ placeholder }}</span>
       <span class="no-wrap">{{ parsedOptions[value] }}</span>
     </div>
@@ -59,7 +59,7 @@
 
 <script>
 export default {
-  name: "v-select",
+  name: "VSelect",
   props: {
     disabled: {
       type: Boolean,
@@ -95,7 +95,7 @@ export default {
       default: ""
     },
     options: {
-      type: [Object, String],
+      type: [Object, String, Array],
       required: true
     },
     placeholder: {
@@ -159,6 +159,7 @@ export default {
     height: 100%;
     opacity: 0;
     cursor: pointer;
+    appearance: none;
   }
 
   .value,

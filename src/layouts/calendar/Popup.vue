@@ -9,10 +9,10 @@
         </div>
         <div id="sidebar" @wheel="scroll">
           <transition :name="moveSidebar">
-            <div :key="days" id="dates-container">
+            <div id="dates-container" :key="days">
               <div
-                :key="day.date.getDate()"
                 v-for="day in days"
+                :key="day.date.getDate()"
                 class="dates"
                 @click="changeDay(day.index)"
               >
@@ -33,8 +33,8 @@
         </div>
         <div id="events">
           <div
-            :key="event.title"
             v-for="event in events"
+            :key="event.title"
             class="event"
             :style="event.color"
             @click="$router.push(event.to)"
@@ -57,8 +57,8 @@
 
 <script>
 export default {
-  props: ["open", "date"],
   components: {},
+  props: ["open", "date"],
   data() {
     return {
       // The differend animations for the sidebar.
@@ -92,6 +92,9 @@ export default {
       var url = this.$root._router.currentRoute.path;
       return "#" + url + "/+";
     }
+  },
+  created() {
+    this.scroll = _.throttle(this.scroll, 150);
   },
   methods: {
     /*
@@ -154,9 +157,6 @@ export default {
         this.changeDay(-1);
       }
     }
-  },
-  created() {
-    this.scroll = this.$lodash.throttle(this.scroll, 150);
   }
 };
 </script>

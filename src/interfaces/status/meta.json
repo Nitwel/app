@@ -19,52 +19,52 @@
     "status_mapping": {
       "name": "$t:status_mapping",
       "comment": "$t:status_mapping_comment",
-      "interface": "json",
+      "interface": "repeater",
       "type": "JSON",
       "options": {
-        "language": "application/json",
-        "template": {
+        "fields": {
+          "name": {
+            "interface": "text-input",
+            "type": "String",
+            "preview": true
+          },
+          "value": {
+            "interface": "text-input",
+            "type": "String",
+            "index": true
+          },
+          "text_color": {
+            "interface": "color-palette",
+            "type": "String"
+          },
+          "background_color": {
+            "interface": "color-palette",
+            "type": "String",
+            "preview": true
+          },
+          "browse_subdued": {
+            "interface": "toggle",
+            "type": "boolean"
+          },
+          "browse_badge": {
+            "interface": "toggle",
+            "type": "boolean"
+          },
+          "soft_delete": {
+            "interface": "toggle",
+            "type": "boolean"
+          },
           "published": {
-            "name": "$t:published",
-            "text_color": "white",
-            "background_color": "accent",
-            "browse_subdued": false,
-            "browse_badge": true,
-            "soft_delete": false,
-            "published": true
-          },
-          "under-review": {
-            "name": "$t:under_review",
-            "text_color": "white",
-            "background_color": "amber",
-            "browse_subdued": true,
-            "browse_badge": true,
-            "soft_delete": false,
-            "published": false
-          },
-          "draft": {
-            "name": "$t:draft",
-            "text_color": "white",
-            "background_color": "blue-grey-200",
-            "browse_subdued": true,
-            "browse_badge": true,
-            "soft_delete": false,
-            "published": false
-          },
-          "deleted": {
-            "name": "$t:deleted",
-            "text_color": "white",
-            "background_color": "red",
-            "browse_subdued": true,
-            "browse_badge": true,
-            "soft_delete": true,
-            "published": false
+            "interface": "toggle",
+            "type": "boolean"
+
           }
         }
       },
       "default": {
         "published": {
           "name": "$t:published",
+          "value": "published",
           "text_color": "white",
           "background_color": "accent",
           "browse_subdued": false,
@@ -74,6 +74,7 @@
         },
         "draft": {
           "name": "$t:draft",
+          "value": "draft",
           "text_color": "white",
           "background_color": "blue-grey-200",
           "browse_subdued": true,
@@ -83,6 +84,7 @@
         },
         "deleted": {
           "name": "$t:deleted",
+          "value": "deleted",
           "text_color": "white",
           "background_color": "red",
           "browse_subdued": true,

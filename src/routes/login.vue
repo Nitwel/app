@@ -1,7 +1,7 @@
 <template>
   <transition name="fade">
     <div class="login" :class="{ loading }">
-      <v-install v-if="installing" @install="install" :saving="saving" />
+      <v-install v-if="installing" :saving="saving" @install="install" />
 
       <form v-else @submit.prevent="processForm">
         <img class="logo" alt="" src="../assets/logo-dark.svg" />
@@ -14,14 +14,14 @@
 
         <label class="project-switcher">
           <select
+            v-if="Object.keys(urls).length > 1 || allowOther"
             v-model="selectedUrl"
             :disabled="loading"
-            v-if="Object.keys(urls).length > 1 || allowOther"
           >
             <option
               v-for="(name, u) in urls"
-              :value="u"
               :key="u"
+              :value="u"
               :checked="u === url || u === url + '/'"
             >
               {{ name }}
@@ -40,13 +40,13 @@
           </span>
         </label>
 
-        <div class="material-input" v-if="selectOther">
+        <div v-if="selectOther" class="material-input">
           <input
+            id="url"
             v-model="url"
             :disabled="loading"
             :class="{ 'has-value': url && url.length > 0 }"
             type="url"
-            id="url"
             name="url"
           />
           <label for="url">{{ $t("api_url") }}</label>
@@ -62,12 +62,12 @@
         <template v-else>
           <div class="material-input">
             <input
+              id="email"
               v-model="email"
               autocomplete="email"
               :disabled="loading || exists === false"
               :class="{ 'has-value': email && email.length > 0 }"
               type="text"
-              id="email"
               name="email"
             />
             <label for="email">{{ $t("email") }}</label>
@@ -75,12 +75,12 @@
 
           <div v-if="!resetMode" class="material-input">
             <input
+              id="password"
               v-model="password"
               autocomplete="current-password"
               :disabled="loading || exists === false"
               :class="{ 'has-value': password && password.length > 0 }"
               type="password"
-              id="password"
               name="password"
             />
             <label for="password">{{ $t("password") }}</label>
@@ -98,8 +98,8 @@
           <transition-group name="list" tag="div" class="stack">
             <v-spinner
               v-if="checkingExistence || gettingThirdPartyAuthProviders"
-              class="spinner"
               key="spinner"
+              class="spinner"
               :size="18"
               :line-size="2"
               line-fg-color="var(--gray)"
@@ -107,9 +107,9 @@
             />
 
             <span
+              v-else-if="error || SSOerror"
               key="error"
               class="notice"
-              v-else-if="error || SSOerror"
               :class="errorType"
               @click="error = null"
             >
@@ -119,12 +119,12 @@
 
             <v-icon
               v-else-if="thirdPartyAuthProviders && !thirdPartyAuthProviders.length"
-              :name="loggedIn ? 'lock_open' : 'lock_outline'"
               key="lock"
+              :name="loggedIn ? 'lock_open' : 'lock_outline'"
               class="lock"
             />
 
-            <ul v-else class="third-party-auth" key="third-party-auth">
+            <ul v-else key="third-party-auth" class="third-party-auth">
               <li v-for="provider in thirdPartyAuthProviders" :key="provider.name">
                 <a
                   v-tooltip.bottom="$helpers.formatTitle(provider.name)"
@@ -152,7 +152,7 @@ import { version } from "../../package.json";
 import VInstall from "../components/install.vue";
 
 export default {
-  name: "login",
+  name: "Login",
   components: {
     VInstall
   },
@@ -184,7 +184,7 @@ export default {
   computed: {
     urls() {
       if (!window.__DirectusConfig__) return;
-      return this.$lodash.mapKeys(window.__DirectusConfig__.api, (val, key) =>
+      return _.mapKeys(window.__DirectusConfig__.api, (val, key) =>
         key.endsWith("/") === false ? key + "/" : key
       );
     },
@@ -240,9 +240,32 @@ export default {
       return this.selectedUrl === "other";
     }
   },
+  watch: {
+    url() {
+      this.exists = null;
+      this.checkUrl();
+    },
+    selectedUrl(url) {
+      if (url === "other") return;
+      return (this.url = url);
+    },
+    exists(newVal) {
+      if (newVal === true) {
+        this.getThirdPartyAuthProviders();
+      } else if (newVal === false) {
+        this.error = { code: -1 };
+      }
+    },
+    $route() {
+      this.trySSOLogin();
+    },
+    storeError(error) {
+      this.error = error;
+    }
+  },
 
   created() {
-    this.checkUrl = this.$lodash.debounce(this.checkUrl, 300);
+    this.checkUrl = _.debounce(this.checkUrl, 300);
 
     if (this.url) {
       this.checkUrl();
@@ -271,29 +294,6 @@ export default {
       });
     }
     return next();
-  },
-  watch: {
-    url() {
-      this.exists = null;
-      this.checkUrl();
-    },
-    selectedUrl(url) {
-      if (url === "other") return;
-      return (this.url = url);
-    },
-    exists(newVal) {
-      if (newVal === true) {
-        this.getThirdPartyAuthProviders();
-      } else if (newVal === false) {
-        this.error = { code: -1 };
-      }
-    },
-    $route() {
-      this.trySSOLogin();
-    },
-    storeError(error) {
-      this.error = error;
-    }
   },
   methods: {
     processForm() {

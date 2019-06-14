@@ -13,8 +13,8 @@
   </div>
   <div v-else-if="activeLanguage" class="translation">
     <v-simple-select
-      class="language-select"
       v-model="activeLanguage"
+      class="language-select"
       :placeholder="$t('interfaces-translation-choose_language')"
     >
       <option v-for="language in languages" :key="language.code" :value="language.code">
@@ -25,12 +25,12 @@
     <hr />
 
     <v-form
-      class="form"
       :key="activeLanguage"
+      ref="form"
+      class="form"
       :fields="relatedFields"
       :values="langValue"
       :collection="relation.collection_many"
-      ref="form"
       @stage-value="stageValue"
     />
   </div>
@@ -53,7 +53,7 @@ export default {
       return false;
     },
     primaryKeyField() {
-      return this.$lodash.find(this.fields, { primary_key: true }).field;
+      return _.find(this.fields, { primary_key: true }).field;
     },
     primaryKey() {
       return this.values[this.primaryKeyField];
@@ -74,7 +74,7 @@ export default {
     },
     valuesByLang() {
       if (!this.value) return {};
-      return this.$lodash.keyBy(this.value, this.options.translationLanguageField);
+      return _.keyBy(this.value, this.options.translationLanguageField);
     },
     fieldManyName() {
       return this.relation.field_many.field;
@@ -105,7 +105,7 @@ export default {
           this.activeLanguage =
             this.options.defaultLanguage ||
             languages[0][
-              this.$lodash.find(this.languageFields, {
+              _.find(this.languageFields, {
                 primary_key: true
               }).field
             ];

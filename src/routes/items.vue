@@ -1,6 +1,6 @@
 <template>
   <v-not-found v-if="notFound" />
-  <div class="route-item-listing" v-else>
+  <div v-else class="route-item-listing">
     <v-header
       info-toggle
       :item-detail="false"
@@ -51,8 +51,8 @@
         />
         <v-header-button
           v-if="addButton && !activity"
-          icon="add"
           key="add"
+          icon="add"
           color="action"
           :label="$t('new')"
           :to="`/collections/${collection}/+`"
@@ -80,8 +80,8 @@
     <v-info-sidebar v-if="preferences">
       <template slot="system">
         <div class="layout-picker">
-          <select @input="updatePreferences('view_type', $event.target.value)" :value="viewType">
-            <option v-for="(name, val) in layoutNames" :value="val" :key="val">
+          <select :value="viewType" @input="updatePreferences('view_type', $event.target.value)">
+            <option v-for="(name, val) in layoutNames" :key="val" :value="val">
               {{ name }}
             </option>
           </select>
@@ -93,11 +93,11 @@
         </div>
       </template>
       <v-ext-layout-options
-        class="layout-options"
         :key="`${collection}-${viewType}`"
+        class="layout-options"
         :type="viewType"
         :collection="collection"
-        :fields="$lodash.keyBy(fields, 'field')"
+        :fields="keyBy(fields, 'field')"
         :view-options="viewOptions"
         :view-query="viewQuery"
         :selection="selection"
@@ -106,7 +106,7 @@
         @options="setViewOptions"
       />
 
-      <router-link to="/activity" class="notifications" v-if="canReadActivity">
+      <router-link v-if="canReadActivity" to="/activity" class="notifications">
         <div class="preview">
           <v-icon name="notifications" color="light-gray" />
           <span>{{ $t("notifications") }}</span>
@@ -114,7 +114,7 @@
       </router-link>
     </v-info-sidebar>
 
-    <portal to="modal" v-if="confirmRemove">
+    <portal v-if="confirmRemove" to="modal">
       <v-confirm
         :message="
           $tc('batch_delete_confirm', selection.length, {
@@ -128,7 +128,7 @@
       />
     </portal>
 
-    <portal to="modal" v-if="bookmarkModal">
+    <portal v-if="bookmarkModal" to="modal">
       <v-create-bookmark :preferences="preferences" @close="closeBookmark"></v-create-bookmark>
     </portal>
   </div>
@@ -144,7 +144,7 @@ import VNotFound from "./not-found.vue";
 import api from "../api";
 
 export default {
-  name: "items",
+  name: "Items",
   metaInfo() {
     return {
       title: this.$helpers.formatTitle(this.collection)
@@ -241,7 +241,7 @@ export default {
           view_type: bookmark.view_type,
           view_query: bookmark.view_query
         };
-        return this.$lodash.isEqual(bookmarkPreferences, preferences);
+        return _.isEqual(bookmarkPreferences, preferences);
       })[0];
       return currentBookmark || null;
     },
@@ -308,9 +308,8 @@ export default {
       if (!this.meta || !this.preferences) return this.$t("loading");
 
       const isFiltering =
-        !this.$lodash.isEmpty(this.preferences.filters) ||
-        (!this.$lodash.isNil(this.preferences.search_query) &&
-          this.preferences.search_query.length > 0);
+        !_.isEmpty(this.preferences.filters) ||
+        (!_.isNil(this.preferences.search_query) && this.preferences.search_query.length > 0);
 
       return isFiltering
         ? this.$tc("item_count_filter", this.meta.result_count, {
@@ -342,10 +341,7 @@ export default {
     statusField() {
       if (!this.fields) return null;
       return (
-        this.$lodash.find(
-          Object.values(this.fields),
-          field => field.type.toLowerCase() === "status"
-        ) || {}
+        _.find(Object.values(this.fields), field => field.type.toLowerCase() === "status") || {}
       ).field;
     },
 
@@ -356,7 +352,7 @@ export default {
       if (!this.collectionInfo.status_mapping || !this.statusField) return null;
 
       const statusKeys = Object.keys(this.collectionInfo.status_mapping);
-      const index = this.$lodash.findIndex(Object.values(this.collectionInfo.status_mapping), {
+      const index = _.findIndex(Object.values(this.collectionInfo.status_mapping), {
         soft_delete: true
       });
       return statusKeys[index];
@@ -366,15 +362,13 @@ export default {
       if (!this.fields) return null;
 
       return (
-        this.$lodash.find(
-          Object.values(this.fields),
-          field => field.type.toLowerCase() === "user_created"
-        ) || {}
+        _.find(Object.values(this.fields), field => field.type.toLowerCase() === "user_created") ||
+        {}
       ).field;
     },
     primaryKeyField() {
       if (!this.fields) return null;
-      return this.$lodash.find(this.fields, { primary_key: true }).field;
+      return _.find(this.fields, { primary_key: true }).field;
     },
     permissions() {
       return this.$store.state.permissions;
@@ -475,7 +469,17 @@ export default {
       return enabled;
     }
   },
+  watch: {
+    $route() {
+      if (this.$route.query.b) {
+        this.$router.replace({
+          path: this.$route.path
+        });
+      }
+    }
+  },
   methods: {
+    keyBy: _.keyBy,
     closeBookmark() {
       this.bookmarkModal = false;
     },
@@ -595,15 +599,6 @@ export default {
             error
           });
         });
-    }
-  },
-  watch: {
-    $route() {
-      if (this.$route.query.b) {
-        this.$router.replace({
-          path: this.$route.path
-        });
-      }
     }
   },
   beforeRouteEnter(to, from, next) {

@@ -1,6 +1,6 @@
 <template>
   <v-not-found v-if="notFound" />
-  <div class="route-file-library" v-else>
+  <div v-else class="route-file-library">
     <v-header info-toggle :breadcrumb="breadcrumb" icon="photo_library">
       <template slot="title">
         <button
@@ -43,8 +43,8 @@
           @click="confirmRemove = true"
         />
         <v-header-button
-          icon="add"
           key="add"
+          icon="add"
           color="action"
           :label="$t('new')"
           @click="newModal = true"
@@ -85,7 +85,7 @@
         :key="`${collection}-${viewType}`"
         :type="viewType"
         :collection="collection"
-        :fields="$lodash.keyBy(fields, 'field')"
+        :fields="keyBy(fields, 'field')"
         :view-options="viewOptions"
         :view-query="viewQuery"
         :selection="selection"
@@ -95,7 +95,7 @@
       />
     </v-info-sidebar>
 
-    <portal to="modal" v-if="confirmRemove">
+    <portal v-if="confirmRemove" to="modal">
       <v-confirm
         :message="
           $tc('batch_delete_confirm', selection.length, {
@@ -109,16 +109,16 @@
       />
     </portal>
 
-    <portal to="modal" v-if="bookmarkModal">
+    <portal v-if="bookmarkModal" to="modal">
       <v-prompt
-        :message="$t('name_bookmark')"
         v-model="bookmarkTitle"
+        :message="$t('name_bookmark')"
         @cancel="cancelBookmark"
         @confirm="saveBookmark"
       />
     </portal>
 
-    <portal to="modal" v-if="newModal">
+    <portal v-if="newModal" to="modal">
       <v-modal
         :title="$t('file_upload')"
         :buttons="{
@@ -146,7 +146,7 @@ import VNotFound from "./not-found.vue";
 import api from "../api";
 
 export default {
-  name: "route-file-library",
+  name: "RouteFileLibrary",
   metaInfo() {
     return {
       title: this.$t("file_library")
@@ -211,7 +211,7 @@ export default {
           view_type: bookmark.view_type,
           view_query: bookmark.view_query
         };
-        return this.$lodash.isEqual(bookmarkPreferences, preferences);
+        return _.isEqual(bookmarkPreferences, preferences);
       })[0];
       return currentBookmark || null;
     },
@@ -245,9 +245,8 @@ export default {
       if (!this.meta || !this.preferences) return this.$t("loading");
 
       const isFiltering =
-        !this.$lodash.isEmpty(this.preferences.filters) ||
-        (!this.$lodash.isNil(this.preferences.search_query) &&
-          this.preferences.search_query.length > 0);
+        !_.isEmpty(this.preferences.filters) ||
+        (!_.isNil(this.preferences.search_query) && this.preferences.search_query.length > 0);
 
       return isFiltering
         ? this.$tc("item_count_filter", this.meta.result_count, {
@@ -269,7 +268,17 @@ export default {
       return translatedNames;
     }
   },
+  watch: {
+    $route() {
+      if (this.$route.query.b) {
+        this.$router.replace({
+          path: this.$route.path
+        });
+      }
+    }
+  },
   methods: {
+    keyBy: _.keyBy,
     cancelBookmark() {
       this.bookmarkTitle = "";
       this.bookmarkModal = false;
@@ -403,15 +412,6 @@ export default {
             error
           });
         });
-    }
-  },
-  watch: {
-    $route() {
-      if (this.$route.query.b) {
-        this.$router.replace({
-          path: this.$route.path
-        });
-      }
     }
   },
   beforeRouteEnter(to, from, next) {

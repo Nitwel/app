@@ -1,5 +1,6 @@
 <template>
   <v-input
+    :id="name"
     type="text"
     icon-right-color=""
     :value="value || ''"
@@ -8,7 +9,6 @@
     :icon-left="options.iconLeft"
     :icon-right="options.iconRight"
     :maxlength="length ? +length : null"
-    :id="name"
     :charactercount="options.showCharacterCount"
     @input="updateValue"
   ></v-input>

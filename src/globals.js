@@ -4,7 +4,7 @@ import VSpinner from "vue-simple-spinner";
 import InvisibleLabel from "./components/invisible-label.vue";
 import Loader from "./components/loader.vue";
 import VAvatar from "./components/avatar.vue";
-import VCard from "./components/card.vue";
+import VCard from "./components/card/card.vue";
 import VDetails from "./components/details.vue";
 import VNotice from "./components/notice.vue";
 import VTable from "./components/table/table.vue";
@@ -23,7 +23,7 @@ import VItems from "./components/items.vue";
 import VForm from "./components/form/form.vue";
 
 // Form inputs
-import VButton from "./components/form-inputs/button.vue";
+import VButton from "./components/form-inputs/button/button.vue";
 import VCheckbox from "./components/form-inputs/checkbox.vue";
 import VInput from "./components/form-inputs/input.vue";
 import VRadio from "./components/form-inputs/radio.vue";
@@ -47,8 +47,12 @@ import VInfoSidebar from "./components/sidebars/info-sidebar.vue";
 import VError from "./components/error.vue";
 import VUpload from "./components/upload.vue";
 import VProgressRing from "./components/progress-ring.vue";
+import VContextualMenu from "./components/contextual-menu.vue";
 
 import VIcon from "./components/icon.vue";
+import VTag from "./components/tag.vue";
+
+import VItemSelect from "./components/item-select/item-select.vue";
 
 // Extensions
 Vue.component("v-ext-page", VExtPage);
@@ -99,3 +103,6 @@ Vue.component("v-table", VTable);
 Vue.component("v-upload", VUpload);
 Vue.component("v-progress-ring", VProgressRing);
 Vue.component("v-icon", VIcon);
+Vue.component("v-tag", VTag);
+Vue.component("v-contextual-menu", VContextualMenu);
+Vue.component("v-item-select", VItemSelect);

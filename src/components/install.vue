@@ -3,9 +3,9 @@
     :tabs="tabs"
     :buttons="buttons"
     :active-tab="activeTab"
+    action-required
     @tab="activeTab = $event"
     @next="nextTab"
-    action-required
   >
     <template slot="project">
       <h1 class="style-0">{{ $t("project_info") }}</h1>
@@ -15,28 +15,28 @@
         <label>
           {{ $t("project_name") }}
           <v-input
-            class="input"
-            ref="projectName"
             id="project-name"
+            ref="projectName"
             v-model="values.project_name"
+            class="input"
             autofocus
           />
         </label>
         <label>
           {{ $t("project_key") }}
-          <v-input class="input" id="environment" disabled value="Default ( _ )" />
+          <v-input id="environment" class="input" disabled value="Default ( _ )" />
         </label>
         <label>
           {{ $t("admin_email") }}
-          <v-input class="input" id="admin-email" type="email" v-model="values.user_email" />
+          <v-input id="admin-email" v-model="values.user_email" class="input" type="email" />
         </label>
         <label>
           {{ $t("admin_password") }}
           <v-input
-            class="input"
             id="admin-password"
-            type="password"
             v-model="values.user_password"
+            class="input"
+            type="password"
             autocomplete="new-password"
           />
         </label>
@@ -50,27 +50,27 @@
       <form @submit.prevent="nextTab">
         <label>
           {{ $t("host") }}
-          <v-input class="input" id="db_host" v-model="values.db_host" />
+          <v-input id="db_host" v-model="values.db_host" class="input" />
         </label>
         <label>
           {{ $t("port") }}
-          <v-input class="input" id="db_port" v-model="values.db_port" />
+          <v-input id="db_port" v-model="values.db_port" class="input" />
         </label>
         <label>
           {{ $t("db_user") }}
-          <v-input class="input" id="db_user" v-model="values.db_user" />
+          <v-input id="db_user" v-model="values.db_user" class="input" />
         </label>
         <label>
           {{ $t("db_password") }}
-          <v-input type="password" class="input" id="db_password" v-model="values.db_password" />
+          <v-input id="db_password" v-model="values.db_password" type="password" class="input" />
         </label>
         <label>
           {{ $t("db_name") }}
-          <v-input class="input" id="db_name" v-model="values.db_name" />
+          <v-input id="db_name" v-model="values.db_name" class="input" />
         </label>
         <label>
           {{ $t("db_type") }}
-          <v-input class="input" disabled id="db_type" value="MySQL & Variants" />
+          <v-input id="db_type" class="input" disabled value="MySQL & Variants" />
         </label>
         <input type="submit" class="hidden" />
       </form>
@@ -80,7 +80,7 @@
 
 <script>
 export default {
-  name: "v-install",
+  name: "VInstall",
   props: {
     saving: {
       type: Boolean,
@@ -106,13 +106,13 @@ export default {
   },
   computed: {
     databaseDisabled() {
-      const { isEmpty } = this.$lodash;
+      const { isEmpty } = _;
       const { project_name, user_email, user_password } = this.values;
 
       return isEmpty(project_name) || isEmpty(user_email) || isEmpty(user_password);
     },
     schemaDisabled() {
-      const { isEmpty } = this.$lodash;
+      const { isEmpty } = _;
       const { db_host, db_port, db_name, db_user, db_password } = this.values;
 
       return (

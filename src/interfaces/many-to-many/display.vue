@@ -1,53 +1,40 @@
 <template>
-  <v-popover trigger="hover" v-if="options.template && options.template.length > 0">
-    <div class="readonly-many-to-many">{{ itemCount }}</div>
-
-    <template slot="popover">
-      <ul class="list">
-        <li v-for="(val, i) in value" :key="i">{{ render(val) }}</li>
-      </ul>
-    </template>
-  </v-popover>
-
-  <div v-else class="readonly-many-to-many">{{ itemCount }}</div>
+  <v-contextual-menu
+    trigger="hover"
+    :text="itemCount"
+    :options="menuOptions"
+    :icon="null"
+    placement="right-end"
+  />
 </template>
 
 <script>
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "readonly-many-to-many",
+  name: "ReadonlyManyToMany",
   mixins: [mixin],
   computed: {
     itemCount() {
       return this.$tc("item_count", (this.value || []).length, {
         count: (this.value || []).length
       });
-    }
-  },
-  methods: {
-    render(val) {
-      return this.$helpers.micromustache.render(this.options.template, val);
+    },
+    menuOptions() {
+      var options = [];
+      _.forEach(this.value, value => {
+        options.push({
+          text: this.$helpers.micromustache.render(this.options.template, value)
+        });
+      });
+      return options;
     }
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.list {
-  max-height: 200px;
-  overflow-y: scroll;
-
-  list-style: none;
-  padding: 0;
-
-  li {
-    color: var(--dark-gray);
-    padding: 8px 0;
-
-    &:not(:last-of-type) {
-      border-bottom: 1px solid var(--lightest-gray);
-    }
-  }
+.v-ext-display {
+  display: flex;
 }
 </style>

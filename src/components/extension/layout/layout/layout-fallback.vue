@@ -3,7 +3,7 @@
     v-if="items && columns && primaryKeyField"
     :items="items"
     :columns="columns"
-    :primaryKeyField="primaryKeyField"
+    :primary-key-field="primaryKeyField"
     :use-interfaces="true"
     link="__link__"
     class="v-ext-layout-fallback"
@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "v-ext-layout-fallback",
+  name: "VExtLayoutFallback",
   props: {
     fields: {
       type: Object,

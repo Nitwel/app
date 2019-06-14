@@ -7,14 +7,14 @@
       </p>
     </div>
     <template>
-      <div class="table" v-if="items.length">
+      <div v-if="items.length" class="table">
         <div class="header">
           <div class="row">
             <button
               v-for="column in columns"
+              :key="column.field"
               type="button"
               class="style-4"
-              :key="column.field"
               @click="changeSort(column.field)"
             >
               {{ column.name }}
@@ -29,24 +29,26 @@
         <div class="body">
           <div
             v-for="item in items"
-            class="row"
             :key="item[junctionPrimaryKey]"
+            class="row"
             @click="editExisting = item"
           >
             <div v-for="column in columns" :key="column.field" class="no-wrap">
               <v-ext-display
                 :interface-type="(column.fieldInfo || {}).interface || null"
                 :name="column.field"
+                :collection="relatedCollection"
                 :type="column.fieldInfo.type"
                 :datatype="column.fieldInfo.datatype"
                 :options="column.fieldInfo.options"
                 :value="item[junctionRelatedKey][column.field]"
+                :values="item[junctionRelatedKey]"
               />
             </div>
             <button
+              v-tooltip="$t('remove_related')"
               type="button"
               class="remove-item"
-              v-tooltip="$t('remove_related')"
               @click.stop="
                 removeRelated({
                   junctionKey: item[junctionPrimaryKey],
@@ -60,17 +62,33 @@
           </div>
         </div>
       </div>
-      <button type="button" class="style-btn select" @click="addNew = true">
-        <v-icon name="add" />
-        {{ $t("add_new") }}
-      </button>
-      <button type="button" class="style-btn select" @click="selectExisting = true">
-        <v-icon name="playlist_add" />
-        <span>{{ $t("select_existing") }}</span>
-      </button>
+
+      <v-notice v-else>{{ $t("no_items_selected") }}</v-notice>
+
+      <div class="buttons">
+        <v-button
+          v-if="options.allow_create"
+          type="button"
+          :disabled="readonly"
+          icon="add"
+          @click="addNew = true"
+        >
+          {{ $t("add_new") }}
+        </v-button>
+
+        <v-button
+          v-if="options.allow_select"
+          type="button"
+          :disabled="readonly"
+          icon="playlist_add"
+          @click="selectExisting = true"
+        >
+          {{ $t("select_existing") }}
+        </v-button>
+      </div>
     </template>
 
-    <portal to="modal" v-if="selectExisting">
+    <portal v-if="selectExisting" to="modal">
       <v-modal
         :title="$t('select_existing')"
         :buttons="{
@@ -80,9 +98,9 @@
             loading: selectionSaving
           }
         }"
+        action-required
         @close="dismissSelection"
         @save="saveSelection"
-        action-required
       >
         <div class="search">
           <v-input
@@ -107,7 +125,7 @@
       </v-modal>
     </portal>
 
-    <portal to="modal" v-if="editExisting">
+    <portal v-if="editExisting" to="modal">
       <v-modal
         :title="$t('editing_item')"
         :buttons="{
@@ -123,6 +141,7 @@
         <div class="edit-modal-body">
           <v-form
             :fields="relatedCollectionFields"
+            :collection="collection"
             :values="editExisting[junctionRelatedKey]"
             @stage-value="stageValue"
           ></v-form>
@@ -130,7 +149,7 @@
       </v-modal>
     </portal>
 
-    <portal to="modal" v-if="addNew">
+    <portal v-if="addNew" to="modal">
       <v-modal
         :title="$t('creating_item')"
         :buttons="{
@@ -147,6 +166,7 @@
           <v-form
             new-item
             :fields="relatedCollectionFields"
+            :collection="collection"
             :values="relatedDefaultsWithEdits"
             @stage-value="stageValue"
           ></v-form>
@@ -160,8 +180,8 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
+  name: "InterfaceManyToMany",
   mixins: [mixin],
-  name: "interface-many-to-many",
   data() {
     return {
       sort: {
@@ -188,9 +208,6 @@ export default {
       if (!this.relation) return false;
       return true;
     },
-    currentCollection() {
-      return this.relation.collection_one.collection;
-    },
     relatedCollection() {
       return this.relation.junction.collection_one.collection;
     },
@@ -201,12 +218,12 @@ export default {
       return this.relation.collection_many.fields;
     },
     relatedKey() {
-      return this.$lodash.find(this.relation.junction.collection_one.fields, {
+      return _.find(this.relation.junction.collection_one.fields, {
         primary_key: true
       }).field;
     },
     junctionPrimaryKey() {
-      return this.$lodash.find(this.relation.collection_many.fields, {
+      return _.find(this.relation.collection_many.fields, {
         primary_key: true
       }).field;
     },
@@ -222,7 +239,7 @@ export default {
     items() {
       if (this.relationSetup === false) return null;
 
-      return this.$lodash.orderBy(
+      return _.orderBy(
         (this.value || [])
           .filter(val => !val.$delete)
           .filter(val => val[this.junctionRelatedKey] != null),
@@ -243,7 +260,7 @@ export default {
       if (this.relationSetup === false) return null;
       if (!this.relatedCollectionFields) return null;
 
-      return this.$lodash.mapValues(this.relatedCollectionFields, field => field.default_value);
+      return _.mapValues(this.relatedCollectionFields, field => field.default_value);
     },
     relatedDefaultsWithEdits() {
       if (this.relationSetup === false) return null;
@@ -284,14 +301,6 @@ export default {
       };
     }
   },
-  created() {
-    if (this.relationSetup) {
-      this.sort.field = this.visibleFields && this.visibleFields[0];
-      this.setSelection();
-    }
-
-    this.onSearchInput = this.$lodash.debounce(this.onSearchInput, 200);
-  },
   watch: {
     value() {
       this.setSelection();
@@ -302,6 +311,14 @@ export default {
         this.setSelection();
       }
     }
+  },
+  created() {
+    if (this.relationSetup) {
+      this.sort.field = this.visibleFields && this.visibleFields[0];
+      this.setSelection();
+    }
+
+    this.onSearchInput = _.debounce(this.onSearchInput, 200);
   },
   methods: {
     setViewOptions(updates) {
@@ -468,7 +485,7 @@ export default {
         this.$emit(
           "input",
           (this.value || []).filter(val => {
-            return this.$lodash.isEqual(val, item) === false;
+            return _.isEqual(val, item) === false;
           })
         );
       } else {
@@ -576,29 +593,22 @@ export default {
   }
 }
 
-button.select {
-  background-color: var(--darker-gray);
-  border-radius: var(--border-radius);
-  height: var(--input-height);
-  padding: 0 10px;
-  display: inline-flex;
-  align-items: center;
-  margin-right: 10px;
-  transition: background-color var(--fast) var(--transition);
-
-  i {
-    margin-right: 5px;
-  }
-
-  &:hover {
-    transition: none;
-    background-color: var(--darkest-gray);
+button {
+  display: inline-block;
+  margin-left: 20px;
+  &:first-of-type {
+    margin-left: 0;
   }
 }
 
 .edit-modal-body {
-  padding: 20px;
+  padding: 30px 30px 60px 30px;
   background-color: var(--body-background);
+  .form {
+    grid-template-columns:
+      [start] minmax(0, var(--column-width)) [half] minmax(0, var(--column-width))
+      [full];
+  }
 }
 
 .search {
@@ -624,5 +634,9 @@ button.select {
 
 .items {
   height: calc(100% - var(--header-height) - 1px);
+}
+
+.buttons {
+  margin-top: 24px;
 }
 </style>

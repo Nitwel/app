@@ -1,11 +1,11 @@
 <template>
   <textarea
+    :id="id"
     :cols="cols"
     :disabled="disabled"
     :maxlength="maxlength"
     :minlength="minlength"
     :name="name"
-    :id="id"
     :placeholder="placeholder"
     :readonly="readonly"
     :required="required"
@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: "v-textarea",
+  name: "VTextarea",
   props: {
     cols: {
       type: Number,

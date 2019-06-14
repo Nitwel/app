@@ -1,6 +1,8 @@
 <template>
   <div class="buttons no-wrap">
-    <span v-for="(value, index) in displayValue" :key="index">{{ value }}</span>
+    <v-tag v-for="value in displayValue" :key="value">
+      {{ value }}
+    </v-tag>
   </div>
 </template>
 

@@ -2,15 +2,15 @@
   <div class="v-permissions-row" :class="{ 'system-row': system }">
     <div v-if="!statuses" class="row">
       <div class="cell">
-        <span :class="{ system }" v-tooltip="permissionName">
+        <span v-tooltip="permissionName" :class="{ system }">
           {{ $helpers.formatTitle(system ? permissionName.substring(9) : permissionName) }}
         </span>
         <span class="set-all">
-          <button @click.prevent="setAll(true)" type="button">
+          <button type="button" @click.prevent="setAll(true)">
             {{ $t("all") }}
           </button>
           /
-          <button @click.prevent="setAll(false)" type="button">
+          <button type="button" @click.prevent="setAll(false)">
             {{ $t("none") }}
           </button>
         </span>
@@ -71,15 +71,15 @@
     </div>
     <div v-else class="row">
       <div class="cell">
-        <span :class="{ system }" v-tooltip="permissionName">
+        <span v-tooltip="permissionName" :class="{ system }">
           {{ $helpers.formatTitle(system ? permissionName.substring(9) : permissionName) }}
         </span>
         <span class="set-all">
-          <button @click.prevent="setAll(true)" type="button">
+          <button type="button" @click.prevent="setAll(true)">
             {{ $t("all") }}
           </button>
           /
-          <button @click.prevent="setAll(false)" type="button">
+          <button type="button" @click.prevent="setAll(false)">
             {{ $t("none") }}
           </button>
         </span>
@@ -139,7 +139,7 @@
     </div>
     <template v-if="active">
       <div class="sub row">
-        <div class="cell" v-tooltip="'System Option'">
+        <div v-tooltip="'System Option'" class="cell">
           {{ $t("permission_states.on_create") }}
         </div>
         <div class="cell block"><v-icon name="block" /></div>
@@ -155,7 +155,7 @@
             {{ getFieldSettingsPerStatus("$create") ? $t("limited") : $t("all") }}
           </button>
         </div>
-        <div class="cell" v-if="statuses">
+        <div v-if="statuses" class="cell">
           <button
             :class="{
               limited: (permission.$create.status_blacklist || []).length !== 0
@@ -167,14 +167,14 @@
             }}
           </button>
         </div>
-        <div class="cell" v-else><span class="mixed">--</span></div>
+        <div v-else class="cell"><span class="mixed">--</span></div>
       </div>
     </template>
     <template v-if="statuses && active">
       <div
-        class="sub row"
         v-for="(statusInfo, status) in statuses"
         :key="`${permissionName}-${status}`"
+        class="sub row"
       >
         <div class="cell">
           <span v-tooltip="status">{{ statusInfo.name }}</span>
@@ -252,17 +252,17 @@
       <v-modal
         :title="$t('select_fields')"
         :buttons="{ confirm: { text: $t('confirm') } }"
-        @confirm="fieldsSelect = null"
         action-required
+        @confirm="fieldsSelect = null"
       >
-        <form @submit.prevent class="modal-content">
+        <form class="modal-content" @submit.prevent>
           <fieldset>
             <legend class="style-3">{{ $t("readable_fields") }}</legend>
             <p class="style-4">{{ $t("readable_fields_copy") }}</p>
             <v-checkbox
               v-for="(field, name) in fieldsWithoutPK"
-              :key="`${permissionName}-read-${name}`"
               :id="`${permissionName}-read-${name}`"
+              :key="`${permissionName}-read-${name}`"
               :checked="!blacklist.read.includes(name)"
               :label="$helpers.formatTitle(name)"
               :value="name"
@@ -274,8 +274,8 @@
             <p class="style-4">{{ $t("writable_fields_copy") }}</p>
             <v-checkbox
               v-for="(field, name) in fields"
-              :key="`${permissionName}-write-${name}`"
               :id="`${permissionName}-write-${name}`"
+              :key="`${permissionName}-write-${name}`"
               :checked="!blacklist.write.includes(name)"
               :label="$helpers.formatTitle(name)"
               :value="name"
@@ -289,8 +289,8 @@
       <v-modal
         :title="$t('select_statuses')"
         :buttons="{ confirm: { text: $t('confirm') } }"
-        @confirm="statusSelect = null"
         action-required
+        @confirm="statusSelect = null"
       >
         <form class="modal-content" @submit.prevent>
           <fieldset>
@@ -298,8 +298,8 @@
             <p class="style-4">{{ $t("select_statuses_copy") }}</p>
             <v-checkbox
               v-for="(status, name) in statuses"
-              :key="`status-${name}`"
               :id="`status-${name}`"
+              :key="`status-${name}`"
               :checked="!(permission[statusSelect.status].status_blacklist || []).includes(name)"
               :label="status.name"
               :value="name"
@@ -316,7 +316,7 @@
 import VPermissionsToggle from "./permissions-toggle.vue";
 
 export default {
-  name: "v-permissions-row",
+  name: "VPermissionsRow",
   components: {
     VPermissionsToggle
   },
@@ -351,7 +351,7 @@ export default {
   },
   computed: {
     primaryKeyFieldName() {
-      return this.$lodash.find(this.fields, { primary_key: true }).field;
+      return _.find(this.fields, { primary_key: true }).field;
     },
     fieldsWithoutPK() {
       const fieldsCopy = Object.assign({}, this.fields);
@@ -385,7 +385,7 @@ export default {
       if (this.statuses) {
         let all = true;
 
-        this.$lodash.forEach(this.permission, permission => {
+        _.forEach(this.permission, permission => {
           if (
             permission.read_field_blacklist.length > 0 ||
             permission.write_field_blacklist.length > 0
@@ -407,7 +407,7 @@ export default {
       return true;
     },
     userCreatedField() {
-      return this.$lodash.find(
+      return _.find(
         this.fields,
         field => field.type && field.type.toLowerCase() === "user_created"
       );
@@ -481,7 +481,7 @@ export default {
 
       let value = this.permission[Object.keys(this.statuses)[0]][field];
 
-      this.$lodash.forEach(this.permission, (status, name) => {
+      _.forEach(this.permission, (status, name) => {
         if (name !== "$create" && status[field] !== value) value = "indeterminate";
       });
 

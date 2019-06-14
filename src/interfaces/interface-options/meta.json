@@ -1,0 +1,22 @@
+{
+  "name": "$t:interface-options",
+  "version": "1.0.0",
+  "types": ["json"],
+  "icon": "category",
+  "options": {
+    "interfaceField": {
+      "name": "$t:interface-field",
+      "interface": "text-input",
+      "comment": "$t:placeholder_comment",
+      "default": "$t:placeholder_default",
+      "length": 200
+    }
+  },
+  "translation": {
+    "en-US": {
+      "interface-options": "Interface Options",
+      "interface-field": "Interface Field",
+      "interface-field-comment": "The field that holds the name of the interface"
+    }
+  }
+}

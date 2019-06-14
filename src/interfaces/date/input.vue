@@ -1,8 +1,8 @@
 <template>
   <v-input
+    :id="name"
     type="date"
     class="interface-date"
-    :id="name"
     :name="name"
     :min="options.min"
     :max="options.max"
@@ -16,7 +16,7 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "interface-date",
+  name: "InterfaceDate",
   mixins: [mixin]
 };
 </script>

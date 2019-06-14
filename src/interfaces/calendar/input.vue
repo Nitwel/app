@@ -1,5 +1,5 @@
 <template>
-  <div v-bind:class="{ inactive: readonly }">
+  <div :class="{ inactive: readonly }">
     <flat-pickr
       class="form-control"
       :config="configs"
@@ -16,7 +16,11 @@ import mixin from "@directus/extension-toolkit/mixins/interface";
 import "./calendar.css";
 
 export default {
-  name: "interface-calendar",
+  name: "InterfaceCalendar",
+  components: {
+    flatPickr
+  },
+  mixins: [mixin],
   computed: {
     configs() {
       return {
@@ -26,10 +30,6 @@ export default {
         dateFormat: "Y-m-d"
       };
     }
-  },
-  mixins: [mixin],
-  components: {
-    flatPickr
   }
 };
 </script>

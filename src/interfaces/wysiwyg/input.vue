@@ -2,10 +2,10 @@
   <div ref="input" :class="[{ fullscreen: distractionFree }, 'interface-wysiwyg-container']">
     <div ref="editor" :class="['interface-wysiwyg', readonly ? 'readonly' : '']"></div>
     <button
-      v-on:click="distractionFree = !distractionFree"
+      v-tooltip="$t('interfaces-wysiwyg-distraction_free_mode')"
       type="button"
       class="fullscreen-toggle"
-      v-tooltip="$t('interfaces-wysiwyg-distraction_free_mode')"
+      @click="distractionFree = !distractionFree"
     >
       <v-icon :name="fullscreenIcon" />
     </button>
@@ -19,7 +19,7 @@ import "medium-editor/dist/css/medium-editor.css";
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "interface-wysiwyg",
+  name: "InterfaceWysiwyg",
   mixins: [mixin],
   data() {
     return {
@@ -45,12 +45,6 @@ export default {
       return this.distractionFree ? "close" : "fullscreen";
     }
   },
-  mounted() {
-    this.init();
-  },
-  beforeDestroy() {
-    this.destroy();
-  },
   watch: {
     options() {
       this.destroy();
@@ -68,6 +62,12 @@ export default {
         this.$helpers.enableBodyScroll(this.$refs.input);
       }
     }
+  },
+  mounted() {
+    this.init();
+  },
+  beforeDestroy() {
+    this.destroy();
   },
   methods: {
     init() {

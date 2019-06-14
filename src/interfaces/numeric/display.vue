@@ -1,6 +1,6 @@
 <template>
-  <span class="no-wrap" v-if="options.localized">{{ $n(value) }}</span>
-  <span class="no-wrap" v-else>{{ value }}</span>
+  <span v-if="options.localized" class="no-wrap">{{ $n(value) }}</span>
+  <span v-else class="no-wrap">{{ value }}</span>
 </template>
 
 <script>

@@ -54,7 +54,7 @@ import VNavSidebar from "./components/sidebars/nav-sidebar/nav-sidebar.vue";
 import VNotification from "./components/notifications/notifications.vue";
 
 export default {
-  name: "directus",
+  name: "Directus",
   metaInfo: {
     title: "Directus"
   },

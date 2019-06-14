@@ -1,8 +1,8 @@
 <template>
   <div
     v-if="options.formatValue"
-    class="swatch no-wrap"
     v-tooltip="value"
+    class="swatch no-wrap"
     :style="`background-color: ${displayValue}`"
   ></div>
   <div v-else>{{ displayValue }}</div>

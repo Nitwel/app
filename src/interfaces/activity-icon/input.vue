@@ -12,7 +12,7 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "interface-activity-icon",
+  name: "InterfaceActivityIcon",
   mixins: [mixin]
 };
 </script>

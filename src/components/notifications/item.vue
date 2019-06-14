@@ -16,7 +16,7 @@
 import { mapMutations } from "vuex";
 import { REMOVE_NOTIFICATION } from "@/store/mutation-types";
 export default {
-  name: "v-item",
+  name: "VItem",
   props: {
     item: {
       type: Object,

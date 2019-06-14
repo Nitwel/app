@@ -1,6 +1,6 @@
 <template>
   <div class="nav-sidebar">
-    <v-blocker v-show="active" class="blocker" @click="disableNav" :z-index="2" />
+    <v-blocker v-show="active" class="blocker" :z-index="2" @click="disableNav" />
     <transition name="nav">
       <aside :class="{ active }">
         <button class="a11y-close" @click="disableNav">Close nav</button>
@@ -12,31 +12,31 @@
 
           <template v-for="section in navStructure">
             <nav-bookmarks
-              class="menu-section"
               v-if="section.include && section.include === 'bookmarks' && bookmarks.length > 0"
-              :bookmarks="bookmarks"
               :key="section.id"
+              class="menu-section"
+              :bookmarks="bookmarks"
             />
             <nav-menu
-              class="menu-section"
               v-else-if="section.include && section.include === 'collections'"
+              :key="section.id"
+              class="menu-section"
               :title="$t('collections')"
               :links="linksCollections"
-              :key="section.id"
             />
             <nav-menu
-              class="menu-section"
               v-else-if="section.include && section.include === 'extensions'"
+              :key="section.id"
+              class="menu-section"
               :title="$t('extensions')"
               :links="linksExtensions"
-              :key="section.id"
             />
             <nav-menu
-              class="menu-section"
               v-else
+              :key="section.id"
+              class="menu-section"
               :title="section.title"
               :links="section.links ? section.links : []"
-              :key="section.id"
             />
           </template>
         </section>
@@ -55,7 +55,7 @@ import VBlocker from "../../blocker.vue";
 import { TOGGLE_NAV } from "../../../store/mutation-types";
 
 export default {
-  name: "nav-sidebar",
+  name: "NavSidebar",
   components: {
     VLogo,
     ProjectSwitcher,
@@ -82,7 +82,7 @@ export default {
         )
         .filter(collection => {
           if (collection.status_mapping && this.permissions[collection.collection].statuses) {
-            return this.$lodash.some(
+            return _.some(
               this.permissions[collection.collection].statuses,
               permission => permission.read !== "none"
             );
@@ -144,7 +144,7 @@ export default {
       const links = [];
       const pages = this.$store.state.extensions.pages;
 
-      this.$lodash.forEach(pages, (info, key) => {
+      _.forEach(pages, (info, key) => {
         links.push({
           path: `/ext/${key}`,
           name: info.name,

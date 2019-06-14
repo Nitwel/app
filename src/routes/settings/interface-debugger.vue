@@ -6,8 +6,8 @@
 
     <div :style="{ width: width + 'px' }" class="interface">
       <v-ext-input
-        v-model="value"
         :id="id"
+        v-model="value"
         :name="id"
         :type="type"
         :length="length"
@@ -28,7 +28,7 @@
 
         <label for="value">Value</label>
         <p>The value saved into the database</p>
-        <v-input v-model="value" id="value" type="text" class="value" />
+        <v-input id="value" v-model="value" type="text" class="value" />
 
         <label>Display</label>
         <p>Appearance on the Items Page (eg: Tabular)</p>
@@ -50,12 +50,12 @@
       </fieldset>
       <fieldset>
         <legend>Options</legend>
-        <div v-for="(option, optionID) in extension.options" class="options" :key="optionID">
+        <div v-for="(option, optionID) in extension.options" :key="optionID" class="options">
           <label :for="optionID">{{ option.name }}</label>
           <p v-if="options.comment" v-html="$helpers.snarkdown(option.comment)" />
           <v-ext-input
-            v-model="options[optionID]"
             :id="option.interface"
+            v-model="options[optionID]"
             :name="optionID"
             :type="option.type"
             :length="option.length"
@@ -72,7 +72,7 @@
         <div class="settings">
           <label for="type">Type</label>
           <p>Allowed datatypes this interface supports</p>
-          <v-simple-select id="type" class="small" v-model="type">
+          <v-simple-select id="type" v-model="type" class="small">
             <option v-for="type in extension.types" :key="type" :value="type">
               {{ type }}
             </option>
@@ -189,7 +189,7 @@
 import mapping, { datatypes } from "../../type-map";
 
 export default {
-  name: "interface-debugger",
+  name: "InterfaceDebugger",
   metaInfo() {
     return {
       title: "Interface Debugger"
@@ -353,7 +353,7 @@ export default {
       this.type = this.extension.types[0];
 
       // Populate the options with the default values
-      const defaults = this.$lodash.mapValues(this.extension.options, settings =>
+      const defaults = _.mapValues(this.extension.options, settings =>
         settings.default === undefined ? null : settings.default
       );
 

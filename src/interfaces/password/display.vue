@@ -10,7 +10,7 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "readonly-password",
+  name: "ReadonlyPassword",
   mixins: [mixin],
   computed: {
     icon() {

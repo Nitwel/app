@@ -6,7 +6,7 @@
 
 <script>
 export default {
-  name: "blocker",
+  name: "Blocker",
   props: {
     zIndex: {
       type: Number,

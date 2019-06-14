@@ -35,7 +35,7 @@
       {{ $t("existing") }}
     </v-button>
 
-    <portal to="modal" v-if="newFile">
+    <portal v-if="newFile" to="modal">
       <v-modal
         :buttons="{
           done: {
@@ -47,12 +47,12 @@
         @done="newFile = false"
       >
         <div class="body">
-          <v-upload @upload="saveUpload" :multiple="true" :accept="options.accept"></v-upload>
+          <v-upload :multiple="true" :accept="options.accept" @upload="saveUpload"></v-upload>
         </div>
       </v-modal>
     </portal>
 
-    <portal to="modal" v-if="existing">
+    <portal v-if="existing" to="modal">
       <v-modal
         :title="$t('choose_one')"
         :buttons="{
@@ -60,9 +60,9 @@
             text: $t('done')
           }
         }"
+        action-required
         @close="existing = false"
         @done="existing = false"
-        action-required
       >
         <div class="search">
           <v-input
@@ -88,7 +88,7 @@
       </v-modal>
     </portal>
 
-    <portal to="modal" v-if="editExisting" class="edit-modal">
+    <portal v-if="editExisting" to="modal" class="edit-modal">
       <v-modal
         :title="$t('editing_item')"
         :buttons="{
@@ -105,6 +105,7 @@
           <v-form
             :fields="relatedCollectionFields"
             :values="editExisting[junctionFieldName]"
+            :collection="collection"
             @stage-value="stageValue"
           ></v-form>
         </div>
@@ -149,7 +150,7 @@ export default {
     },
 
     junctionPrimaryKey() {
-      return this.$lodash.find(this.relation.collection_many.fields, {
+      return _.find(this.relation.collection_many.fields, {
         primary_key: true
       }).field;
     },
@@ -185,7 +186,7 @@ export default {
      * we need to make sure we use the value dynamically
      */
     relatedPrimaryKeyField() {
-      return this.$lodash.find(this.relation.junction.collection_one.fields, {
+      return _.find(this.relation.junction.collection_one.fields, {
         primary_key: true
       });
     },
@@ -245,6 +246,9 @@ export default {
         }
       ];
     }
+  },
+  created() {
+    this.onSearchInput = _.debounce(this.onSearchInput, 200);
   },
   methods: {
     /*
@@ -373,9 +377,6 @@ export default {
         q: value
       });
     }
-  },
-  created() {
-    this.onSearchInput = this.$lodash.debounce(this.onSearchInput, 200);
   }
 };
 </script>
@@ -405,8 +406,13 @@ button {
 }
 
 .edit-modal-body {
-  padding: 20px;
+  padding: 30px;
   background-color: var(--body-background);
+  .form {
+    grid-template-columns:
+      [start] minmax(0, var(--column-width)) [half] minmax(0, var(--column-width))
+      [full];
+  }
 }
 
 .search-input {

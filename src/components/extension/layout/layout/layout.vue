@@ -5,6 +5,7 @@
     :primary-key-field="primaryKeyField"
     :fields="fields"
     :items="items"
+    :collection="collection"
     :view-options="viewOptions"
     :view-query="viewQuery"
     :loading="loading"
@@ -29,7 +30,7 @@ import VExtLayoutFallback from "./layout-fallback.vue";
 import VExtLayoutLoading from "./layout-loading.vue";
 
 export default {
-  name: "v-layout",
+  name: "VLayout",
   props: {
     fields: {
       type: Object,
@@ -67,6 +68,10 @@ export default {
       type: String,
       default: null
     },
+    collection: {
+      type: String,
+      default: null
+    },
     sortField: {
       type: String,
       default: null
@@ -83,7 +88,7 @@ export default {
       return `layout-${this.viewType}`;
     },
     primaryKeyField() {
-      const fieldInfo = this.$lodash.filter(this.fields, info => info.primary_key === true)[0];
+      const fieldInfo = _.filter(this.fields, info => info.primary_key === true)[0];
 
       return fieldInfo && fieldInfo.field;
     }

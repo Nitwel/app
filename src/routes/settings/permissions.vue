@@ -10,7 +10,7 @@
     />
   </div>
 
-  <div class="settings-permissions" v-else>
+  <div v-else class="settings-permissions">
     <v-header :breadcrumb="breadcrumb" icon-link="/settings/roles" icon-color="warning">
       <template slot="buttons">
         <v-header-button
@@ -54,7 +54,7 @@
       @stage-value="stageValue"
     />
 
-    <portal to="modal" v-if="confirmRemove">
+    <portal v-if="confirmRemove" to="modal">
       <v-confirm
         color="danger"
         :message="$t('delete_role_are_you_sure', { name: role.name })"
@@ -75,7 +75,7 @@ import VPermissions from "../../components/permissions/permissions.vue";
 import { defaultNone } from "../../store/modules/permissions/defaults";
 
 export default {
-  name: "settings-permissions",
+  name: "SettingsPermissions",
   metaInfo() {
     if (!this.role) return;
 
@@ -283,13 +283,13 @@ export default {
         });
       });
   },
-  created() {
-    this.loadPermissions();
-  },
   watch: {
     $route() {
       this.loadPermissions();
     }
+  },
+  created() {
+    this.loadPermissions();
   },
   methods: {
     stageValue({ field, value }) {
@@ -477,7 +477,7 @@ export default {
           this.permissionsLoading = false;
           this.savedPermissions = savedPermissions;
 
-          this.statuses = this.$lodash.keyBy(
+          this.statuses = _.keyBy(
             fields
               .filter(field => field.type && field.type.toLowerCase() === "status")
               .map(field => ({
@@ -487,9 +487,8 @@ export default {
             "collection"
           );
 
-          this.permissionFields = this.$lodash.mapValues(
-            this.$lodash.groupBy(fields, "collection"),
-            array => this.$lodash.keyBy(array, "field")
+          this.permissionFields = _.mapValues(_.groupBy(fields, "collection"), array =>
+            _.keyBy(array, "field")
           );
         })
         .catch(error => {

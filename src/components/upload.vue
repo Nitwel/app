@@ -1,10 +1,10 @@
 <template>
   <div class="v-upload" :class="{ uploading: Object.keys(files).length > 0, disabled }">
     <input
+      ref="select"
       :disabled="disabled"
       class="select"
       type="file"
-      ref="select"
       :accept="accept"
       :multiple="multiple"
       @change="filesChange($event.target.files)"
@@ -25,12 +25,12 @@
         </p>
       </div>
       <div class="buttons">
-        <form class="embed-input" @submit.prevent="saveEmbed" v-if="embed">
-          <input type="url" :placeholder="$t('embed_placeholder')" v-model="embedLink" />
+        <form v-if="embed" class="embed-input" @submit.prevent="saveEmbed">
+          <input v-model="embedLink" type="url" :placeholder="$t('embed_placeholder')" />
           <button type="submit">Save</button>
         </form>
         <button @click="embed = !embed">
-          <v-icon name="link" v-tooltip="$t('embed')" class="select" />
+          <v-icon v-tooltip="$t('embed')" name="link" class="select" />
         </button>
         <button @click="$refs.select.click()">
           <v-icon
@@ -42,7 +42,7 @@
       </div>
     </div>
     <transition-group tag="ol" name="list">
-      <li class="list-item" v-for="file in files" :key="file.name">
+      <li v-for="file in files" :key="file.name" class="list-item">
         <v-progress-ring
           class="icon"
           :progress="file.progress"
@@ -69,10 +69,10 @@
     </transition-group>
 
     <input
+      ref="drop"
       :disabled="disabled"
       class="drop"
       type="file"
-      ref="drop"
       :accept="accept"
       :multiple="multiple"
       @click.prevent
@@ -85,7 +85,7 @@
 import filesize from "filesize";
 
 export default {
-  name: "v-upload",
+  name: "VUpload",
   props: {
     accept: {
       type: String

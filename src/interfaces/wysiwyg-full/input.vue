@@ -1,7 +1,7 @@
 <template>
-  <div class="interface-wysiwyg-container" ref="parent">
+  <div ref="parent" class="interface-wysiwyg-container">
     <div ref="editor" :class="['interface-wysiwyg', readonly ? 'readonly' : '']"></div>
-    <portal to="modal" v-if="chooseExisting">
+    <portal v-if="chooseExisting" to="modal">
       <v-modal
         :title="$t('choose_one')"
         :buttons="{
@@ -35,18 +35,8 @@ Quill.register("modules/imageUpload", ImageUpload);
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "interface-wysiwyg",
+  name: "InterfaceWysiwyg",
   mixins: [mixin],
-  mounted() {
-    this.init();
-  },
-  watch: {
-    value(newVal) {
-      if (newVal !== this.editor.root.innerHTML) {
-        this.editor.clipboard.dangerouslyPasteHTML(this.value);
-      }
-    }
-  },
   data() {
     return {
       chooseExisting: false,
@@ -57,6 +47,9 @@ export default {
         src: "data"
       }
     };
+  },
+  mounted() {
+    this.init();
   },
   methods: {
     init() {
@@ -120,7 +113,7 @@ export default {
         }
       });
 
-      this.editor.clipboard.dangerouslyPasteHTML(this.value);
+      this.editor.setContents(this.editor.clipboard.convert(this.value));
 
       this.editor.on("text-change", () => {
         this.$emit("input", this.editor.root.innerHTML);

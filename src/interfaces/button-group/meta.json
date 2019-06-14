@@ -8,8 +8,38 @@
     "choices": {
       "name": "$t:choices",
       "comment": "$t:choices_comment",
-      "interface": "json",
+      "interface": "repeater",
       "type": "JSON",
+      "options": {
+        "dataType": "value",
+        "buttonText": "Add Group",
+        "fields": {
+          "groups": {
+            "width": "full",
+            "interface": "repeater",
+            "type": "JSON",
+            "options": {
+              "buttonText": "Add Button",
+              "fields": {
+                "label": {
+                  "interface": "text-input",
+                  "type": "String",
+                  "preview": true
+                },
+                "value": {
+                  "interface": "text-input",
+                  "type": "String"
+                },
+                "icon": {
+                  "width": "full",
+                  "interface": "icon",
+                  "type": "String"
+                }
+              }
+            }
+          }
+        }
+      },
       "default": [
         [
           {
@@ -23,29 +53,33 @@
             "value": "cruise"
           }
         ],
-        {
-          "label": "$t:bus",
-          "icon": "directions_bus",
-          "value": "bus"
-        },
-        {
-          "label": "$t:car",
-          "icon": "directions_car",
-          "value": "car"
-        },
-        {
-          "label": "$t:bike",
-          "icon": "directions_bike",
-          "value": "bike"
-        },
-        {
-          "icon": "directions_run",
-          "value": "run"
-        },
-        {
-          "label": "$t:sleep",
-          "value": "sleep"
-        }
+        [
+          {
+            "label": "$t:bus",
+            "icon": "directions_bus",
+            "value": "bus"
+          },
+          {
+            "label": "$t:car",
+            "icon": "directions_car",
+            "value": "car"
+          },
+          {
+            "label": "$t:bike",
+            "icon": "directions_bike",
+            "value": "bike"
+          },
+          {
+            "label": "Run",
+            "icon": "directions_run",
+            "value": "run"
+          },
+          {
+            "label": "Sleep",
+            "label": "$t:sleep",
+            "value": "sleep"
+          }
+        ]
       ]
     },
     "theme": {
@@ -77,12 +111,9 @@
       "theme": "Interface Theme",
       "theme_comment": "Set the UI of interface if supported",
       "value": "Value",
-      "car": "Car",
-      "bike": "Bike",
-      "bus": "Bus",
-      "sleep": "Sleep",
       "flight": "Flight",
-      "cruise": "Cruise"
+      "cruise": "Cruise",
+      "other": "Other"
     },
 	"fr-FR": {
       "button_group": "Groupe de boutons",

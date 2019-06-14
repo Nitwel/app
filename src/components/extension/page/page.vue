@@ -10,7 +10,7 @@ import pageFallback from "./page-fallback.vue";
 import pageLoading from "./page-loading.vue";
 
 export default {
-  name: "v-ext-page",
+  name: "VExtPage",
   props: {
     id: {
       type: String,

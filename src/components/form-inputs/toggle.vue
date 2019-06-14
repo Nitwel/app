@@ -1,12 +1,6 @@
 <template>
-  <div class="v-toggle" :class="{ disabled }" @click="emitValue">
-    <input
-      type="checkbox"
-      :id="id"
-      :disabled="disabled"
-      :checked="value"
-      @change="$emit('input', !value)"
-    />
+  <div class="v-toggle" :class="{ disabled }" @click.prevent="emitValue">
+    <input :id="id" v-model="value" type="checkbox" :disabled="disabled" />
     <div class="switch-track" :class="{ active: value }" />
     <div class="switch-thumb" :class="{ active: value }" />
   </div>
@@ -14,7 +8,7 @@
 
 <script>
 export default {
-  name: "v-toggle",
+  name: "VToggle",
   props: {
     value: {
       type: Boolean,
@@ -44,6 +38,10 @@ export default {
   position: relative;
   cursor: pointer;
   width: max-content;
+
+  .user-is-tabbing &:focus-within .switch-track::after {
+    box-shadow: 0 0 5px var(--action-dark);
+  }
 }
 
 .disabled {

@@ -1,8 +1,8 @@
 <template>
   <div class="interface-toggle-icon">
     <input
-      type="checkbox"
       id="icon-toggle"
+      type="checkbox"
       :disabled="readonly"
       @change="updateValue($event.target.checked)"
     />
@@ -17,7 +17,7 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "interface-toggle-icon",
+  name: "InterfaceToggleIcon",
   mixins: [mixin],
   computed: {
     icon() {

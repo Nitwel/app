@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "v-ext-page-fallback",
+  name: "VExtPageFallback",
   created() {
     this.$notify({
       title: this.$t("extension_error", { ext: this.interfaceName }),

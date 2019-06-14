@@ -9,26 +9,28 @@
 
   ## Properties
 
-  | name  | description                            | default |
-  |-------|----------------------------------------|---------|
-  | name* | The name of the icon to render         | -       |
-  | size  | The size of the icon in px             | 24      |
-  | color | A color name out of the global pallete | -       |
+  | name      | description                            | default |
+  |-----------|----------------------------------------|---------|
+  | name*     | The name of the icon to render         | -       |
+  | size      | The size of the icon in px             | 24      |
+  | color     | A color name out of the global pallete | -       |
+  | iconStyle | default or outline                     | -       |
+  | sup       | Render the icon as a superscript icon  | false   |
 </docs>
 
 <template>
-  <svg v-if="isCustom" viewBox="0 0 96 100" :width="size" :height="size" :style="svgStyle">
+  <svg v-if="isCustom" viewBox="0 0 96 100" :width="size" :height="size" :style="svgStyles">
     <path
       d="M3.153 79.825l42.917 19.73c1.287.593 2.573.593 3.86 0l42.906-19.73c1.787-.821 2.683-2.216 2.685-4.183V24.358a4.632 4.632 0 0 0-.081-.83v-.242c-.048-.2-.11-.396-.184-.587l-.069-.196a4.73 4.73 0 0 0-.369-.692l-.104-.149a4.668 4.668 0 0 0-.403-.485l-.219-.149a4.476 4.476 0 0 0-.507-.415l-.127-.092a4.558 4.558 0 0 0-.622-.346L49.919.445c-1.287-.593-2.574-.593-3.861 0L3.153 20.175a4.51 4.51 0 0 0-.623.346l-.126.092a4.476 4.476 0 0 0-.507.415l-.15.161c-.146.152-.28.313-.404.484l-.103.15c-.143.22-.266.45-.369.691l-.127.185a4.592 4.592 0 0 0-.184.587v.242a4.632 4.632 0 0 0-.081.83v51.284c0 1.964.891 3.358 2.674 4.183zm6.534-48.264l33.697 15.523v41.142L9.687 72.692V31.561zm42.917 56.654V47.084l33.697-15.523v41.142L52.604 88.215zm-4.61-78.55l31.9 14.693-31.9 14.694-31.899-14.694L47.994 9.665z"
     />
   </svg>
 
-  <i v-else :style="iconStyle">{{ name }}</i>
+  <i v-else :style="iconStyles" :class="[iconStyle, { sup }]">{{ name }}</i>
 </template>
 
 <script>
 export default {
-  name: "v-icon",
+  name: "VIcon",
   props: {
     // Name of the material design icon. See https://material.io/tools/icons
     name: {
@@ -60,6 +62,17 @@ export default {
     color: {
       type: String,
       default: undefined
+    },
+
+    // What icon style to use. So far only default and `outline` are supported
+    iconStyle: {
+      type: String,
+      default: ""
+    },
+
+    sup: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
@@ -71,7 +84,7 @@ export default {
     },
 
     // The inline styles of the material design icon
-    iconStyle() {
+    iconStyles() {
       const styles = {
         fontSize: this.size + "px"
       };
@@ -84,7 +97,7 @@ export default {
     },
 
     // The inline styles of the alternate-icon svg
-    svgStyle() {
+    svgStyles() {
       return {
         fill: `var(--${this.color})`
       };
@@ -106,6 +119,15 @@ i {
   white-space: nowrap;
   font-feature-settings: "liga";
   vertical-align: middle;
+}
+
+i.outline {
+  font-family: "Material Icons Outline";
+}
+
+i.sup {
+  font-size: 8px !important;
+  vertical-align: super;
 }
 
 svg {

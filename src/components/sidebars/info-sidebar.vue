@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-blocker :z-index="9" v-show="active" @click="disableSidebar" class="blocker-info" />
-    <aside class="info-sidebar" v-if="active" :class="{ wide }">
+    <v-blocker v-show="active" :z-index="9" class="blocker-info" @click="disableSidebar" />
+    <aside v-if="active" class="info-sidebar" :class="{ wide }">
       <div class="system"><slot name="system" /></div>
       <slot />
     </aside>
@@ -13,7 +13,7 @@ import VBlocker from "../blocker.vue";
 import { TOGGLE_INFO } from "../../store/mutation-types";
 
 export default {
-  name: "info-sidebar",
+  name: "InfoSidebar",
   components: {
     VBlocker
   },
@@ -32,14 +32,14 @@ export default {
       return this.$store.state.sidebars.info;
     }
   },
-  methods: {
-    disableSidebar() {
-      this.$store.commit(TOGGLE_INFO, false);
-    }
-  },
   created() {
     if (this.itemDetail && window.innerWidth > 1235) {
       this.$store.commit(TOGGLE_INFO, true);
+    }
+  },
+  methods: {
+    disableSidebar() {
+      this.$store.commit(TOGGLE_INFO, false);
     }
   }
 };

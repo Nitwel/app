@@ -5,6 +5,7 @@
       :class="viewOptions.spacing"
       :items="items"
       :columns="columns"
+      :collection="collection"
       :primary-key-field="primaryKeyField"
       :selection="selection"
       :sort-val="sortVal"
@@ -80,6 +81,13 @@ export default {
       };
     }
   },
+  watch: {
+    sortVal(newVal, oldVal) {
+      if (newVal !== oldVal) {
+        this.$refs.table.$el.scrollTop = 0;
+      }
+    }
+  },
   methods: {
     sort(sortVal) {
       const sortValString = (sortVal.asc ? "" : "-") + sortVal.field;
@@ -92,13 +100,6 @@ export default {
       this.$emit("options", {
         widths
       });
-    }
-  },
-  watch: {
-    sortVal(newVal, oldVal) {
-      if (newVal !== oldVal) {
-        this.$refs.table.$el.scrollTop = 0;
-      }
     }
   }
 };

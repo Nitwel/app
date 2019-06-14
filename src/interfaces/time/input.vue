@@ -3,8 +3,8 @@
     type="time"
     class="input"
     :readonly="readonly"
-    @input="emitValue"
     :value="value"
+    @input="emitValue"
   ></v-input>
 </template>
 

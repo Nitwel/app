@@ -23,7 +23,7 @@ import VExtLayoutOptionsFallback from "./layout-options-fallback.vue";
 import VExtLayoutOptionsLoading from "./layout-options-loading.vue";
 
 export default {
-  name: "v-ext-layout-options",
+  name: "VExtLayoutOptions",
   props: {
     type: {
       type: String,
@@ -63,7 +63,7 @@ export default {
     primaryKeyField() {
       if (!this.fields) return null;
 
-      const primaryKeyField = this.$lodash.find(this.fields, {
+      const primaryKeyField = _.find(this.fields, {
         primary_key: true
       });
 

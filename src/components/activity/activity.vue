@@ -20,8 +20,8 @@
 
     <article
       v-for="(activity, index) in activityWithChanges"
-      class="activity-item"
       :key="activity.id"
+      class="activity-item"
     >
       <span
         v-tooltip="$helpers.formatTitle(activity.action)"
@@ -44,7 +44,7 @@
               :locale="$i18n.locale"
               class="date"
             />
-            <v-icon class="chevron" v-tooltip="'Rivision Details'" name="chevron_left" size="18" />
+            <v-icon v-tooltip="'Revision Details'" class="chevron" name="chevron_left" size="18" />
           </summary>
           <div v-if="activity.changes">
             <v-diff :changes="activity.changes" />
@@ -58,7 +58,7 @@
             </button>
           </div>
         </details>
-        <div class="title" v-else-if="activity.name">
+        <div v-else-if="activity.name" class="title">
           <span class="name">{{ activity.name }}</span>
           <v-timeago
             v-if="activity.date"
@@ -74,10 +74,10 @@
         </div>
         <p
           v-if="activity.htmlcomment"
-          v-html="activity.htmlcomment"
           :class="{
             comment: activity.action && activity.action.toLowerCase() === 'comment'
           }"
+          v-html="activity.htmlcomment"
         ></p>
       </div>
     </article>
@@ -88,14 +88,9 @@
 import VDiff from "./diff.vue";
 
 export default {
-  name: "v-activity",
+  name: "VActivity",
   components: {
     VDiff
-  },
-  data() {
-    return {
-      comment: ""
-    };
   },
   props: {
     activity: {
@@ -114,6 +109,11 @@ export default {
       type: String,
       default: "none"
     }
+  },
+  data() {
+    return {
+      comment: ""
+    };
   },
   computed: {
     activityWithChanges() {
@@ -184,7 +184,7 @@ export default {
         if (this.activity[index].action === "create") {
           const data = revision.data;
 
-          return this.$lodash.mapValues(data, (value, field) => ({
+          return _.mapValues(data, (value, field) => ({
             before: null,
             after: value,
             field: field
@@ -198,7 +198,7 @@ export default {
       const previousData = (previousRevision && previousRevision.data) || {};
       const currentDelta = revision.delta;
 
-      return this.$lodash.mapValues(currentDelta, (value, field) => ({
+      return _.mapValues(currentDelta, (value, field) => ({
         before: previousData[field],
         after: value,
         field
@@ -283,7 +283,14 @@ export default {
     }
 
     summary {
+      position: relative;
+      width: 224px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      padding-right: 20px;
       cursor: pointer;
+      color: var(--light-gray);
 
       &:hover {
         .chevron {
@@ -292,7 +299,9 @@ export default {
       }
 
       .chevron {
-        float: right;
+        position: absolute;
+        top: 0;
+        right: 0;
         color: var(--lighter-gray);
         transition: all var(--fast) var(--transition);
       }

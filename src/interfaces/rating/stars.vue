@@ -2,12 +2,13 @@
   <div :class="['rating-stars', { 'rating-readonly': readonly }, { 'rating-small': small }]">
     <button
       v-for="n in options.max_stars"
+      :key="`star_${n}`"
+      :class="ratingClass(n)"
+      :style="ratingStyle(n)"
+      :v-tooltip="n"
       @mouseenter="readonly ? '' : (hovered = n)"
       @mouseleave="readonly ? '' : (hovered = null)"
       @click="readonly ? '' : set(n)"
-      :class="ratingClass(n)"
-      :style="ratingStyle(n)"
-      :key="`star_${n}`"
     ></button>
   </div>
 </template>
@@ -74,7 +75,7 @@ export default {
       let _starType = this.starType(n);
       if (_starType != "empty") {
         if (this.hovered) {
-          _style.color = `var(--dark-gray)`;
+          _style.color = `var(--light-gray)`;
         } else {
           _style.color = `var(--${this.options.active_color})`;
         }
@@ -113,6 +114,7 @@ export default {
   }
 }
 .rating-button {
+  transition: all var(--fast) var(--transition);
   width: 36px;
   height: 40px;
   display: flex;
@@ -127,9 +129,9 @@ export default {
   }
 }
 .rating-empty {
-  color: var(--lighter-gray);
+  color: var(--lightest-gray);
   &:after {
-    content: "star_border";
+    content: "star";
   }
 }
 .rating-half {

@@ -13,6 +13,14 @@
         "placeholder": "$t:template_placeholder"
       }
     },
+    "visible_fields": {
+      "name": "$t:visible_fields",
+      "comment": "$t:visible_fields_note",
+      "interface": "text-input",
+      "options": {
+        "placeholder": "$t:visible_fields_placeholder"
+      }
+    },
     "placeholder": {
       "name": "$t:placeholder",
       "comment": "$t:placeholder_comment",
@@ -26,27 +34,6 @@
       "interface": "numeric",
       "default": 20
     },
-    "preferences": {
-      "name": "$t:preferences",
-      "comment": "$t:preferences_comment",
-      "interface": "json",
-      "options": {
-        "language": "application/json",
-        "template": {
-          "viewType": "tabular",
-          "viewQuery": {
-            "fields": ["id", "name"]
-          },
-          "filters": [
-            {
-              "field": "name",
-              "operator": "contains",
-              "value": "hi"
-            }
-          ]
-        }
-      }
-    },
     "icon": {
       "name": "$t:icon",
       "comment": "$t:icon_comment",
@@ -59,6 +46,8 @@
       "m2o": "Many to One",
       "template": "Dropdown Template",
       "template_comment": "How to format the dropdown options",
+      "visible_fields": "Visible Fields",
+      "visible_fields_note": "CSV of fields visible when selecting an item in the modal",
       "template_placeholder": "{{title}} — {{author}}",
       "placeholder": "Placeholder",
       "placeholder_comment": "Enter placeholder text",

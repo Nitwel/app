@@ -2,10 +2,10 @@
   <div v-if="value" class="gray style-3">
     <v-timeago
       v-if="options.showRelative"
+      v-tooltip="displayValue"
       :datetime="date"
       :auto-update="60"
       :locale="$i18n.locale"
-      v-tooltip="displayValue"
       class="no-wrap"
     ></v-timeago>
     <div v-else>{{ displayValue }}</div>

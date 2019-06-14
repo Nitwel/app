@@ -45,28 +45,17 @@
       </div>
       <div class="body" :class="{ menu: options != null }">
         <div class="main">
-          <component :is="titleElement" class="title" v-tooltip="title">
+          <component :is="titleElement" v-tooltip="title" class="title">
             {{ title }}
           </component>
           <p v-if="subtitle" class="subtitle">{{ subtitle }}</p>
           <p v-if="body" class="content">{{ body }}</p>
         </div>
-        <v-popover placement="right-start" offset="2">
-          <button v-if="options != null" type="button" class="menu-toggle">
-            <v-icon name="more_vert" />
-          </button>
-
-          <template slot="popover">
-            <ul class="ctx-menu">
-              <li v-for="({ text, icon }, id) in options" :key="id">
-                <button type="button" @click="$emit(id)" v-close-popover>
-                  <v-icon v-if="icon" :name="icon" />
-                  {{ $t("remove") }}
-                </button>
-              </li>
-            </ul>
-          </template>
-        </v-popover>
+        <v-contextual-menu
+          :disabled="disabled"
+          :options="options"
+          @click="$emit($event)"
+        ></v-contextual-menu>
       </div>
     </component>
   </component>
@@ -74,7 +63,7 @@
 
 <script>
 export default {
-  name: "v-card",
+  name: "VCard",
   props: {
     element: {
       type: String,
@@ -177,14 +166,14 @@ export default {
       return "check_circle";
     }
   },
-  methods: {
-    onImageError(error) {
-      this.error = error;
-    }
-  },
   watch: {
     src() {
       this.error = null;
+    }
+  },
+  methods: {
+    onImageError(error) {
+      this.error = error;
     }
   }
 };
@@ -311,17 +300,6 @@ export default {
       overflow: hidden;
       flex-grow: 1;
     }
-
-    .menu-toggle {
-      width: 16px;
-      color: var(--lighter-gray);
-      transition: color var(--fast) var(--transition);
-
-      &:hover {
-        color: var(--darker-gray);
-        transition: none;
-      }
-    }
   }
 
   .title,
@@ -395,42 +373,6 @@ export default {
 
     &.selected .select {
       opacity: 1;
-    }
-  }
-}
-
-.ctx-menu {
-  list-style: none;
-  padding: 0;
-  width: 136px;
-
-  li {
-    display: block;
-  }
-
-  i {
-    color: var(--light-gray);
-    margin-right: 5px;
-    transition: color var(--fast) var(--transition);
-  }
-
-  button {
-    display: flex;
-    align-items: center;
-    padding: 5px;
-    color: var(--darker-gray);
-    width: 100%;
-    height: 100%;
-    transition: color var(--fast) var(--transition);
-
-    &:hover {
-      color: var(--darkest-gray);
-      transition: none;
-
-      i {
-        color: var(--darkest-gray);
-        transition: none;
-      }
     }
   }
 }

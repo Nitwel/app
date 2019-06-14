@@ -7,11 +7,6 @@
     }"
   >
     <div
-      class="content"
-      :class="{
-        slow: $store.getters.signalStrength === 1,
-        disconnected: $store.getters.signalStrength === 0
-      }"
       v-tooltip.left="{
         content:
           (!!$store.state.auth.url ? $store.state.auth.url : 'No connection') +
@@ -21,6 +16,11 @@
               : ' - '
           }ms`,
         boundariesElement: 'body'
+      }"
+      class="content"
+      :class="{
+        slow: $store.getters.signalStrength === 1,
+        disconnected: $store.getters.signalStrength === 0
       }"
     >
       <v-signal class="icon" />
@@ -34,8 +34,8 @@
           :key="name + url"
           :name="name"
           :value="url"
-          @click="changeUrl"
           :selected="url === currentUrl || url + '/' === currentUrl"
+          @click="changeUrl"
         >
           {{ name }}
         </option>
@@ -48,7 +48,7 @@
 import VSignal from "../../signal.vue";
 
 export default {
-  name: "project-switcher",
+  name: "ProjectSwitcher",
   components: {
     VSignal
   },
@@ -61,7 +61,7 @@ export default {
   },
   computed: {
     urls() {
-      return this.$lodash.mapKeys(window.__DirectusConfig__.api, (val, key) =>
+      return _.mapKeys(window.__DirectusConfig__.api, (val, key) =>
         key.endsWith("/") === false ? key + "/" : key
       );
     },

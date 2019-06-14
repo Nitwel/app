@@ -16,8 +16,8 @@
     <v-input
       v-if="false"
       id="second"
-      class="password second"
       v-model="confirmValue"
+      class="password second"
       :type="inputType"
       :placeholder="$t('interfaces-password-confirm_placeholder')"
       :icon-right="confirmIcon"
@@ -38,14 +38,6 @@ export default {
       matches: true
     };
   },
-  watch: {
-    value() {
-      this.matches = this.value === this.confirmValue ? true : false;
-    },
-    confirmValue() {
-      this.matches = this.value === this.confirmValue ? true : false;
-    }
-  },
   computed: {
     valueChanged() {
       return this.value !== this.originalValue;
@@ -64,6 +56,14 @@ export default {
     },
     confirmColor() {
       return this.matches ? "accent" : "danger";
+    }
+  },
+  watch: {
+    value() {
+      this.matches = this.value === this.confirmValue ? true : false;
+    },
+    confirmValue() {
+      this.matches = this.value === this.confirmValue ? true : false;
     }
   }
 };

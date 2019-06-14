@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "v-ext-display-loading"
+  name: "VExtDisplayLoading"
 };
 </script>
 

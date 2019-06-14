@@ -1,8 +1,8 @@
 <template>
-  <div class="no-wrap" v-if="options.format">
+  <div v-if="options.format" class="no-wrap">
     {{ formatSize(value, options.decimal) }}
   </div>
-  <div class="no-wrap" v-else>{{ value }}</div>
+  <div v-else class="no-wrap">{{ value }}</div>
 </template>
 
 <script>

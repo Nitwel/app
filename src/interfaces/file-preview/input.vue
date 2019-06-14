@@ -1,8 +1,8 @@
 <template>
   <div>
     <div v-if="isImage" class="image">
-      <img id="image" :src="vUrl" @error="imgError = true" v-if="!imgError" />
-      <div class="broken-image" v-if="imgError">
+      <img v-if="!imgError" id="image" :src="vUrl" @error="imgError = true" />
+      <div v-if="imgError" class="broken-image">
         <v-icon name="broken_image" />
       </div>
     </div>
@@ -130,11 +130,6 @@ export default {
       }
     };
   },
-  watch: {
-    "image.cropRatio"(newValue) {
-      this.setAspectRatio(newValue);
-    }
-  },
   computed: {
     isImage() {
       switch (this.values.type) {
@@ -186,6 +181,11 @@ export default {
       return `${this.values.data.full_url}?v=${
         this.image.version
       }&timestamp=${new Date().getTime()}`;
+    }
+  },
+  watch: {
+    "image.cropRatio"(newValue) {
+      this.setAspectRatio(newValue);
     }
   },
   methods: {

@@ -1,10 +1,10 @@
 <template>
   <div class="interface-checkbox-relational">
     <v-checkbox
-      :style="{ flexBasis: 100 / (options.grid || 1) + '%' }"
       v-for="item in items"
       :id="uid(item)"
       :key="`checkbox_relational_${item.id}`"
+      :style="{ flexBasis: 100 / (options.grid || 1) + '%' }"
       :value="item[relatedPk]"
       :disabled="readonly"
       :label="labelRendered(item)"
@@ -18,7 +18,7 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "interface-checkboxes-relational",
+  name: "InterfaceCheckboxesRelational",
   mixins: [mixin],
   data() {
     return {
@@ -32,7 +32,7 @@ export default {
     //The primary key of related table
     relatedPk() {
       let fields = this.relation.junction.collection_one.fields;
-      return this.$lodash.find(fields, {
+      return _.find(fields, {
         primary_key: true
       }).field;
     },
@@ -45,7 +45,7 @@ export default {
     //Junction Table Primary Key
     //? In normal case it would be "ID" only!
     junctionPk() {
-      return this.$lodash.find(this.relation.collection_many.fields, {
+      return _.find(this.relation.collection_many.fields, {
         primary_key: true
       }).field;
     }

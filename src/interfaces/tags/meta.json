@@ -49,6 +49,19 @@
       "interface": "icon",
       "default": "local_offer",
       "advanced": true
+    },
+    "validation": {
+      "name": "$t:validation",
+      "comment": "$t:validation_comment",
+      "interface": "text-input",
+      "advanced": true
+    },
+    "validationMessage": {
+      "name": "$t:validation_message",
+      "comment": "$t:validation_message_comment",
+      "interface": "text-input",
+      "default": "Please enter a valid tag",
+      "advanced": true
     }
   },
   "translation": {
@@ -64,11 +77,16 @@
       "format_comment": "Convert the tags to Title Case when displaying the value",
       "sanitize": "Sanitize",
       "sanitize_comment": "Removes any non-alphanumeric characters and converts spaces to hyphens",
-      "placeholder_text": "Enter tag and then hit enter or comma...",
+      "placeholder_text": "Type a tag and then hit enter or comma...",
       "icon_left": "Icon Left",
       "icon_left_comment": "Choose an optional icon to display on the left of the input",
       "icon_right": "Icon Right",
-      "icon_right_comment": "Choose an optional icon to display on the right of the input"
+      "icon_right_comment": "Choose an optional icon to display on the right of the input",
+      "validation": "Validation",
+      "validation_comment": "A RegEx to check each individual value against",
+      "validation_message": "Validation Message",
+      "validation_message_comment": "A short message to show users if tag validation fails",
+      "validation_message_default": "Please enter a valid tag"
     },
 	"fr-FR": {
       "tags": "Etiquettes",

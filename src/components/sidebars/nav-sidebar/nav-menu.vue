@@ -1,5 +1,5 @@
 <template>
-  <div class="nav-menu" v-if="links.length > 0">
+  <div v-if="links.length > 0" class="nav-menu">
     <nav>
       <ul>
         <li v-for="{ path, name, target, icon, color } in links" :key="path">
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: "nav-menu",
+  name: "NavMenu",
   props: {
     title: {
       type: String,
@@ -80,7 +80,7 @@ ul {
 }
 
 nav > ul > li > * {
-  padding: 8px 0 8px 10px;
+  padding: 8px 4px 8px 10px;
   margin: 2px 0;
 }
 

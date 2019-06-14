@@ -1,9 +1,9 @@
 <template>
   <div v-if="checkbox" class="checkbox">
     <input
+      :id="name"
       type="checkbox"
       :disabled="readonly"
-      :id="name"
       @change="updateValue($event.target.checked)"
     />
     <label :for="name">
@@ -12,8 +12,8 @@
     </label>
   </div>
 
-  <div v-else class="toggle" :class="{ on: value }">
-    <v-toggle :value="value" @input="updateValue" :disabled="readonly" />
+  <div v-else class="toggle" :class="{ on: valBool }">
+    <v-toggle :value="valBool" :disabled="readonly" @input="updateValue" />
     <span>{{ label }}</span>
   </div>
 </template>
@@ -25,13 +25,19 @@ export default {
   mixins: [mixin],
   computed: {
     icon() {
-      return this.value ? "check_box" : "check_box_outline_blank";
+      return this.valBool ? "check_box" : "check_box_outline_blank";
     },
     checkbox() {
       return this.options.checkbox || false;
     },
     label() {
-      return this.value ? this.options.labelOn : this.options.labelOff;
+      return this.valBool ? this.options.labelOn : this.options.labelOff;
+    },
+    // Sometimes, the API might return `0`, or `"0"` as the value. These should both be considered
+    // false as well
+    valBool() {
+      if (this.value === true || this.value === 1 || this.value === "1") return true;
+      return false;
     }
   },
   methods: {

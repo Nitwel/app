@@ -42,7 +42,6 @@
 
         <span
           v-else
-          class="style-4"
           v-tooltip="
             (columns[index].fieldInfo && columns[index].fieldInfo.type.toLowerCase() === 'o2m') ||
             (columns[index].fieldInfo && columns[index].fieldInfo.type.toLowerCase() === 'm2o') ||
@@ -51,6 +50,7 @@
               ? $t('cant_sort_by_this_field')
               : undefined
           "
+          class="style-4"
         >
           {{ widths[field] > 40 ? name : null }}
         </span>
@@ -94,9 +94,9 @@
           >
             <div
               v-if="manualSortField"
-              @click.stop.prevent
               class="manual-sort cell"
               :class="{ active: manualSorting }"
+              @click.stop.prevent
             >
               <v-icon name="drag_handle" />
             </div>
@@ -116,14 +116,16 @@
               }"
               class="cell"
             >
-              <div v-if="row[field] === '' || $lodash.isNil(row[field])" class="empty">
+              <div v-if="row[field] === '' || isNil(row[field])" class="empty">
                 --
               </div>
               <v-ext-display
-                v-else-if="useInterfaces && !$lodash.isNil(row[field])"
-                :interface-type="fieldInfo.interface"
+                v-else-if="useInterfaces && !isNil(row[field])"
                 :id="field"
+                :interface-type="fieldInfo.interface"
                 :name="field"
+                :values="row"
+                :collection="collection"
                 :type="fieldInfo.type"
                 :datatype="fieldInfo.datatype"
                 :options="fieldInfo.options"
@@ -160,14 +162,15 @@
               }"
               class="cell"
             >
-              <div v-if="row[field] === '' || $lodash.isNil(row[field])" class="empty">
+              <div v-if="row[field] === '' || isNil(row[field])" class="empty">
                 --
               </div>
               <v-ext-display
-                v-else-if="useInterfaces && !$lodash.isNil(row[field])"
-                :interface-type="fieldInfo.interface"
+                v-else-if="useInterfaces && !isNil(row[field])"
                 :id="field"
+                :interface-type="fieldInfo.interface"
                 :name="field"
+                :collection="collection"
                 :type="fieldInfo.type"
                 :options="fieldInfo.options"
                 :value="row[field]"
@@ -190,7 +193,7 @@
 
 <script>
 export default {
-  name: "v-table",
+  name: "VTable",
   props: {
     loading: {
       type: Boolean,
@@ -243,6 +246,10 @@ export default {
     useInterfaces: {
       type: Boolean,
       default: false
+    },
+    collection: {
+      type: String,
+      default: null
     }
   },
   data() {
@@ -262,16 +269,16 @@ export default {
       const primaryKeyFields = this.items.map(item => item[this.primaryKeyField]).sort();
       const selection = [...this.selection];
       selection.sort();
-      return this.selection.length > 0 && this.$lodash.isEqual(primaryKeyFields, selection);
+      return this.selection.length > 0 && _.isEqual(primaryKeyFields, selection);
     },
     selectable() {
       return Array.isArray(this.selection);
     },
     sortable() {
-      return this.$lodash.isObject(this.sortVal);
+      return _.isObject(this.sortVal);
     },
     resizeable() {
-      return this.$lodash.isObject(this.columnWidths);
+      return _.isObject(this.columnWidths);
     },
     totalWidth() {
       return (
@@ -287,16 +294,6 @@ export default {
       return this.manualSorting ? this.itemsManuallySorted : this.items;
     }
   },
-  created() {
-    this.initWidths();
-
-    if (!this.manualSortField) return;
-
-    if (this.sortVal && this.sortVal.field === this.manualSortField && this.sortVal.asc === true) {
-      this.manualSorting = true;
-      this.itemsManuallySorted = this.items;
-    }
-  },
   watch: {
     columnWidths() {
       this.initWidths();
@@ -308,7 +305,20 @@ export default {
       this.itemsManuallySorted = newVal;
     }
   },
+  created() {
+    this.initWidths();
+
+    if (!this.manualSortField) return;
+
+    if (this.sortVal && this.sortVal.field === this.manualSortField && this.sortVal.asc === true) {
+      this.manualSorting = true;
+      this.itemsManuallySorted = this.items;
+    }
+  },
   methods: {
+    isNil(val) {
+      return _.isNil(val);
+    },
     selectAll() {
       if (this.allSelected) {
         return this.$emit("select", []);

@@ -13,7 +13,7 @@
 import VError from "../components/error.vue";
 
 export default {
-  name: "not-found",
+  name: "NotFound",
   metaInfo() {
     return {
       title: this.$t("page_not_found")

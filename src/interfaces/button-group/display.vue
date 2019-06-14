@@ -8,7 +8,7 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "readonly-button-group",
+  name: "ReadonlyButtonGroup",
   mixins: [mixin]
 };
 </script>

@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  name: "invisible-label",
+  name: "InvisibleLabel",
   props: {
     htmlFor: {
       type: String,

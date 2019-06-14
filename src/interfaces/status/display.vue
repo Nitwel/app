@@ -1,9 +1,8 @@
 <template>
   <div
-    v-if="currentStatus && currentStatus.browse_badge"
+    v-tooltip="options.simpleBadge ? currentStatus.name : false"
     :class="['badge', 'no-wrap', { simple: options.simpleBadge }]"
     :style="style"
-    v-tooltip="options.simpleBadge ? currentStatus.name : false"
   >
     {{ options.simpleBadge ? null : currentStatus.name }}
   </div>

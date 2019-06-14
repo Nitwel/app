@@ -3,9 +3,9 @@
     <v-radio
       v-for="(options, key) in optionValues"
       :id="`${name}-${key}`"
+      :key="key"
       :name="name"
       :value="key"
-      :key="key"
       :disabled="readonly"
       :model-value="String(value)"
       :label="options.label"
@@ -19,7 +19,7 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "interface-status",
+  name: "InterfaceStatus",
   mixins: [mixin],
   data() {
     return {
@@ -32,7 +32,7 @@ export default {
         return this.options.status_mapping ? JSON.parse(this.status_mapping) : {};
       }
       if (!this.options.status_mapping) return {};
-      return this.$lodash.mapValues(this.options.status_mapping, mapping => ({
+      return _.mapValues(this.options.status_mapping, mapping => ({
         ...mapping,
         label: this.$helpers.formatTitle(this.$t(mapping.name))
       }));
@@ -40,13 +40,9 @@ export default {
     optionValues() {
       const allStatuses = Object.keys(this.statusMapping);
 
-      const allowedStatuses = this.$lodash.differenceWith(
-        allStatuses,
-        this.blacklist,
-        this.$lodash.isEqual
-      );
+      const allowedStatuses = _.differenceWith(allStatuses, this.blacklist, _.isEqual);
 
-      return this.$lodash.pick(this.statusMapping, allowedStatuses);
+      return _.pick(this.statusMapping, allowedStatuses);
     },
     blacklist() {
       if (typeof this.permissions.status_blacklist === "string")
@@ -60,12 +56,18 @@ export default {
       }
 
       return this.$store.state.permissions[this.collection].statuses[this.startStatus];
-    },
-    collection() {
-      return Object.values(this.fields)[0].collection;
     }
   },
   created() {
+    if (!this.value || this.value === "") {
+      // Set first value selected if no default exists
+      if (this.$store.state.permissions[this.collection].statuses !== null) {
+        let obj = Object.keys(this.$store.state.permissions[this.collection].statuses);
+        if (obj.length > 1) {
+          this.$emit("input", obj[0]);
+        }
+      }
+    }
     this.startStatus = this.value;
   }
 };

@@ -20,7 +20,10 @@
 import VModalBase from "./modal-base.vue";
 
 export default {
-  name: "v-confirm",
+  name: "VConfirm",
+  components: {
+    VModalBase
+  },
   props: {
     message: {
       type: String,
@@ -42,9 +45,6 @@ export default {
       type: String,
       default: "action"
     }
-  },
-  components: {
-    VModalBase
   }
 };
 </script>

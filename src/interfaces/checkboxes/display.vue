@@ -6,30 +6,27 @@
 import mixin from "@directus/extension-toolkit/mixins/interface";
 
 export default {
-  name: "readonly-checkboxes",
+  name: "ReadonlyCheckboxes",
   mixins: [mixin],
   computed: {
     selection() {
       if (this.value == null) return [];
 
       const selection = this.type === "VARCHAR" ? this.value.split(",") : this.value;
-
       if (this.options.wrap) {
         selection.pop();
         selection.shift();
       }
-
       return selection;
     },
     displayValue() {
-      if (this.options.formatting) {
-        return this.selection
-          .filter(val => val)
-          .map(val => this.options.choices[val])
-          .join(", ");
+      let display = this.selection ? this.selection : [];
+      if (this.options.formatting && this.type === "array") {
+        return display
+          .map(val => (this.options.choices[val] ? this.options.choices[val] : val))
+          .toString();
       }
-
-      return this.selection.join(", ");
+      return display.toString();
     }
   }
 };

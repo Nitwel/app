@@ -38,11 +38,21 @@ window.__DirectusConfig__ = window.__DirectusConfig__ || defaultConfig;
 
 Vue.config.productionTip = false;
 
+// Make lodash globally available under it's common name `_`
+window._ = lodash;
+
 Object.defineProperties(Vue.prototype, {
-  $lodash: { value: lodash },
   $api: { value: api },
   $notify: { value: notify },
-  $axios: { value: axios }
+  $axios: { value: axios },
+
+  // TODO: Remove this in/after 7.4
+  $lodash: {
+    get() {
+      console.warn("[Directus] this.$lodash is deprecated. Use _ instead.");
+      return _;
+    }
+  }
 });
 
 Vue.use(events);

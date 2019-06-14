@@ -2,8 +2,8 @@
   <div class="interface-color-picker">
     <button
       v-for="color in colors"
-      v-tooltip="$helpers.formatTitle(color)"
       :key="color"
+      v-tooltip="$helpers.formatTitle(color)"
       :disabled="readonly"
       :style="{ backgroundColor: `var(--${color})` }"
       :class="{ active: value === color }"

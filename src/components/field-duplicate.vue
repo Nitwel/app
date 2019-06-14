@@ -5,11 +5,11 @@
     @save="saveField()"
     @close="$emit('close')"
   >
-    <form @submit.prevent class="options">
+    <form class="options" @submit.prevent>
       <div class="options">
         <label>
           {{ $t("collection") }}
-          <v-simple-select required v-model="selectedCollection">
+          <v-simple-select v-model="selectedCollection" required>
             <option
               v-for="collection in Object.keys(this.collections)"
               :key="collection"
@@ -25,8 +25,8 @@
         <label>
           {{ $t("field") + " " + $t("name") }}
           <v-input
-            required
             v-model="field"
+            required
             :value="field"
             :placeholder="fieldInfo.field"
             :icon-right="iconToShow.icon"
@@ -45,7 +45,7 @@
 
 <script>
 export default {
-  name: "v-field-duplicate",
+  name: "VFieldDuplicate",
   props: {
     collectionInformation: {
       type: Object,

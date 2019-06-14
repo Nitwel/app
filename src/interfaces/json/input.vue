@@ -1,6 +1,6 @@
 <template>
   <div class="interface-json">
-    <codemirror :value="stringValue" @input="updateValue" :options="cmOptions"></codemirror>
+    <codemirror :value="stringValue" :options="cmOptions" @input="updateValue"></codemirror>
     <button v-if="options.template" @click="fillTemplate">
       <v-icon name="playlist_add" />
     </button>
@@ -46,10 +46,10 @@ CodeMirror.registerHelper("lint", "json", text => {
 });
 
 export default {
-  mixins: [mixin],
   components: {
     codemirror
   },
+  mixins: [mixin],
   data() {
     return {
       initialValue: ""

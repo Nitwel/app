@@ -28,7 +28,7 @@
               </button>
             </header>
 
-            <div class="tabs" v-if="tabs">
+            <div v-if="tabs" class="tabs">
               <button
                 v-for="(info, id) in tabs"
                 :key="id"
@@ -60,8 +60,8 @@
               </button>
               <v-button
                 v-for="(button, id) in buttons"
-                class="confirm"
                 :key="id"
+                class="confirm"
                 :loading="button.loading || false"
                 :disabled="button.disabled || false"
                 @click="$emit(id)"
@@ -80,7 +80,7 @@
 import { disableBodyScroll, enableBodyScroll } from "body-scroll-lock";
 
 export default {
-  name: "v-modal",
+  name: "VModal",
   props: {
     actionRequired: {
       type: Boolean,
@@ -107,12 +107,6 @@ export default {
       default: false
     }
   },
-  mounted() {
-    disableBodyScroll(this.$refs.modal);
-  },
-  beforeDestroy() {
-    enableBodyScroll(this.$refs.modal);
-  },
   watch: {
     /*
      * Focus on the first input in the currently rendered tab on change of tab
@@ -125,6 +119,12 @@ export default {
         this.$refs.tabsBody.querySelector("input").focus();
       }, 0);
     }
+  },
+  mounted() {
+    disableBodyScroll(this.$refs.modal);
+  },
+  beforeDestroy() {
+    enableBodyScroll(this.$refs.modal);
   }
 };
 </script>

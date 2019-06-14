@@ -120,7 +120,7 @@
       </nav>
     </v-details>
 
-    <portal to="modal" v-if="updateDBActive">
+    <portal v-if="updateDBActive" to="modal">
       <v-confirm
         :message="$t('settings_update_database_confirm')"
         :confirm-text="$t('update')"
@@ -137,7 +137,7 @@ import { version } from "../../../package.json";
 import VSignal from "../../components/signal.vue";
 
 export default {
-  name: "settings",
+  name: "Settings",
   metaInfo() {
     return {
       title: `${this.$t("settings")}`

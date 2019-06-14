@@ -11,8 +11,8 @@
       v-if="loading"
       :line-size="2"
       size="13"
-      line-foreground-color="#fff"
-      line-background-color="var(--darkest-gray)"
+      line-fg-color="var(--light-gray)"
+      line-bg-color="#fff"
       class="spinner"
     />
     <slot />
@@ -21,7 +21,7 @@
 
 <script>
 export default {
-  name: "v-button",
+  name: "VButton",
   props: {
     fullwidth: {
       type: Boolean,
@@ -51,7 +51,7 @@ export default {
     bg: {
       type: String,
       default: "action",
-      validator: value => ["action", "warning", "danger"].includes(value)
+      validator: value => ["action", "gray", "warning", "danger"].includes(value)
     }
   }
 };
@@ -65,6 +65,16 @@ button.action {
   &:hover:not(:disabled) {
     background-color: var(--darkest-gray);
     border-color: var(--darkest-gray);
+  }
+}
+
+button.gray {
+  background-color: var(--lightest-gray);
+  border-color: var(--lightest-gray);
+
+  &:hover:not(:disabled) {
+    background-color: var(--lighter-gray);
+    border-color: var(--lighter-gray);
   }
 }
 
@@ -89,7 +99,7 @@ button.danger {
 }
 
 button.black {
-  color: var(--black);
+  color: var(--darker-gray);
 }
 
 button.white {

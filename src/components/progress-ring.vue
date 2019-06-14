@@ -38,7 +38,7 @@
 
 <script>
 export default {
-  name: "v-progress-ring",
+  name: "VProgressRing",
   props: {
     radius: {
       type: Number,

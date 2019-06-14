@@ -20,7 +20,7 @@
         </li>
       </ul>
     </nav>
-    <portal to="modal" v-if="confirmRemove">
+    <portal v-if="confirmRemove" to="modal">
       <v-confirm
         :message="$t('delete_bookmark_body')"
         @cancel="confirmRemove = false"
@@ -32,7 +32,7 @@
 
 <script>
 export default {
-  name: "nav-bookmarks",
+  name: "NavBookmarks",
   props: {
     bookmarks: {
       type: Array,

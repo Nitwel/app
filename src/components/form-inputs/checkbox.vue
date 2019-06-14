@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: "form-checkbox",
+  name: "FormCheckbox",
   model: {
     prop: "modelValue",
     event: "change"

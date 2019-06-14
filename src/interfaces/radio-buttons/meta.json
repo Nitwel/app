@@ -11,8 +11,23 @@
     "choices": {
       "name": "$t:choices",
       "comment": "$t:choices_comment",
-      "interface": "json",
+      "interface": "repeater",
       "type": "JSON",
+      "options": {
+        "dataType": "value",
+        "fields": {
+          "name": {
+            "interface": "text-input",
+            "type": "String",
+            "preview": true
+          },
+          "value": {
+            "interface": "text-input",
+            "type": "String",
+            "index": true
+          }
+        }
+      },
       "default": {
         "value1": "$t:option 1",
         "value2": "$t:option 2",

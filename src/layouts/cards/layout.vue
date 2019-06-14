@@ -4,7 +4,7 @@
       <p>{{ $t("sort_by") }}</p>
 
       <div class="sort-select">
-        <select @input="setSort($event.target.value)" :value="sortedOn">
+        <select :value="sortedOn" @input="setSort($event.target.value)">
           <option v-for="(fieldInfo, name) in sortableFields" :key="name" :value="name">
             {{ $helpers.formatTitle(name) }}
           </option>
@@ -13,7 +13,7 @@
       </div>
 
       <div class="sort-select">
-        <select @input="setSortDirection($event.target.value)" :value="sortDirection">
+        <select :value="sortDirection" @input="setSortDirection($event.target.value)">
           <option value="asc">{{ $t("ASC") }}</option>
           <option value="desc">{{ $t("DESC") }}</option>
         </select>
@@ -51,11 +51,11 @@
 import mixin from "@directus/extension-toolkit/mixins/layout";
 
 export default {
-  name: "layout-cards",
+  name: "LayoutCards",
   mixins: [mixin],
   computed: {
     sortableFields() {
-      return this.$lodash.pickBy(this.fields, field => field.datatype);
+      return _.pickBy(this.fields, field => field.datatype);
     },
     sortedOn() {
       let fieldName;

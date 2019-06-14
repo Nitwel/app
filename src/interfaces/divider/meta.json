@@ -2,8 +2,11 @@
   "name": "$t:divider",
   "version": "1.0.0",
   "types": ["alias"],
-  "hideLabel": true,
   "icon": "horizontal_split",
+  "hideLabel": true,
+  "recommended": {
+    "required": false
+  },
   "options": {
     "style": {
       "name": "$t:style-name",

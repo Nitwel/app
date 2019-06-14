@@ -15,7 +15,7 @@
       :body="$t('no_collections_body')"
       icon="error_outline"
     />
-    <div class="padding" v-else>
+    <div v-else class="padding">
       <v-table
         :items="items"
         :columns="fields"
@@ -31,7 +31,7 @@
 import VError from "../components/error.vue";
 
 export default {
-  name: "collections",
+  name: "Collections",
   metaInfo() {
     return {
       title: this.$t("collections")
@@ -53,7 +53,7 @@ export default {
         )
         .filter(collection => {
           if (collection.status_mapping) {
-            return this.$lodash.some(
+            return _.some(
               this.permissions[collection.collection].statuses,
               permission => permission.read !== "none"
             );

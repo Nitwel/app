@@ -1,5 +1,5 @@
 <template>
-  <div :class="{ open }" ref="searchFilter" class="search-filter">
+  <div ref="searchFilter" :class="{ open }" class="search-filter">
     <v-header-button
       class="toggle"
       icon-color="lighter-gray"
@@ -69,8 +69,8 @@
             </button>
           </div>
           <v-input
-            autofocus
             :id="`filter-${i}`"
+            autofocus
             :value="filter.value"
             type="text"
             @input="updateFilter(i, 'value', $event)"
@@ -101,7 +101,7 @@
 import VBlocker from "../blocker.vue";
 
 export default {
-  name: "search-filter",
+  name: "SearchFilter",
   components: {
     VBlocker
   },
@@ -161,8 +161,8 @@ export default {
     }
   },
   created() {
-    this.search = this.$lodash.debounce(this.search, 300);
-    this.updateFilter = this.$lodash.debounce(this.updateFilter, 300);
+    this.search = _.debounce(this.search, 300);
+    this.updateFilter = _.debounce(this.updateFilter, 300);
   },
   mounted() {
     window.addEventListener("click", this.closeFilter);
@@ -185,13 +185,13 @@ export default {
       ]);
     },
     updateFilter(index, key, value) {
-      const filters = this.$lodash.cloneDeep(this.filters);
+      const filters = _.cloneDeep(this.filters);
       filters[index][key] = value;
 
       this.$emit("filter", filters);
     },
     deleteFilter(index) {
-      const filters = this.$lodash.cloneDeep(this.filters);
+      const filters = _.cloneDeep(this.filters);
       filters.splice(index, 1);
 
       this.$emit("filter", filters);

@@ -6,6 +6,8 @@
     :value="value"
     :type="type"
     :length="length"
+    :values="values"
+    :collection="collection"
     :readonly="readonly"
     :required="required"
     :loading="loading"
@@ -23,7 +25,10 @@ import VExtDisplayLoading from "./display-loading.vue";
 import { datatypes } from "../../../../type-map";
 
 export default {
-  name: "v-ext-display",
+  name: "VExtDisplay",
+  components: {
+    VExtDisplayFallback
+  },
   props: {
     interfaceType: {
       type: String,
@@ -49,6 +54,14 @@ export default {
       type: [String, Number],
       default: null
     },
+    values: {
+      type: Object,
+      default: null
+    },
+    collection: {
+      type: String,
+      default: null
+    },
     readonly: {
       type: Boolean,
       default: false
@@ -65,9 +78,6 @@ export default {
       type: Object,
       default: () => ({})
     }
-  },
-  components: {
-    VExtDisplayFallback
   },
   computed: {
     interfaces() {
@@ -100,7 +110,7 @@ export default {
     optionsWithDefaults() {
       if (!this.interfaceInfo) return {};
 
-      const defaults = this.$lodash.mapValues(
+      const defaults = _.mapValues(
         this.interfaceInfo.options,
         settings => settings.default || null
       );

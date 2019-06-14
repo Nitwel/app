@@ -9,9 +9,9 @@
   </small>
   <v-select
     v-else
+    :id="name"
     :value="value"
     :disabled="readonly"
-    :id="name"
     :options="choices"
     :placeholder="options.placeholder"
     :icon="options.icon"

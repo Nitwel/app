@@ -1,0 +1,146 @@
+{
+  "name": "$t:repeater",
+  "version": "1.0.0",
+  "icon": "replay",
+  "types": ["json"],
+  "recommended": {
+    "length": 200
+  },
+  "options": {
+    "dataType": {
+      "name": "$t:data_type",
+      "comment": "$t:data_type_comment",
+      "interface": "button-group",
+      "default": "object",
+      "type": "JSON",
+      "options": {
+        "choices": [
+          {
+            "label": "Object",
+            "value": "object"
+          },
+          {
+            "label": "Value",
+            "value": "value"
+          }
+        ]
+      }
+    },
+    "limit": {
+      "name": "$t:limit",
+      "comment": "$t:limit_comment",
+      "interface": "numeric",
+      "default": 0,
+      "type": "Number"
+    },
+    "buttonText": {
+      "name": "$t:button_text",
+      "comment": "$t:button_text_comment",
+      "interface": "text-input",
+      "default": "Add Item",
+      "type": "String"
+    },
+    "fields": {
+      "name": "$t:fields",
+      "interface": "repeater",
+      "type": "JSON",
+      "options": {
+        "fields": {
+          "field": {
+            "field": "field",
+            "interface": "text-input",
+            "type": "String",
+            "preview": true,
+            "index": true,
+            "options": {
+              "placeholder": "Choose a name for this field"
+            }
+          },
+          "interface": {
+            "interface": "interfaces",
+            "field": "interface",
+            "type": "String",
+            "width": "half",
+            "preview": true,
+            "default": "text-input"
+          },
+          "options": {
+            "interface": "interface-options",
+            "field": "options",
+            "type": "String",
+            "width": "full",
+            "preview": false,
+            "default": {},
+            "options": {
+              "interfaceField": "interface"
+            }
+          },
+          "type": {
+            "field": "type",
+            "interface": "dropdown",
+            "type": "String",
+            "width": "half",
+            "options": {
+              "placeholder": "Choose a data type",
+              "choices": {
+                "JSON": "JSON",
+                "String": "String",
+                "Integer": "Integer",
+                "Decimal": "Decimal",
+                "Boolean": "Boolean",
+                "File": "File",
+                "Sort": "Sort",
+                "Status": "Status",
+                "O2M": "O2M",
+                "M2M": "M2M",
+                "M2O": "M2O",
+                "Array": "Array",
+                "Date": "Date",
+                "Time": "Time",
+                "DateTime": "DateTime",
+                "Alias": "Alias"
+              }
+            },
+            "default": "string"
+          },
+          "preview": {
+            "field": "preview",
+            "interface": "toggle",
+            "type": "Boolean",
+            "width": "half",
+            "options": {
+              "checkbox": true,
+              "labelOn": "Included in title",
+              "labelOff": "Not included in title"
+            },
+            "default": true
+          },
+          "index": {
+            "field": "index",
+            "interface": "toggle",
+            "type": "Boolean",
+            "width": "half",
+            "options": {
+              "checkbox": true,
+              "labelOn": "Used as key",
+              "labelOff": "Not used as key"
+            },
+            "default": false
+          }
+        }
+      }
+    }
+  },
+  "translation": {
+    "en-US": {
+      "repeater": "Repeater",
+      "fields": "Fields",
+      "data_type": "Data Type",
+      "data_type_comment": "Sets if data gets saved as an Object or only a single value of the Object",
+      "limit": "Limit",
+      "limit_comment": "Limits the amount of items",
+      "button_text": "Button Text",
+      "button_text_comment": "Sets the text displayed in the add button"
+    }
+  }
+}

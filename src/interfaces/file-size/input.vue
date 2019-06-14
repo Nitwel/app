@@ -1,5 +1,5 @@
 <template>
-  <div class="interface-container" v-if="options.formatInput">
+  <div v-if="options.formatInput" class="interface-container">
     <v-input
       v-model="reducedValue"
       type="number"
@@ -11,10 +11,10 @@
     <!--
     -->
     <v-select
+      :id="name"
       v-model="units"
       class="interface-file-size-units"
       :readonly="readonly"
-      :id="name"
       :options="unitChoices"
       :placeholder="options.placeholder"
       @input="calculateValue"

@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "v-ext-input-loading"
+  name: "VExtInputLoading"
 };
 </script>
 
