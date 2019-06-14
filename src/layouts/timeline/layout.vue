@@ -12,10 +12,11 @@ import mixin from "@directus/extension-toolkit/mixins/layout";
 import Day from "./Day.vue";
 
 export default {
-  props: ["items"],
   components: {
     Day
   },
+  mixins: [mixin],
+  props: ["items"],
   data() {
     return {
       actionColor: {
@@ -42,7 +43,6 @@ export default {
       weekNames: ["monday", "tuesday", "wednesday", "thursday", "friday", "saturday", "sunday"]
     };
   },
-  mixins: [mixin],
   computed: {
     days() {
       var days = [];
@@ -79,16 +79,6 @@ export default {
       return days;
     }
   },
-  methods: {
-    scroll(event) {
-      var timeline = this.$refs.timeline;
-      var toBottom = timeline.offsetTop + timeline.clientHeight - window.innerHeight - event.pageY;
-
-      if (toBottom < 100 && !this.lazyLoading) {
-        this.$emit("next-page");
-      }
-    }
-  },
   created() {
     document.addEventListener("scroll", this.scroll);
 
@@ -98,12 +88,16 @@ export default {
   },
   destroyed() {
     document.removeEventListener("scroll", this.scroll);
+  },
+  methods: {
+    scroll(event) {
+      var timeline = this.$refs.timeline;
+      var toBottom = timeline.offsetTop + timeline.clientHeight - window.innerHeight - event.pageY;
+
+      if (toBottom < 100 && !this.lazyLoading) {
+        this.$emit("next-page");
+      }
+    }
   }
 };
 </script>
-
-<style type="scss" scoped>
-#timeline {
-  margin-top: 30px;
-}
-</style>
