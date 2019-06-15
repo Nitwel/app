@@ -49,6 +49,8 @@ export default {
 
       for (var i = 0; i < this.items.length; i++) {
         var item = this.items[i];
+        
+        if(!this.viewOptions.date)return
 
         var date = new Date(item[this.viewOptions.date].substr(0, 10) + "T00:00:00");
         var existingDay = this.$lodash.find(days, { date: date });
