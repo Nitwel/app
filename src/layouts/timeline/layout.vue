@@ -54,7 +54,7 @@ export default {
         var date = new Date(item[this.viewOptions.date].substr(0, 10) + "T00:00:00");
         var existingDay = this.$lodash.find(days, { date: date });
 
-        var color = null;
+        let color = null;
         if (this.viewOptions.color && item[this.viewOptions.color]) {
           color = item[this.viewOptions.color];
 
