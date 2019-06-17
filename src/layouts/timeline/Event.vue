@@ -12,6 +12,7 @@
       </div>
       <div class="content">
         <v-ext-display
+          v-if="data.contentType"
           :id="data.contentType.name"
           class="display"
           :name="data.contentType.name"
@@ -30,7 +31,16 @@
 <script>
 export default {
   components: {},
-  props: ["data", "connect"],
+  props: {
+    data: {
+      type: Object,
+      default: null
+    },
+    connect: {
+      type: Boolean,
+      default: true
+    }
+  },
   data() {
     return {};
   },

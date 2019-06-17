@@ -22,7 +22,16 @@ export default {
   components: {
     Event
   },
-  props: ["date", "events"],
+  props: {
+    date: {
+      type: Date,
+      default: new Date()
+    },
+    events: {
+      type: Object,
+      default: null
+    }
+  },
   data() {
     return {};
   },

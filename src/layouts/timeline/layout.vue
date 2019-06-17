@@ -16,7 +16,6 @@ export default {
     Day
   },
   mixins: [mixin],
-  props: ["items"],
   data() {
     return {
       actionColor: {
@@ -49,22 +48,31 @@ export default {
 
       for (var i = 0; i < this.items.length; i++) {
         var item = this.items[i];
-        
-        if(!this.viewOptions.date)return
+
+        if (!this.viewOptions.date) return;
 
         var date = new Date(item[this.viewOptions.date].substr(0, 10) + "T00:00:00");
         var existingDay = this.$lodash.find(days, { date: date });
 
-        var color = item[this.viewOptions.color];
-        if (this.fields[this.viewOptions.color].field == "action") {
-          color = this.actionColor[color];
+        var color = null;
+        if (this.viewOptions.color && item[this.viewOptions.color]) {
+          color = item[this.viewOptions.color];
+
+          if (
+            this.fields[this.viewOptions.color] &&
+            this.fields[this.viewOptions.color].field == "action"
+          ) {
+            color = this.actionColor[color];
+          }
         }
+
+        var contentType = this.viewOptions.content ? this.fields[this.viewOptions.content] : null;
 
         var event = {
           time: new Date(item[this.viewOptions.date]),
           title: this.$helpers.micromustache.render(this.viewOptions.title, item),
           content: item[this.viewOptions.content],
-          contentType: this.fields[this.viewOptions.content],
+          contentType: contentType,
           color: color,
           to: item.__link__
         };
