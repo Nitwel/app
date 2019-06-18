@@ -68,7 +68,7 @@ export default {
 
         const contentType = this.viewOptions.content ? this.fields[this.viewOptions.content] : null;
 
-        var event = {
+        const event = {
           time: new Date(item[this.viewOptions.date]),
           title: this.$helpers.micromustache.render(this.viewOptions.title, item),
           content: item[this.viewOptions.content],
