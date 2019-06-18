@@ -66,7 +66,7 @@ export default {
           }
         }
 
-        var contentType = this.viewOptions.content ? this.fields[this.viewOptions.content] : null;
+        const contentType = this.viewOptions.content ? this.fields[this.viewOptions.content] : null;
 
         var event = {
           time: new Date(item[this.viewOptions.date]),
