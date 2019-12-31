@@ -36,6 +36,9 @@
       "content": "Content",
       "title": "Titel",
       "color": "Color"
+    },
+    "tree": {
+      "tree": "Baum"
     }
   }
 }

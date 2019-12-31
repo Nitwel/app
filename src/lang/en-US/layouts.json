@@ -36,6 +36,11 @@
       "content": "Content",
       "title": "Title",
       "color": "Color"
+    },
+    "tree": {
+      "tree": "Tree",
+      "parent": "Parent",
+      "title": "Title"
     }
   }
 }
