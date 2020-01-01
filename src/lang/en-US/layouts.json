@@ -40,7 +40,9 @@
     "tree": {
       "tree": "Tree",
       "parent": "Parent",
-      "title": "Title"
+      "title": "Title",
+      "friends": "Friends",
+      "showAllCollections": "Show all collections"
     }
   }
 }

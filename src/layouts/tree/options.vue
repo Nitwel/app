@@ -22,6 +22,22 @@
       :options="textOptions"
       @input="setOption('title', $event)"
     ></v-select>
+    <label for="spacing" class="type-label">
+      {{ $t("layouts.tree.friends") }}
+    </label>
+    <v-select
+      id="spacing"
+      :value="viewOptions.friends || '__none__'"
+      :options="friendsOptions"
+      @input="setOption('friends', $event)"
+    ></v-select>
+    <v-checkbox
+      id="tree-checkbox"
+      :label="buttonLabel"
+      :checked="showAllCollections"
+      value="null"
+      @change="toggleAllCollections()"
+    ></v-checkbox>
   </form>
 </template>
 
@@ -33,18 +49,13 @@ export default {
   data() {
     return {
       sortList: null,
-      titleValid: true
+      titleValid: true,
+      showAllCollections: false
     };
   },
   computed: {
-    contentOptions() {
-      var options = {
-        __none__: `(${this.$t("dont_show")})`,
-        ..._.mapValues(this.fields, info =>
-          ["integer", "string", "user"].includes(info.type) ? info.name : null
-        )
-      };
-      return _.pickBy(options, _.identity);
+    buttonLabel() {
+      return this.$t("layouts.tree.showAllCollections");
     },
     textOptions() {
       var options = {
@@ -55,6 +66,17 @@ export default {
       };
       return _.pickBy(options, _.identity);
     },
+    friendsOptions() {
+      var collections = Object.keys(this.$store.state.collections);
+      var options = {
+        __none__: `(${this.$t("dont_show")})`
+      };
+      collections.forEach(collection => {
+        if (this.showAllCollections || !collection.startsWith("directus"))
+          options[collection] = collection;
+      });
+      return options;
+    },
     parentOptions() {
       var options = _.mapValues(this.fields, info =>
         ["m2o"].includes(info.type) ? info.name : null
@@ -63,6 +85,9 @@ export default {
     }
   },
   methods: {
+    toggleAllCollections() {
+      this.showAllCollections = !this.showAllCollections;
+    },
     getKeys(obj) {
       var keys = _.keys(obj);
       var subKeys = [];

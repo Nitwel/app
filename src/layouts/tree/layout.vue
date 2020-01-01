@@ -28,7 +28,7 @@ export default {
           null: ""
         }
       },
-      sort: "-" + this.viewOptions.title
+      sort: "" + this.viewOptions.title
     };
     this.$emit("query", query);
   },

@@ -2,17 +2,12 @@
   <div class="subTree" @click="loadItems">
     {{ title }}, {{ hasChildren ? "YO" : "NO" }}
     <Tree v-for="item in items" :key="item.id" :tree="item" :parent="parent"></Tree>
-    <div v-for="item in items" :key="item.id">{{ item.title }}</div>
   </div>
 </template>
 
 <script>
-import Tree from "./Tree.vue";
-
 export default {
-  components: {
-    Tree
-  },
+  name: "Tree",
   props: {
     tree: {
       type: Object,
@@ -31,7 +26,7 @@ export default {
   },
   computed: {
     title() {
-      return this.tree[this.$parent.viewOptions.title];
+      return this.tree[this.parent.viewOptions.title];
     }
   },
   created() {
@@ -67,5 +62,8 @@ export default {
 
 <style lang="scss" scoped>
 .subTree {
+  div {
+    margin-left: 15px;
+  }
 }
 </style>
