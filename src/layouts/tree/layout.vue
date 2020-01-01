@@ -1,6 +1,6 @@
 <template>
-  <div class="tree">
-    <Tree v-for="item in items" :key="item" :parent="item"></Tree>
+  <div ref="tree" class="tree">
+    <Tree v-for="item in items" :key="item.id" :tree="item" :parent="self"></Tree>
   </div>
 </template>
 
@@ -15,12 +15,12 @@ export default {
   mixins: [mixin],
   data() {
     return {
-      a: ""
+      self: this
     };
   },
   computed: {},
   created() {
-    document.addEventListener("scroll", this.scroll);
+    //document.addEventListener("scroll", this.scroll);
 
     var query = {
       filter: {
@@ -33,11 +33,11 @@ export default {
     this.$emit("query", query);
   },
   destroyed() {
-    document.removeEventListener("scroll", this.scroll);
+    //document.removeEventListener("scroll", this.scroll);
   },
   methods: {
     scroll(event) {
-      var timeline = this.$refs.timeline;
+      var timeline = this.$refs.tree;
       var toBottom = timeline.offsetTop + timeline.clientHeight - window.innerHeight - event.pageY;
 
       if (toBottom < 100 && !this.lazyLoading) {
