@@ -1,6 +1,13 @@
 <template>
   <div ref="tree" class="tree">
-    <Tree v-for="item in items" :key="item.id" :tree="item" :parent="self"></Tree>
+    <Tree
+      v-for="(item, index) in items"
+      :key="item.id"
+      :tree="item"
+      :parent="self"
+      :depth="folderDepth[item.id]"
+      :last="index == items.length - 1"
+    ></Tree>
   </div>
 </template>
 
@@ -15,22 +22,34 @@ export default {
   mixins: [mixin],
   data() {
     return {
-      self: this
+      self: this,
+      folderDepth: {}
     };
   },
   computed: {},
+  watch: {
+    items(items) {
+      if (items.length > 0) {
+        var self = this;
+        this.loadDepthIds(items).then(result => {
+          self.folderDepth = result;
+        });
+      }
+    }
+  },
   created() {
     //document.addEventListener("scroll", this.scroll);
-
-    var query = {
-      filter: {
-        [this.viewOptions.parent]: {
-          null: ""
-        }
-      },
-      sort: "" + this.viewOptions.title
-    };
-    this.$emit("query", query);
+    if (this.viewOptions.parent && this.viewOptions.title) {
+      var query = {
+        filter: {
+          [this.viewOptions.parent]: {
+            null: ""
+          }
+        },
+        sort: "" + this.viewOptions.title
+      };
+      this.$emit("query", query);
+    }
   },
   destroyed() {
     //document.removeEventListener("scroll", this.scroll);
@@ -43,6 +62,33 @@ export default {
       if (toBottom < 100 && !this.lazyLoading) {
         this.$emit("next-page");
       }
+    },
+    async loadItems(id) {
+      var parent = this.viewOptions.parent;
+      var items = await this.$api.getItems(this.collection, {
+        filter: { [parent]: id },
+        sort: "-" + this.viewOptions.title
+      });
+      return items.data;
+    },
+    async loadDepthIds(items) {
+      var itemIds = _.map(items, item => item.id);
+
+      var parent = this.viewOptions.parent;
+      var filter = {
+        filter: { [parent]: { in: itemIds.join(",") } },
+        fields: parent
+      };
+      var ids = await this.$api.getItems(this.collection, filter);
+
+      ids = _.map(ids.data, id => id[parent]);
+
+      var folderDepth = {};
+      _.forEach(itemIds, id => {
+        folderDepth[id] = ids.includes(id);
+      });
+
+      return folderDepth;
     }
   }
 };
@@ -50,6 +96,6 @@ export default {
 
 <style lang="scss" scoped>
 .tree {
-  margin-top: 32px;
+  padding: var(--page-padding);
 }
 </style>
