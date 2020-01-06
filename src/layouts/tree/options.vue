@@ -5,7 +5,7 @@
       <v-icon class="required" name="star" color="input-required-color" sup />
     </label>
     <v-select
-      id="spacing"
+      id="parent"
       :value="viewOptions.parent || '__none__'"
       :options="parentOptions"
       class="select"
@@ -17,27 +17,92 @@
       <v-icon class="required" name="star" color="input-required-color" sup />
     </label>
     <v-select
-      id="spacing"
+      id="title"
       :value="viewOptions.title || '__none__'"
-      :options="textOptions"
+      :options="titleOptions"
       @input="setOption('title', $event)"
     ></v-select>
     <label for="spacing" class="type-label">
-      {{ $t("layouts.tree.friends") }}
+      {{ $t("layouts.tree.friends.friends") }}
     </label>
     <v-select
-      id="spacing"
+      id="friends"
       :value="viewOptions.friends || '__none__'"
       :options="friendsOptions"
-      @input="setOption('friends', $event)"
+      @input="changeFriendsCollection($event)"
     ></v-select>
     <v-checkbox
-      id="tree-checkbox"
+      id="allCollections"
       :label="buttonLabel"
       :checked="showAllCollections"
       value="null"
       @change="toggleAllCollections()"
     ></v-checkbox>
+    <div v-if="viewOptions.friends && viewOptions.friends != '__none__'" class="friends-options">
+      <label for="spacing" class="type-label">
+        {{ $t("layouts.tree.friends.field") }}
+      </label>
+      <v-select
+        id="friendsField"
+        :value="viewOptions.friendsField || '__none__'"
+        :options="friendsFieldOptions"
+        @input="setOption('friendsField', $event)"
+      ></v-select>
+      <label for="spacing" class="type-label">
+        {{ $t("layouts.tree.friends.title") }}
+      </label>
+      <v-select
+        id="friendsTitle"
+        :value="viewOptions.friendsTitle || '__none__'"
+        :options="friendsTitleOptions"
+        @input="setOption('friendsTitle', $event)"
+      ></v-select>
+    </div>
+    <v-details :title="$t('layouts.tree.icon.title')" background="var(--sidebar-background-color)">
+      <label for="spacing" class="type-label">
+        {{ $t("layouts.tree.icon.folder") }}
+      </label>
+      <v-ext-input
+        id="icon"
+        name="icon"
+        type="string"
+        :value="viewOptions.folder || 'folder'"
+        @input="setOption('folder', $event)"
+      ></v-ext-input>
+
+      <label for="spacing" class="type-label">
+        {{ $t("layouts.tree.icon.folder_open") }}
+      </label>
+      <v-ext-input
+        id="icon"
+        name="icon"
+        type="string"
+        :value="viewOptions.folderOpen || 'folder_open'"
+        @input="setOption('folderOpen', $event)"
+      ></v-ext-input>
+
+      <label for="spacing" class="type-label">
+        {{ $t("layouts.tree.icon.item") }}
+      </label>
+      <v-ext-input
+        id="icon"
+        name="icon"
+        type="string"
+        :value="viewOptions.item || 'file'"
+        @input="setOption('item', $event)"
+      ></v-ext-input>
+
+      <label for="spacing" class="type-label">
+        {{ $t("layouts.tree.icon.friend") }}
+      </label>
+      <v-ext-input
+        id="icon"
+        name="icon"
+        type="string"
+        :value="viewOptions.friendIcon"
+        @input="setOption('friendIcon', $event)"
+      ></v-ext-input>
+    </v-details>
   </form>
 </template>
 
@@ -57,13 +122,10 @@ export default {
     buttonLabel() {
       return this.$t("layouts.tree.showAllCollections");
     },
-    textOptions() {
-      var options = {
-        __none__: `(${this.$t("dont_show")})`,
-        ..._.mapValues(this.fields, info =>
-          info.type == "string" || info.type == "integer" ? info.name : null
-        )
-      };
+    titleOptions() {
+      var options = _.mapValues(this.fields, info =>
+        ["string", "integer"].includes(info.type) ? info.name : null
+      );
       return _.pickBy(options, _.identity);
     },
     friendsOptions() {
@@ -77,6 +139,20 @@ export default {
       });
       return options;
     },
+    friendsFieldOptions() {
+      var collection = this.$store.state.collections[this.viewOptions.friends].fields;
+      var options = _.mapValues(collection, info =>
+        ["m2o"].includes(info.type) ? info.field : null
+      );
+      return _.pickBy(options, _.identity);
+    },
+    friendsTitleOptions() {
+      var collection = this.$store.state.collections[this.viewOptions.friends].fields;
+      var options = _.mapValues(collection, info =>
+        ["string", "integer"].includes(info.type) ? info.field : null
+      );
+      return _.pickBy(options, _.identity);
+    },
     parentOptions() {
       var options = _.mapValues(this.fields, info =>
         ["m2o"].includes(info.type) ? info.name : null
@@ -85,6 +161,15 @@ export default {
     }
   },
   methods: {
+    changeFriendsCollection(event) {
+      //needed to reset the "friends-field" select
+      this.viewOptions.friends = null;
+      this.viewOptions.friendsField = null;
+      this.viewOptions.friendsTitle = null;
+      setTimeout(() => {
+        this.setOption("friends", event);
+      }, 1);
+    },
     toggleAllCollections() {
       this.showAllCollections = !this.showAllCollections;
     },
@@ -117,6 +202,14 @@ export default {
   margin-bottom: var(--input-label-margin);
   &:first-of-type {
     margin-top: 0;
+  }
+}
+
+.friends-options {
+  padding: 10px 0px 10px 20px;
+
+  label {
+    margin-top: 10px;
   }
 }
 </style>
