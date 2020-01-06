@@ -9,7 +9,7 @@
       :value="viewOptions.parent || '__none__'"
       :options="parentOptions"
       class="select"
-      icon="today"
+      icon="call_merge"
       @input="setOption('parent', $event)"
     ></v-select>
     <label for="spacing" class="type-label">
@@ -20,6 +20,7 @@
       id="title"
       :value="viewOptions.title || '__none__'"
       :options="titleOptions"
+      icon="title"
       @input="setOption('title', $event)"
     ></v-select>
     <label for="spacing" class="type-label">
@@ -29,6 +30,7 @@
       id="friends"
       :value="viewOptions.friends || '__none__'"
       :options="friendsOptions"
+      icon="subdirectory_arrow_right"
       @input="changeFriendsCollection($event)"
     ></v-select>
     <v-checkbox
@@ -46,6 +48,7 @@
         id="friendsField"
         :value="viewOptions.friendsField || '__none__'"
         :options="friendsFieldOptions"
+        icon="call_merge"
         @input="setOption('friendsField', $event)"
       ></v-select>
       <label for="spacing" class="type-label">
@@ -55,6 +58,7 @@
         id="friendsTitle"
         :value="viewOptions.friendsTitle || '__none__'"
         :options="friendsTitleOptions"
+        icon="title"
         @input="setOption('friendsTitle', $event)"
       ></v-select>
     </div>
