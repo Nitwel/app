@@ -58,7 +58,6 @@ export default {
     }
   },
   created() {
-    //document.addEventListener("scroll", this.scroll);
     if (this.viewOptions.parent && this.viewOptions.title) {
       var query = {
         filter: {
@@ -71,22 +70,11 @@ export default {
       this.$emit("query", query);
     }
   },
-  destroyed() {
-    //document.removeEventListener("scroll", this.scroll);
-  },
   methods: {
     change($event) {
       if ($event.added) {
         var item = $event.added.element;
         this.updateItem(item.id, item.__collection__, null);
-      }
-    },
-    scroll(event) {
-      var timeline = this.$refs.tree;
-      var toBottom = timeline.offsetTop + timeline.clientHeight - window.innerHeight - event.pageY;
-
-      if (toBottom < 100 && !this.lazyLoading) {
-        this.$emit("next-page");
       }
     },
     updateItem(id, collection, parentId) {

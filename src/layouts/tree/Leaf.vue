@@ -26,9 +26,6 @@ export default {
       default: false
     }
   },
-  data() {
-    return {};
-  },
   computed: {
     title() {
       var connections = this.root.viewOptions.connections;
@@ -43,9 +40,7 @@ export default {
       if (!collection.icon) return this.$store.state.collections[this.item.__collection__].icon;
       return collection.icon;
     }
-  },
-  created() {},
-  methods: {}
+  }
 };
 </script>
 
