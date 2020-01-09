@@ -32,7 +32,7 @@
     ></v-checkbox>
 
     <label for="spacing" class="type-label">
-      {{ $t("layouts.tree.connections") }}
+      {{ $t("layouts.tree.relations.relations") }}
     </label>
 
     <v-ext-input
@@ -75,7 +75,7 @@ export default {
         dataType: "object",
         fields: {
           collection: {
-            name: "Collection",
+            name: this.$t("layouts.tree.relations.collection"),
             interface: "dropdown",
             required: true,
             type: "String",
@@ -85,7 +85,7 @@ export default {
             }
           },
           title: {
-            name: "Title",
+            name: this.$t("layouts.tree.relations.title"),
             interface: "text-input",
             type: "String",
             options: {
@@ -93,7 +93,7 @@ export default {
             }
           },
           icon: {
-            name: "Icon",
+            name: this.$t("layouts.tree.relations.icon"),
             interface: "icon",
             type: "String"
           }
@@ -102,7 +102,7 @@ export default {
       return options;
     },
     buttonLabel() {
-      return this.$t("layouts.tree.showAllCollections");
+      return this.$t("layouts.tree.show_all_collections");
     },
     titleOptions() {
       var options = _.mapValues(this.fields, info =>
@@ -112,11 +112,12 @@ export default {
     },
     collectionOptions() {
       var collections = Object.keys(this.$store.state.collections);
-      var options = {
-        __none__: `(${this.$t("dont_show")})`
-      };
+      var options = {};
       collections.forEach(collection => {
-        if (this.showAllCollections || !collection.startsWith("directus"))
+        if (
+          (this.showAllCollections || !collection.startsWith("directus")) &&
+          collection != this.collection
+        )
           options[collection] = collection;
       });
       return options;
@@ -135,8 +136,6 @@ export default {
         if (connection && connection.collection) {
           var collection = connection.collection;
           var relations = this.$store.state.relations;
-          // var fields = this.$store.state.collections[collection].fields;
-          // fields = _.filter(fields, field => field.type == "m2o");
           let relation = _.find(relations, relation => {
             return (
               relation.collection_many == collection && relation.collection_one == this.collection

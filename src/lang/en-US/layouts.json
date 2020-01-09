@@ -41,9 +41,14 @@
       "tree": "Tree",
       "parent": "Parent",
       "title": "Title",
-      "connections": "Connections",
+      "relations": {
+        "relations": "Relations",
+        "collection": "Collection",
+        "title": "Title",
+        "icon": "Icon"
+      },
       "icon": "Icon",
-      "showAllCollections": "Show all collections"
+      "show_all_collections": "Show all collections"
     }
   }
 }

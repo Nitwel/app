@@ -38,7 +38,17 @@
       "color": "Color"
     },
     "tree": {
-      "tree": "Baum"
+      "tree": "Baum",
+      "parent": "Vater Feld",
+      "title": "Titel",
+      "relations": {
+        "relations": "Verbindungen",
+        "collection": "Collection",
+        "title": "Titel",
+        "icon": "Icon"
+      },
+      "icon": "Icon",
+      "show_all_collections": "Zeige alle Collections"
     }
   }
 }
