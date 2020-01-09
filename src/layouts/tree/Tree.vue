@@ -14,7 +14,12 @@
         ></v-icon>
         <v-icon class="edit" name="edit"></v-icon>
       </span>
-      <v-spinner v-if="loading" class="spinner" size="15" line-fg-color="#263238"></v-spinner>
+      <v-spinner
+        v-if="loading"
+        class="spinner"
+        size="15"
+        line-fg-color="var(--darkest-gray)"
+      ></v-spinner>
     </div>
     <draggable
       class="sub-trees"
