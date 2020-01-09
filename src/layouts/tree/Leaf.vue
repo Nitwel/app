@@ -1,7 +1,5 @@
 <template>
   <div class="leaf">
-    <div v-show="!last" class="line"></div>
-    <div class="dot"></div>
     <v-icon v-if="icon" class="icon" :name="icon"></v-icon>
     <router-link class="title" :to="root.createLink(item.id, item.__collection__)">
       {{ title }}
@@ -49,32 +47,6 @@ export default {
   position: relative;
   display: flex;
   align-items: center;
-
-  .dot {
-    display: none;
-    z-index: 1;
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border: 2px solid var(--darkest-gray);
-    background-color: var(--white);
-    border-radius: 50%;
-    float: left;
-    top: 15px;
-    left: -10px;
-    transform: translate(-50%, -50%);
-  }
-
-  .line {
-    display: none;
-    position: absolute;
-    width: 2px;
-    height: 100%;
-    background-color: var(--dark-gray);
-    float: left;
-    top: 15px;
-    left: -11px;
-  }
 
   .icon {
     margin-right: 5px;
