@@ -23,16 +23,6 @@
       icon="title"
       @input="setOption('title', $event)"
     ></v-select>
-    <label for="spacing" class="type-label">
-      {{ $t("layouts.tree.friends.friends") }}
-    </label>
-    <v-select
-      id="friends"
-      :value="viewOptions.friends || '__none__'"
-      :options="friendsOptions"
-      icon="subdirectory_arrow_right"
-      @input="changeFriendsCollection($event)"
-    ></v-select>
     <v-checkbox
       id="allCollections"
       :label="buttonLabel"
@@ -40,73 +30,30 @@
       value="null"
       @change="toggleAllCollections()"
     ></v-checkbox>
-    <div v-if="viewOptions.friends && viewOptions.friends != '__none__'" class="friends-options">
-      <label for="spacing" class="type-label">
-        {{ $t("layouts.tree.friends.field") }}
-      </label>
-      <v-select
-        id="friendsField"
-        :value="viewOptions.friendsField || '__none__'"
-        :options="friendsFieldOptions"
-        icon="call_merge"
-        @input="setOption('friendsField', $event)"
-      ></v-select>
-      <label for="spacing" class="type-label">
-        {{ $t("layouts.tree.friends.title") }}
-      </label>
-      <v-select
-        id="friendsTitle"
-        :value="viewOptions.friendsTitle || '__none__'"
-        :options="friendsTitleOptions"
-        icon="title"
-        @input="setOption('friendsTitle', $event)"
-      ></v-select>
-    </div>
-    <v-details :title="$t('layouts.tree.icon.title')" background="var(--sidebar-background-color)">
-      <label for="spacing" class="type-label">
-        {{ $t("layouts.tree.icon.folder") }}
-      </label>
-      <v-ext-input
-        id="icon"
-        name="icon"
-        type="string"
-        :value="viewOptions.folder || 'folder'"
-        @input="setOption('folder', $event)"
-      ></v-ext-input>
 
-      <label for="spacing" class="type-label">
-        {{ $t("layouts.tree.icon.folder_open") }}
-      </label>
-      <v-ext-input
-        id="icon"
-        name="icon"
-        type="string"
-        :value="viewOptions.folderOpen || 'folder_open'"
-        @input="setOption('folderOpen', $event)"
-      ></v-ext-input>
+    <label for="spacing" class="type-label">
+      {{ $t("layouts.tree.connections") }}
+    </label>
 
-      <label for="spacing" class="type-label">
-        {{ $t("layouts.tree.icon.item") }}
-      </label>
-      <v-ext-input
-        id="icon"
-        name="icon"
-        type="string"
-        :value="viewOptions.item || 'file'"
-        @input="setOption('item', $event)"
-      ></v-ext-input>
+    <v-ext-input
+      id="repeater"
+      name="repeater"
+      type="object"
+      :options="repeaterOptions"
+      :value="viewOptions.connections || {}"
+      @input="updateConnections"
+    ></v-ext-input>
 
-      <label for="spacing" class="type-label">
-        {{ $t("layouts.tree.icon.friend") }}
-      </label>
-      <v-ext-input
-        id="icon"
-        name="icon"
-        type="string"
-        :value="viewOptions.friendIcon"
-        @input="setOption('friendIcon', $event)"
-      ></v-ext-input>
-    </v-details>
+    <label for="spacing" class="type-label">
+      {{ $t("layouts.tree.icon") }}
+    </label>
+    <v-ext-input
+      id="icon"
+      name="icon"
+      type="string"
+      :value="viewOptions.icon || 'file'"
+      @input="setOption('icon', $event)"
+    ></v-ext-input>
   </form>
 </template>
 
@@ -123,6 +70,37 @@ export default {
     };
   },
   computed: {
+    repeaterOptions() {
+      var options = {
+        dataType: "object",
+        fields: {
+          collection: {
+            name: "Collection",
+            interface: "dropdown",
+            required: true,
+            type: "String",
+            preview: true,
+            options: {
+              choices: this.collectionOptions
+            }
+          },
+          title: {
+            name: "Title",
+            interface: "text-input",
+            type: "String",
+            options: {
+              placeholder: "{{my_field}} {{my_second_field}}"
+            }
+          },
+          icon: {
+            name: "Icon",
+            interface: "icon",
+            type: "String"
+          }
+        }
+      };
+      return options;
+    },
     buttonLabel() {
       return this.$t("layouts.tree.showAllCollections");
     },
@@ -132,7 +110,7 @@ export default {
       );
       return _.pickBy(options, _.identity);
     },
-    friendsOptions() {
+    collectionOptions() {
       var collections = Object.keys(this.$store.state.collections);
       var options = {
         __none__: `(${this.$t("dont_show")})`
@@ -143,20 +121,6 @@ export default {
       });
       return options;
     },
-    friendsFieldOptions() {
-      var collection = this.$store.state.collections[this.viewOptions.friends].fields;
-      var options = _.mapValues(collection, info =>
-        ["m2o"].includes(info.type) ? info.field : null
-      );
-      return _.pickBy(options, _.identity);
-    },
-    friendsTitleOptions() {
-      var collection = this.$store.state.collections[this.viewOptions.friends].fields;
-      var options = _.mapValues(collection, info =>
-        ["string", "integer"].includes(info.type) ? info.field : null
-      );
-      return _.pickBy(options, _.identity);
-    },
     parentOptions() {
       var options = _.mapValues(this.fields, info =>
         ["m2o"].includes(info.type) ? info.name : null
@@ -165,30 +129,26 @@ export default {
     }
   },
   methods: {
-    changeFriendsCollection(event) {
-      //needed to reset the "friends-field" select
-      this.viewOptions.friends = null;
-      this.viewOptions.friendsField = null;
-      this.viewOptions.friendsTitle = null;
-      setTimeout(() => {
-        this.setOption("friends", event);
-      }, 1);
+    updateConnections($event) {
+      var event = $event || [];
+      event.forEach(connection => {
+        if (connection && connection.collection) {
+          var collection = connection.collection;
+          var relations = this.$store.state.relations;
+          // var fields = this.$store.state.collections[collection].fields;
+          // fields = _.filter(fields, field => field.type == "m2o");
+          let relation = _.find(relations, relation => {
+            return (
+              relation.collection_many == collection && relation.collection_one == this.collection
+            );
+          });
+          connection.field = relation.field_many;
+        }
+      });
+      this.setOption("connections", event);
     },
     toggleAllCollections() {
       this.showAllCollections = !this.showAllCollections;
-    },
-    getKeys(obj) {
-      var keys = _.keys(obj);
-      var subKeys = [];
-      for (var i = 0; i < keys.length; i++) {
-        if (typeof obj[keys[i]] === "object") {
-          var subKeyList = this.getKeys(obj[keys[i]]);
-          for (var k = 0; k < subKeyList.length; k++) {
-            subKeys.push(keys[i] + "." + subKeyList[k]);
-          }
-        }
-      }
-      return [...keys, ...subKeys];
     },
     setOption(option, value) {
       this.$emit("options", {

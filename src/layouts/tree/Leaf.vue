@@ -3,7 +3,9 @@
     <div v-show="!last" class="line"></div>
     <div class="dot"></div>
     <v-icon v-if="icon" class="icon" :name="icon"></v-icon>
-    <div class="title" @click.stop="parent.openItem(item.id, true)">{{ title }}</div>
+    <router-link class="title" :to="root.createLink(item.id, item.__collection__)">
+      {{ title }}
+    </router-link>
   </div>
 </template>
 
@@ -15,7 +17,7 @@ export default {
       type: Object,
       default: null
     },
-    parent: {
+    root: {
       type: Object,
       default: null
     },
@@ -29,10 +31,17 @@ export default {
   },
   computed: {
     title() {
-      return this.item[this.parent.viewOptions.friendsTitle];
+      var connections = this.root.viewOptions.connections;
+      var collection = _.find(connections, con => con.collection == this.item.__collection__);
+      if (!collection) return;
+      var title = this.$helpers.micromustache.render(collection.title, this.item);
+      return title;
     },
     icon() {
-      return this.parent.viewOptions.friendIcon;
+      var connections = this.root.viewOptions.connections;
+      var collection = _.find(connections, con => con.collection == this.item.__collection__);
+      if (!collection) return;
+      return collection.icon;
     }
   },
   created() {},
@@ -47,6 +56,7 @@ export default {
   align-items: center;
 
   .dot {
+    display: none;
     z-index: 1;
     position: absolute;
     width: 10px;
@@ -61,6 +71,7 @@ export default {
   }
 
   .line {
+    display: none;
     position: absolute;
     width: 2px;
     height: 100%;
@@ -78,6 +89,7 @@ export default {
     cursor: pointer;
     height: 30px;
     font-size: 16px;
+    text-decoration: none;
 
     display: flex;
     align-items: center;

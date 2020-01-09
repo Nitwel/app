@@ -41,18 +41,8 @@
       "tree": "Tree",
       "parent": "Parent",
       "title": "Title",
-      "friends": {
-        "friends": "Friends",
-        "field": "Field",
-        "title": "Title"
-      },
-      "icon": {
-        "title": "Icon Settings",
-        "folder": "Folder",
-        "folder_open": "Folder Open",
-        "item": "Item",
-        "friend": "Friend Icon"
-      },
+      "connections": "Connections",
+      "icon": "Icon",
       "showAllCollections": "Show all collections"
     }
   }

@@ -8,6 +8,7 @@
 		:view-query="viewQuery"
 		:selection="selection"
 		:layout-name="type"
+		:collection="collection"
 		class="v-ext-layout-options"
 		@query="$emit('query', $event)"
 		@select="$emit('select', $event)"
@@ -52,6 +53,10 @@ export default {
 		primaryKeyField: {
 			type: String,
 			required: true
+		},
+		collection: {
+			type: String,
+			default: ''
 		}
 	},
 	computed: {

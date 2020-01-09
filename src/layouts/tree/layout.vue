@@ -1,15 +1,25 @@
 <template>
   <div ref="tree" class="tree">
-    <div v-if="viewOptions.parent && viewOptions.title">
+    <draggable
+      v-if="(viewOptions.parent && viewOptions.title) || reload"
+      tag="div"
+      class="items"
+      group="tree"
+      :list="rootItems"
+      @change="change"
+      @start="dragging = true"
+      @end="dragging = false"
+    >
       <Tree
-        v-for="(item, index) in items"
+        v-for="(item, index) in rootItems"
         :key="item.id"
         :tree="item"
-        :parent="self"
+        :root="root"
         :depth="folderDepth[item.id]"
         :last="index == items.length - 1"
+        @itemChange="$set(rootItems[index], 'tree', $event)"
       ></Tree>
-    </div>
+    </draggable>
   </div>
 </template>
 
@@ -24,31 +34,32 @@ export default {
   mixins: [mixin],
   data() {
     return {
-      self: this,
-      folderDepth: {}
+      root: this,
+      folderDepth: {},
+      reload: false,
+      dragging: false,
+      rootItems: []
     };
   },
   computed: {},
   watch: {
     items(items) {
       if (items.length > 0) {
-        var self = this;
+        this.rootItems = items;
+        for (let i = 0; i < items.length; i++) {
+          this.$set(this.rootItems[i], "__collection__", this.collection);
+        }
         this.loadDepthIds(items).then(result => {
-          self.folderDepth = result;
+          this.folderDepth = result;
         });
       }
     },
     viewOptions(newValue, oldValue) {
-      if (
-        (newValue.friends != oldValue.friends || newValue.friendsField != oldValue.friendsField) &&
-        this.items.length > 0
-      ) {
-        var self = this;
-        var items = this.items;
-        this.items = [];
-        setTimeout(() => {
-          self.items = items;
-        }, 1);
+      // resetting the layout to apply updates
+      if (newValue.connections != oldValue.connections && this.items.length > 0) {
+        this.loadDepthIds(this.items).then(result => {
+          this.folderDepth = result;
+        });
       }
     }
   },
@@ -70,6 +81,12 @@ export default {
     //document.removeEventListener("scroll", this.scroll);
   },
   methods: {
+    change($event) {
+      if ($event.added) {
+        var item = $event.added.element;
+        this.updateItem(item.id, item.__collection__, null);
+      }
+    },
     scroll(event) {
       var timeline = this.$refs.tree;
       var toBottom = timeline.offsetTop + timeline.clientHeight - window.innerHeight - event.pageY;
@@ -78,60 +95,98 @@ export default {
         this.$emit("next-page");
       }
     },
+    updateItem(id, collection, parentId) {
+      if (collection == this.collection) {
+        var parent = this.viewOptions.parent;
+
+        this.$api.updateItem(collection, id, {
+          [parent]: parentId
+        });
+      } else {
+        var connections = this.viewOptions.connections;
+        var collectionInfo = _.find(connections, con => con.collection == collection);
+
+        this.$api.updateItem(collection, id, {
+          [collectionInfo.parent]: parentId
+        });
+      }
+    },
     async loadItems(id) {
       var parent = this.viewOptions.parent;
       var items = await this.$api.getItems(this.collection, {
         filter: { [parent]: id },
         sort: "-" + this.viewOptions.title
       });
-      return items.data;
+      items = items.data;
+      _.forEach(items, item => (item.__collection__ = this.collection));
+      return items;
     },
-    async loadFriendItems(id) {
+    async loadConnectionItems(id) {
       var parent = this.viewOptions.parent;
-      var friends = this.viewOptions.friends;
-      var friendsField = this.viewOptions.friendsField;
-      if (!parent || !friends || !friendsField) return;
+      var connections = this.viewOptions.connections;
 
-      var items = await this.$api.getItems(friends, {
-        filter: { [friendsField]: id }
+      if (!parent || !connections) return;
+
+      var promises = [];
+      connections.forEach(connection => {
+        promises.push(
+          this.$api.getItems(connection.collection, {
+            filter: { [connection.field]: id }
+          })
+        );
       });
-      return items.data;
+
+      var items = [];
+      var results = await Promise.all(promises);
+      _.forEach(results, (itemCollection, index) => {
+        itemCollection = itemCollection.data;
+        _.forEach(itemCollection, item => {
+          item.__collection__ = connections[index].collection;
+        });
+        items.push(...itemCollection);
+      });
+
+      return items;
     },
     async loadDepthIds(items) {
       var itemIds = _.map(items, item => item.id);
 
       var parent = this.viewOptions.parent;
-      var friends = this.viewOptions.friends;
-      var friendsField = this.viewOptions.friendsField;
+      var connections = this.viewOptions.connections;
 
       var ids = await this.$api.getItems(this.collection, {
         filter: { [parent]: { in: itemIds.join(",") } },
         fields: parent
       });
+      ids = _.uniq(_.map(ids.data, id => id[parent]));
 
-      var friendIds;
+      var promises = [];
+      connections.forEach(connection => {
+        promises.push(
+          this.$api.getItems(connection.collection, {
+            filter: { [connection.field]: { in: itemIds.join(",") } },
+            fields: connection.field
+          })
+        );
+      });
 
-      if (friends && friendsField) {
-        friendIds = await this.$api.getItems(friends, {
-          filter: { [friendsField]: { in: itemIds.join(",") } },
-          fields: friendsField
-        });
-        friendIds = _.map(friendIds.data, id => id[friendsField]);
-      }
+      var connectionResults = await Promise.all(promises);
+      var connectionIds = [];
 
-      ids = _.map(ids.data, id => id[parent]);
+      _.forEach(connectionResults, (ids, index) => {
+        connectionIds.push(..._.map(ids.data, id => id[connections[index].field]));
+      });
 
       var folderDepth = {};
       _.forEach(itemIds, id => {
-        folderDepth[id] = ids.includes(id) || (friendIds && friendIds.includes(id));
+        folderDepth[id] = ids.includes(id) || connectionIds.includes(id);
       });
 
       return folderDepth;
     },
-    openItem(id, friend) {
-      var collection = friend ? this.viewOptions.friends : this.collection;
+    createLink(id, collection) {
       var projectKey = this.$store.state.currentProjectKey;
-      this.$router.push(`/${projectKey}/collections/${collection}/${id}`);
+      return `/${projectKey}/collections/${collection}/${id}`;
     }
   }
 };

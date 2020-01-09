@@ -2,36 +2,53 @@
   <div class="sub-tree">
     <div v-show="!last" class="line"></div>
     <div class="dot"></div>
-    <svg v-show="depth && open && !loading" class="child-link" view-box="20 30">
+    <svg v-show="openable && open && !loading" class="child-link" view-box="20 30">
       <path d="M 0,0 C 0,25 25,0 20,30 " />
     </svg>
     <div class="tree-title">
-      <v-icon v-if="icon" class="icon" :name="icon" @click.native.stop="loadItems"></v-icon>
-      <span @click.stop="parent.openItem(tree.id, false)">
-        {{ title }}
+      <v-icon v-if="icon" class="icon" :name="icon"></v-icon>
+      <span>
+        <router-link class="title" :to="root.createLink(tree.id, tree.__collection__)">
+          {{ title }}
+        </router-link>
+        <v-icon
+          v-if="openIcon"
+          class="open"
+          :name="openIcon"
+          @click.native.stop="loadItems"
+        ></v-icon>
         <v-icon class="edit" name="edit"></v-icon>
       </span>
       <v-spinner v-if="loading" class="spinner" size="15" line-fg-color="#263238"></v-spinner>
     </div>
-    <div v-show="depth && open && !loading && allLoaded" class="sub-trees">
-      <Tree
-        v-for="(item, index) in items"
-        :key="item.id"
-        :tree="item"
-        :parent="parent"
-        :depth="folderDepth[item.id]"
-        :last="index == items.length - 1"
-      ></Tree>
-    </div>
-    <div v-show="depth && open && !loading && allLoaded" class="sub-friends">
-      <Leaf
-        v-for="(item, index) in friends"
-        :key="item.id"
-        :item="item"
-        :parent="parent"
-        :last="index == friends.length - 1"
-      ></Leaf>
-    </div>
+    <draggable
+      v-show="(!loading && allLoaded && open) || root.dragging"
+      class="sub-trees"
+      tag="div"
+      group="tree"
+      :list="items"
+      @change="change"
+      @start="root.dragging = true"
+      @end="root.dragging = false"
+    >
+      <div v-for="(item, index) in items" :key="item.__collection__ + item.id">
+        <Tree
+          v-if="item.__collection__ == root.collection"
+          :tree="item"
+          :root="root"
+          :depth="folderDepth[item.id]"
+          :last="index == items.length - 1"
+          @itemChange="$set(items[index], 'tree', $event)"
+        ></Tree>
+        <Leaf
+          v-else
+          :key="item.id"
+          :item="item"
+          :root="root"
+          :last="index == items.length - 1"
+        ></Leaf>
+      </div>
+    </draggable>
   </div>
 </template>
 
@@ -48,7 +65,7 @@ export default {
       type: Object,
       default: null
     },
-    parent: {
+    root: {
       type: Object,
       default: null
     },
@@ -64,57 +81,74 @@ export default {
   data() {
     return {
       items: [],
-      friends: [],
       folderDepth: {},
       open: false,
+      openable: false,
       loading: false,
       allLoaded: false
     };
   },
   computed: {
     title() {
-      return this.tree[this.parent.viewOptions.title];
+      return this.tree[this.root.viewOptions.title];
     },
     icon() {
-      if (this.depth) {
-        var folder = this.parent.viewOptions.folder || "folder";
-        var folderOpen = this.parent.viewOptions.folderOpen || "folder_open";
-        return this.open ? folderOpen : folder;
+      return this.root.viewOptions.icon;
+    },
+    openIcon() {
+      if (this.openable) {
+        return this.open ? "arrow_drop_up" : "arrow_drop_down";
       } else {
-        return this.parent.viewOptions.item;
+        return null;
       }
     }
   },
-  created() {},
+  watch: {
+    depth(value) {
+      if (value != null) this.openable = this.depth;
+    },
+    items(newVal) {
+      this.$emit("itemChange", newVal);
+    }
+  },
   methods: {
+    change($event) {
+      if ($event.added) {
+        var item = $event.added.element;
+        this.root.updateItem(item.id, item.__collection__, this.tree.id);
+        if (this.items.length == 1) {
+          this.allLoaded = true;
+        }
+        this.open = true;
+      }
+      this.openable = this.items.length > 0;
+    },
     loadItems() {
-      if (!this.depth) return;
+      if (!this.openable) return;
 
       if (!this.open) {
         this.loading = true;
       }
       this.open = !this.open;
 
-      var self = this;
       if (this.allLoaded) {
         this.loading = false;
         return;
       }
-      this.parent
+      this.root
         .loadItems(this.tree.id)
         .then(result => {
-          self.items = result;
-
-          return self.parent.loadDepthIds(result);
+          this.items.push(...result);
+          return this.root.loadDepthIds(result);
         })
         .then(result => {
-          self.folderDepth = result;
-          self.loading = false;
-          self.allLoaded = true;
+          this.folderDepth = result;
+          this.loading = false;
+          this.allLoaded = true;
         });
 
-      this.parent.loadFriendItems(this.tree.id).then(result => {
-        self.friends = result;
+      this.root.loadConnectionItems(this.tree.id).then(result => {
+        this.items.push(...result);
       });
     }
   }
@@ -142,6 +176,10 @@ export default {
       display: flex;
       align-items: center;
       cursor: pointer;
+      .title {
+        text-decoration: none;
+      }
+
       .edit {
         display: none;
       }
@@ -157,13 +195,12 @@ export default {
   .sub-trees {
     align-self: left;
     margin-left: 20px;
-  }
-  .sub-friends {
-    align-self: left;
-    margin-left: 20px;
+    border: 1px dotted var(--gray);
+    //min-height: 30px;
   }
 
   .dot {
+    display: none;
     z-index: 1;
     position: absolute;
     width: 10px;
@@ -178,6 +215,7 @@ export default {
   }
 
   .line {
+    display: none;
     position: absolute;
     width: 2px;
     height: 100%;
@@ -188,6 +226,7 @@ export default {
   }
 
   .child-link {
+    display: none;
     position: absolute;
     width: 30px;
     height: 30px;
