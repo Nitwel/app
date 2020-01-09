@@ -40,7 +40,7 @@ export default {
     icon() {
       var connections = this.root.viewOptions.connections;
       var collection = _.find(connections, con => con.collection == this.item.__collection__);
-      if (!collection) return;
+      if (!collection.icon) return this.$store.state.collections[this.item.__collection__].icon;
       return collection.icon;
     }
   },

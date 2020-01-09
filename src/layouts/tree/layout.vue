@@ -1,25 +1,6 @@
 <template>
   <div ref="tree" class="tree">
-    <draggable
-      v-if="(viewOptions.parent && viewOptions.title) || reload"
-      tag="div"
-      class="items"
-      group="tree"
-      :list="rootItems"
-      @change="change"
-      @start="dragging = true"
-      @end="dragging = false"
-    >
-      <Tree
-        v-for="(item, index) in rootItems"
-        :key="item.id"
-        :tree="item"
-        :root="root"
-        :depth="folderDepth[item.id]"
-        :last="index == items.length - 1"
-        @itemChange="$set(rootItems[index], 'tree', $event)"
-      ></Tree>
-    </draggable>
+    <Tree v-if="!reload" :tree="rootTree" :root="root" :depth="true"></Tree>
   </div>
 </template>
 
@@ -35,20 +16,21 @@ export default {
   data() {
     return {
       root: this,
-      folderDepth: {},
       reload: false,
-      dragging: false,
-      rootItems: []
+      dragging: false
     };
   },
-  computed: {},
+  computed: {
+    rootTree() {
+      return {
+        id: null,
+        [this.viewOptions.title]: "root"
+      };
+    }
+  },
   watch: {
     items(items) {
       if (items.length > 0) {
-        this.rootItems = items;
-        for (let i = 0; i < items.length; i++) {
-          this.$set(this.rootItems[i], "__collection__", this.collection);
-        }
         this.loadDepthIds(items).then(result => {
           this.folderDepth = result;
         });
@@ -57,9 +39,21 @@ export default {
     viewOptions(newValue, oldValue) {
       // resetting the layout to apply updates
       if (newValue.connections != oldValue.connections && this.items.length > 0) {
-        this.loadDepthIds(this.items).then(result => {
-          this.folderDepth = result;
-        });
+        if (newValue.connections.length == oldValue.connections.length) {
+          var iconOrTitleChanged = false;
+          var index = 0;
+          while (index < newValue.connections.length && !iconOrTitleChanged) {
+            var conn = newValue.connections[index];
+            var oldConn = oldValue.connections[index];
+            iconOrTitleChanged = conn.title != oldConn.title || conn.icon != oldConn.icon;
+            index++;
+          }
+          if (iconOrTitleChanged) return;
+        }
+        this.reload = true;
+        setTimeout(() => {
+          this.reload = false;
+        }, 1);
       }
     }
   },
@@ -107,16 +101,20 @@ export default {
         var collectionInfo = _.find(connections, con => con.collection == collection);
 
         this.$api.updateItem(collection, id, {
-          [collectionInfo.parent]: parentId
+          [collectionInfo.field]: parentId
         });
       }
     },
     async loadItems(id) {
       var parent = this.viewOptions.parent;
-      var items = await this.$api.getItems(this.collection, {
-        filter: { [parent]: id },
-        sort: "-" + this.viewOptions.title
-      });
+      var filter;
+      if (id) {
+        filter = { filter: { [parent]: id }, sort: "-" + this.viewOptions.title };
+      } else {
+        filter = { filter: { [parent]: { null: "" } }, sort: "-" + this.viewOptions.title };
+      }
+
+      var items = await this.$api.getItems(this.collection, filter);
       items = items.data;
       _.forEach(items, item => (item.__collection__ = this.collection));
       return items;
@@ -129,11 +127,16 @@ export default {
 
       var promises = [];
       connections.forEach(connection => {
-        promises.push(
-          this.$api.getItems(connection.collection, {
-            filter: { [connection.field]: id }
-          })
-        );
+        if (connection.collection) {
+          var filter;
+          if (id) {
+            filter = { filter: { [connection.field]: id } };
+          } else {
+            filter = { filter: { [connection.field]: { null: "" } } };
+          }
+
+          promises.push(this.$api.getItems(connection.collection, filter));
+        }
       });
 
       var items = [];
@@ -162,12 +165,14 @@ export default {
 
       var promises = [];
       connections.forEach(connection => {
-        promises.push(
-          this.$api.getItems(connection.collection, {
-            filter: { [connection.field]: { in: itemIds.join(",") } },
-            fields: connection.field
-          })
-        );
+        if (connection.collection) {
+          promises.push(
+            this.$api.getItems(connection.collection, {
+              filter: { [connection.field]: { in: itemIds.join(",") } },
+              fields: connection.field
+            })
+          );
+        }
       });
 
       var connectionResults = await Promise.all(promises);

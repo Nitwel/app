@@ -40,7 +40,7 @@
       name="repeater"
       type="object"
       :options="repeaterOptions"
-      :value="viewOptions.connections || {}"
+      :value="viewOptions.connections || []"
       @input="updateConnections"
     ></v-ext-input>
 
